@@ -1,0 +1,2307 @@
+{
+  "schema_version": "result-envelope/v0.2",
+  "provenance": {
+    "raw_predictions_embedded": true,
+    "raw_report_home": ".benchmarks/cross-model/",
+    "raw_report_files": [
+      ".benchmarks/cross-model/llama31-4k-token-1024.json",
+      ".benchmarks/cross-model/llama31-4k-sentence-1024-guarded.json",
+      ".benchmarks/cross-model/llama31-4k-tova-1024.json",
+      ".benchmarks/cross-model/llama31-4k-h2o-1024.json",
+      ".benchmarks/cross-model/llama31-4k-token-b512.json",
+      ".benchmarks/cross-model/llama31-4k-sentence-b512.json",
+      ".benchmarks/cross-model/llama31-4k-tova-b512.json",
+      ".benchmarks/cross-model/llama31-4k-h2o-b512.json"
+    ],
+    "durable_prediction_home": "rows[].observations[]",
+    "notes": "Llama 3.1 threshold-cut artifact. Published rows embed per-fixture predictions directly and record raw-report filenames + run IDs."
+  },
+  "rows": [
+    {
+      "label": "llama_token_1024_guarded",
+      "family": "Llama 3.1",
+      "method": "token_vorn",
+      "metric": "needle_hit_rate",
+      "budget": 1024,
+      "guardrails": "prefix_plus_recent",
+      "hits": 50,
+      "cases": 50,
+      "hit_rate": 1.0,
+      "wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "elapsed_seconds": 276.246657288,
+      "estimated_cost_usd": 0.19171518015787198,
+      "mean_retention_ratio": 0.2664,
+      "run_id": "step2-niah-vorn-live-b1024",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "retention_policy": "vorn",
+      "source_report": ".benchmarks/cross-model/llama31-4k-token-1024.json",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": true,
+          "prediction": "The special magic number for fair-sprout is: 9375710."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": true,
+          "prediction": "The special magic number for solid-few mentioned in the provided text is: 7700828."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": true,
+          "prediction": "3684052."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": true,
+          "prediction": "The special magic number for tested-familiar mentioned in the provided text is: 6707197."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": true,
+          "prediction": "2785277"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-5",
+          "correct": true,
+          "prediction": "9897858."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-6",
+          "correct": true,
+          "prediction": "8973915"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-7",
+          "correct": true,
+          "prediction": "4374754."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-8",
+          "correct": true,
+          "prediction": "The special magic number for spectacular-hail mentioned in the provided text is: 4694634."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-9",
+          "correct": true,
+          "prediction": "5672073"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-10",
+          "correct": true,
+          "prediction": "The special magic number for careful-nurse is: 2626229."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-11",
+          "correct": true,
+          "prediction": "4078418."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-12",
+          "correct": true,
+          "prediction": "2642635."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-13",
+          "correct": true,
+          "prediction": "8633773."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-14",
+          "correct": true,
+          "prediction": "1981186."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-15",
+          "correct": true,
+          "prediction": "2149597."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-16",
+          "correct": true,
+          "prediction": "5374922."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-17",
+          "correct": true,
+          "prediction": "The special magic number for orange-conversion mentioned in the provided text is: 6304573."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-18",
+          "correct": true,
+          "prediction": "3646552."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-19",
+          "correct": true,
+          "prediction": "The special magic number for sticky-platter mentioned in the provided text is: 4533779."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-20",
+          "correct": true,
+          "prediction": "6596150."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-21",
+          "correct": true,
+          "prediction": "1604451."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-22",
+          "correct": true,
+          "prediction": "7117837"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-23",
+          "correct": true,
+          "prediction": "7907400."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-24",
+          "correct": true,
+          "prediction": "The special magic number for outrageous-admission mentioned in the provided text is: 6866294."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-25",
+          "correct": true,
+          "prediction": "6891254."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-26",
+          "correct": true,
+          "prediction": "6262632"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-27",
+          "correct": true,
+          "prediction": "4188992."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-28",
+          "correct": true,
+          "prediction": "6038571."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-29",
+          "correct": true,
+          "prediction": "The special magic number for ultra-vodka mentioned in the provided text is: 7361002."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-30",
+          "correct": true,
+          "prediction": "The special magic number for sneaky-vice mentioned in the provided text is: 6406444."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-31",
+          "correct": true,
+          "prediction": "2422633."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-32",
+          "correct": true,
+          "prediction": "7953166."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-33",
+          "correct": true,
+          "prediction": "1093026"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-34",
+          "correct": true,
+          "prediction": "6323376"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-35",
+          "correct": true,
+          "prediction": "The special magic number for functional-panic is: 5652512."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-36",
+          "correct": true,
+          "prediction": "5558623."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-37",
+          "correct": true,
+          "prediction": "8048838"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-38",
+          "correct": true,
+          "prediction": "The special magic number for rough-extremist is: 4700025."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-39",
+          "correct": true,
+          "prediction": "The special magic number for adjoining-swivel mentioned in the provided text is 7523941."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-40",
+          "correct": true,
+          "prediction": "7360307"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-41",
+          "correct": true,
+          "prediction": "The special magic number for guarded-wasp mentioned in the provided text is: 8072684."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-42",
+          "correct": true,
+          "prediction": "3117636."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-43",
+          "correct": true,
+          "prediction": "The special magic number for disgusted-hunchback is: 6218367."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-44",
+          "correct": true,
+          "prediction": "The special magic number for shy-mutt is: 1689025."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-45",
+          "correct": true,
+          "prediction": "7076506"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-46",
+          "correct": true,
+          "prediction": "5118725"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-47",
+          "correct": true,
+          "prediction": "6452832"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-48",
+          "correct": true,
+          "prediction": "5049282"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-49",
+          "correct": true,
+          "prediction": "7784725."
+        }
+      ]
+    },
+    {
+      "label": "llama_sentence_1024_guarded",
+      "family": "Llama 3.1",
+      "method": "sentence_vorn",
+      "metric": "needle_hit_rate",
+      "budget": 1024,
+      "guardrails": "prefix_plus_recent",
+      "hits": 50,
+      "cases": 50,
+      "hit_rate": 1.0,
+      "wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "elapsed_seconds": 245.173976197,
+      "estimated_cost_usd": 0.170150739480718,
+      "mean_retention_ratio": 0.2638,
+      "run_id": "step2-niah-sentence-vorn-live-b1024",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "retention_policy": "sentence_vorn",
+      "source_report": ".benchmarks/cross-model/llama31-4k-sentence-1024-guarded.json",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": true,
+          "prediction": "The special magic number for fair-sprout mentioned in the provided text is: 9375710."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": true,
+          "prediction": "The special magic number for solid-few mentioned in the provided text is 7700828."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": true,
+          "prediction": "The special magic number for tan-page mentioned in the provided text is: 3684052."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": true,
+          "prediction": "The special magic number for tested-familiar mentioned in the provided text is: 6707197."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": true,
+          "prediction": "The special magic number for quick-mortality mentioned in the provided text is: 2785277."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-5",
+          "correct": true,
+          "prediction": "9897858."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-6",
+          "correct": true,
+          "prediction": "8973915."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-7",
+          "correct": true,
+          "prediction": "4374754."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-8",
+          "correct": true,
+          "prediction": "The special magic number for spectacular-hail mentioned in the provided text is: 4694634."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-9",
+          "correct": true,
+          "prediction": "5672073."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-10",
+          "correct": true,
+          "prediction": "2626229."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-11",
+          "correct": true,
+          "prediction": "The special magic number for nappy-limestone is: 4078418."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-12",
+          "correct": true,
+          "prediction": "2642635."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-13",
+          "correct": true,
+          "prediction": "The special magic number for good-speed mentioned in the provided text is: 8633773."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-14",
+          "correct": true,
+          "prediction": "1981186."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-15",
+          "correct": true,
+          "prediction": "The special magic number for efficient-pursuit mentioned in the provided text is: 2149597."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-16",
+          "correct": true,
+          "prediction": "5374922."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-17",
+          "correct": true,
+          "prediction": "The special magic number for orange-conversion mentioned in the provided text is: 6304573."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-18",
+          "correct": true,
+          "prediction": "3646552."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-19",
+          "correct": true,
+          "prediction": "The special magic number for sticky-platter mentioned in the provided text is: 4533779."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-20",
+          "correct": true,
+          "prediction": "6596150."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-21",
+          "correct": true,
+          "prediction": "The special magic number for salty-hovel mentioned in the provided text is 1604451."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-22",
+          "correct": true,
+          "prediction": "7117837."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-23",
+          "correct": true,
+          "prediction": "7907400."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-24",
+          "correct": true,
+          "prediction": "The special magic number for outrageous-admission mentioned in the provided text is: 6866294."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-25",
+          "correct": true,
+          "prediction": "The special magic number for gullible-article mentioned in the provided text is: 6891254."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-26",
+          "correct": true,
+          "prediction": "6262632."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-27",
+          "correct": true,
+          "prediction": "4188992."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-28",
+          "correct": true,
+          "prediction": "6038571."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-29",
+          "correct": true,
+          "prediction": "7361002."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-30",
+          "correct": true,
+          "prediction": "The special magic number for sneaky-vice mentioned in the provided text is: 6406444."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-31",
+          "correct": true,
+          "prediction": "The special magic number for trite-icon mentioned in the provided text is: 2422633."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-32",
+          "correct": true,
+          "prediction": "7953166."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-33",
+          "correct": true,
+          "prediction": "1093026."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-34",
+          "correct": true,
+          "prediction": "6323376."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-35",
+          "correct": true,
+          "prediction": "The special magic number for functional-panic mentioned in the provided text is: 5652512."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-36",
+          "correct": true,
+          "prediction": "The special magic number for flowery-supplement mentioned in the provided text is: 5558623."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-37",
+          "correct": true,
+          "prediction": "The special magic number for exotic-position mentioned in the provided text is: 8048838."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-38",
+          "correct": true,
+          "prediction": "The special magic number for rough-extremist mentioned in the provided text is: 4700025."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-39",
+          "correct": true,
+          "prediction": "The special magic number for adjoining-swivel mentioned in the provided text is 7523941."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-40",
+          "correct": true,
+          "prediction": "The special magic number for glamorous-nightmare mentioned in the provided text is: 7360307."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-41",
+          "correct": true,
+          "prediction": "8072684."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-42",
+          "correct": true,
+          "prediction": "3117636."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-43",
+          "correct": true,
+          "prediction": "6218367."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-44",
+          "correct": true,
+          "prediction": "The special magic number for shy-mutt is: 1689025."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-45",
+          "correct": true,
+          "prediction": "The special magic number for noisy-thyme is: 7076506."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-46",
+          "correct": true,
+          "prediction": "The special magic number for illegal-hearth mentioned in the provided text is: 5118725."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-47",
+          "correct": true,
+          "prediction": "The special magic number for productive-artery mentioned in the provided text is: 6452832."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-48",
+          "correct": true,
+          "prediction": "The special magic number for bright-spat mentioned in the provided text is: 5049282."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-49",
+          "correct": true,
+          "prediction": "7784725."
+        }
+      ]
+    },
+    {
+      "label": "llama_tova_1024_guarded",
+      "family": "Llama 3.1",
+      "method": "tova",
+      "metric": "needle_hit_rate",
+      "budget": 1024,
+      "guardrails": "prefix_plus_recent",
+      "hits": 45,
+      "cases": 50,
+      "hit_rate": 0.9,
+      "wilson_ci_95": [
+        0.7863950966521162,
+        0.956524876008429
+      ],
+      "elapsed_seconds": 395.0004144,
+      "estimated_cost_usd": 0.2741302875936,
+      "mean_retention_ratio": 0.2664,
+      "run_id": "step2-niah-tova-live-b1024",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "retention_policy": "tova",
+      "source_report": ".benchmarks/cross-model/llama31-4k-tova-1024.json",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": true,
+          "prediction": "The special magic number for fair-sprout mentioned in the provided text is: 9375710."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": true,
+          "prediction": "The special magic number for solid-few mentioned in the provided text is: 7700828."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": true,
+          "prediction": "3684052."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": true,
+          "prediction": "The special magic number for tested-familiar mentioned in the provided text is: 6707197."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": false,
+          "prediction": "The special magic number for quick-mortality mentioned in the provided text is 2787."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-5",
+          "correct": true,
+          "prediction": "The special magic number for round-ruin mentioned in the provided text is 9897858."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-6",
+          "correct": true,
+          "prediction": "8973915."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-7",
+          "correct": true,
+          "prediction": "The special magic number for faint-smolt is: 4374754."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-8",
+          "correct": false,
+          "prediction": "The special magic number for spectacular-hail mentioned in the provided text is: 4860684."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-9",
+          "correct": true,
+          "prediction": "5672073."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-10",
+          "correct": true,
+          "prediction": "The special magic number for careful-nurse mentioned in the provided text is: 2626229."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-11",
+          "correct": false,
+          "prediction": "4078."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-12",
+          "correct": true,
+          "prediction": "2642635"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-13",
+          "correct": true,
+          "prediction": "8633773."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-14",
+          "correct": true,
+          "prediction": "1981186."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-15",
+          "correct": true,
+          "prediction": "2149597."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-16",
+          "correct": true,
+          "prediction": "The special magic number for hypnotic-biscuit is: 5374922."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-17",
+          "correct": true,
+          "prediction": "6304573."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-18",
+          "correct": true,
+          "prediction": "3646552."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-19",
+          "correct": true,
+          "prediction": "The special magic number for sticky-platter mentioned in the provided text is: 4533779."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-20",
+          "correct": true,
+          "prediction": "6596150."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-21",
+          "correct": true,
+          "prediction": "1604451."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-22",
+          "correct": true,
+          "prediction": "The special magic number for hot-backdrop mentioned in the provided text is 7117837."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-23",
+          "correct": true,
+          "prediction": "The special magic number for inconclusive-participation mentioned in the provided text is 7907400."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-24",
+          "correct": true,
+          "prediction": "The special magic number for outrageous-admission mentioned in the provided text is: 6866294."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-25",
+          "correct": false,
+          "prediction": "The special magic number for gullible-article mentioned in the provided text is: 2164686."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-26",
+          "correct": true,
+          "prediction": "6262632."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-27",
+          "correct": true,
+          "prediction": "4188992."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-28",
+          "correct": true,
+          "prediction": "The special magic number for womanly-regulator mentioned in the provided text is: 6038571."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-29",
+          "correct": true,
+          "prediction": "7361002."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-30",
+          "correct": true,
+          "prediction": "The special magic number for sneaky-vice mentioned in the provided text is: 6406444."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-31",
+          "correct": true,
+          "prediction": "2422633."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-32",
+          "correct": true,
+          "prediction": "7953166."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-33",
+          "correct": true,
+          "prediction": "1093026"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-34",
+          "correct": true,
+          "prediction": "6323376"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-35",
+          "correct": true,
+          "prediction": "5652512."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-36",
+          "correct": true,
+          "prediction": "5558623."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-37",
+          "correct": true,
+          "prediction": "8048838"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-38",
+          "correct": true,
+          "prediction": "The special magic number for rough-extremist mentioned in the provided text is: 4700025."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-39",
+          "correct": true,
+          "prediction": "7523941."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-40",
+          "correct": true,
+          "prediction": "The special magic number for glamorous-nightmare mentioned in the provided text is 7360307."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-41",
+          "correct": true,
+          "prediction": "The special magic number for guarded-wasp mentioned in the provided text is 8072684."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-42",
+          "correct": true,
+          "prediction": "3117636."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-43",
+          "correct": false,
+          "prediction": "The special magic number for disgusted-hunchback mentioned in the provided text is: 6217."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-44",
+          "correct": true,
+          "prediction": "The special magic number for shy-mutt is: 1689025"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-45",
+          "correct": true,
+          "prediction": "The special magic number for noisy-thyme is: 7076506."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-46",
+          "correct": true,
+          "prediction": "The special magic number for illegal-hearth mentioned in the provided text is 5118725."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-47",
+          "correct": true,
+          "prediction": "The special magic number for productive-artery mentioned in the provided text is: 6452832."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-48",
+          "correct": true,
+          "prediction": "5049282."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-49",
+          "correct": true,
+          "prediction": "7784725."
+        }
+      ]
+    },
+    {
+      "label": "llama_h2o_1024_guarded",
+      "family": "Llama 3.1",
+      "method": "h2o",
+      "metric": "needle_hit_rate",
+      "budget": 1024,
+      "guardrails": "prefix_plus_recent",
+      "hits": 47,
+      "cases": 50,
+      "hit_rate": 0.94,
+      "wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "elapsed_seconds": 308.578539458,
+      "estimated_cost_usd": 0.214153506383852,
+      "mean_retention_ratio": 0.2664,
+      "run_id": "step2-niah-h2o-live-b1024",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "retention_policy": "h2o",
+      "source_report": ".benchmarks/cross-model/llama31-4k-h2o-1024.json",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": true,
+          "prediction": "The special magic number for fair-sprout mentioned in the provided text is: 9375710."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": true,
+          "prediction": "The special magic number for solid-few mentioned in the provided text is: 7700828."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": true,
+          "prediction": "3684052."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": true,
+          "prediction": "The special magic number for tested-familiar mentioned in the provided text is: 6707197."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": true,
+          "prediction": "The special magic number for quick-mortality mentioned in the provided text is 2785277."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-5",
+          "correct": true,
+          "prediction": "The special magic number for round-ruin mentioned in the provided text is 9897858."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-6",
+          "correct": true,
+          "prediction": "8973915."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-7",
+          "correct": true,
+          "prediction": "The special magic number for faint-smolt mentioned in the provided text is: 4374754."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-8",
+          "correct": false,
+          "prediction": "The special magic number for spectacular-hail mentioned in the provided text is: 4860684."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-9",
+          "correct": true,
+          "prediction": "5672073."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-10",
+          "correct": true,
+          "prediction": "The special magic number for careful-nurse is: 2626229."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-11",
+          "correct": false,
+          "prediction": "4078."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-12",
+          "correct": true,
+          "prediction": "2642635"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-13",
+          "correct": true,
+          "prediction": "8633773."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-14",
+          "correct": true,
+          "prediction": "1981186."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-15",
+          "correct": true,
+          "prediction": "2149597."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-16",
+          "correct": true,
+          "prediction": "The special magic number for hypnotic-biscuit is: 5374922."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-17",
+          "correct": true,
+          "prediction": "6304573."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-18",
+          "correct": true,
+          "prediction": "3646552."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-19",
+          "correct": true,
+          "prediction": "The special magic number for sticky-platter mentioned in the provided text is: 4533779."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-20",
+          "correct": true,
+          "prediction": "6596150."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-21",
+          "correct": true,
+          "prediction": "1604451."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-22",
+          "correct": true,
+          "prediction": "The special magic number for hot-backdrop mentioned in the provided text is 7117837."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-23",
+          "correct": true,
+          "prediction": "The special magic number for inconclusive-participation mentioned in the provided text is 7907400."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-24",
+          "correct": true,
+          "prediction": "The special magic number for outrageous-admission mentioned in the provided text is: 6866294."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-25",
+          "correct": false,
+          "prediction": "The special magic number for gullible-article mentioned in the provided text is: 2164686."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-26",
+          "correct": true,
+          "prediction": "6262632."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-27",
+          "correct": true,
+          "prediction": "4188992."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-28",
+          "correct": true,
+          "prediction": "The special magic number for womanly-regulator mentioned in the provided text is: 6038571."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-29",
+          "correct": true,
+          "prediction": "7361002."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-30",
+          "correct": true,
+          "prediction": "The special magic number for sneaky-vice mentioned in the provided text is: 6406444."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-31",
+          "correct": true,
+          "prediction": "2422633."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-32",
+          "correct": true,
+          "prediction": "7953166."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-33",
+          "correct": true,
+          "prediction": "1093026"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-34",
+          "correct": true,
+          "prediction": "6323376"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-35",
+          "correct": true,
+          "prediction": "5652512."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-36",
+          "correct": true,
+          "prediction": "5558623."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-37",
+          "correct": true,
+          "prediction": "8048838"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-38",
+          "correct": true,
+          "prediction": "The special magic number for rough-extremist mentioned in the provided text is: 4700025."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-39",
+          "correct": true,
+          "prediction": "7523941."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-40",
+          "correct": true,
+          "prediction": "The special magic number for glamorous-nightmare mentioned in the provided text is 7360307."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-41",
+          "correct": true,
+          "prediction": "The special magic number for guarded-wasp mentioned in the provided text is 8072684."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-42",
+          "correct": true,
+          "prediction": "3117636."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-43",
+          "correct": true,
+          "prediction": "The special magic number for disgusted-hunchback mentioned in the provided text is: 6218367."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-44",
+          "correct": true,
+          "prediction": "The special magic number for shy-mutt is: 1689025"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-45",
+          "correct": true,
+          "prediction": "The special magic number for noisy-thyme is: 7076506."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-46",
+          "correct": true,
+          "prediction": "The special magic number for illegal-hearth mentioned in the provided text is 5118725."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-47",
+          "correct": true,
+          "prediction": "The special magic number for productive-artery mentioned in the provided text is 6452832."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-48",
+          "correct": true,
+          "prediction": "5049282."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-49",
+          "correct": true,
+          "prediction": "7784725."
+        }
+      ]
+    },
+    {
+      "label": "llama_token_512_guarded",
+      "family": "Llama 3.1",
+      "method": "token_vorn",
+      "metric": "needle_hit_rate",
+      "budget": 512,
+      "guardrails": "prefix_plus_recent",
+      "hits": 48,
+      "cases": 50,
+      "hit_rate": 0.96,
+      "wilson_ci_95": [
+        0.8653966212204534,
+        0.9889613473391734
+      ],
+      "elapsed_seconds": 249.41562037100002,
+      "estimated_cost_usd": 0.173094440537474,
+      "mean_retention_ratio": 0.1332,
+      "run_id": "step2-niah-vorn-live-b512",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "retention_policy": "vorn",
+      "source_report": ".benchmarks/cross-model/llama31-4k-token-b512.json",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": true,
+          "prediction": "The special magic number for fair-sprout mentioned in the provided text is: 9375710."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": true,
+          "prediction": "The special magic number for solid-few mentioned in the provided text is: 7700828."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": true,
+          "prediction": "3684052."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": true,
+          "prediction": "The special magic number for tested-familiar mentioned in the provided text is: 6707197."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": true,
+          "prediction": "2785277."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-5",
+          "correct": true,
+          "prediction": "The special magic number for round-ruin mentioned in the provided text is: 9897858."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-6",
+          "correct": true,
+          "prediction": "8973915."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-7",
+          "correct": true,
+          "prediction": "The special magic number for faint-smolt mentioned in the provided text is: 4374754."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-8",
+          "correct": true,
+          "prediction": "The special magic number for spectacular-hail mentioned in the provided text is: 4694634."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-9",
+          "correct": true,
+          "prediction": "5672073."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-10",
+          "correct": true,
+          "prediction": "The special magic number for careful-nurse mentioned in the provided text is: 2626229."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-11",
+          "correct": true,
+          "prediction": "The special magic number for nappy-limestone mentioned in the provided text is: 4078418."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-12",
+          "correct": true,
+          "prediction": "2642635."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-13",
+          "correct": true,
+          "prediction": "8633773."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-14",
+          "correct": true,
+          "prediction": "1981186."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-15",
+          "correct": true,
+          "prediction": "2149597."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-16",
+          "correct": true,
+          "prediction": "5374922."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-17",
+          "correct": true,
+          "prediction": "The special magic number for orange-conversion is: 6304573."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-18",
+          "correct": true,
+          "prediction": "3646552."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-19",
+          "correct": true,
+          "prediction": "The special magic number for sticky-platter mentioned in the text is: 4533779."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-20",
+          "correct": true,
+          "prediction": "6596150."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-21",
+          "correct": true,
+          "prediction": "The special magic number for salty-hovel mentioned in the provided text is: 1604451."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-22",
+          "correct": true,
+          "prediction": "The special magic number for hot-backdrop mentioned in the provided text is: 7117837."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-23",
+          "correct": true,
+          "prediction": "7907400."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-24",
+          "correct": true,
+          "prediction": "The special magic number for outrageous-admission mentioned in the provided text is: 6866294."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-25",
+          "correct": true,
+          "prediction": "The special magic number for gullible-article mentioned in the provided text is: 6891254."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-26",
+          "correct": true,
+          "prediction": "6262632"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-27",
+          "correct": true,
+          "prediction": "4188992."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-28",
+          "correct": true,
+          "prediction": "The special magic number for womanly-regulator mentioned in the provided text is: 6038571."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-29",
+          "correct": true,
+          "prediction": "7361002."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-30",
+          "correct": false,
+          "prediction": "The special magic number for sneaky-vice mentioned in the provided text is: 6444."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-31",
+          "correct": true,
+          "prediction": "The special magic number for trite-icon mentioned in the provided text is: 2422633."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-32",
+          "correct": true,
+          "prediction": "7953166."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-33",
+          "correct": true,
+          "prediction": "1093026"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-34",
+          "correct": true,
+          "prediction": "6323376."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-35",
+          "correct": true,
+          "prediction": "The special magic number for functional-panic mentioned in the provided text is: 5652512."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-36",
+          "correct": true,
+          "prediction": "5558623."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-37",
+          "correct": true,
+          "prediction": "8048838."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-38",
+          "correct": true,
+          "prediction": "The special magic number for rough-extremist mentioned in the provided text is: 4700025."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-39",
+          "correct": true,
+          "prediction": "The special magic number for adjoining-swivel mentioned in the provided text is: 7523941."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-40",
+          "correct": true,
+          "prediction": "The special magic number for glamorous-nightmare mentioned in the text is: 7360307."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-41",
+          "correct": true,
+          "prediction": "The special magic number for guarded-wasp is: 8072684."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-42",
+          "correct": true,
+          "prediction": "3117636."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-43",
+          "correct": true,
+          "prediction": "The special magic number for disgusted-hunchback mentioned in the provided text is: 6218367."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-44",
+          "correct": true,
+          "prediction": "The special magic number for shy-mutt mentioned in the provided text is: 1689025."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-45",
+          "correct": true,
+          "prediction": "The special magic number for noisy-thyme mentioned in the provided text is: 7076506."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-46",
+          "correct": true,
+          "prediction": "The special magic number for illegal-hearth mentioned in the provided text is: 5118725."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-47",
+          "correct": true,
+          "prediction": "The special magic number for productive-artery mentioned in the provided text is: 6452832."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-48",
+          "correct": false,
+          "prediction": "The special magic number for bright-spat mentioned in the provided text is 5042."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-49",
+          "correct": true,
+          "prediction": "The special magic number for fearless-tritone mentioned in the provided text is: 7784725."
+        }
+      ]
+    },
+    {
+      "label": "llama_sentence_512_guarded",
+      "family": "Llama 3.1",
+      "method": "sentence_vorn",
+      "metric": "needle_hit_rate",
+      "budget": 512,
+      "guardrails": "prefix_plus_recent",
+      "hits": 50,
+      "cases": 50,
+      "hit_rate": 1.0,
+      "wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "elapsed_seconds": 214.978432631,
+      "estimated_cost_usd": 0.149195032245914,
+      "mean_retention_ratio": 0.1302,
+      "run_id": "step2-niah-sentence-vorn-live-b512",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "retention_policy": "sentence_vorn",
+      "source_report": ".benchmarks/cross-model/llama31-4k-sentence-b512.json",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": true,
+          "prediction": "The special magic number for fair-sprout mentioned in the provided text is: 9375710."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": true,
+          "prediction": "The special magic number for solid-few mentioned in the provided text is: 7700828."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": true,
+          "prediction": "3684052."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": true,
+          "prediction": "The special magic number for tested-familiar mentioned in the provided text is: 6707197."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": true,
+          "prediction": "2785277."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-5",
+          "correct": true,
+          "prediction": "The special magic number for round-ruin mentioned in the provided text is: 9897858."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-6",
+          "correct": true,
+          "prediction": "8973915."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-7",
+          "correct": true,
+          "prediction": "The special magic number for faint-smolt mentioned in the provided text is: 4374754."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-8",
+          "correct": true,
+          "prediction": "The special magic number for spectacular-hail mentioned in the provided text is: 4694634."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-9",
+          "correct": true,
+          "prediction": "5672073."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-10",
+          "correct": true,
+          "prediction": "The special magic number for careful-nurse mentioned in the provided text is: 2626229."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-11",
+          "correct": true,
+          "prediction": "The special magic number for nappy-limestone mentioned in the provided text is: 4078418."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-12",
+          "correct": true,
+          "prediction": "2642635."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-13",
+          "correct": true,
+          "prediction": "The special magic number for good-speed mentioned in the provided text is: 8633773."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-14",
+          "correct": true,
+          "prediction": "1981186."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-15",
+          "correct": true,
+          "prediction": "The special magic number for efficient-pursuit mentioned in the provided text is: 2149597."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-16",
+          "correct": true,
+          "prediction": "5374922."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-17",
+          "correct": true,
+          "prediction": "The special magic number for orange-conversion mentioned in the provided text is: 6304573."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-18",
+          "correct": true,
+          "prediction": "3646552."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-19",
+          "correct": true,
+          "prediction": "The special magic number for sticky-platter mentioned in the provided text is: 4533779."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-20",
+          "correct": true,
+          "prediction": "6596150."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-21",
+          "correct": true,
+          "prediction": "1604451."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-22",
+          "correct": true,
+          "prediction": "The special magic number for hot-backdrop mentioned in the provided text is: 7117837."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-23",
+          "correct": true,
+          "prediction": "7907400."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-24",
+          "correct": true,
+          "prediction": "The special magic number for outrageous-admission mentioned in the provided text is: 6866294."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-25",
+          "correct": true,
+          "prediction": "The special magic number for gullible-article mentioned in the provided text is: 6891254."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-26",
+          "correct": true,
+          "prediction": "6262632."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-27",
+          "correct": true,
+          "prediction": "The special magic number for smelly-root mentioned in the provided text is: 4188992."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-28",
+          "correct": true,
+          "prediction": "The special magic number for womanly-regulator mentioned in the provided text is: 6038571."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-29",
+          "correct": true,
+          "prediction": "The special magic number for ultra-vodka mentioned in the provided text is: 7361002."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-30",
+          "correct": true,
+          "prediction": "The special magic number for sneaky-vice mentioned in the provided text is: 6406444."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-31",
+          "correct": true,
+          "prediction": "The special magic number for trite-icon mentioned in the provided text is: 2422633."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-32",
+          "correct": true,
+          "prediction": "7953166."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-33",
+          "correct": true,
+          "prediction": "The special magic number for towering-yeast mentioned in the provided text is: 1093026."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-34",
+          "correct": true,
+          "prediction": "6323376."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-35",
+          "correct": true,
+          "prediction": "The special magic number for functional-panic mentioned in the provided text is: 5652512."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-36",
+          "correct": true,
+          "prediction": "The special magic number for flowery-supplement mentioned in the provided text is: 5558623."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-37",
+          "correct": true,
+          "prediction": "The special magic number for exotic-position mentioned in the provided text is: 8048838."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-38",
+          "correct": true,
+          "prediction": "The special magic number for rough-extremist mentioned in the provided text is: 4700025."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-39",
+          "correct": true,
+          "prediction": "7523941."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-40",
+          "correct": true,
+          "prediction": "7360307."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-41",
+          "correct": true,
+          "prediction": "The special magic number for guarded-wasp mentioned in the provided text is: 8072684."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-42",
+          "correct": true,
+          "prediction": "3117636."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-43",
+          "correct": true,
+          "prediction": "6218367."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-44",
+          "correct": true,
+          "prediction": "The special magic number for shy-mutt is: 1689025."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-45",
+          "correct": true,
+          "prediction": "The special magic number for noisy-thyme is: 7076506."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-46",
+          "correct": true,
+          "prediction": "The special magic number for illegal-hearth mentioned in the provided text is: 5118725."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-47",
+          "correct": true,
+          "prediction": "The special magic number for productive-artery mentioned in the provided text is: 6452832."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-48",
+          "correct": true,
+          "prediction": "The special magic number for bright-spat mentioned in the provided text is: 5049282."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-49",
+          "correct": true,
+          "prediction": "The special magic number for fearless-tritone is: 7784725."
+        }
+      ]
+    },
+    {
+      "label": "llama_tova_512_guarded",
+      "family": "Llama 3.1",
+      "method": "tova",
+      "metric": "needle_hit_rate",
+      "budget": 512,
+      "guardrails": "prefix_plus_recent",
+      "hits": 28,
+      "cases": 50,
+      "hit_rate": 0.56,
+      "wilson_ci_95": [
+        0.4230578680014353,
+        0.6883801278976466
+      ],
+      "elapsed_seconds": 231.181171389,
+      "estimated_cost_usd": 0.160439732943966,
+      "mean_retention_ratio": 0.1332,
+      "run_id": "step2-niah-tova-live-b512",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "retention_policy": "tova",
+      "source_report": ".benchmarks/cross-model/llama31-4k-tova-b512.json",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": true,
+          "prediction": "The special magic number for fair-sprout mentioned in the provided text is 9375710."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": true,
+          "prediction": "7700828"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": true,
+          "prediction": "3684052."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": true,
+          "prediction": "The special magic number for tested-familiar mentioned in the provided text is: 6707197."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": false,
+          "prediction": "278527."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-5",
+          "correct": true,
+          "prediction": "9897858"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-6",
+          "correct": true,
+          "prediction": "8973915"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-7",
+          "correct": true,
+          "prediction": "The special magic number for faint-smolt mentioned in the provided text is: 4374754."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-8",
+          "correct": false,
+          "prediction": "The special magic number for spectacular-hail mentioned in the provided text is: 4860684."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-9",
+          "correct": true,
+          "prediction": "5672073."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-10",
+          "correct": true,
+          "prediction": "2626229."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-11",
+          "correct": false,
+          "prediction": "4078"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-12",
+          "correct": false,
+          "prediction": "2645."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-13",
+          "correct": false,
+          "prediction": "8096887"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-14",
+          "correct": true,
+          "prediction": "1981186."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-15",
+          "correct": true,
+          "prediction": "2149597."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-16",
+          "correct": false,
+          "prediction": "There is no special magic number for hypnotic-biscuit mentioned in the provided text. The text appears to be a collection of unrelated phrases and sentences, and"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-17",
+          "correct": true,
+          "prediction": "6304573"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-18",
+          "correct": true,
+          "prediction": "3646552"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-19",
+          "correct": false,
+          "prediction": "The special magic number for sticky-platter mentioned in the provided text is: 453"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-20",
+          "correct": false,
+          "prediction": "6590"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-21",
+          "correct": true,
+          "prediction": "1604451."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-22",
+          "correct": false,
+          "prediction": "The special magic number for hot-backdrop mentioned in the provided text is: 7117."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-23",
+          "correct": false,
+          "prediction": "The special magic number for inconclusive-participation mentioned in the provided text is: 4009172."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-24",
+          "correct": false,
+          "prediction": "The special magic number for outrageous-admission mentioned in the provided text is: 8896868."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-25",
+          "correct": false,
+          "prediction": "2164686."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-26",
+          "correct": true,
+          "prediction": "6262632"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-27",
+          "correct": true,
+          "prediction": "4188992"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-28",
+          "correct": false,
+          "prediction": "6031"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-29",
+          "correct": true,
+          "prediction": "7361002."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-30",
+          "correct": false,
+          "prediction": "640644."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-31",
+          "correct": true,
+          "prediction": "The special magic number for trite-icon mentioned in the provided text is: 2422633."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-32",
+          "correct": true,
+          "prediction": "7953166"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-33",
+          "correct": true,
+          "prediction": "The special magic number for towering-yeast mentioned in the provided text is: 1093026."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-34",
+          "correct": true,
+          "prediction": "6323376."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-35",
+          "correct": true,
+          "prediction": "5652512"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-36",
+          "correct": true,
+          "prediction": "5558623."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-37",
+          "correct": true,
+          "prediction": "8048838."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-38",
+          "correct": true,
+          "prediction": "4700025"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-39",
+          "correct": true,
+          "prediction": "7523941"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-40",
+          "correct": false,
+          "prediction": "There is no special magic number for \"glamorous-nightmare\" mentioned in the provided text. The text appears to be a collection of unrelated phrases, sentences"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-41",
+          "correct": true,
+          "prediction": "8072684"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-42",
+          "correct": false,
+          "prediction": "The special magic number for foregoing-syndicate mentioned in the provided text is: 2919136."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-43",
+          "correct": false,
+          "prediction": "621836."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-44",
+          "correct": false,
+          "prediction": "There is no mention of \"shy-mutt\" in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-45",
+          "correct": false,
+          "prediction": "8046"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-46",
+          "correct": false,
+          "prediction": "5115"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-47",
+          "correct": false,
+          "prediction": "The special magic number for productive-artery mentioned in the provided text is: 9170."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-48",
+          "correct": true,
+          "prediction": "5049282"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-49",
+          "correct": false,
+          "prediction": "7785"
+        }
+      ]
+    },
+    {
+      "label": "llama_h2o_512_guarded",
+      "family": "Llama 3.1",
+      "method": "h2o",
+      "metric": "needle_hit_rate",
+      "budget": 512,
+      "guardrails": "prefix_plus_recent",
+      "hits": 28,
+      "cases": 50,
+      "hit_rate": 0.56,
+      "wilson_ci_95": [
+        0.4230578680014353,
+        0.6883801278976466
+      ],
+      "elapsed_seconds": 235.934771475,
+      "estimated_cost_usd": 0.16373873140364997,
+      "mean_retention_ratio": 0.1332,
+      "run_id": "step2-niah-h2o-live-b512",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "retention_policy": "h2o",
+      "source_report": ".benchmarks/cross-model/llama31-4k-h2o-b512.json",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": true,
+          "prediction": "The special magic number for fair-sprout mentioned in the provided text is 9375710."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": true,
+          "prediction": "7700828"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": true,
+          "prediction": "3684052."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": true,
+          "prediction": "The special magic number for tested-familiar mentioned in the provided text is: 6707197."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": false,
+          "prediction": "278527."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-5",
+          "correct": true,
+          "prediction": "9897858"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-6",
+          "correct": true,
+          "prediction": "8973915"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-7",
+          "correct": true,
+          "prediction": "The special magic number for faint-smolt mentioned in the provided text is: 4374754."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-8",
+          "correct": false,
+          "prediction": "The special magic number for spectacular-hail mentioned in the provided text is: 4860684."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-9",
+          "correct": true,
+          "prediction": "5672073."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-10",
+          "correct": true,
+          "prediction": "2626229."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-11",
+          "correct": false,
+          "prediction": "4078"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-12",
+          "correct": false,
+          "prediction": "2645."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-13",
+          "correct": false,
+          "prediction": "8096887"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-14",
+          "correct": true,
+          "prediction": "1981186."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-15",
+          "correct": true,
+          "prediction": "2149597."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-16",
+          "correct": false,
+          "prediction": "There is no special magic number for hypnotic-biscuit mentioned in the provided text. The text appears to be a collection of unrelated phrases and sentences, and"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-17",
+          "correct": true,
+          "prediction": "6304573"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-18",
+          "correct": true,
+          "prediction": "3646552"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-19",
+          "correct": false,
+          "prediction": "The special magic number for sticky-platter mentioned in the provided text is: 4531."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-20",
+          "correct": false,
+          "prediction": "6590"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-21",
+          "correct": true,
+          "prediction": "1604451."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-22",
+          "correct": false,
+          "prediction": "The special magic number for hot-backdrop mentioned in the provided text is: 518641."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-23",
+          "correct": false,
+          "prediction": "The special magic number for inconclusive-participation mentioned in the provided text is: 4009172."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-24",
+          "correct": false,
+          "prediction": "The special magic number for outrageous-admission mentioned in the provided text is: 8896868."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-25",
+          "correct": false,
+          "prediction": "2164686."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-26",
+          "correct": true,
+          "prediction": "6262632"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-27",
+          "correct": true,
+          "prediction": "4188992"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-28",
+          "correct": false,
+          "prediction": "6031"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-29",
+          "correct": true,
+          "prediction": "7361002."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-30",
+          "correct": false,
+          "prediction": "640644."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-31",
+          "correct": true,
+          "prediction": "The special magic number for trite-icon mentioned in the provided text is: 2422633."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-32",
+          "correct": true,
+          "prediction": "7953166"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-33",
+          "correct": true,
+          "prediction": "The special magic number for towering-yeast mentioned in the provided text is: 1093026."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-34",
+          "correct": true,
+          "prediction": "6323376."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-35",
+          "correct": true,
+          "prediction": "5652512"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-36",
+          "correct": true,
+          "prediction": "5558623."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-37",
+          "correct": true,
+          "prediction": "8048838."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-38",
+          "correct": true,
+          "prediction": "4700025"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-39",
+          "correct": true,
+          "prediction": "7523941"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-40",
+          "correct": false,
+          "prediction": "There is no special magic number for \"glamorous-nightmare\" mentioned in the provided text. The text appears to be a collection of unrelated phrases, sentences"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-41",
+          "correct": true,
+          "prediction": "8072684"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-42",
+          "correct": false,
+          "prediction": "The special magic number for foregoing-syndicate mentioned in the provided text is: 2919136."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-43",
+          "correct": false,
+          "prediction": "621836."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-44",
+          "correct": false,
+          "prediction": "There is no mention of \"shy-mutt\" in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-45",
+          "correct": false,
+          "prediction": "8046"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-46",
+          "correct": false,
+          "prediction": "5115"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-47",
+          "correct": false,
+          "prediction": "The special magic number for productive-artery mentioned in the provided text is: 9170."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-48",
+          "correct": true,
+          "prediction": "5049282"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-49",
+          "correct": false,
+          "prediction": "7785"
+        }
+      ]
+    }
+  ],
+  "pairwise_tests": [
+    {
+      "lhs": "llama_token_512_guarded",
+      "rhs": "llama_token_1024_guarded",
+      "paired": true,
+      "same_n": true,
+      "test": "mcnemar_exact_two_sided",
+      "table": [
+        [
+          48,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "p_value": 0.5,
+      "discordant_pairs": 2,
+      "lhs_discordant_share": 0.0
+    },
+    {
+      "lhs": "llama_sentence_512_guarded",
+      "rhs": "llama_sentence_1024_guarded",
+      "paired": true,
+      "same_n": true,
+      "test": "mcnemar_exact_two_sided",
+      "table": [
+        [
+          50,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "p_value": 1.0,
+      "discordant_pairs": 0,
+      "lhs_discordant_share": null
+    },
+    {
+      "lhs": "llama_tova_512_guarded",
+      "rhs": "llama_tova_1024_guarded",
+      "paired": true,
+      "same_n": true,
+      "test": "mcnemar_exact_two_sided",
+      "table": [
+        [
+          28,
+          0
+        ],
+        [
+          17,
+          5
+        ]
+      ],
+      "p_value": 1.52587890625e-05,
+      "discordant_pairs": 17,
+      "lhs_discordant_share": 0.0
+    },
+    {
+      "lhs": "llama_h2o_512_guarded",
+      "rhs": "llama_h2o_1024_guarded",
+      "paired": true,
+      "same_n": true,
+      "test": "mcnemar_exact_two_sided",
+      "table": [
+        [
+          28,
+          0
+        ],
+        [
+          19,
+          3
+        ]
+      ],
+      "p_value": 3.814697265625e-06,
+      "discordant_pairs": 19,
+      "lhs_discordant_share": 0.0
+    }
+  ],
+  "run_conditions": {
+    "profile": "author",
+    "dataset_id": "rbiswasfc/ruler",
+    "dataset_config": "niah_multikey_1_4k",
+    "split": "validation[:50]",
+    "model": "meta-llama/Llama-3.1-8B-Instruct",
+    "budgets": [
+      512,
+      1024
+    ],
+    "note": "First threshold-cut artifact below the earlier 1024 ceiling regime. Compares the same four methods at 512 vs 1024 on the identical slice."
+  }
+}

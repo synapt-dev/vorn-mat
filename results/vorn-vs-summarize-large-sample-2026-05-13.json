@@ -1,0 +1,71 @@
+{
+  "context_ceiling": {
+    "method": "vanilla",
+    "budget_regime": "full_context_unconstrained",
+    "hit_rate": 0.28,
+    "elapsed_seconds": 160.23,
+    "inference_cost_usd": 0.1112,
+    "preprocessing_elapsed_seconds": 0.0,
+    "preprocessing_cost_usd": 0.0,
+    "kv_savings": 0.0
+  },
+  "experiment": {
+    "profile": "author",
+    "dataset_id": "rbiswasfc/ruler",
+    "dataset_config": "niah_multikey_1_4k",
+    "split": "validation[:200]",
+    "model": "mistralai/Mistral-7B-Instruct-v0.3",
+    "random_seed": 17,
+    "cache_budget_tokens": 1024
+  },
+  "rows": [
+    {
+      "method": "vorn_live",
+      "label": "Vorn eviction @ 1024",
+      "cases": 200,
+      "hits": 50,
+      "hit_rate": 0.25,
+      "wilson_ci_95": [
+        0.19508168006817497,
+        0.31434098312045833
+      ],
+      "elapsed_seconds": 1029.1667161330001,
+      "inference_cost_usd": 0.714241700996302,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "mean_retention_ratio": 0.2446,
+      "summary_contract": "canonical_hidden_state_float32_per_token_from_layer_L_star",
+      "summary_fingerprint": "948fbf86eb88325758bd60952682745020b53db4ea92d685875945f3b29675a1",
+      "run_id": "step2-niah-vorn-live-b1024"
+    },
+    {
+      "method": "summarize_compact",
+      "label": "Summarize compact @ 1024",
+      "cases": 200,
+      "hits": 32,
+      "hit_rate": 0.16,
+      "wilson_ci_95": [
+        0.11567412031587018,
+        0.2171407016206711
+      ],
+      "elapsed_seconds": 1380.4800617180001,
+      "inference_cost_usd": 0.958053162832292,
+      "preprocessing_elapsed_seconds": 1049.5406156420006,
+      "preprocessing_cost_usd": 0.7283811872555483,
+      "mean_retention_ratio": 0.0548,
+      "summary_contract": "whole_context_summary_without_question_then_answer_with_question",
+      "summary_fingerprint": "a30a3a4afbb25568d498e42fecb4b602fea6f5ac0158ff250f25ba3a8f7b798e",
+      "run_id": "step2-niah-summarize-compact-b1024"
+    }
+  ],
+  "significance": {
+    "test": "fisher_exact_two_sided",
+    "contingency_table": [
+      [50, 150],
+      [32, 168]
+    ],
+    "p_value": 0.03483387193403559,
+    "odds_ratio": 1.75,
+    "absolute_hit_rate_delta": 0.09
+  }
+}

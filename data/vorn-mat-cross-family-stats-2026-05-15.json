@@ -1,0 +1,4129 @@
+{
+  "note_slug": "vorn-mat-cross-family-stats-2026-05-15",
+  "alpha": 0.05,
+  "minimum_one_sided_discordant_pairs_for_exact_two_sided_significance": 6,
+  "artifacts": {
+    "mistral_4k": {
+      "artifact_id": "mistral_4k_sentence_budget_sweep",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/sentence-level-eviction-4k-budget-sweep-2026-05-13.json",
+      "pr_number": null,
+      "title": "research: sentence-level vorn eviction budget sweep"
+    },
+    "mistral_8k": {
+      "artifact_id": "mistral_8k_sentence_budget_sweep",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/sentence-level-eviction-8k-budget-sweep-2026-05-13.json",
+      "pr_number": null,
+      "title": "research: extend vorn sentence matrix to 8k"
+    },
+    "qwen_4k": {
+      "artifact_id": "qwen_4k_budget_sweep",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/qwen-4k-budget-sweep-2026-05-14.json",
+      "pr_number": null,
+      "title": "research: characterize qwen 4k sentence/token budget sweep"
+    },
+    "qwen_word": {
+      "artifact_id": "qwen_4k_word_budget_sweep",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/qwen-4k-word-budget-sweep-2026-05-14.json",
+      "pr_number": null,
+      "title": "research: characterize qwen word-shaped eviction"
+    },
+    "adaptive_posthoc": {
+      "artifact_id": "adaptive_posthoc_map",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/adaptive-granularity-posthoc-2026-05-14.json",
+      "pr_number": null,
+      "title": "research: map adaptive-granularity posthoc oracle"
+    },
+    "gemma_gate": {
+      "artifact_id": "gemma_4k_gate",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/gemma-4-4k-gate-2026-05-15.json",
+      "pr_number": null,
+      "title": "feat: add gemma 4 cross-model gate"
+    },
+    "gemma_curve": {
+      "artifact_id": "gemma_4k_degradation_curve",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/gemma-4-4k-degradation-curve-2026-05-15.json",
+      "pr_number": null,
+      "title": "feat: add Gemma 4 degradation curve"
+    },
+    "qwen3_gate": {
+      "artifact_id": "qwen3_4k_gate",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/qwen3-4k-gate-2026-05-15.json",
+      "pr_number": null,
+      "title": "feat: package qwen 3 cross-model gate"
+    },
+    "llama_gate": {
+      "artifact_id": "llama31_4k_gate",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/llama31-4k-gate-2026-05-15.json",
+      "pr_number": null,
+      "title": "feat: add llama 3.1 cross-model gate"
+    },
+    "gemma_xbase": {
+      "artifact_id": "gemma_4k_cross_baseline_extension",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json",
+      "pr_number": null,
+      "title": "feat: add gemma 4 cross-baseline extension"
+    },
+    "llama_xbase": {
+      "artifact_id": "llama31_4k_cross_baseline_extension",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/llama31-4k-cross-baseline-extension-2026-05-15.json",
+      "pr_number": null,
+      "title": "feat: add llama 3.1 cross-baseline extension"
+    },
+    "cross_family_no_guards": {
+      "artifact_id": "cross_family_no_guards_mirror",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+      "pr_number": null,
+      "title": "feat: add no-guards mirror and llama threshold artifacts"
+    },
+    "llama_threshold_cut": {
+      "artifact_id": "llama31_4k_threshold_cut",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/llama31-4k-threshold-cut-2026-05-15.json",
+      "pr_number": null,
+      "title": "feat: add no-guards mirror and llama threshold artifacts"
+    },
+    "ministral_fast_read": {
+      "artifact_id": "ministral_8b_4k_fast_read",
+      "ref": "origin/main",
+      "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+      "path": "results/ministral-8b-4k-fast-read-2026-05-15.json",
+      "pr_number": null,
+      "title": "feat: add Ministral 8B fast-read artifact"
+    }
+  },
+  "comparisons": [
+    {
+      "family_id": "mistral_4k_sentence_vs_token",
+      "artifact_id": "mistral_4k_sentence_budget_sweep",
+      "source": {
+        "artifact_id": "mistral_4k_sentence_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/sentence-level-eviction-4k-budget-sweep-2026-05-13.json",
+        "pr_number": null,
+        "title": "research: sentence-level vorn eviction budget sweep"
+      },
+      "comparison": {
+        "lhs": "sentence_512_guarded",
+        "rhs": "token_512_guarded"
+      },
+      "lhs_hit_rate": 0.26,
+      "rhs_hit_rate": 0.2,
+      "lhs_wilson_ci_95": [
+        0.15871379651367384,
+        0.3955342198899992
+      ],
+      "rhs_wilson_ci_95": [
+        0.11243629945973886,
+        0.3303737210448524
+      ],
+      "delta_hit_rate": 0.06,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.60723876953125,
+        "holm_adjusted_p_within_family": 0.60723876953125,
+        "discordant_pairs": 15,
+        "table": [
+          [
+            4,
+            9
+          ],
+          [
+            6,
+            31
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "mistral_4k_sentence_vs_token",
+      "artifact_id": "mistral_4k_sentence_budget_sweep",
+      "source": {
+        "artifact_id": "mistral_4k_sentence_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/sentence-level-eviction-4k-budget-sweep-2026-05-13.json",
+        "pr_number": null,
+        "title": "research: sentence-level vorn eviction budget sweep"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_guarded",
+        "rhs": "token_1024_guarded"
+      },
+      "lhs_hit_rate": 0.68,
+      "rhs_hit_rate": 0.26,
+      "lhs_wilson_ci_95": [
+        0.5418944286372394,
+        0.792419559060006
+      ],
+      "rhs_wilson_ci_95": [
+        0.15871379651367384,
+        0.3955342198899992
+      ],
+      "delta_hit_rate": 0.42000000000000004,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 4.9233436584472656e-05,
+        "holm_adjusted_p_within_family": 0.00019693374633789062,
+        "discordant_pairs": 27,
+        "table": [
+          [
+            10,
+            24
+          ],
+          [
+            3,
+            13
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "mistral_4k_sentence_vs_token",
+      "artifact_id": "mistral_4k_sentence_budget_sweep",
+      "source": {
+        "artifact_id": "mistral_4k_sentence_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/sentence-level-eviction-4k-budget-sweep-2026-05-13.json",
+        "pr_number": null,
+        "title": "research: sentence-level vorn eviction budget sweep"
+      },
+      "comparison": {
+        "lhs": "sentence_1536_guarded",
+        "rhs": "token_1536_guarded"
+      },
+      "lhs_hit_rate": 0.54,
+      "rhs_hit_rate": 0.16,
+      "lhs_wilson_ci_95": [
+        0.40398634328388083,
+        0.6703056539821737
+      ],
+      "rhs_wilson_ci_95": [
+        0.08337321362087696,
+        0.2851448096176598
+      ],
+      "delta_hit_rate": 0.38,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.000310748815536499,
+        "holm_adjusted_p_within_family": 0.0009322464466094971,
+        "discordant_pairs": 27,
+        "table": [
+          [
+            4,
+            23
+          ],
+          [
+            4,
+            19
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "mistral_4k_sentence_vs_token",
+      "artifact_id": "mistral_4k_sentence_budget_sweep",
+      "source": {
+        "artifact_id": "mistral_4k_sentence_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/sentence-level-eviction-4k-budget-sweep-2026-05-13.json",
+        "pr_number": null,
+        "title": "research: sentence-level vorn eviction budget sweep"
+      },
+      "comparison": {
+        "lhs": "sentence_2048_guarded",
+        "rhs": "token_2048_guarded"
+      },
+      "lhs_hit_rate": 0.36,
+      "rhs_hit_rate": 0.16,
+      "lhs_wilson_ci_95": [
+        0.24138562967182875,
+        0.49859237989698046
+      ],
+      "rhs_wilson_ci_95": [
+        0.08337321362087696,
+        0.2851448096176598
+      ],
+      "delta_hit_rate": 0.19999999999999998,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.012939453125,
+        "holm_adjusted_p_within_family": 0.02587890625,
+        "discordant_pairs": 14,
+        "table": [
+          [
+            6,
+            12
+          ],
+          [
+            2,
+            30
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "mistral_8k_sentence_vs_token",
+      "artifact_id": "mistral_8k_sentence_budget_sweep",
+      "source": {
+        "artifact_id": "mistral_8k_sentence_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/sentence-level-eviction-8k-budget-sweep-2026-05-13.json",
+        "pr_number": null,
+        "title": "research: extend vorn sentence matrix to 8k"
+      },
+      "comparison": {
+        "lhs": "sentence_512_guarded",
+        "rhs": "token_512_guarded"
+      },
+      "lhs_hit_rate": 0.18,
+      "rhs_hit_rate": 0.38,
+      "lhs_wilson_ci_95": [
+        0.09770082732453791,
+        0.30796319454702603
+      ],
+      "rhs_wilson_ci_95": [
+        0.2586259584257722,
+        0.5184980497760643
+      ],
+      "delta_hit_rate": -0.2,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.012939453125,
+        "holm_adjusted_p_within_family": 0.038177490234375,
+        "discordant_pairs": 14,
+        "table": [
+          [
+            7,
+            2
+          ],
+          [
+            12,
+            29
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "mistral_8k_sentence_vs_token",
+      "artifact_id": "mistral_8k_sentence_budget_sweep",
+      "source": {
+        "artifact_id": "mistral_8k_sentence_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/sentence-level-eviction-8k-budget-sweep-2026-05-13.json",
+        "pr_number": null,
+        "title": "research: extend vorn sentence matrix to 8k"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_guarded",
+        "rhs": "token_1024_guarded"
+      },
+      "lhs_hit_rate": 0.62,
+      "rhs_hit_rate": 0.38,
+      "lhs_wilson_ci_95": [
+        0.4815019502239357,
+        0.7413740415742278
+      ],
+      "rhs_wilson_ci_95": [
+        0.2586259584257722,
+        0.5184980497760643
+      ],
+      "delta_hit_rate": 0.24,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.007537841796875,
+        "holm_adjusted_p_within_family": 0.0301513671875,
+        "discordant_pairs": 18,
+        "table": [
+          [
+            16,
+            15
+          ],
+          [
+            3,
+            16
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "mistral_8k_sentence_vs_token",
+      "artifact_id": "mistral_8k_sentence_budget_sweep",
+      "source": {
+        "artifact_id": "mistral_8k_sentence_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/sentence-level-eviction-8k-budget-sweep-2026-05-13.json",
+        "pr_number": null,
+        "title": "research: extend vorn sentence matrix to 8k"
+      },
+      "comparison": {
+        "lhs": "sentence_1536_guarded",
+        "rhs": "token_1536_guarded"
+      },
+      "lhs_hit_rate": 0.74,
+      "rhs_hit_rate": 0.52,
+      "lhs_wilson_ci_95": [
+        0.6044657801100008,
+        0.8412862034863262
+      ],
+      "rhs_wilson_ci_95": [
+        0.3851151225880844,
+        0.6520308760449429
+      ],
+      "delta_hit_rate": 0.21999999999999997,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.012725830078125,
+        "holm_adjusted_p_within_family": 0.038177490234375,
+        "discordant_pairs": 17,
+        "table": [
+          [
+            23,
+            14
+          ],
+          [
+            3,
+            10
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "mistral_8k_sentence_vs_token",
+      "artifact_id": "mistral_8k_sentence_budget_sweep",
+      "source": {
+        "artifact_id": "mistral_8k_sentence_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/sentence-level-eviction-8k-budget-sweep-2026-05-13.json",
+        "pr_number": null,
+        "title": "research: extend vorn sentence matrix to 8k"
+      },
+      "comparison": {
+        "lhs": "sentence_2048_guarded",
+        "rhs": "token_2048_guarded"
+      },
+      "lhs_hit_rate": 0.62,
+      "rhs_hit_rate": 0.68,
+      "lhs_wilson_ci_95": [
+        0.4815019502239357,
+        0.7413740415742278
+      ],
+      "rhs_wilson_ci_95": [
+        0.5418944286372394,
+        0.792419559060006
+      ],
+      "delta_hit_rate": -0.06000000000000005,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.60723876953125,
+        "holm_adjusted_p_within_family": 0.60723876953125,
+        "discordant_pairs": 15,
+        "table": [
+          [
+            25,
+            6
+          ],
+          [
+            9,
+            10
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "qwen_4k_sentence_vs_token",
+      "artifact_id": "qwen_4k_budget_sweep",
+      "source": {
+        "artifact_id": "qwen_4k_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/qwen-4k-budget-sweep-2026-05-14.json",
+        "pr_number": null,
+        "title": "research: characterize qwen 4k sentence/token budget sweep"
+      },
+      "comparison": {
+        "lhs": "sentence_256_guarded",
+        "rhs": "token_256_guarded"
+      },
+      "lhs_hit_rate": 0.0,
+      "rhs_hit_rate": 0.0,
+      "lhs_wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "rhs_wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            50
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": null
+    },
+    {
+      "family_id": "qwen_4k_sentence_vs_token",
+      "artifact_id": "qwen_4k_budget_sweep",
+      "source": {
+        "artifact_id": "qwen_4k_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/qwen-4k-budget-sweep-2026-05-14.json",
+        "pr_number": null,
+        "title": "research: characterize qwen 4k sentence/token budget sweep"
+      },
+      "comparison": {
+        "lhs": "sentence_512_guarded",
+        "rhs": "token_512_guarded"
+      },
+      "lhs_hit_rate": 0.0,
+      "rhs_hit_rate": 0.02,
+      "lhs_wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "rhs_wilson_ci_95": [
+        0.0035391680889764604,
+        0.10495686471836953
+      ],
+      "delta_hit_rate": -0.02,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 1,
+        "table": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            49
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "qwen_4k_sentence_vs_token",
+      "artifact_id": "qwen_4k_budget_sweep",
+      "source": {
+        "artifact_id": "qwen_4k_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/qwen-4k-budget-sweep-2026-05-14.json",
+        "pr_number": null,
+        "title": "research: characterize qwen 4k sentence/token budget sweep"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_guarded",
+        "rhs": "token_1024_guarded"
+      },
+      "lhs_hit_rate": 0.0,
+      "rhs_hit_rate": 0.04,
+      "lhs_wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "rhs_wilson_ci_95": [
+        0.011038652660826577,
+        0.13460337877954667
+      ],
+      "delta_hit_rate": -0.04,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.5,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 2,
+        "table": [
+          [
+            0,
+            0
+          ],
+          [
+            2,
+            48
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "qwen_4k_sentence_vs_token",
+      "artifact_id": "qwen_4k_budget_sweep",
+      "source": {
+        "artifact_id": "qwen_4k_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/qwen-4k-budget-sweep-2026-05-14.json",
+        "pr_number": null,
+        "title": "research: characterize qwen 4k sentence/token budget sweep"
+      },
+      "comparison": {
+        "lhs": "sentence_1536_guarded",
+        "rhs": "token_1536_guarded"
+      },
+      "lhs_hit_rate": 0.0,
+      "rhs_hit_rate": 0.08,
+      "lhs_wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "rhs_wilson_ci_95": [
+        0.031549003255790686,
+        0.18838502545063704
+      ],
+      "delta_hit_rate": -0.08,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.125,
+        "holm_adjusted_p_within_family": 0.625,
+        "discordant_pairs": 4,
+        "table": [
+          [
+            0,
+            0
+          ],
+          [
+            4,
+            46
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": "Best Qwen token edge appears at 1536, but remains non-decisive."
+    },
+    {
+      "family_id": "qwen_4k_sentence_vs_token",
+      "artifact_id": "qwen_4k_budget_sweep",
+      "source": {
+        "artifact_id": "qwen_4k_budget_sweep",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/qwen-4k-budget-sweep-2026-05-14.json",
+        "pr_number": null,
+        "title": "research: characterize qwen 4k sentence/token budget sweep"
+      },
+      "comparison": {
+        "lhs": "sentence_2048_guarded",
+        "rhs": "token_2048_guarded"
+      },
+      "lhs_hit_rate": 0.0,
+      "rhs_hit_rate": 0.02,
+      "lhs_wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "rhs_wilson_ci_95": [
+        0.0035391680889764604,
+        0.10495686471836953
+      ],
+      "delta_hit_rate": -0.02,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 1,
+        "table": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            49
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_gate",
+      "artifact_id": "gemma_4k_gate",
+      "source": {
+        "artifact_id": "gemma_4k_gate",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-gate-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add gemma 4 cross-model gate"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_guarded",
+        "rhs": "token_1024_guarded"
+      },
+      "lhs_hit_rate": 0.24,
+      "rhs_hit_rate": 0.02,
+      "lhs_wilson_ci_95": [
+        0.14297252401872207,
+        0.3741294937519236
+      ],
+      "rhs_wilson_ci_95": [
+        0.0035391680889764604,
+        0.10495686471836953
+      ],
+      "delta_hit_rate": 0.22,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.00341796875,
+        "holm_adjusted_p_within_family": 0.0068359375,
+        "discordant_pairs": 13,
+        "table": [
+          [
+            0,
+            12
+          ],
+          [
+            1,
+            37
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_gate",
+      "artifact_id": "gemma_4k_gate",
+      "source": {
+        "artifact_id": "gemma_4k_gate",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-gate-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add gemma 4 cross-model gate"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_noguards",
+        "rhs": "sentence_1024_guarded"
+      },
+      "lhs_hit_rate": 0.22,
+      "rhs_hit_rate": 0.24,
+      "lhs_wilson_ci_95": [
+        0.12753786224302288,
+        0.35241815689459555
+      ],
+      "rhs_wilson_ci_95": [
+        0.14297252401872207,
+        0.3741294937519236
+      ],
+      "delta_hit_rate": -0.01999999999999999,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 1,
+        "table": [
+          [
+            11,
+            0
+          ],
+          [
+            1,
+            38
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_gate",
+      "artifact_id": "gemma_4k_gate",
+      "source": {
+        "artifact_id": "gemma_4k_gate",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-gate-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add gemma 4 cross-model gate"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_guarded",
+        "rhs": "vanilla_floor"
+      },
+      "lhs_hit_rate": 0.24,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.14297252401872207,
+        0.3741294937519236
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": -0.76,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 7.275957614183426e-12,
+        "holm_adjusted_p_within_family": 2.1827872842550278e-11,
+        "discordant_pairs": 38,
+        "table": [
+          [
+            12,
+            0
+          ],
+          [
+            38,
+            0
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": "Negative delta to vanilla is expected here because vanilla is already at ceiling."
+    },
+    {
+      "family_id": "qwen3_4k_gate",
+      "artifact_id": "qwen3_4k_gate",
+      "source": {
+        "artifact_id": "qwen3_4k_gate",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/qwen3-4k-gate-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: package qwen 3 cross-model gate"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_guarded",
+        "rhs": "token_1024_guarded"
+      },
+      "lhs_hit_rate": 0.0,
+      "rhs_hit_rate": 0.0,
+      "lhs_wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "rhs_wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            50
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": "Zero-discordance gate: no retention-policy discrimination on the shipped surface."
+    },
+    {
+      "family_id": "qwen3_4k_gate",
+      "artifact_id": "qwen3_4k_gate",
+      "source": {
+        "artifact_id": "qwen3_4k_gate",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/qwen3-4k-gate-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: package qwen 3 cross-model gate"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_noguards",
+        "rhs": "sentence_1024_guarded"
+      },
+      "lhs_hit_rate": 0.0,
+      "rhs_hit_rate": 0.0,
+      "lhs_wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "rhs_wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            50
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": null
+    },
+    {
+      "family_id": "llama31_4k_gate",
+      "artifact_id": "llama31_4k_gate",
+      "source": {
+        "artifact_id": "llama31_4k_gate",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-gate-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add llama 3.1 cross-model gate"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_guarded",
+        "rhs": "token_1024_guarded"
+      },
+      "lhs_hit_rate": 1.0,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            50,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": "Ceiling gate: no retention-policy discrimination on the shipped surface."
+    },
+    {
+      "family_id": "llama31_4k_gate",
+      "artifact_id": "llama31_4k_gate",
+      "source": {
+        "artifact_id": "llama31_4k_gate",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-gate-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add llama 3.1 cross-model gate"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_noguards",
+        "rhs": "sentence_1024_guarded"
+      },
+      "lhs_hit_rate": 1.0,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            50,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": null
+    },
+    {
+      "family_id": "llama31_4k_gate",
+      "artifact_id": "llama31_4k_gate",
+      "source": {
+        "artifact_id": "llama31_4k_gate",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-gate-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add llama 3.1 cross-model gate"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_guarded",
+        "rhs": "vanilla_floor"
+      },
+      "lhs_hit_rate": 1.0,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            50,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_cross_baseline",
+      "artifact_id": "gemma_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "gemma_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add gemma 4 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "tova_1024_guarded",
+        "rhs": "token_1024_guarded"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 0.02,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.0035391680889764604,
+        0.10495686471836953
+      ],
+      "delta_hit_rate": 0.9199999999999999,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 2.842170943040401e-14,
+        "holm_adjusted_p_within_family": 1.9895196601282805e-13,
+        "discordant_pairs": 46,
+        "table": [
+          [
+            1,
+            46
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_cross_baseline",
+      "artifact_id": "gemma_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "gemma_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add gemma 4 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "h2o_1024_guarded",
+        "rhs": "token_1024_guarded"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 0.02,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.0035391680889764604,
+        0.10495686471836953
+      ],
+      "delta_hit_rate": 0.9199999999999999,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 2.842170943040401e-14,
+        "holm_adjusted_p_within_family": 1.9895196601282805e-13,
+        "discordant_pairs": 46,
+        "table": [
+          [
+            1,
+            46
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_cross_baseline",
+      "artifact_id": "gemma_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "gemma_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add gemma 4 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "tova_1024_guarded",
+        "rhs": "sentence_1024_guarded"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 0.24,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.14297252401872207,
+        0.3741294937519236
+      ],
+      "delta_hit_rate": 0.7,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 5.820766091346741e-11,
+        "holm_adjusted_p_within_family": 2.9103830456733704e-10,
+        "discordant_pairs": 35,
+        "table": [
+          [
+            12,
+            35
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_cross_baseline",
+      "artifact_id": "gemma_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "gemma_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add gemma 4 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "h2o_1024_guarded",
+        "rhs": "sentence_1024_guarded"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 0.24,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.14297252401872207,
+        0.3741294937519236
+      ],
+      "delta_hit_rate": 0.7,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 5.529727786779404e-10,
+        "holm_adjusted_p_within_family": 2.2118911147117615e-09,
+        "discordant_pairs": 37,
+        "table": [
+          [
+            11,
+            36
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_cross_baseline",
+      "artifact_id": "gemma_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "gemma_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add gemma 4 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "tova_1024_guarded",
+        "rhs": "h2o_1024_guarded"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 0.94,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 2,
+        "table": [
+          [
+            46,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_cross_baseline",
+      "artifact_id": "gemma_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "gemma_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add gemma 4 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "tova_1024_guarded",
+        "rhs": "vanilla_floor"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": -0.06000000000000005,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.25,
+        "holm_adjusted_p_within_family": 0.75,
+        "discordant_pairs": 3,
+        "table": [
+          [
+            47,
+            0
+          ],
+          [
+            3,
+            0
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_cross_baseline",
+      "artifact_id": "gemma_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "gemma_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add gemma 4 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "h2o_1024_guarded",
+        "rhs": "vanilla_floor"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": -0.06000000000000005,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.25,
+        "holm_adjusted_p_within_family": 0.75,
+        "discordant_pairs": 3,
+        "table": [
+          [
+            47,
+            0
+          ],
+          [
+            3,
+            0
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_curve",
+      "artifact_id": "gemma_4k_degradation_curve",
+      "source": {
+        "artifact_id": "gemma_4k_degradation_curve",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-degradation-curve-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add Gemma 4 degradation curve"
+      },
+      "comparison": {
+        "lhs": "sentence_512_guarded",
+        "rhs": "token_512_guarded"
+      },
+      "lhs_hit_rate": 0.04,
+      "rhs_hit_rate": 0.0,
+      "lhs_wilson_ci_95": [
+        0.011038652660826577,
+        0.13460337877954667
+      ],
+      "rhs_wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "delta_hit_rate": 0.04,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.5,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 2,
+        "table": [
+          [
+            0,
+            2
+          ],
+          [
+            0,
+            48
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_curve",
+      "artifact_id": "gemma_4k_degradation_curve",
+      "source": {
+        "artifact_id": "gemma_4k_degradation_curve",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-degradation-curve-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add Gemma 4 degradation curve"
+      },
+      "comparison": {
+        "lhs": "tova_512_guarded",
+        "rhs": "sentence_512_guarded"
+      },
+      "lhs_hit_rate": 0.34,
+      "rhs_hit_rate": 0.04,
+      "lhs_wilson_ci_95": [
+        0.2243676963506106,
+        0.47846431458517147
+      ],
+      "rhs_wilson_ci_95": [
+        0.011038652660826577,
+        0.13460337877954667
+      ],
+      "delta_hit_rate": 0.30000000000000004,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.000274658203125,
+        "holm_adjusted_p_within_family": 0.000823974609375,
+        "discordant_pairs": 17,
+        "table": [
+          [
+            1,
+            16
+          ],
+          [
+            1,
+            32
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_curve",
+      "artifact_id": "gemma_4k_degradation_curve",
+      "source": {
+        "artifact_id": "gemma_4k_degradation_curve",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-degradation-curve-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add Gemma 4 degradation curve"
+      },
+      "comparison": {
+        "lhs": "sentence_1536_guarded",
+        "rhs": "token_1536_guarded"
+      },
+      "lhs_hit_rate": 0.68,
+      "rhs_hit_rate": 0.22,
+      "lhs_wilson_ci_95": [
+        0.5418944286372394,
+        0.792419559060006
+      ],
+      "rhs_wilson_ci_95": [
+        0.12753786224302288,
+        0.35241815689459555
+      ],
+      "delta_hit_rate": 0.4600000000000001,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.5497207641601562e-06,
+        "holm_adjusted_p_within_family": 9.298324584960938e-06,
+        "discordant_pairs": 25,
+        "table": [
+          [
+            10,
+            24
+          ],
+          [
+            1,
+            15
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_curve",
+      "artifact_id": "gemma_4k_degradation_curve",
+      "source": {
+        "artifact_id": "gemma_4k_degradation_curve",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-degradation-curve-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add Gemma 4 degradation curve"
+      },
+      "comparison": {
+        "lhs": "tova_1536_guarded",
+        "rhs": "sentence_1536_guarded"
+      },
+      "lhs_hit_rate": 0.98,
+      "rhs_hit_rate": 0.68,
+      "lhs_wilson_ci_95": [
+        0.8950431352816304,
+        0.9964608319110235
+      ],
+      "rhs_wilson_ci_95": [
+        0.5418944286372394,
+        0.792419559060006
+      ],
+      "delta_hit_rate": 0.29999999999999993,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 6.103515625e-05,
+        "holm_adjusted_p_within_family": 0.000244140625,
+        "discordant_pairs": 15,
+        "table": [
+          [
+            34,
+            15
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_curve",
+      "artifact_id": "gemma_4k_degradation_curve",
+      "source": {
+        "artifact_id": "gemma_4k_degradation_curve",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-degradation-curve-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add Gemma 4 degradation curve"
+      },
+      "comparison": {
+        "lhs": "sentence_2048_guarded",
+        "rhs": "token_2048_guarded"
+      },
+      "lhs_hit_rate": 0.96,
+      "rhs_hit_rate": 0.52,
+      "lhs_wilson_ci_95": [
+        0.8653966212204534,
+        0.9889613473391734
+      ],
+      "rhs_wilson_ci_95": [
+        0.3851151225880844,
+        0.6520308760449429
+      ],
+      "delta_hit_rate": 0.43999999999999995,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.049041748046875e-05,
+        "holm_adjusted_p_within_family": 5.245208740234375e-05,
+        "discordant_pairs": 26,
+        "table": [
+          [
+            24,
+            24
+          ],
+          [
+            2,
+            0
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "gemma_4k_curve",
+      "artifact_id": "gemma_4k_degradation_curve",
+      "source": {
+        "artifact_id": "gemma_4k_degradation_curve",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/gemma-4-4k-degradation-curve-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add Gemma 4 degradation curve"
+      },
+      "comparison": {
+        "lhs": "tova_2048_guarded",
+        "rhs": "sentence_2048_guarded"
+      },
+      "lhs_hit_rate": 1.0,
+      "rhs_hit_rate": 0.96,
+      "lhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "rhs_wilson_ci_95": [
+        0.8653966212204534,
+        0.9889613473391734
+      ],
+      "delta_hit_rate": 0.040000000000000036,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.5,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 2,
+        "table": [
+          [
+            48,
+            2
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": "At 2048, TOVA remains numerically above sentence, but the paired test is non-decisive."
+    },
+    {
+      "family_id": "llama31_4k_cross_baseline",
+      "artifact_id": "llama31_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "llama31_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add llama 3.1 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "tova_1024_guarded",
+        "rhs": "token_1024_guarded"
+      },
+      "lhs_hit_rate": 0.9,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.7863950966521162,
+        0.956524876008429
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": -0.09999999999999998,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.0625,
+        "holm_adjusted_p_within_family": 0.4375,
+        "discordant_pairs": 5,
+        "table": [
+          [
+            45,
+            0
+          ],
+          [
+            5,
+            0
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": "Five one-sided discordant pairs is still p = 0.0625 under exact two-sided McNemar."
+    },
+    {
+      "family_id": "llama31_4k_cross_baseline",
+      "artifact_id": "llama31_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "llama31_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add llama 3.1 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "h2o_1024_guarded",
+        "rhs": "token_1024_guarded"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": -0.06000000000000005,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.25,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 3,
+        "table": [
+          [
+            47,
+            0
+          ],
+          [
+            3,
+            0
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "llama31_4k_cross_baseline",
+      "artifact_id": "llama31_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "llama31_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add llama 3.1 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "tova_1024_guarded",
+        "rhs": "sentence_1024_guarded"
+      },
+      "lhs_hit_rate": 0.9,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.7863950966521162,
+        0.956524876008429
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": -0.09999999999999998,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.0625,
+        "holm_adjusted_p_within_family": 0.4375,
+        "discordant_pairs": 5,
+        "table": [
+          [
+            45,
+            0
+          ],
+          [
+            5,
+            0
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "llama31_4k_cross_baseline",
+      "artifact_id": "llama31_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "llama31_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add llama 3.1 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "h2o_1024_guarded",
+        "rhs": "sentence_1024_guarded"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": -0.06000000000000005,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.25,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 3,
+        "table": [
+          [
+            47,
+            0
+          ],
+          [
+            3,
+            0
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "llama31_4k_cross_baseline",
+      "artifact_id": "llama31_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "llama31_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add llama 3.1 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "tova_1024_guarded",
+        "rhs": "h2o_1024_guarded"
+      },
+      "lhs_hit_rate": 0.9,
+      "rhs_hit_rate": 0.94,
+      "lhs_wilson_ci_95": [
+        0.7863950966521162,
+        0.956524876008429
+      ],
+      "rhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "delta_hit_rate": -0.039999999999999925,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.5,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 2,
+        "table": [
+          [
+            45,
+            0
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "llama31_4k_cross_baseline",
+      "artifact_id": "llama31_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "llama31_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add llama 3.1 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "tova_1024_guarded",
+        "rhs": "vanilla_floor"
+      },
+      "lhs_hit_rate": 0.9,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.7863950966521162,
+        0.956524876008429
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": -0.09999999999999998,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.0625,
+        "holm_adjusted_p_within_family": 0.4375,
+        "discordant_pairs": 5,
+        "table": [
+          [
+            45,
+            0
+          ],
+          [
+            5,
+            0
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "llama31_4k_cross_baseline",
+      "artifact_id": "llama31_4k_cross_baseline_extension",
+      "source": {
+        "artifact_id": "llama31_4k_cross_baseline_extension",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-cross-baseline-extension-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add llama 3.1 cross-baseline extension"
+      },
+      "comparison": {
+        "lhs": "h2o_1024_guarded",
+        "rhs": "vanilla_floor"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": -0.06000000000000005,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.25,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 3,
+        "table": [
+          [
+            47,
+            0
+          ],
+          [
+            3,
+            0
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "cross_family_no_guards_guardrail_checks",
+      "artifact_id": "cross_family_no_guards_mirror",
+      "source": {
+        "artifact_id": "cross_family_no_guards_mirror",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add no-guards mirror and llama threshold artifacts"
+      },
+      "comparison": {
+        "lhs": "gemma_token_noguards",
+        "rhs": "gemma_token_guarded"
+      },
+      "lhs_hit_rate": 0.0,
+      "rhs_hit_rate": 0.02,
+      "lhs_wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "rhs_wilson_ci_95": [
+        0.0035391680889764604,
+        0.10495686471836953
+      ],
+      "delta_hit_rate": -0.02,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 1,
+        "table": [
+          [
+            0,
+            0
+          ],
+          [
+            1,
+            49
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "cross_family_no_guards_guardrail_checks",
+      "artifact_id": "cross_family_no_guards_mirror",
+      "source": {
+        "artifact_id": "cross_family_no_guards_mirror",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add no-guards mirror and llama threshold artifacts"
+      },
+      "comparison": {
+        "lhs": "gemma_sentence_noguards",
+        "rhs": "gemma_sentence_guarded"
+      },
+      "lhs_hit_rate": 0.22,
+      "rhs_hit_rate": 0.24,
+      "lhs_wilson_ci_95": [
+        0.12753786224302288,
+        0.35241815689459555
+      ],
+      "rhs_wilson_ci_95": [
+        0.14297252401872207,
+        0.3741294937519236
+      ],
+      "delta_hit_rate": -0.01999999999999999,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 1,
+        "table": [
+          [
+            11,
+            0
+          ],
+          [
+            1,
+            38
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "cross_family_no_guards_guardrail_checks",
+      "artifact_id": "cross_family_no_guards_mirror",
+      "source": {
+        "artifact_id": "cross_family_no_guards_mirror",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add no-guards mirror and llama threshold artifacts"
+      },
+      "comparison": {
+        "lhs": "gemma_tova_noguards",
+        "rhs": "gemma_tova_guarded"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 0.94,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            47,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": null
+    },
+    {
+      "family_id": "cross_family_no_guards_guardrail_checks",
+      "artifact_id": "cross_family_no_guards_mirror",
+      "source": {
+        "artifact_id": "cross_family_no_guards_mirror",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add no-guards mirror and llama threshold artifacts"
+      },
+      "comparison": {
+        "lhs": "gemma_h2o_noguards",
+        "rhs": "gemma_h2o_guarded"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 0.94,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            47,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": null
+    },
+    {
+      "family_id": "cross_family_no_guards_guardrail_checks",
+      "artifact_id": "cross_family_no_guards_mirror",
+      "source": {
+        "artifact_id": "cross_family_no_guards_mirror",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add no-guards mirror and llama threshold artifacts"
+      },
+      "comparison": {
+        "lhs": "llama_token_noguards",
+        "rhs": "llama_token_guarded"
+      },
+      "lhs_hit_rate": 1.0,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            50,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": null
+    },
+    {
+      "family_id": "cross_family_no_guards_guardrail_checks",
+      "artifact_id": "cross_family_no_guards_mirror",
+      "source": {
+        "artifact_id": "cross_family_no_guards_mirror",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add no-guards mirror and llama threshold artifacts"
+      },
+      "comparison": {
+        "lhs": "llama_sentence_noguards",
+        "rhs": "llama_sentence_guarded"
+      },
+      "lhs_hit_rate": 1.0,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            50,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": null
+    },
+    {
+      "family_id": "cross_family_no_guards_guardrail_checks",
+      "artifact_id": "cross_family_no_guards_mirror",
+      "source": {
+        "artifact_id": "cross_family_no_guards_mirror",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add no-guards mirror and llama threshold artifacts"
+      },
+      "comparison": {
+        "lhs": "llama_tova_noguards",
+        "rhs": "llama_tova_guarded"
+      },
+      "lhs_hit_rate": 0.9,
+      "rhs_hit_rate": 0.9,
+      "lhs_wilson_ci_95": [
+        0.7863950966521162,
+        0.956524876008429
+      ],
+      "rhs_wilson_ci_95": [
+        0.7863950966521162,
+        0.956524876008429
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            45,
+            0
+          ],
+          [
+            0,
+            5
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": null
+    },
+    {
+      "family_id": "cross_family_no_guards_guardrail_checks",
+      "artifact_id": "cross_family_no_guards_mirror",
+      "source": {
+        "artifact_id": "cross_family_no_guards_mirror",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add no-guards mirror and llama threshold artifacts"
+      },
+      "comparison": {
+        "lhs": "llama_h2o_noguards",
+        "rhs": "llama_h2o_guarded"
+      },
+      "lhs_hit_rate": 0.94,
+      "rhs_hit_rate": 0.94,
+      "lhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "rhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            47,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": null
+    },
+    {
+      "family_id": "llama31_4k_threshold_cut",
+      "artifact_id": "llama31_4k_threshold_cut",
+      "source": {
+        "artifact_id": "llama31_4k_threshold_cut",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-threshold-cut-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add no-guards mirror and llama threshold artifacts"
+      },
+      "comparison": {
+        "lhs": "llama_token_512_guarded",
+        "rhs": "llama_token_1024_guarded"
+      },
+      "lhs_hit_rate": 0.96,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.8653966212204534,
+        0.9889613473391734
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": -0.040000000000000036,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 0.5,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 2,
+        "table": [
+          [
+            48,
+            0
+          ],
+          [
+            2,
+            0
+          ]
+        ]
+      },
+      "classification": "directional_only",
+      "note": null
+    },
+    {
+      "family_id": "llama31_4k_threshold_cut",
+      "artifact_id": "llama31_4k_threshold_cut",
+      "source": {
+        "artifact_id": "llama31_4k_threshold_cut",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-threshold-cut-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add no-guards mirror and llama threshold artifacts"
+      },
+      "comparison": {
+        "lhs": "llama_sentence_512_guarded",
+        "rhs": "llama_sentence_1024_guarded"
+      },
+      "lhs_hit_rate": 1.0,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            50,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": null
+    },
+    {
+      "family_id": "llama31_4k_threshold_cut",
+      "artifact_id": "llama31_4k_threshold_cut",
+      "source": {
+        "artifact_id": "llama31_4k_threshold_cut",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-threshold-cut-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add no-guards mirror and llama threshold artifacts"
+      },
+      "comparison": {
+        "lhs": "llama_tova_512_guarded",
+        "rhs": "llama_tova_1024_guarded"
+      },
+      "lhs_hit_rate": 0.56,
+      "rhs_hit_rate": 0.9,
+      "lhs_wilson_ci_95": [
+        0.4230578680014353,
+        0.6883801278976466
+      ],
+      "rhs_wilson_ci_95": [
+        0.7863950966521162,
+        0.956524876008429
+      ],
+      "delta_hit_rate": -0.33999999999999997,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.52587890625e-05,
+        "holm_adjusted_p_within_family": 4.57763671875e-05,
+        "discordant_pairs": 17,
+        "table": [
+          [
+            28,
+            0
+          ],
+          [
+            17,
+            5
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "llama31_4k_threshold_cut",
+      "artifact_id": "llama31_4k_threshold_cut",
+      "source": {
+        "artifact_id": "llama31_4k_threshold_cut",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/llama31-4k-threshold-cut-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add no-guards mirror and llama threshold artifacts"
+      },
+      "comparison": {
+        "lhs": "llama_h2o_512_guarded",
+        "rhs": "llama_h2o_1024_guarded"
+      },
+      "lhs_hit_rate": 0.56,
+      "rhs_hit_rate": 0.94,
+      "lhs_wilson_ci_95": [
+        0.4230578680014353,
+        0.6883801278976466
+      ],
+      "rhs_wilson_ci_95": [
+        0.8378265662912299,
+        0.9793854036353695
+      ],
+      "delta_hit_rate": -0.3799999999999999,
+      "direction": "rhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 3.814697265625e-06,
+        "holm_adjusted_p_within_family": 1.52587890625e-05,
+        "discordant_pairs": 19,
+        "table": [
+          [
+            28,
+            0
+          ],
+          [
+            19,
+            3
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "ministral_8b_fast_read",
+      "artifact_id": "ministral_8b_4k_fast_read",
+      "source": {
+        "artifact_id": "ministral_8b_4k_fast_read",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/ministral-8b-4k-fast-read-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add Ministral 8B fast-read artifact"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_guarded",
+        "rhs": "tova_1024_guarded"
+      },
+      "lhs_hit_rate": 1.0,
+      "rhs_hit_rate": 0.44,
+      "lhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "rhs_wilson_ci_95": [
+        0.3116198721023534,
+        0.5769421319985648
+      ],
+      "delta_hit_rate": 0.56,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 7.450580596923828e-09,
+        "holm_adjusted_p_within_family": 2.2351741790771484e-08,
+        "discordant_pairs": 28,
+        "table": [
+          [
+            22,
+            28
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "ministral_8b_fast_read",
+      "artifact_id": "ministral_8b_4k_fast_read",
+      "source": {
+        "artifact_id": "ministral_8b_4k_fast_read",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/ministral-8b-4k-fast-read-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add Ministral 8B fast-read artifact"
+      },
+      "comparison": {
+        "lhs": "vanilla_floor",
+        "rhs": "tova_1024_guarded"
+      },
+      "lhs_hit_rate": 1.0,
+      "rhs_hit_rate": 0.44,
+      "lhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "rhs_wilson_ci_95": [
+        0.3116198721023534,
+        0.5769421319985648
+      ],
+      "delta_hit_rate": 0.56,
+      "direction": "lhs_better",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 7.450580596923828e-09,
+        "holm_adjusted_p_within_family": 2.2351741790771484e-08,
+        "discordant_pairs": 28,
+        "table": [
+          [
+            22,
+            28
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "classification": "publication_strong",
+      "note": null
+    },
+    {
+      "family_id": "ministral_8b_fast_read",
+      "artifact_id": "ministral_8b_4k_fast_read",
+      "source": {
+        "artifact_id": "ministral_8b_4k_fast_read",
+        "ref": "origin/main",
+        "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+        "path": "results/ministral-8b-4k-fast-read-2026-05-15.json",
+        "pr_number": null,
+        "title": "feat: add Ministral 8B fast-read artifact"
+      },
+      "comparison": {
+        "lhs": "sentence_1024_guarded",
+        "rhs": "vanilla_floor"
+      },
+      "lhs_hit_rate": 1.0,
+      "rhs_hit_rate": 1.0,
+      "lhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "rhs_wilson_ci_95": [
+        0.9286499658256813,
+        1.0
+      ],
+      "delta_hit_rate": 0.0,
+      "direction": "tied",
+      "paired_test": {
+        "name": "mcnemar_exact_two_sided",
+        "p_value": 1.0,
+        "holm_adjusted_p_within_family": 1.0,
+        "discordant_pairs": 0,
+        "table": [
+          [
+            50,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "classification": "non_discriminative",
+      "note": null
+    }
+  ],
+  "supporting_observations": {
+    "adaptive_posthoc_summary": {
+      "common_budget_regimes": 12,
+      "winner_counts_by_unit": {
+        "token": 5,
+        "sentence": 7,
+        "word": 0,
+        "none": 0
+      },
+      "appendix_regimes": 1
+    },
+    "qwen_word_all_zero": true
+  },
+  "claims": [
+    {
+      "claim_id": "mistral_4k_sentence_advantage_1024",
+      "summary": "Mistral 4k sentence-level decisively outperforms token-level at budget 1024.",
+      "support": [
+        {
+          "family_id": "mistral_4k_sentence_vs_token",
+          "artifact_id": "mistral_4k_sentence_budget_sweep",
+          "source": {
+            "artifact_id": "mistral_4k_sentence_budget_sweep",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/sentence-level-eviction-4k-budget-sweep-2026-05-13.json",
+            "pr_number": null,
+            "title": "research: sentence-level vorn eviction budget sweep"
+          },
+          "comparison": {
+            "lhs": "sentence_1024_guarded",
+            "rhs": "token_1024_guarded"
+          },
+          "lhs_hit_rate": 0.68,
+          "rhs_hit_rate": 0.26,
+          "lhs_wilson_ci_95": [
+            0.5418944286372394,
+            0.792419559060006
+          ],
+          "rhs_wilson_ci_95": [
+            0.15871379651367384,
+            0.3955342198899992
+          ],
+          "delta_hit_rate": 0.42000000000000004,
+          "direction": "lhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 4.9233436584472656e-05,
+            "holm_adjusted_p_within_family": 0.00019693374633789062,
+            "discordant_pairs": 27,
+            "table": [
+              [
+                10,
+                24
+              ],
+              [
+                3,
+                13
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        }
+      ],
+      "classification": "publication_strong"
+    },
+    {
+      "claim_id": "mistral_8k_midband_sentence_advantage",
+      "summary": "Mistral 8k sentence-level wins in the mid-budget band (1024 and 1536), while 2048 remains non-decisive.",
+      "support": [
+        {
+          "family_id": "mistral_8k_sentence_vs_token",
+          "artifact_id": "mistral_8k_sentence_budget_sweep",
+          "source": {
+            "artifact_id": "mistral_8k_sentence_budget_sweep",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/sentence-level-eviction-8k-budget-sweep-2026-05-13.json",
+            "pr_number": null,
+            "title": "research: extend vorn sentence matrix to 8k"
+          },
+          "comparison": {
+            "lhs": "sentence_1024_guarded",
+            "rhs": "token_1024_guarded"
+          },
+          "lhs_hit_rate": 0.62,
+          "rhs_hit_rate": 0.38,
+          "lhs_wilson_ci_95": [
+            0.4815019502239357,
+            0.7413740415742278
+          ],
+          "rhs_wilson_ci_95": [
+            0.2586259584257722,
+            0.5184980497760643
+          ],
+          "delta_hit_rate": 0.24,
+          "direction": "lhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 0.007537841796875,
+            "holm_adjusted_p_within_family": 0.0301513671875,
+            "discordant_pairs": 18,
+            "table": [
+              [
+                16,
+                15
+              ],
+              [
+                3,
+                16
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        },
+        {
+          "family_id": "mistral_8k_sentence_vs_token",
+          "artifact_id": "mistral_8k_sentence_budget_sweep",
+          "source": {
+            "artifact_id": "mistral_8k_sentence_budget_sweep",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/sentence-level-eviction-8k-budget-sweep-2026-05-13.json",
+            "pr_number": null,
+            "title": "research: extend vorn sentence matrix to 8k"
+          },
+          "comparison": {
+            "lhs": "sentence_1536_guarded",
+            "rhs": "token_1536_guarded"
+          },
+          "lhs_hit_rate": 0.74,
+          "rhs_hit_rate": 0.52,
+          "lhs_wilson_ci_95": [
+            0.6044657801100008,
+            0.8412862034863262
+          ],
+          "rhs_wilson_ci_95": [
+            0.3851151225880844,
+            0.6520308760449429
+          ],
+          "delta_hit_rate": 0.21999999999999997,
+          "direction": "lhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 0.012725830078125,
+            "holm_adjusted_p_within_family": 0.038177490234375,
+            "discordant_pairs": 17,
+            "table": [
+              [
+                23,
+                14
+              ],
+              [
+                3,
+                10
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        },
+        {
+          "family_id": "mistral_8k_sentence_vs_token",
+          "artifact_id": "mistral_8k_sentence_budget_sweep",
+          "source": {
+            "artifact_id": "mistral_8k_sentence_budget_sweep",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/sentence-level-eviction-8k-budget-sweep-2026-05-13.json",
+            "pr_number": null,
+            "title": "research: extend vorn sentence matrix to 8k"
+          },
+          "comparison": {
+            "lhs": "sentence_2048_guarded",
+            "rhs": "token_2048_guarded"
+          },
+          "lhs_hit_rate": 0.62,
+          "rhs_hit_rate": 0.68,
+          "lhs_wilson_ci_95": [
+            0.4815019502239357,
+            0.7413740415742278
+          ],
+          "rhs_wilson_ci_95": [
+            0.5418944286372394,
+            0.792419559060006
+          ],
+          "delta_hit_rate": -0.06000000000000005,
+          "direction": "rhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 0.60723876953125,
+            "holm_adjusted_p_within_family": 0.60723876953125,
+            "discordant_pairs": 15,
+            "table": [
+              [
+                25,
+                6
+              ],
+              [
+                9,
+                10
+              ]
+            ]
+          },
+          "classification": "directional_only",
+          "note": null
+        }
+      ],
+      "classification": "publication_strong_with_regime_partition"
+    },
+    {
+      "claim_id": "qwen_blocks_universal_sentence_law",
+      "summary": "Qwen blocks any universal sentence-law claim, but the evidence is non-discriminative rather than strongly anti-sentence.",
+      "support": [
+        {
+          "family_id": "qwen_4k_sentence_vs_token",
+          "artifact_id": "qwen_4k_budget_sweep",
+          "source": {
+            "artifact_id": "qwen_4k_budget_sweep",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/qwen-4k-budget-sweep-2026-05-14.json",
+            "pr_number": null,
+            "title": "research: characterize qwen 4k sentence/token budget sweep"
+          },
+          "comparison": {
+            "lhs": "sentence_1536_guarded",
+            "rhs": "token_1536_guarded"
+          },
+          "lhs_hit_rate": 0.0,
+          "rhs_hit_rate": 0.08,
+          "lhs_wilson_ci_95": [
+            0.0,
+            0.07135003417431873
+          ],
+          "rhs_wilson_ci_95": [
+            0.031549003255790686,
+            0.18838502545063704
+          ],
+          "delta_hit_rate": -0.08,
+          "direction": "rhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 0.125,
+            "holm_adjusted_p_within_family": 0.625,
+            "discordant_pairs": 4,
+            "table": [
+              [
+                0,
+                0
+              ],
+              [
+                4,
+                46
+              ]
+            ]
+          },
+          "classification": "directional_only",
+          "note": "Best Qwen token edge appears at 1536, but remains non-decisive."
+        },
+        {
+          "family_id": "qwen3_4k_gate",
+          "artifact_id": "qwen3_4k_gate",
+          "source": {
+            "artifact_id": "qwen3_4k_gate",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/qwen3-4k-gate-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: package qwen 3 cross-model gate"
+          },
+          "comparison": {
+            "lhs": "sentence_1024_guarded",
+            "rhs": "token_1024_guarded"
+          },
+          "lhs_hit_rate": 0.0,
+          "rhs_hit_rate": 0.0,
+          "lhs_wilson_ci_95": [
+            0.0,
+            0.07135003417431873
+          ],
+          "rhs_wilson_ci_95": [
+            0.0,
+            0.07135003417431873
+          ],
+          "delta_hit_rate": 0.0,
+          "direction": "tied",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.0,
+            "holm_adjusted_p_within_family": 1.0,
+            "discordant_pairs": 0,
+            "table": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                50
+              ]
+            ]
+          },
+          "classification": "non_discriminative",
+          "note": "Zero-discordance gate: no retention-policy discrimination on the shipped surface."
+        }
+      ],
+      "classification": "directional_only"
+    },
+    {
+      "claim_id": "gemma_degradation_regime",
+      "summary": "Gemma 4 sits in a degradation regime: sentence improves over token but remains far below vanilla/TOVA/H2O on the tested slice.",
+      "support": [
+        {
+          "family_id": "gemma_4k_gate",
+          "artifact_id": "gemma_4k_gate",
+          "source": {
+            "artifact_id": "gemma_4k_gate",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/gemma-4-4k-gate-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add gemma 4 cross-model gate"
+          },
+          "comparison": {
+            "lhs": "sentence_1024_guarded",
+            "rhs": "token_1024_guarded"
+          },
+          "lhs_hit_rate": 0.24,
+          "rhs_hit_rate": 0.02,
+          "lhs_wilson_ci_95": [
+            0.14297252401872207,
+            0.3741294937519236
+          ],
+          "rhs_wilson_ci_95": [
+            0.0035391680889764604,
+            0.10495686471836953
+          ],
+          "delta_hit_rate": 0.22,
+          "direction": "lhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 0.00341796875,
+            "holm_adjusted_p_within_family": 0.0068359375,
+            "discordant_pairs": 13,
+            "table": [
+              [
+                0,
+                12
+              ],
+              [
+                1,
+                37
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        },
+        {
+          "family_id": "gemma_4k_gate",
+          "artifact_id": "gemma_4k_gate",
+          "source": {
+            "artifact_id": "gemma_4k_gate",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/gemma-4-4k-gate-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add gemma 4 cross-model gate"
+          },
+          "comparison": {
+            "lhs": "sentence_1024_guarded",
+            "rhs": "vanilla_floor"
+          },
+          "lhs_hit_rate": 0.24,
+          "rhs_hit_rate": 1.0,
+          "lhs_wilson_ci_95": [
+            0.14297252401872207,
+            0.3741294937519236
+          ],
+          "rhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "delta_hit_rate": -0.76,
+          "direction": "rhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 7.275957614183426e-12,
+            "holm_adjusted_p_within_family": 2.1827872842550278e-11,
+            "discordant_pairs": 38,
+            "table": [
+              [
+                12,
+                0
+              ],
+              [
+                38,
+                0
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": "Negative delta to vanilla is expected here because vanilla is already at ceiling."
+        },
+        {
+          "family_id": "gemma_4k_cross_baseline",
+          "artifact_id": "gemma_4k_cross_baseline_extension",
+          "source": {
+            "artifact_id": "gemma_4k_cross_baseline_extension",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add gemma 4 cross-baseline extension"
+          },
+          "comparison": {
+            "lhs": "tova_1024_guarded",
+            "rhs": "sentence_1024_guarded"
+          },
+          "lhs_hit_rate": 0.94,
+          "rhs_hit_rate": 0.24,
+          "lhs_wilson_ci_95": [
+            0.8378265662912299,
+            0.9793854036353695
+          ],
+          "rhs_wilson_ci_95": [
+            0.14297252401872207,
+            0.3741294937519236
+          ],
+          "delta_hit_rate": 0.7,
+          "direction": "lhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 5.820766091346741e-11,
+            "holm_adjusted_p_within_family": 2.9103830456733704e-10,
+            "discordant_pairs": 35,
+            "table": [
+              [
+                12,
+                35
+              ],
+              [
+                0,
+                3
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        },
+        {
+          "family_id": "gemma_4k_cross_baseline",
+          "artifact_id": "gemma_4k_cross_baseline_extension",
+          "source": {
+            "artifact_id": "gemma_4k_cross_baseline_extension",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add gemma 4 cross-baseline extension"
+          },
+          "comparison": {
+            "lhs": "h2o_1024_guarded",
+            "rhs": "sentence_1024_guarded"
+          },
+          "lhs_hit_rate": 0.94,
+          "rhs_hit_rate": 0.24,
+          "lhs_wilson_ci_95": [
+            0.8378265662912299,
+            0.9793854036353695
+          ],
+          "rhs_wilson_ci_95": [
+            0.14297252401872207,
+            0.3741294937519236
+          ],
+          "delta_hit_rate": 0.7,
+          "direction": "lhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 5.529727786779404e-10,
+            "holm_adjusted_p_within_family": 2.2118911147117615e-09,
+            "discordant_pairs": 37,
+            "table": [
+              [
+                11,
+                36
+              ],
+              [
+                1,
+                2
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        },
+        {
+          "family_id": "gemma_4k_curve",
+          "artifact_id": "gemma_4k_degradation_curve",
+          "source": {
+            "artifact_id": "gemma_4k_degradation_curve",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/gemma-4-4k-degradation-curve-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add Gemma 4 degradation curve"
+          },
+          "comparison": {
+            "lhs": "tova_1536_guarded",
+            "rhs": "sentence_1536_guarded"
+          },
+          "lhs_hit_rate": 0.98,
+          "rhs_hit_rate": 0.68,
+          "lhs_wilson_ci_95": [
+            0.8950431352816304,
+            0.9964608319110235
+          ],
+          "rhs_wilson_ci_95": [
+            0.5418944286372394,
+            0.792419559060006
+          ],
+          "delta_hit_rate": 0.29999999999999993,
+          "direction": "lhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 6.103515625e-05,
+            "holm_adjusted_p_within_family": 0.000244140625,
+            "discordant_pairs": 15,
+            "table": [
+              [
+                34,
+                15
+              ],
+              [
+                0,
+                1
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        },
+        {
+          "family_id": "gemma_4k_curve",
+          "artifact_id": "gemma_4k_degradation_curve",
+          "source": {
+            "artifact_id": "gemma_4k_degradation_curve",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/gemma-4-4k-degradation-curve-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add Gemma 4 degradation curve"
+          },
+          "comparison": {
+            "lhs": "sentence_2048_guarded",
+            "rhs": "token_2048_guarded"
+          },
+          "lhs_hit_rate": 0.96,
+          "rhs_hit_rate": 0.52,
+          "lhs_wilson_ci_95": [
+            0.8653966212204534,
+            0.9889613473391734
+          ],
+          "rhs_wilson_ci_95": [
+            0.3851151225880844,
+            0.6520308760449429
+          ],
+          "delta_hit_rate": 0.43999999999999995,
+          "direction": "lhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.049041748046875e-05,
+            "holm_adjusted_p_within_family": 5.245208740234375e-05,
+            "discordant_pairs": 26,
+            "table": [
+              [
+                24,
+                24
+              ],
+              [
+                2,
+                0
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        }
+      ],
+      "classification": "publication_strong"
+    },
+    {
+      "claim_id": "llama_threshold_gate",
+      "summary": "Llama 3.1 functions as a threshold gate, not a discriminative retention comparison, on the tested 4k slice.",
+      "support": [
+        {
+          "family_id": "llama31_4k_gate",
+          "artifact_id": "llama31_4k_gate",
+          "source": {
+            "artifact_id": "llama31_4k_gate",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/llama31-4k-gate-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add llama 3.1 cross-model gate"
+          },
+          "comparison": {
+            "lhs": "sentence_1024_guarded",
+            "rhs": "token_1024_guarded"
+          },
+          "lhs_hit_rate": 1.0,
+          "rhs_hit_rate": 1.0,
+          "lhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "rhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "delta_hit_rate": 0.0,
+          "direction": "tied",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.0,
+            "holm_adjusted_p_within_family": 1.0,
+            "discordant_pairs": 0,
+            "table": [
+              [
+                50,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          "classification": "non_discriminative",
+          "note": "Ceiling gate: no retention-policy discrimination on the shipped surface."
+        },
+        {
+          "family_id": "llama31_4k_gate",
+          "artifact_id": "llama31_4k_gate",
+          "source": {
+            "artifact_id": "llama31_4k_gate",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/llama31-4k-gate-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add llama 3.1 cross-model gate"
+          },
+          "comparison": {
+            "lhs": "sentence_1024_guarded",
+            "rhs": "vanilla_floor"
+          },
+          "lhs_hit_rate": 1.0,
+          "rhs_hit_rate": 1.0,
+          "lhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "rhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "delta_hit_rate": 0.0,
+          "direction": "tied",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.0,
+            "holm_adjusted_p_within_family": 1.0,
+            "discordant_pairs": 0,
+            "table": [
+              [
+                50,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          "classification": "non_discriminative",
+          "note": null
+        }
+      ],
+      "classification": "non_discriminative"
+    },
+    {
+      "claim_id": "llama_vs_gemma_mirror_image",
+      "summary": "The Gemma-vs-Llama mirror-image framing survives guardrail removal, but it is still not inferentially symmetric at n=50.",
+      "support": [
+        {
+          "family_id": "gemma_4k_cross_baseline",
+          "artifact_id": "gemma_4k_cross_baseline_extension",
+          "source": {
+            "artifact_id": "gemma_4k_cross_baseline_extension",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add gemma 4 cross-baseline extension"
+          },
+          "comparison": {
+            "lhs": "tova_1024_guarded",
+            "rhs": "sentence_1024_guarded"
+          },
+          "lhs_hit_rate": 0.94,
+          "rhs_hit_rate": 0.24,
+          "lhs_wilson_ci_95": [
+            0.8378265662912299,
+            0.9793854036353695
+          ],
+          "rhs_wilson_ci_95": [
+            0.14297252401872207,
+            0.3741294937519236
+          ],
+          "delta_hit_rate": 0.7,
+          "direction": "lhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 5.820766091346741e-11,
+            "holm_adjusted_p_within_family": 2.9103830456733704e-10,
+            "discordant_pairs": 35,
+            "table": [
+              [
+                12,
+                35
+              ],
+              [
+                0,
+                3
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        },
+        {
+          "family_id": "llama31_4k_cross_baseline",
+          "artifact_id": "llama31_4k_cross_baseline_extension",
+          "source": {
+            "artifact_id": "llama31_4k_cross_baseline_extension",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/llama31-4k-cross-baseline-extension-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add llama 3.1 cross-baseline extension"
+          },
+          "comparison": {
+            "lhs": "tova_1024_guarded",
+            "rhs": "sentence_1024_guarded"
+          },
+          "lhs_hit_rate": 0.9,
+          "rhs_hit_rate": 1.0,
+          "lhs_wilson_ci_95": [
+            0.7863950966521162,
+            0.956524876008429
+          ],
+          "rhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "delta_hit_rate": -0.09999999999999998,
+          "direction": "rhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 0.0625,
+            "holm_adjusted_p_within_family": 0.4375,
+            "discordant_pairs": 5,
+            "table": [
+              [
+                45,
+                0
+              ],
+              [
+                5,
+                0
+              ]
+            ]
+          },
+          "classification": "directional_only",
+          "note": null
+        },
+        {
+          "family_id": "llama31_4k_cross_baseline",
+          "artifact_id": "llama31_4k_cross_baseline_extension",
+          "source": {
+            "artifact_id": "llama31_4k_cross_baseline_extension",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/llama31-4k-cross-baseline-extension-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add llama 3.1 cross-baseline extension"
+          },
+          "comparison": {
+            "lhs": "tova_1024_guarded",
+            "rhs": "token_1024_guarded"
+          },
+          "lhs_hit_rate": 0.9,
+          "rhs_hit_rate": 1.0,
+          "lhs_wilson_ci_95": [
+            0.7863950966521162,
+            0.956524876008429
+          ],
+          "rhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "delta_hit_rate": -0.09999999999999998,
+          "direction": "rhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 0.0625,
+            "holm_adjusted_p_within_family": 0.4375,
+            "discordant_pairs": 5,
+            "table": [
+              [
+                45,
+                0
+              ],
+              [
+                5,
+                0
+              ]
+            ]
+          },
+          "classification": "directional_only",
+          "note": "Five one-sided discordant pairs is still p = 0.0625 under exact two-sided McNemar."
+        },
+        {
+          "family_id": "cross_family_no_guards_guardrail_checks",
+          "artifact_id": "cross_family_no_guards_mirror",
+          "source": {
+            "artifact_id": "cross_family_no_guards_mirror",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add no-guards mirror and llama threshold artifacts"
+          },
+          "comparison": {
+            "lhs": "gemma_sentence_noguards",
+            "rhs": "gemma_sentence_guarded"
+          },
+          "lhs_hit_rate": 0.22,
+          "rhs_hit_rate": 0.24,
+          "lhs_wilson_ci_95": [
+            0.12753786224302288,
+            0.35241815689459555
+          ],
+          "rhs_wilson_ci_95": [
+            0.14297252401872207,
+            0.3741294937519236
+          ],
+          "delta_hit_rate": -0.01999999999999999,
+          "direction": "rhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.0,
+            "holm_adjusted_p_within_family": 1.0,
+            "discordant_pairs": 1,
+            "table": [
+              [
+                11,
+                0
+              ],
+              [
+                1,
+                38
+              ]
+            ]
+          },
+          "classification": "directional_only",
+          "note": null
+        },
+        {
+          "family_id": "cross_family_no_guards_guardrail_checks",
+          "artifact_id": "cross_family_no_guards_mirror",
+          "source": {
+            "artifact_id": "cross_family_no_guards_mirror",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add no-guards mirror and llama threshold artifacts"
+          },
+          "comparison": {
+            "lhs": "llama_sentence_noguards",
+            "rhs": "llama_sentence_guarded"
+          },
+          "lhs_hit_rate": 1.0,
+          "rhs_hit_rate": 1.0,
+          "lhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "rhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "delta_hit_rate": 0.0,
+          "direction": "tied",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.0,
+            "holm_adjusted_p_within_family": 1.0,
+            "discordant_pairs": 0,
+            "table": [
+              [
+                50,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          "classification": "non_discriminative",
+          "note": null
+        }
+      ],
+      "classification": "directional_only"
+    },
+    {
+      "claim_id": "guardrail_removal_does_not_reverse_family_split",
+      "summary": "Removing guardrails does not reveal a hidden reversal of the Gemma/Llama family split on the tested 1024 slice.",
+      "support": [
+        {
+          "family_id": "cross_family_no_guards_guardrail_checks",
+          "artifact_id": "cross_family_no_guards_mirror",
+          "source": {
+            "artifact_id": "cross_family_no_guards_mirror",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add no-guards mirror and llama threshold artifacts"
+          },
+          "comparison": {
+            "lhs": "gemma_token_noguards",
+            "rhs": "gemma_token_guarded"
+          },
+          "lhs_hit_rate": 0.0,
+          "rhs_hit_rate": 0.02,
+          "lhs_wilson_ci_95": [
+            0.0,
+            0.07135003417431873
+          ],
+          "rhs_wilson_ci_95": [
+            0.0035391680889764604,
+            0.10495686471836953
+          ],
+          "delta_hit_rate": -0.02,
+          "direction": "rhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.0,
+            "holm_adjusted_p_within_family": 1.0,
+            "discordant_pairs": 1,
+            "table": [
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                49
+              ]
+            ]
+          },
+          "classification": "directional_only",
+          "note": null
+        },
+        {
+          "family_id": "cross_family_no_guards_guardrail_checks",
+          "artifact_id": "cross_family_no_guards_mirror",
+          "source": {
+            "artifact_id": "cross_family_no_guards_mirror",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add no-guards mirror and llama threshold artifacts"
+          },
+          "comparison": {
+            "lhs": "gemma_sentence_noguards",
+            "rhs": "gemma_sentence_guarded"
+          },
+          "lhs_hit_rate": 0.22,
+          "rhs_hit_rate": 0.24,
+          "lhs_wilson_ci_95": [
+            0.12753786224302288,
+            0.35241815689459555
+          ],
+          "rhs_wilson_ci_95": [
+            0.14297252401872207,
+            0.3741294937519236
+          ],
+          "delta_hit_rate": -0.01999999999999999,
+          "direction": "rhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.0,
+            "holm_adjusted_p_within_family": 1.0,
+            "discordant_pairs": 1,
+            "table": [
+              [
+                11,
+                0
+              ],
+              [
+                1,
+                38
+              ]
+            ]
+          },
+          "classification": "directional_only",
+          "note": null
+        },
+        {
+          "family_id": "cross_family_no_guards_guardrail_checks",
+          "artifact_id": "cross_family_no_guards_mirror",
+          "source": {
+            "artifact_id": "cross_family_no_guards_mirror",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add no-guards mirror and llama threshold artifacts"
+          },
+          "comparison": {
+            "lhs": "llama_token_noguards",
+            "rhs": "llama_token_guarded"
+          },
+          "lhs_hit_rate": 1.0,
+          "rhs_hit_rate": 1.0,
+          "lhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "rhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "delta_hit_rate": 0.0,
+          "direction": "tied",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.0,
+            "holm_adjusted_p_within_family": 1.0,
+            "discordant_pairs": 0,
+            "table": [
+              [
+                50,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          "classification": "non_discriminative",
+          "note": null
+        },
+        {
+          "family_id": "cross_family_no_guards_guardrail_checks",
+          "artifact_id": "cross_family_no_guards_mirror",
+          "source": {
+            "artifact_id": "cross_family_no_guards_mirror",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add no-guards mirror and llama threshold artifacts"
+          },
+          "comparison": {
+            "lhs": "llama_sentence_noguards",
+            "rhs": "llama_sentence_guarded"
+          },
+          "lhs_hit_rate": 1.0,
+          "rhs_hit_rate": 1.0,
+          "lhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "rhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "delta_hit_rate": 0.0,
+          "direction": "tied",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.0,
+            "holm_adjusted_p_within_family": 1.0,
+            "discordant_pairs": 0,
+            "table": [
+              [
+                50,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          "classification": "non_discriminative",
+          "note": null
+        }
+      ],
+      "classification": "observational_only"
+    },
+    {
+      "claim_id": "llama_threshold_cut_is_method_specific",
+      "summary": "On Llama 3.1, the threshold cut below 1024 appears sharply in the attention-weight baselines, while sentence remains at ceiling and token remains near-ceiling.",
+      "support": [
+        {
+          "family_id": "llama31_4k_threshold_cut",
+          "artifact_id": "llama31_4k_threshold_cut",
+          "source": {
+            "artifact_id": "llama31_4k_threshold_cut",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/llama31-4k-threshold-cut-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add no-guards mirror and llama threshold artifacts"
+          },
+          "comparison": {
+            "lhs": "llama_tova_512_guarded",
+            "rhs": "llama_tova_1024_guarded"
+          },
+          "lhs_hit_rate": 0.56,
+          "rhs_hit_rate": 0.9,
+          "lhs_wilson_ci_95": [
+            0.4230578680014353,
+            0.6883801278976466
+          ],
+          "rhs_wilson_ci_95": [
+            0.7863950966521162,
+            0.956524876008429
+          ],
+          "delta_hit_rate": -0.33999999999999997,
+          "direction": "rhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.52587890625e-05,
+            "holm_adjusted_p_within_family": 4.57763671875e-05,
+            "discordant_pairs": 17,
+            "table": [
+              [
+                28,
+                0
+              ],
+              [
+                17,
+                5
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        },
+        {
+          "family_id": "llama31_4k_threshold_cut",
+          "artifact_id": "llama31_4k_threshold_cut",
+          "source": {
+            "artifact_id": "llama31_4k_threshold_cut",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/llama31-4k-threshold-cut-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add no-guards mirror and llama threshold artifacts"
+          },
+          "comparison": {
+            "lhs": "llama_h2o_512_guarded",
+            "rhs": "llama_h2o_1024_guarded"
+          },
+          "lhs_hit_rate": 0.56,
+          "rhs_hit_rate": 0.94,
+          "lhs_wilson_ci_95": [
+            0.4230578680014353,
+            0.6883801278976466
+          ],
+          "rhs_wilson_ci_95": [
+            0.8378265662912299,
+            0.9793854036353695
+          ],
+          "delta_hit_rate": -0.3799999999999999,
+          "direction": "rhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 3.814697265625e-06,
+            "holm_adjusted_p_within_family": 1.52587890625e-05,
+            "discordant_pairs": 19,
+            "table": [
+              [
+                28,
+                0
+              ],
+              [
+                19,
+                3
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        },
+        {
+          "family_id": "llama31_4k_threshold_cut",
+          "artifact_id": "llama31_4k_threshold_cut",
+          "source": {
+            "artifact_id": "llama31_4k_threshold_cut",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/llama31-4k-threshold-cut-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add no-guards mirror and llama threshold artifacts"
+          },
+          "comparison": {
+            "lhs": "llama_sentence_512_guarded",
+            "rhs": "llama_sentence_1024_guarded"
+          },
+          "lhs_hit_rate": 1.0,
+          "rhs_hit_rate": 1.0,
+          "lhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "rhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "delta_hit_rate": 0.0,
+          "direction": "tied",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.0,
+            "holm_adjusted_p_within_family": 1.0,
+            "discordant_pairs": 0,
+            "table": [
+              [
+                50,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          "classification": "non_discriminative",
+          "note": null
+        }
+      ],
+      "classification": "publication_strong"
+    },
+    {
+      "claim_id": "ministral_fast_read_is_strong_but_narrow",
+      "summary": "Ministral 8B provides a strong fifth-family fast-read in the residual-preserving direction, but not yet a full family classification.",
+      "support": [
+        {
+          "family_id": "ministral_8b_fast_read",
+          "artifact_id": "ministral_8b_4k_fast_read",
+          "source": {
+            "artifact_id": "ministral_8b_4k_fast_read",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/ministral-8b-4k-fast-read-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add Ministral 8B fast-read artifact"
+          },
+          "comparison": {
+            "lhs": "sentence_1024_guarded",
+            "rhs": "tova_1024_guarded"
+          },
+          "lhs_hit_rate": 1.0,
+          "rhs_hit_rate": 0.44,
+          "lhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "rhs_wilson_ci_95": [
+            0.3116198721023534,
+            0.5769421319985648
+          ],
+          "delta_hit_rate": 0.56,
+          "direction": "lhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 7.450580596923828e-09,
+            "holm_adjusted_p_within_family": 2.2351741790771484e-08,
+            "discordant_pairs": 28,
+            "table": [
+              [
+                22,
+                28
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        },
+        {
+          "family_id": "ministral_8b_fast_read",
+          "artifact_id": "ministral_8b_4k_fast_read",
+          "source": {
+            "artifact_id": "ministral_8b_4k_fast_read",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/ministral-8b-4k-fast-read-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add Ministral 8B fast-read artifact"
+          },
+          "comparison": {
+            "lhs": "vanilla_floor",
+            "rhs": "tova_1024_guarded"
+          },
+          "lhs_hit_rate": 1.0,
+          "rhs_hit_rate": 0.44,
+          "lhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "rhs_wilson_ci_95": [
+            0.3116198721023534,
+            0.5769421319985648
+          ],
+          "delta_hit_rate": 0.56,
+          "direction": "lhs_better",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 7.450580596923828e-09,
+            "holm_adjusted_p_within_family": 2.2351741790771484e-08,
+            "discordant_pairs": 28,
+            "table": [
+              [
+                22,
+                28
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          "classification": "publication_strong",
+          "note": null
+        },
+        {
+          "family_id": "ministral_8b_fast_read",
+          "artifact_id": "ministral_8b_4k_fast_read",
+          "source": {
+            "artifact_id": "ministral_8b_4k_fast_read",
+            "ref": "origin/main",
+            "commit": "6f1f1078271610b8d5883e50b7a25c3131208526",
+            "path": "results/ministral-8b-4k-fast-read-2026-05-15.json",
+            "pr_number": null,
+            "title": "feat: add Ministral 8B fast-read artifact"
+          },
+          "comparison": {
+            "lhs": "sentence_1024_guarded",
+            "rhs": "vanilla_floor"
+          },
+          "lhs_hit_rate": 1.0,
+          "rhs_hit_rate": 1.0,
+          "lhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "rhs_wilson_ci_95": [
+            0.9286499658256813,
+            1.0
+          ],
+          "delta_hit_rate": 0.0,
+          "direction": "tied",
+          "paired_test": {
+            "name": "mcnemar_exact_two_sided",
+            "p_value": 1.0,
+            "holm_adjusted_p_within_family": 1.0,
+            "discordant_pairs": 0,
+            "table": [
+              [
+                50,
+                0
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          },
+          "classification": "non_discriminative",
+          "note": null
+        }
+      ],
+      "classification": "publication_strong"
+    },
+    {
+      "claim_id": "word_never_wins_is_local",
+      "summary": "Word never wins in the observed regime table, but that remains an observed-regime statement, not a universal theorem.",
+      "support": [
+        {
+          "common_budget_regimes": 12,
+          "winner_counts_by_unit": {
+            "token": 5,
+            "sentence": 7,
+            "word": 0,
+            "none": 0
+          },
+          "appendix_regimes": 1
+        },
+        {
+          "qwen_word_all_zero": true
+        }
+      ],
+      "classification": "observational_only"
+    }
+  ]
+}

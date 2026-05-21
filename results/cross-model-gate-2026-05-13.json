@@ -1,0 +1,82 @@
+{
+  "artifact": "cross-model-gate",
+  "dataset_config": "niah_multikey_1_4k",
+  "dataset_id": "rbiswasfc/ruler",
+  "date": "2026-05-13",
+  "models": {
+    "llama": {
+      "failure": {
+        "summary": "Modal Hugging Face secret lacks access to the Meta Llama 3.1 8B Instruct gated repository (403).",
+        "type": "gated_repo"
+      },
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "status": "blocked"
+    },
+    "qwen": {
+      "model_id": "Qwen/Qwen2.5-7B-Instruct",
+      "read": "Non-discriminative on this slice. Vanilla ceiling is 0.00, so the sweet-spot comparison cannot support a cross-model generalization claim.",
+      "rows": [
+        {
+          "budget_regime": "full context",
+          "elapsed_seconds": 192.294331409,
+          "estimated_cost_usd": 0.133452265997846,
+          "hit_rate": 0.0,
+          "method": "Vanilla",
+          "model_id": "Qwen/Qwen2.5-7B-Instruct",
+          "run_id": "week1-niah-vanilla",
+          "sample_incorrect_predictions": [
+            "The!pecial!mag!c!!!n!um!b!er!!!!!f!or!!!!!f!",
+            "The! special!!!!!!!!!!!!!!!!!!! magic!!! number!! for!!",
+            "The!!!! special!! magic!!!!!!!!!!!!!!!!!!! number! for!"
+          ]
+        },
+        {
+          "budget_regime": "1024 guarded",
+          "elapsed_seconds": 294.379443308,
+          "estimated_cost_usd": 0.204299333655752,
+          "hit_rate": 0.04,
+          "method": "Token vorn",
+          "model_id": "Qwen/Qwen2.5-7B-Instruct",
+          "run_id": "step2-niah-vorn-live-b1024",
+          "sample_incorrect_predictions": [
+            "Not! There! The!! special!!!!!!!!!!!!!!!!!!! magic! number! for",
+            "7700828.",
+            "344052."
+          ]
+        },
+        {
+          "budget_regime": "1024 guarded",
+          "elapsed_seconds": 226.728246339,
+          "estimated_cost_usd": 0.157349402959266,
+          "hit_rate": 0.0,
+          "method": "Sentence vorn",
+          "model_id": "Qwen/Qwen2.5-7B-Instruct",
+          "run_id": "step2-niah-sentence-vorn-live-b1024",
+          "sample_incorrect_predictions": [
+            "9375710.",
+            "770082!",
+            "3684052."
+          ]
+        },
+        {
+          "budget_regime": "1024 no guardrails",
+          "elapsed_seconds": 326.503014501,
+          "estimated_cost_usd": 0.226593092063694,
+          "hit_rate": 0.0,
+          "method": "Sentence vorn",
+          "model_id": "Qwen/Qwen2.5-7B-Instruct",
+          "run_id": "step2-niah-sentence-vorn-live-b1024-noguards",
+          "sample_incorrect_predictions": [
+            "9375710.",
+            "770082!",
+            "3684052."
+          ]
+        }
+      ],
+      "status": "completed"
+    }
+  },
+  "next_options": "Either add a model-specific prompt/eval compatibility pass for Qwen, obtain Llama access, or switch the cross-model validity lane to a different open-weight instruct model with demonstrated vanilla headroom on the target slice.",
+  "read": "This lane delivered the model-selection seam and a first external-model gate, but it did not produce a publishable architecture-generalization result. Qwen 2.5 7B is non-discriminative on the NIAH 4k sweet-spot slice, and Llama 3.1 8B is blocked by model access.",
+  "split": "validation[:50]"
+}

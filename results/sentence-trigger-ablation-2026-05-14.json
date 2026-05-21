@@ -1,0 +1,604 @@
+{
+  "schema_version": "result-envelope/v0.2",
+  "metadata": {
+    "experiment_id": "sentence-trigger-ablation-8k-1536-2026-05-14",
+    "date": "2026-05-14",
+    "team": "synapt",
+    "slice": {
+      "dataset": "rbiswasfc/ruler",
+      "name": "niah_multikey_1_8k",
+      "split": "validation",
+      "n": 50,
+      "selector": "validation[:50]"
+    },
+    "model": {
+      "name": "mistralai/Mistral-7B-Instruct-v0.3",
+      "provider": "modal",
+      "profile": "author",
+      "deterministic": true
+    },
+    "comparison_axis": "eviction_trigger",
+    "budget": 1536,
+    "retention_policy": "sentence_vorn",
+    "sentence_pooling": "max",
+    "sentence_top_k": 3
+  },
+  "rows": [
+    {
+      "label": "sentence_1536_threshold_trigger",
+      "method": "sentence_vorn",
+      "metric": "needle_hit_rate",
+      "dataset_config": "niah_multikey_1_8k",
+      "budget": 1536,
+      "guardrails": "prefix_plus_recent",
+      "eviction_trigger": "budget_threshold",
+      "sentence_pooling": "max",
+      "sentence_top_k": 3,
+      "hits": 37,
+      "cases": 50,
+      "hit_rate": 0.74,
+      "wilson_ci_95": [
+        0.6044657801100008,
+        0.8412862034863262
+      ],
+      "elapsed_seconds": 373.61790746,
+      "estimated_cost_usd": 0.25929082777724,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "mean_retention_ratio": 0.1861,
+      "run_id": "step2-niah-sentence-vorn-live-b1536",
+      "summary_contract": "canonical_hidden_state_float32_per_token_from_layer_L_star",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_8k-0",
+          "correct": true,
+          "prediction": "8973915"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-1",
+          "correct": true,
+          "prediction": "4374754"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-2",
+          "correct": true,
+          "prediction": "4694634"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-3",
+          "correct": true,
+          "prediction": "5672073"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-4",
+          "correct": true,
+          "prediction": "2626229"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-5",
+          "correct": true,
+          "prediction": "4078418"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-6",
+          "correct": false,
+          "prediction": "2642635."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-7",
+          "correct": false,
+          "prediction": "The special magic number for good-speed mentioned in the text is 8633773."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-8",
+          "correct": true,
+          "prediction": "1981186"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-9",
+          "correct": false,
+          "prediction": "2149597."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-10",
+          "correct": true,
+          "prediction": "5374922"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-11",
+          "correct": false,
+          "prediction": "6304573."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-12",
+          "correct": false,
+          "prediction": "3646552."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-13",
+          "correct": true,
+          "prediction": "4533779"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-14",
+          "correct": true,
+          "prediction": "6596150"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-15",
+          "correct": false,
+          "prediction": "The special magic number for salty-hovel mentioned in the provided text is 1604451."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-16",
+          "correct": true,
+          "prediction": "7117837"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-17",
+          "correct": true,
+          "prediction": "7907400"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-18",
+          "correct": true,
+          "prediction": "6866294"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-19",
+          "correct": true,
+          "prediction": "6891254"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-20",
+          "correct": false,
+          "prediction": "6262632."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-21",
+          "correct": true,
+          "prediction": "4188992"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-22",
+          "correct": true,
+          "prediction": "6038571"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-23",
+          "correct": true,
+          "prediction": "7361002"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-24",
+          "correct": false,
+          "prediction": "6406444."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-25",
+          "correct": true,
+          "prediction": "2422633"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-26",
+          "correct": true,
+          "prediction": "7953166"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-27",
+          "correct": false,
+          "prediction": "1093026."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-28",
+          "correct": false,
+          "prediction": "6323376."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-29",
+          "correct": true,
+          "prediction": "5652512"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-30",
+          "correct": true,
+          "prediction": "5558623"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-31",
+          "correct": true,
+          "prediction": "8048838"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-32",
+          "correct": true,
+          "prediction": "4700025"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-33",
+          "correct": false,
+          "prediction": "7523941."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-34",
+          "correct": true,
+          "prediction": "7360307"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-35",
+          "correct": true,
+          "prediction": "8072684"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-36",
+          "correct": true,
+          "prediction": "3117636"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-37",
+          "correct": true,
+          "prediction": "6218367"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-38",
+          "correct": true,
+          "prediction": "1689025"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-39",
+          "correct": true,
+          "prediction": "7076506"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-40",
+          "correct": true,
+          "prediction": "5118725"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-41",
+          "correct": true,
+          "prediction": "6452832"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-42",
+          "correct": true,
+          "prediction": "5049282"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-43",
+          "correct": true,
+          "prediction": "7784725"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-44",
+          "correct": true,
+          "prediction": "9907391"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-45",
+          "correct": false,
+          "prediction": "4106298."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-46",
+          "correct": false,
+          "prediction": "4256752."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-47",
+          "correct": true,
+          "prediction": "9235577"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-48",
+          "correct": true,
+          "prediction": "9014965"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-49",
+          "correct": true,
+          "prediction": "4786401"
+        }
+      ]
+    },
+    {
+      "label": "sentence_1536_sentence_boundary_trigger",
+      "method": "sentence_vorn",
+      "metric": "needle_hit_rate",
+      "dataset_config": "niah_multikey_1_8k",
+      "budget": 1536,
+      "guardrails": "prefix_plus_recent",
+      "eviction_trigger": "sentence_boundary",
+      "sentence_pooling": "max",
+      "sentence_top_k": 3,
+      "hits": 36,
+      "cases": 50,
+      "hit_rate": 0.72,
+      "wilson_ci_95": [
+        0.5833461285401034,
+        0.8252598564231963
+      ],
+      "elapsed_seconds": 378.751879299,
+      "estimated_cost_usd": 0.26285380423350596,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "mean_retention_ratio": 0.1865,
+      "run_id": "step2-niah-sentence-vorn-live-b1536-sentbound",
+      "summary_contract": "canonical_hidden_state_float32_per_token_from_layer_L_star",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_8k-0",
+          "correct": true,
+          "prediction": "8973915"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-1",
+          "correct": true,
+          "prediction": "4374754"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-2",
+          "correct": true,
+          "prediction": "4694634"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-3",
+          "correct": true,
+          "prediction": "5672073"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-4",
+          "correct": true,
+          "prediction": "2626229"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-5",
+          "correct": true,
+          "prediction": "4078418"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-6",
+          "correct": false,
+          "prediction": "2642635."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-7",
+          "correct": false,
+          "prediction": "The special magic number for good-speed mentioned in the text is 8633773."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-8",
+          "correct": true,
+          "prediction": "1981186"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-9",
+          "correct": false,
+          "prediction": "2149597."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-10",
+          "correct": true,
+          "prediction": "5374922"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-11",
+          "correct": false,
+          "prediction": "6304573."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-12",
+          "correct": false,
+          "prediction": "3646552."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-13",
+          "correct": true,
+          "prediction": "4533779"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-14",
+          "correct": true,
+          "prediction": "6596150"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-15",
+          "correct": false,
+          "prediction": "The special magic number for salty-hovel mentioned in the provided text is 1604451."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-16",
+          "correct": false,
+          "prediction": "7117837."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-17",
+          "correct": true,
+          "prediction": "7907400"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-18",
+          "correct": true,
+          "prediction": "6866294"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-19",
+          "correct": true,
+          "prediction": "6891254"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-20",
+          "correct": false,
+          "prediction": "6262632."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-21",
+          "correct": true,
+          "prediction": "4188992"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-22",
+          "correct": true,
+          "prediction": "6038571"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-23",
+          "correct": true,
+          "prediction": "7361002"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-24",
+          "correct": false,
+          "prediction": "6406444."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-25",
+          "correct": true,
+          "prediction": "2422633"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-26",
+          "correct": true,
+          "prediction": "7953166"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-27",
+          "correct": false,
+          "prediction": "1093026."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-28",
+          "correct": false,
+          "prediction": "6323376."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-29",
+          "correct": true,
+          "prediction": "5652512"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-30",
+          "correct": true,
+          "prediction": "5558623"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-31",
+          "correct": true,
+          "prediction": "8048838"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-32",
+          "correct": true,
+          "prediction": "4700025"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-33",
+          "correct": false,
+          "prediction": "7523941."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-34",
+          "correct": true,
+          "prediction": "7360307"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-35",
+          "correct": true,
+          "prediction": "8072684"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-36",
+          "correct": true,
+          "prediction": "3117636"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-37",
+          "correct": true,
+          "prediction": "6218367"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-38",
+          "correct": true,
+          "prediction": "1689025"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-39",
+          "correct": true,
+          "prediction": "7076506"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-40",
+          "correct": true,
+          "prediction": "5118725"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-41",
+          "correct": true,
+          "prediction": "6452832"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-42",
+          "correct": true,
+          "prediction": "5049282"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-43",
+          "correct": true,
+          "prediction": "7784725"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-44",
+          "correct": true,
+          "prediction": "9907391"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-45",
+          "correct": false,
+          "prediction": "4106298."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-46",
+          "correct": false,
+          "prediction": "4256752."
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-47",
+          "correct": true,
+          "prediction": "9235577"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-48",
+          "correct": true,
+          "prediction": "9014965"
+        },
+        {
+          "fixture_id": "niah_multikey_1_8k-49",
+          "correct": true,
+          "prediction": "4786401"
+        }
+      ]
+    }
+  ],
+  "pairwise_tests": [
+    {
+      "lhs": "sentence_1536_sentence_boundary_trigger",
+      "rhs": "sentence_1536_threshold_trigger",
+      "paired": true,
+      "same_n": true,
+      "test": "mcnemar_exact_two_sided",
+      "table": [
+        [
+          36,
+          0
+        ],
+        [
+          1,
+          13
+        ]
+      ],
+      "p_value": 1.0,
+      "discordant_pairs": 1,
+      "lhs_discordant_share": 0.0
+    }
+  ]
+}

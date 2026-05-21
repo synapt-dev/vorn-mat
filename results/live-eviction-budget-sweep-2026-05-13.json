@@ -1,0 +1,547 @@
+{
+  "analysis": {
+    "alpha": 0.05,
+    "confidence_interval_method": "wilson_score_95",
+    "requested_comparisons": [
+      {
+        "label": "vorn@1024 vs summarize@1024",
+        "lhs": {
+          "budget": 1024,
+          "case_count": 50,
+          "hit_count": 13,
+          "hit_rate": 0.26,
+          "method": "vorn_eviction",
+          "wilson_ci_95": {
+            "high": 0.39553157264848837,
+            "low": 0.15871527493552393
+          }
+        },
+        "p_value": 0.12473659204240488,
+        "rhs": {
+          "budget": 1024,
+          "case_count": 50,
+          "hit_count": 6,
+          "hit_rate": 0.12,
+          "method": "summarize_compact",
+          "wilson_ci_95": {
+            "high": 0.23804817383202992,
+            "low": 0.05617600150932274
+          }
+        },
+        "significant_at_0_05": false,
+        "test": "two_sided_fisher_exact"
+      },
+      {
+        "label": "vorn@256 vs prefix+suffix@256",
+        "lhs": {
+          "budget": 256,
+          "case_count": 50,
+          "hit_count": 2,
+          "hit_rate": 0.04,
+          "method": "vorn_eviction",
+          "wilson_ci_95": {
+            "high": 0.1346009068750702,
+            "low": 0.011038884327619805
+          }
+        },
+        "p_value": 0.9999999999999999,
+        "rhs": {
+          "budget": 256,
+          "case_count": 50,
+          "hit_count": 2,
+          "hit_rate": 0.04,
+          "method": "prefix_suffix",
+          "wilson_ci_95": {
+            "high": 0.1346009068750702,
+            "low": 0.011038884327619805
+          }
+        },
+        "significant_at_0_05": false,
+        "test": "two_sided_fisher_exact"
+      },
+      {
+        "label": "vorn@2048 vs vorn@1024",
+        "lhs": {
+          "budget": 2048,
+          "case_count": 50,
+          "hit_count": 10,
+          "hit_rate": 0.2,
+          "method": "vorn_eviction",
+          "wilson_ci_95": {
+            "high": 0.3303710593222542,
+            "low": 0.1124375001577611
+          }
+        },
+        "p_value": 0.6352558567231936,
+        "rhs": {
+          "budget": 1024,
+          "case_count": 50,
+          "hit_count": 13,
+          "hit_rate": 0.26,
+          "method": "vorn_eviction",
+          "wilson_ci_95": {
+            "high": 0.39553157264848837,
+            "low": 0.15871527493552393
+          }
+        },
+        "significant_at_0_05": false,
+        "test": "two_sided_fisher_exact"
+      }
+    ],
+    "sample_size_per_row": 50,
+    "significance_test_method": "two_sided_fisher_exact",
+    "supplementary_comparisons": [
+      {
+        "label": "vorn@512 vs sliding-window@512",
+        "lhs": {
+          "budget": 512,
+          "case_count": 50,
+          "hit_count": 9,
+          "hit_rate": 0.18,
+          "method": "vorn_eviction",
+          "wilson_ci_95": {
+            "high": 0.30796053674300783,
+            "low": 0.09770192670234178
+          }
+        },
+        "p_value": 0.002634204400259045,
+        "rhs": {
+          "budget": 512,
+          "case_count": 50,
+          "hit_count": 0,
+          "hit_rate": 0.0,
+          "method": "sliding_window",
+          "wilson_ci_95": {
+            "high": 0.07134759913335872,
+            "low": 6.938893903907228e-18
+          }
+        },
+        "significant_at_0_05": true,
+        "test": "two_sided_fisher_exact"
+      },
+      {
+        "label": "vorn@1024 vs sliding-window@1024",
+        "lhs": {
+          "budget": 1024,
+          "case_count": 50,
+          "hit_count": 13,
+          "hit_rate": 0.26,
+          "method": "vorn_eviction",
+          "wilson_ci_95": {
+            "high": 0.39553157264848837,
+            "low": 0.15871527493552393
+          }
+        },
+        "p_value": 9.981250196029942e-05,
+        "rhs": {
+          "budget": 1024,
+          "case_count": 50,
+          "hit_count": 0,
+          "hit_rate": 0.0,
+          "method": "sliding_window",
+          "wilson_ci_95": {
+            "high": 0.07134759913335872,
+            "low": 6.938893903907228e-18
+          }
+        },
+        "significant_at_0_05": true,
+        "test": "two_sided_fisher_exact"
+      },
+      {
+        "label": "vorn@1024 vs prefix+suffix@1024",
+        "lhs": {
+          "budget": 1024,
+          "case_count": 50,
+          "hit_count": 13,
+          "hit_rate": 0.26,
+          "method": "vorn_eviction",
+          "wilson_ci_95": {
+            "high": 0.39553157264848837,
+            "low": 0.15871527493552393
+          }
+        },
+        "p_value": 0.01221759829292561,
+        "rhs": {
+          "budget": 1024,
+          "case_count": 50,
+          "hit_count": 3,
+          "hit_rate": 0.06,
+          "method": "prefix_suffix",
+          "wilson_ci_95": {
+            "high": 0.16217091688838173,
+            "low": 0.02061497034897397
+          }
+        },
+        "significant_at_0_05": true,
+        "test": "two_sided_fisher_exact"
+      }
+    ]
+  },
+  "context_ceiling": {
+    "budget_regime": "full_context_unconstrained",
+    "case_count": 50,
+    "hit_count": 14,
+    "hit_rate": 0.28,
+    "inference_cost_usd": 0.1112,
+    "kv_savings_ratio": 0.0,
+    "method": "vanilla",
+    "preprocessing_cost_usd": 0.0,
+    "preprocessing_elapsed_seconds": 0.0,
+    "wall_clock_seconds": 160.228,
+    "wilson_ci_95": {
+      "high": 0.4166512369595657,
+      "low": 0.17474170665911232
+    }
+  },
+  "dataset": {
+    "dataset_config": "niah_multikey_1_4k",
+    "dataset_id": "rbiswasfc/ruler",
+    "model": "mistralai/Mistral-7B-Instruct-v0.3",
+    "profile": "author",
+    "split": "validation[:50]",
+    "summarize_compact_contract": "whole_context_summary_without_question_then_answer_with_question",
+    "summary_contract": "canonical_hidden_state_float32_per_token_from_layer_L_star"
+  },
+  "rows": [
+    {
+      "budget": 256,
+      "case_count": 50,
+      "hit_count": 0,
+      "hit_rate": 0.0,
+      "inference_cost_usd": 0.16452135977364,
+      "kv_savings_ratio": 0.9388,
+      "mean_retention_ratio": 0.0612,
+      "method": "random_eviction",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "random",
+      "run_id": "step2-niah-random-live-b256",
+      "total_eviction_steps": 1143,
+      "wall_clock_seconds": 237.06247806000002,
+      "wilson_ci_95": {
+        "high": 0.07134759913335872,
+        "low": 6.938893903907228e-18
+      }
+    },
+    {
+      "budget": 256,
+      "case_count": 50,
+      "hit_count": 0,
+      "hit_rate": 0.0,
+      "inference_cost_usd": 0.155766393711084,
+      "kv_savings_ratio": 0.9388,
+      "mean_retention_ratio": 0.0612,
+      "method": "sliding_window",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "sliding_window",
+      "run_id": "step2-niah-sliding-window-live-b256",
+      "total_eviction_steps": 1402,
+      "wall_clock_seconds": 224.447253186,
+      "wilson_ci_95": {
+        "high": 0.07134759913335872,
+        "low": 6.938893903907228e-18
+      }
+    },
+    {
+      "budget": 512,
+      "case_count": 50,
+      "hit_count": 0,
+      "hit_rate": 0.0,
+      "inference_cost_usd": 0.18813542595735,
+      "kv_savings_ratio": 0.8777,
+      "mean_retention_ratio": 0.1223,
+      "method": "sliding_window",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "sliding_window",
+      "run_id": "step2-niah-sliding-window-live-b512",
+      "total_eviction_steps": 1355,
+      "wall_clock_seconds": 271.088510025,
+      "wilson_ci_95": {
+        "high": 0.07134759913335872,
+        "low": 6.938893903907228e-18
+      }
+    },
+    {
+      "budget": 1024,
+      "case_count": 50,
+      "hit_count": 0,
+      "hit_rate": 0.0,
+      "inference_cost_usd": 0.24962577617022,
+      "kv_savings_ratio": 0.7553,
+      "mean_retention_ratio": 0.2447,
+      "method": "sliding_window",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "sliding_window",
+      "run_id": "step2-niah-sliding-window-live-b1024",
+      "total_eviction_steps": 1128,
+      "wall_clock_seconds": 359.69132013,
+      "wilson_ci_95": {
+        "high": 0.07134759913335872,
+        "low": 6.938893903907228e-18
+      }
+    },
+    {
+      "budget": 2048,
+      "case_count": 50,
+      "hit_count": 0,
+      "hit_rate": 0.0,
+      "inference_cost_usd": 0.31336393259637796,
+      "kv_savings_ratio": 0.5106,
+      "mean_retention_ratio": 0.4894,
+      "method": "sliding_window",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "sliding_window",
+      "run_id": "step2-niah-sliding-window-live-b2048",
+      "total_eviction_steps": 827,
+      "wall_clock_seconds": 451.533044087,
+      "wilson_ci_95": {
+        "high": 0.07134759913335872,
+        "low": 6.938893903907228e-18
+      }
+    },
+    {
+      "budget": 256,
+      "case_count": 50,
+      "hit_count": 2,
+      "hit_rate": 0.04,
+      "inference_cost_usd": 0.15808336470625797,
+      "kv_savings_ratio": 0.9388,
+      "mean_retention_ratio": 0.0612,
+      "method": "prefix_suffix",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "prefix_suffix",
+      "run_id": "step2-niah-prefix-suffix-live-b256",
+      "total_eviction_steps": 1554,
+      "wall_clock_seconds": 227.785828107,
+      "wilson_ci_95": {
+        "high": 0.1346009068750702,
+        "low": 0.011038884327619805
+      }
+    },
+    {
+      "budget": 512,
+      "case_count": 50,
+      "hit_count": 0,
+      "hit_rate": 0.0,
+      "inference_cost_usd": 0.19807238356086598,
+      "kv_savings_ratio": 0.8777,
+      "mean_retention_ratio": 0.1223,
+      "method": "prefix_suffix",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "prefix_suffix",
+      "run_id": "step2-niah-prefix-suffix-live-b512",
+      "total_eviction_steps": 1441,
+      "wall_clock_seconds": 285.406892739,
+      "wilson_ci_95": {
+        "high": 0.07134759913335872,
+        "low": 6.938893903907228e-18
+      }
+    },
+    {
+      "budget": 1024,
+      "case_count": 50,
+      "hit_count": 3,
+      "hit_rate": 0.06,
+      "inference_cost_usd": 0.30505240834861597,
+      "kv_savings_ratio": 0.7553,
+      "mean_retention_ratio": 0.2447,
+      "method": "prefix_suffix",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "prefix_suffix",
+      "run_id": "step2-niah-prefix-suffix-live-b1024",
+      "total_eviction_steps": 1267,
+      "wall_clock_seconds": 439.556784364,
+      "wilson_ci_95": {
+        "high": 0.16217091688838173,
+        "low": 0.02061497034897397
+      }
+    },
+    {
+      "budget": 2048,
+      "case_count": 50,
+      "hit_count": 5,
+      "hit_rate": 0.1,
+      "inference_cost_usd": 0.365852645412586,
+      "kv_savings_ratio": 0.5106,
+      "mean_retention_ratio": 0.4894,
+      "method": "prefix_suffix",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "prefix_suffix",
+      "run_id": "step2-niah-prefix-suffix-live-b2048",
+      "total_eviction_steps": 1072,
+      "wall_clock_seconds": 527.165195119,
+      "wilson_ci_95": {
+        "high": 0.21360231437479654,
+        "low": 0.04347576493189041
+      }
+    },
+    {
+      "budget": 256,
+      "case_count": 50,
+      "hit_count": 6,
+      "hit_rate": 0.12,
+      "inference_cost_usd": 0.295034099504348,
+      "kv_savings_ratio": 0.9454,
+      "mean_retention_ratio": 0.0546,
+      "method": "summarize_compact",
+      "preprocessing_cost_usd": 0.18567208270527397,
+      "preprocessing_elapsed_seconds": 267.539024071,
+      "retention_policy": "summarize",
+      "run_id": "step2-niah-summarize-compact-b256",
+      "total_eviction_steps": 0,
+      "wall_clock_seconds": 425.121180842,
+      "wilson_ci_95": {
+        "high": 0.23804817383202992,
+        "low": 0.05617600150932274
+      }
+    },
+    {
+      "budget": 512,
+      "case_count": 50,
+      "hit_count": 6,
+      "hit_rate": 0.12,
+      "inference_cost_usd": 0.41424961385418996,
+      "kv_savings_ratio": 0.9445,
+      "mean_retention_ratio": 0.0555,
+      "method": "summarize_compact",
+      "preprocessing_cost_usd": 0.2471361249632401,
+      "preprocessing_elapsed_seconds": 356.1039264600002,
+      "retention_policy": "summarize",
+      "run_id": "step2-niah-summarize-compact-b512",
+      "total_eviction_steps": 0,
+      "wall_clock_seconds": 596.901460885,
+      "wilson_ci_95": {
+        "high": 0.23804817383202992,
+        "low": 0.05617600150932274
+      }
+    },
+    {
+      "budget": 1024,
+      "case_count": 50,
+      "hit_count": 6,
+      "hit_rate": 0.12,
+      "inference_cost_usd": 0.22956572393245597,
+      "kv_savings_ratio": 0.9445,
+      "mean_retention_ratio": 0.0555,
+      "method": "summarize_compact",
+      "preprocessing_cost_usd": 0.12315368799210208,
+      "preprocessing_elapsed_seconds": 177.45488183300012,
+      "retention_policy": "summarize",
+      "run_id": "step2-niah-summarize-compact-b1024",
+      "total_eviction_steps": 0,
+      "wall_clock_seconds": 330.786345724,
+      "wilson_ci_95": {
+        "high": 0.23804817383202992,
+        "low": 0.05617600150932274
+      }
+    },
+    {
+      "budget": 2048,
+      "case_count": 50,
+      "hit_count": 6,
+      "hit_rate": 0.12,
+      "inference_cost_usd": 0.420135826906272,
+      "kv_savings_ratio": 0.9445,
+      "mean_retention_ratio": 0.0555,
+      "method": "summarize_compact",
+      "preprocessing_cost_usd": 0.2500891478023178,
+      "preprocessing_elapsed_seconds": 360.35900259699974,
+      "retention_policy": "summarize",
+      "run_id": "step2-niah-summarize-compact-b2048",
+      "total_eviction_steps": 0,
+      "wall_clock_seconds": 605.383035888,
+      "wilson_ci_95": {
+        "high": 0.23804817383202992,
+        "low": 0.05617600150932274
+      }
+    },
+    {
+      "budget": 256,
+      "case_count": 50,
+      "hit_count": 2,
+      "hit_rate": 0.04,
+      "inference_cost_usd": 0.140374938462626,
+      "kv_savings_ratio": 0.9388,
+      "mean_retention_ratio": 0.0612,
+      "method": "vorn_eviction",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "vorn",
+      "run_id": "step2-niah-vorn-live",
+      "total_eviction_steps": 1073,
+      "wall_clock_seconds": 202.269363779,
+      "wilson_ci_95": {
+        "high": 0.1346009068750702,
+        "low": 0.011038884327619805
+      }
+    },
+    {
+      "budget": 512,
+      "case_count": 50,
+      "hit_count": 9,
+      "hit_rate": 0.18,
+      "inference_cost_usd": 0.198575800249104,
+      "kv_savings_ratio": 0.8777,
+      "mean_retention_ratio": 0.1223,
+      "method": "vorn_eviction",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "vorn",
+      "run_id": "step2-niah-vorn-live-b512",
+      "total_eviction_steps": 993,
+      "wall_clock_seconds": 286.13227701600005,
+      "wilson_ci_95": {
+        "high": 0.30796053674300783,
+        "low": 0.09770192670234178
+      }
+    },
+    {
+      "budget": 1024,
+      "case_count": 50,
+      "hit_count": 13,
+      "hit_rate": 0.26,
+      "inference_cost_usd": 0.263443194911764,
+      "kv_savings_ratio": 0.7553,
+      "mean_retention_ratio": 0.2447,
+      "method": "vorn_eviction",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "vorn",
+      "run_id": "step2-niah-vorn-live-b1024",
+      "total_eviction_steps": 1035,
+      "wall_clock_seconds": 379.601145406,
+      "wilson_ci_95": {
+        "high": 0.39553157264848837,
+        "low": 0.15871527493552393
+      }
+    },
+    {
+      "budget": 2048,
+      "case_count": 50,
+      "hit_count": 10,
+      "hit_rate": 0.2,
+      "inference_cost_usd": 0.414705743783668,
+      "kv_savings_ratio": 0.5106,
+      "mean_retention_ratio": 0.4894,
+      "method": "vorn_eviction",
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "retention_policy": "vorn",
+      "run_id": "step2-niah-vorn-live-b2048",
+      "total_eviction_steps": 1085,
+      "wall_clock_seconds": 597.558708622,
+      "wilson_ci_95": {
+        "high": 0.3303710593222542,
+        "low": 0.1124375001577611
+      }
+    }
+  ]
+}

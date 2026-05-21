@@ -1,0 +1,323 @@
+{
+  "case_count": 50,
+  "case_shards": [
+    {
+      "case_count": 5,
+      "case_ids": [
+        "niah_multikey_1_4k-0",
+        "niah_multikey_1_4k-1",
+        "niah_multikey_1_4k-2",
+        "niah_multikey_1_4k-3",
+        "niah_multikey_1_4k-4"
+      ],
+      "compressed": true,
+      "path": "vanilla-observation-2026-05-13-shards/part-000.json.gz"
+    },
+    {
+      "case_count": 5,
+      "case_ids": [
+        "niah_multikey_1_4k-5",
+        "niah_multikey_1_4k-6",
+        "niah_multikey_1_4k-7",
+        "niah_multikey_1_4k-8",
+        "niah_multikey_1_4k-9"
+      ],
+      "compressed": true,
+      "path": "vanilla-observation-2026-05-13-shards/part-001.json.gz"
+    },
+    {
+      "case_count": 5,
+      "case_ids": [
+        "niah_multikey_1_4k-10",
+        "niah_multikey_1_4k-11",
+        "niah_multikey_1_4k-12",
+        "niah_multikey_1_4k-13",
+        "niah_multikey_1_4k-14"
+      ],
+      "compressed": true,
+      "path": "vanilla-observation-2026-05-13-shards/part-002.json.gz"
+    },
+    {
+      "case_count": 5,
+      "case_ids": [
+        "niah_multikey_1_4k-15",
+        "niah_multikey_1_4k-16",
+        "niah_multikey_1_4k-17",
+        "niah_multikey_1_4k-18",
+        "niah_multikey_1_4k-19"
+      ],
+      "compressed": true,
+      "path": "vanilla-observation-2026-05-13-shards/part-003.json.gz"
+    },
+    {
+      "case_count": 5,
+      "case_ids": [
+        "niah_multikey_1_4k-20",
+        "niah_multikey_1_4k-21",
+        "niah_multikey_1_4k-22",
+        "niah_multikey_1_4k-23",
+        "niah_multikey_1_4k-24"
+      ],
+      "compressed": true,
+      "path": "vanilla-observation-2026-05-13-shards/part-004.json.gz"
+    },
+    {
+      "case_count": 5,
+      "case_ids": [
+        "niah_multikey_1_4k-25",
+        "niah_multikey_1_4k-26",
+        "niah_multikey_1_4k-27",
+        "niah_multikey_1_4k-28",
+        "niah_multikey_1_4k-29"
+      ],
+      "compressed": true,
+      "path": "vanilla-observation-2026-05-13-shards/part-005.json.gz"
+    },
+    {
+      "case_count": 5,
+      "case_ids": [
+        "niah_multikey_1_4k-30",
+        "niah_multikey_1_4k-31",
+        "niah_multikey_1_4k-32",
+        "niah_multikey_1_4k-33",
+        "niah_multikey_1_4k-34"
+      ],
+      "compressed": true,
+      "path": "vanilla-observation-2026-05-13-shards/part-006.json.gz"
+    },
+    {
+      "case_count": 5,
+      "case_ids": [
+        "niah_multikey_1_4k-35",
+        "niah_multikey_1_4k-36",
+        "niah_multikey_1_4k-37",
+        "niah_multikey_1_4k-38",
+        "niah_multikey_1_4k-39"
+      ],
+      "compressed": true,
+      "path": "vanilla-observation-2026-05-13-shards/part-007.json.gz"
+    },
+    {
+      "case_count": 5,
+      "case_ids": [
+        "niah_multikey_1_4k-40",
+        "niah_multikey_1_4k-41",
+        "niah_multikey_1_4k-42",
+        "niah_multikey_1_4k-43",
+        "niah_multikey_1_4k-44"
+      ],
+      "compressed": true,
+      "path": "vanilla-observation-2026-05-13-shards/part-008.json.gz"
+    },
+    {
+      "case_count": 5,
+      "case_ids": [
+        "niah_multikey_1_4k-45",
+        "niah_multikey_1_4k-46",
+        "niah_multikey_1_4k-47",
+        "niah_multikey_1_4k-48",
+        "niah_multikey_1_4k-49"
+      ],
+      "compressed": true,
+      "path": "vanilla-observation-2026-05-13-shards/part-009.json.gz"
+    }
+  ],
+  "dataset_config": "niah_multikey_1_4k",
+  "elapsed_seconds": 679.370077775,
+  "estimated_cost_usd": 0.47148283397585,
+  "format": "observation-report-sharded-v1",
+  "split": "validation[:50]",
+  "summary": {
+    "failure": {
+      "alignment_gap_by_step": [
+        -0.45269997222222225,
+        -0.43043997222222224,
+        -0.41268605555555554,
+        -0.39645858333333334,
+        -0.3846897222222222,
+        -0.3716224166666667,
+        -0.35982794444444444,
+        -0.33550019444444446,
+        -0.3231081388888889,
+        -0.3250385277777778,
+        -0.34020300000000003,
+        -0.3469515,
+        -0.35646,
+        -0.35985999999999996,
+        -0.3558315,
+        -0.35164700000000004,
+        -0.3409955,
+        -0.34169950000000004,
+        -0.347819,
+        -0.370299,
+        -0.40845775,
+        -0.44791499999999995,
+        -0.48815575,
+        -0.53093925,
+        -0.5629525,
+        -0.57531875,
+        -0.5791675,
+        -0.5893537500000001,
+        -0.579321,
+        -0.57840125,
+        -0.5710645000000001,
+        -0.5657490000000001
+      ],
+      "answer_top_k_hit_rate_by_step": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "cases_with_answer_in_top_k": 0,
+      "mean_first_answer_top_k_step": null,
+      "ranking_stability_by_step": [
+        null,
+        0.818182,
+        0.83922575,
+        0.8409092499999999,
+        0.7052579999999999,
+        0.8413625,
+        0.78095075,
+        0.8198655,
+        0.8097645,
+        0.86447825,
+        0.909091,
+        1.0,
+        0.787879,
+        0.909091,
+        0.9545455,
+        0.8636364999999999,
+        0.78030325,
+        0.787879,
+        0.7237765,
+        0.7424245,
+        0.818182,
+        0.78030325,
+        0.818182,
+        0.818182,
+        0.909091,
+        0.9545455,
+        0.7424245,
+        0.9545455,
+        0.9545455,
+        0.909091,
+        0.818182,
+        0.78030325
+      ],
+      "residual_gap_by_step": [
+        -0.8455314361905488,
+        -0.8452998478209576,
+        -0.8451615464700992,
+        -0.8450790047677128,
+        -0.8449533553946069,
+        -0.8446389320575675,
+        -0.8446126961200884,
+        -0.8446227115415756,
+        -0.8444458502121683,
+        -0.8442133356618662,
+        -0.8526246638910049,
+        -0.8530792069705737,
+        -0.852590935682656,
+        -0.8528224427508966,
+        -0.8527947868362522,
+        -0.8530258216482722,
+        -0.8527825062448195,
+        -0.8524888263966166,
+        -0.852355650299129,
+        -0.8523950960488382,
+        -0.8523551303893868,
+        -0.8523534263440089,
+        -0.8521254186437257,
+        -0.8520913702985062,
+        -0.8519893170871529,
+        -0.8518328802254471,
+        -0.8517335963591846,
+        -0.8516855736532429,
+        -0.8514032895282249,
+        -0.8514519836124523,
+        -0.851233652771068,
+        -0.8508566072474157
+      ]
+    },
+    "failure_cases": 36,
+    "success": {
+      "alignment_gap_by_step": [
+        -0.4638689285714286,
+        -0.44079707142857144,
+        -0.41464885714285715,
+        -0.3984482857142857,
+        -0.3871135714285714,
+        -0.37286564285714285,
+        -0.3687884285714286,
+        -0.3505139285714286,
+        -0.34088264285714287
+      ],
+      "answer_top_k_hit_rate_by_step": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "cases_with_answer_in_top_k": 0,
+      "mean_first_answer_top_k_step": null,
+      "ranking_stability_by_step": [
+        null,
+        0.835498,
+        0.8333335,
+        0.8116885,
+        0.7813855,
+        0.782551,
+        0.8046955,
+        0.822511,
+        0.7965369999999999
+      ],
+      "residual_gap_by_step": [
+        -0.8031383717570424,
+        -0.8030146860336181,
+        -0.8028751370769613,
+        -0.8026444241542786,
+        -0.8026687471734391,
+        -0.802543350724484,
+        -0.8023140116061115,
+        -0.8021574104115954,
+        -0.8020249927609383
+      ]
+    },
+    "success_cases": 14,
+    "total_cases": 50
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "case_count": 50,
+  "dataset_config": "niah_multikey_1_4k",
+  "probes": {
+    "answer_window_10": {
+      "degenerate_cases": 0,
+      "failure": {
+        "case_count": 36,
+        "cases_with_top_k_hit": 0,
+        "mean_best_rank": 30.97222222222222,
+        "mean_final_alignment_gap": -0.34350905555555555,
+        "mean_first_hit_step": null,
+        "top_k_hit_rate": 0.0
+      },
+      "notes": [
+        "answer span expanded by +/-10 tokens"
+      ],
+      "success": {
+        "case_count": 14,
+        "cases_with_top_k_hit": 0,
+        "mean_best_rank": 31.642857142857142,
+        "mean_final_alignment_gap": -0.3345551428571429,
+        "mean_first_hit_step": null,
+        "top_k_hit_rate": 0.0
+      }
+    },
+    "answer_window_5": {
+      "degenerate_cases": 0,
+      "failure": {
+        "case_count": 36,
+        "cases_with_top_k_hit": 0,
+        "mean_best_rank": 31.27777777777778,
+        "mean_final_alignment_gap": -0.3455522777777778,
+        "mean_first_hit_step": null,
+        "top_k_hit_rate": 0.0
+      },
+      "notes": [
+        "answer span expanded by +/-5 tokens"
+      ],
+      "success": {
+        "case_count": 14,
+        "cases_with_top_k_hit": 0,
+        "mean_best_rank": 33.07142857142857,
+        "mean_final_alignment_gap": -0.3395834285714286,
+        "mean_first_hit_step": null,
+        "top_k_hit_rate": 0.0
+      }
+    },
+    "exact_answer": {
+      "degenerate_cases": 0,
+      "failure": {
+        "case_count": 36,
+        "cases_with_top_k_hit": 0,
+        "mean_best_rank": 33.083333333333336,
+        "mean_final_alignment_gap": -0.35040086111111113,
+        "mean_first_hit_step": null,
+        "top_k_hit_rate": 0.0
+      },
+      "notes": [],
+      "success": {
+        "case_count": 14,
+        "cases_with_top_k_hit": 0,
+        "mean_best_rank": 36.285714285714285,
+        "mean_final_alignment_gap": -0.34088264285714287,
+        "mean_first_hit_step": null,
+        "top_k_hit_rate": 0.0
+      }
+    },
+    "line": {
+      "degenerate_cases": 0,
+      "failure": {
+        "case_count": 36,
+        "cases_with_top_k_hit": 0,
+        "mean_best_rank": 23.416666666666668,
+        "mean_final_alignment_gap": -0.30750577777777777,
+        "mean_first_hit_step": null,
+        "top_k_hit_rate": 0.0
+      },
+      "notes": [],
+      "success": {
+        "case_count": 14,
+        "cases_with_top_k_hit": 0,
+        "mean_best_rank": 23.928571428571427,
+        "mean_final_alignment_gap": -0.31005957142857143,
+        "mean_first_hit_step": null,
+        "top_k_hit_rate": 0.0
+      }
+    },
+    "paragraph": {
+      "degenerate_cases": 50,
+      "failure": {
+        "case_count": 36,
+        "cases_with_top_k_hit": 36,
+        "mean_best_rank": 1,
+        "mean_final_alignment_gap": -0.02505899999999999,
+        "mean_first_hit_step": 0,
+        "top_k_hit_rate": 1.0
+      },
+      "notes": [
+        "single-paragraph prompt serialization makes the paragraph probe degenerate"
+      ],
+      "success": {
+        "case_count": 14,
+        "cases_with_top_k_hit": 14,
+        "mean_best_rank": 1,
+        "mean_final_alignment_gap": 0.016691785714285718,
+        "mean_first_hit_step": 0,
+        "top_k_hit_rate": 1.0
+      }
+    },
+    "sentence": {
+      "degenerate_cases": 0,
+      "failure": {
+        "case_count": 36,
+        "cases_with_top_k_hit": 0,
+        "mean_best_rank": 30.97222222222222,
+        "mean_final_alignment_gap": -0.3420163333333333,
+        "mean_first_hit_step": null,
+        "top_k_hit_rate": 0.0
+      },
+      "notes": [],
+      "success": {
+        "case_count": 14,
+        "cases_with_top_k_hit": 0,
+        "mean_best_rank": 32.785714285714285,
+        "mean_final_alignment_gap": -0.3395834285714286,
+        "mean_first_hit_step": null,
+        "top_k_hit_rate": 0.0
+      }
+    }
+  },
+  "source_observation_manifest": "prototypes/vorn-mat/results/vanilla-observation-2026-05-13.json",
+  "split": "validation[:50]",
+  "top_k": 10
+}

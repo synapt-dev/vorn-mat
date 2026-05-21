@@ -1,0 +1,34 @@
+{
+  "dataset": {
+    "profile": "author",
+    "dataset_id": "rbiswasfc/ruler",
+    "dataset_config": "qa_2_4k",
+    "split": "validation[:50]",
+    "model": "mistralai/Mistral-7B-Instruct-v0.3",
+    "metric": "exact_match_any_acceptable_output"
+  },
+  "rows": [
+    {
+      "method": "vanilla",
+      "budget_regime": "full_context",
+      "accuracy": 0.48,
+      "wall_clock_seconds": 136.574343408,
+      "inference_cost_usd": 0.094782594325152,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "retention_ratio": 1.0,
+      "run_id": "week1-niah-vanilla"
+    },
+    {
+      "method": "vorn_eviction",
+      "budget": 1024,
+      "accuracy": 0.32,
+      "wall_clock_seconds": 335.056217709,
+      "inference_cost_usd": 0.232529015090046,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "retention_ratio": 0.2673,
+      "run_id": "step2-niah-vorn-live-b1024"
+    }
+  ]
+}

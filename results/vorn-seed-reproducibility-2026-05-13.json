@@ -1,0 +1,104 @@
+{
+  "dataset": {
+    "profile": "author",
+    "dataset_id": "rbiswasfc/ruler",
+    "dataset_config": "niah_multikey_1_4k",
+    "split": "validation[:50]",
+    "model": "mistralai/Mistral-7B-Instruct-v0.3",
+    "retention_policy": "vorn"
+  },
+  "budgets": [
+    {
+      "budget": 256,
+      "runs": [
+        {
+          "seed": 17,
+          "hit_rate": 0.04,
+          "wall_clock_seconds": 202.269363779,
+          "inference_cost_usd": 0.140374938462626
+        },
+        {
+          "seed": 42,
+          "hit_rate": 0.04,
+          "wall_clock_seconds": 201.43612162199997,
+          "inference_cost_usd": 0.13979666840566798
+        },
+        {
+          "seed": 100,
+          "hit_rate": 0.04,
+          "wall_clock_seconds": 217.527333516,
+          "inference_cost_usd": 0.15096396946010399
+        }
+      ]
+    },
+    {
+      "budget": 512,
+      "runs": [
+        {
+          "seed": 17,
+          "hit_rate": 0.18,
+          "wall_clock_seconds": 286.13227701600005,
+          "inference_cost_usd": 0.198575800249104
+        },
+        {
+          "seed": 42,
+          "hit_rate": 0.18,
+          "wall_clock_seconds": 306.286193456,
+          "inference_cost_usd": 0.21256261825846398
+        },
+        {
+          "seed": 100,
+          "hit_rate": 0.18,
+          "wall_clock_seconds": 234.50036604,
+          "inference_cost_usd": 0.16274325403176
+        }
+      ]
+    },
+    {
+      "budget": 1024,
+      "runs": [
+        {
+          "seed": 17,
+          "hit_rate": 0.26,
+          "wall_clock_seconds": 379.601145406,
+          "inference_cost_usd": 0.263443194911764
+        },
+        {
+          "seed": 42,
+          "hit_rate": 0.26,
+          "wall_clock_seconds": 406.350766866,
+          "inference_cost_usd": 0.282007432205004
+        },
+        {
+          "seed": 100,
+          "hit_rate": 0.26,
+          "wall_clock_seconds": 337.597955406,
+          "inference_cost_usd": 0.23429298105176397
+        }
+      ]
+    },
+    {
+      "budget": 2048,
+      "runs": [
+        {
+          "seed": 17,
+          "hit_rate": 0.2,
+          "wall_clock_seconds": 597.558708622,
+          "inference_cost_usd": 0.414705743783668
+        },
+        {
+          "seed": 42,
+          "hit_rate": 0.2,
+          "wall_clock_seconds": 570.080297022,
+          "inference_cost_usd": 0.395635726133268
+        },
+        {
+          "seed": 100,
+          "hit_rate": 0.2,
+          "wall_clock_seconds": 631.9874968229999,
+          "inference_cost_usd": 0.4385993227951619
+        }
+      ]
+    }
+  ]
+}

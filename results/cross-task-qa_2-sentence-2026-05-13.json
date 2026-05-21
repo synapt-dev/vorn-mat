@@ -1,0 +1,1194 @@
+{
+  "schema_version": "result-envelope/v0.2",
+  "dataset": {
+    "profile": "author",
+    "dataset_id": "rbiswasfc/ruler",
+    "dataset_config": "qa_2_4k",
+    "split": "validation[:50]",
+    "model": "mistralai/Mistral-7B-Instruct-v0.3",
+    "metric": "exact_match_any_acceptable_output"
+  },
+  "rows": [
+    {
+      "label": "vanilla",
+      "method": "vanilla",
+      "hits": 24,
+      "cases": 50,
+      "hit_rate": 0.48,
+      "wilson_ci_95": [
+        0.3479691239550571,
+        0.6148848774119157
+      ],
+      "elapsed_seconds": 181.741523478,
+      "estimated_cost_usd": 0.12612861729373198,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "mean_retention_ratio": 1.0,
+      "summary_contract": "",
+      "run_id": "week1-niah-vanilla",
+      "observations": [
+        {
+          "fixture_id": "qa_2_4k-0",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-1",
+          "correct": false,
+          "prediction": "None of the documents provide information about a government position held by a woman who portrayed Corliss Archer in the film Kiss and Tell."
+        },
+        {
+          "fixture_id": "qa_2_4k-2",
+          "correct": false,
+          "prediction": "The Hork-Bajir Chronicles"
+        },
+        {
+          "fixture_id": "qa_2_4k-3",
+          "correct": false,
+          "prediction": "No."
+        },
+        {
+          "fixture_id": "qa_2_4k-4",
+          "correct": false,
+          "prediction": "Adriana Trigiani"
+        },
+        {
+          "fixture_id": "qa_2_4k-5",
+          "correct": true,
+          "prediction": "YG Entertainment"
+        },
+        {
+          "fixture_id": "qa_2_4k-6",
+          "correct": true,
+          "prediction": "Eenasul Fateh"
+        },
+        {
+          "fixture_id": "qa_2_4k-7",
+          "correct": false,
+          "prediction": "4000"
+        },
+        {
+          "fixture_id": "qa_2_4k-8",
+          "correct": true,
+          "prediction": "Terry Richardson"
+        },
+        {
+          "fixture_id": "qa_2_4k-9",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-10",
+          "correct": true,
+          "prediction": "Kansas Song"
+        },
+        {
+          "fixture_id": "qa_2_4k-11",
+          "correct": true,
+          "prediction": "David Weissman"
+        },
+        {
+          "fixture_id": "qa_2_4k-12",
+          "correct": true,
+          "prediction": "1999"
+        },
+        {
+          "fixture_id": "qa_2_4k-13",
+          "correct": false,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-14",
+          "correct": false,
+          "prediction": "1945-1969 and 1970-1971"
+        },
+        {
+          "fixture_id": "qa_2_4k-15",
+          "correct": false,
+          "prediction": "9,984 (Brown County, Kansas)"
+        },
+        {
+          "fixture_id": "qa_2_4k-16",
+          "correct": false,
+          "prediction": "America East Conference"
+        },
+        {
+          "fixture_id": "qa_2_4k-17",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-18",
+          "correct": false,
+          "prediction": "Nixon (1973-1974)"
+        },
+        {
+          "fixture_id": "qa_2_4k-19",
+          "correct": false,
+          "prediction": "Robert Erskine Childers"
+        },
+        {
+          "fixture_id": "qa_2_4k-20",
+          "correct": false,
+          "prediction": "Sergio P\u00e9rez"
+        },
+        {
+          "fixture_id": "qa_2_4k-21",
+          "correct": false,
+          "prediction": "Sonic the Hedgehog (Document 20)"
+        },
+        {
+          "fixture_id": "qa_2_4k-22",
+          "correct": false,
+          "prediction": "iSight iMac G5"
+        },
+        {
+          "fixture_id": "qa_2_4k-23",
+          "correct": true,
+          "prediction": "Badly Drawn Boy"
+        },
+        {
+          "fixture_id": "qa_2_4k-24",
+          "correct": true,
+          "prediction": "World's Best Goalkeeper"
+        },
+        {
+          "fixture_id": "qa_2_4k-25",
+          "correct": false,
+          "prediction": "Lee Hazlewood, Nancy Sinatra"
+        },
+        {
+          "fixture_id": "qa_2_4k-26",
+          "correct": true,
+          "prediction": "1838"
+        },
+        {
+          "fixture_id": "qa_2_4k-27",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-28",
+          "correct": true,
+          "prediction": "Henry J. Kaiser"
+        },
+        {
+          "fixture_id": "qa_2_4k-29",
+          "correct": true,
+          "prediction": "Arena of Khazan"
+        },
+        {
+          "fixture_id": "qa_2_4k-30",
+          "correct": true,
+          "prediction": "2000"
+        },
+        {
+          "fixture_id": "qa_2_4k-31",
+          "correct": false,
+          "prediction": "Japan"
+        },
+        {
+          "fixture_id": "qa_2_4k-32",
+          "correct": false,
+          "prediction": "Charles Nungesser"
+        },
+        {
+          "fixture_id": "qa_2_4k-33",
+          "correct": false,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-34",
+          "correct": false,
+          "prediction": "Screaming Trees (7 members)"
+        },
+        {
+          "fixture_id": "qa_2_4k-35",
+          "correct": false,
+          "prediction": "1924"
+        },
+        {
+          "fixture_id": "qa_2_4k-36",
+          "correct": true,
+          "prediction": "2000"
+        },
+        {
+          "fixture_id": "qa_2_4k-37",
+          "correct": true,
+          "prediction": "World War II"
+        },
+        {
+          "fixture_id": "qa_2_4k-38",
+          "correct": false,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-39",
+          "correct": false,
+          "prediction": "Columbia (University)"
+        },
+        {
+          "fixture_id": "qa_2_4k-40",
+          "correct": true,
+          "prediction": "Scotch Collie"
+        },
+        {
+          "fixture_id": "qa_2_4k-41",
+          "correct": false,
+          "prediction": "Tata Consultancy Services (TCS)"
+        },
+        {
+          "fixture_id": "qa_2_4k-42",
+          "correct": true,
+          "prediction": "1962"
+        },
+        {
+          "fixture_id": "qa_2_4k-43",
+          "correct": false,
+          "prediction": "Independence"
+        },
+        {
+          "fixture_id": "qa_2_4k-44",
+          "correct": true,
+          "prediction": "Nelson Rockefeller"
+        },
+        {
+          "fixture_id": "qa_2_4k-45",
+          "correct": false,
+          "prediction": "North Berwick West Links golf course"
+        },
+        {
+          "fixture_id": "qa_2_4k-46",
+          "correct": true,
+          "prediction": "Phil Spector"
+        },
+        {
+          "fixture_id": "qa_2_4k-47",
+          "correct": false,
+          "prediction": "World Summit of Nobel Peace Laureates"
+        },
+        {
+          "fixture_id": "qa_2_4k-48",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-49",
+          "correct": true,
+          "prediction": "English Electric Canberra"
+        }
+      ],
+      "budget_regime": "full_context"
+    },
+    {
+      "label": "token_vorn_1024",
+      "method": "vorn_eviction",
+      "hits": 16,
+      "cases": 50,
+      "hit_rate": 0.32,
+      "wilson_ci_95": [
+        0.20758044093999403,
+        0.45810557136276076
+      ],
+      "elapsed_seconds": 314.557264788,
+      "estimated_cost_usd": 0.21830274176287198,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "mean_retention_ratio": 0.2673,
+      "summary_contract": "canonical_hidden_state_float32_per_token_from_layer_L_star",
+      "run_id": "step2-niah-vorn-live-b1024",
+      "observations": [
+        {
+          "fixture_id": "qa_2_4k-0",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-1",
+          "correct": false,
+          "prediction": "The given documents do not provide information about the government position held by the woman who portrayed Corliss Archer in the film Kiss and Tell."
+        },
+        {
+          "fixture_id": "qa_2_4k-2",
+          "correct": false,
+          "prediction": "The Animorphs series has a companion book, The Hork-Bajir Chronicles, which narrates the story of the enslaved Hork"
+        },
+        {
+          "fixture_id": "qa_2_4k-3",
+          "correct": false,
+          "prediction": "No."
+        },
+        {
+          "fixture_id": "qa_2_4k-4",
+          "correct": false,
+          "prediction": "Greenwich Village"
+        },
+        {
+          "fixture_id": "qa_2_4k-5",
+          "correct": true,
+          "prediction": "YG Entertainment"
+        },
+        {
+          "fixture_id": "qa_2_4k-6",
+          "correct": false,
+          "prediction": "Eenasul Fh, a Bangladeshi-British cultural practitioner, magician, live artist, and former international management consultant."
+        },
+        {
+          "fixture_id": "qa_2_4k-7",
+          "correct": false,
+          "prediction": "4,000"
+        },
+        {
+          "fixture_id": "qa_2_4k-8",
+          "correct": false,
+          "prediction": "Annie Morton"
+        },
+        {
+          "fixture_id": "qa_2_4k-9",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-10",
+          "correct": false,
+          "prediction": "Kansas Jayhawk Fight Song\n\n: What is the name of the Catholic university whose main campus is located in San Antonio and Alamo Heights, Texas"
+        },
+        {
+          "fixture_id": "qa_2_4k-11",
+          "correct": true,
+          "prediction": "David Weissman"
+        },
+        {
+          "fixture_id": "qa_2_4k-12",
+          "correct": true,
+          "prediction": "1999"
+        },
+        {
+          "fixture_id": "qa_2_4k-13",
+          "correct": false,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-14",
+          "correct": false,
+          "prediction": "1986 to 2013"
+        },
+        {
+          "fixture_id": "qa_2_4k-15",
+          "correct": false,
+          "prediction": "United States"
+        },
+        {
+          "fixture_id": "qa_2_4k-16",
+          "correct": false,
+          "prediction": "North Atlantic Conference"
+        },
+        {
+          "fixture_id": "qa_2_4k-17",
+          "correct": false,
+          "prediction": "Yes, both Giuseppe Verdi and Ambroise Thomas are Opera composers."
+        },
+        {
+          "fixture_id": "qa_2_4k-18",
+          "correct": false,
+          "prediction": "1977-1979"
+        },
+        {
+          "fixture_id": "qa_2_4k-19",
+          "correct": false,
+          "prediction": "Robert Erskine Childers"
+        },
+        {
+          "fixture_id": "qa_2_4k-20",
+          "correct": false,
+          "prediction": "Fernando Alonso"
+        },
+        {
+          "fixture_id": "qa_2_4k-21",
+          "correct": false,
+          "prediction": "Sonic the Hedgehog"
+        },
+        {
+          "fixture_id": "qa_2_4k-22",
+          "correct": false,
+          "prediction": "iSight iMac G5"
+        },
+        {
+          "fixture_id": "qa_2_4k-23",
+          "correct": false,
+          "prediction": "Badly Drawn Boy."
+        },
+        {
+          "fixture_id": "qa_2_4k-24",
+          "correct": true,
+          "prediction": "World's Best Goalkeeper"
+        },
+        {
+          "fixture_id": "qa_2_4k-25",
+          "correct": false,
+          "prediction": "Lee Hazlewood, Jim Reeves"
+        },
+        {
+          "fixture_id": "qa_2_4k-26",
+          "correct": true,
+          "prediction": "1838"
+        },
+        {
+          "fixture_id": "qa_2_4k-27",
+          "correct": false,
+          "prediction": "Yes, both Dictyosperma and Huernia are described as a genus."
+        },
+        {
+          "fixture_id": "qa_2_4k-28",
+          "correct": true,
+          "prediction": "Henry J. Kaiser"
+        },
+        {
+          "fixture_id": "qa_2_4k-29",
+          "correct": true,
+          "prediction": "Arena of Khazan"
+        },
+        {
+          "fixture_id": "qa_2_4k-30",
+          "correct": true,
+          "prediction": "2000"
+        },
+        {
+          "fixture_id": "qa_2_4k-31",
+          "correct": false,
+          "prediction": "Japan"
+        },
+        {
+          "fixture_id": "qa_2_4k-32",
+          "correct": false,
+          "prediction": "Charles Nungesser and Fran\u00e7ois Coli were the French ace pilot and adventurer who flew L'Oiseau Blanc."
+        },
+        {
+          "fixture_id": "qa_2_4k-33",
+          "correct": false,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-34",
+          "correct": false,
+          "prediction": "Screaming Trees had more members. (9 members compared to Letters to Cleo's 5 members)"
+        },
+        {
+          "fixture_id": "qa_2_4k-35",
+          "correct": false,
+          "prediction": "Russian Civil War"
+        },
+        {
+          "fixture_id": "qa_2_4k-36",
+          "correct": true,
+          "prediction": "2000"
+        },
+        {
+          "fixture_id": "qa_2_4k-37",
+          "correct": true,
+          "prediction": "World War II"
+        },
+        {
+          "fixture_id": "qa_2_4k-38",
+          "correct": false,
+          "prediction": "Yes, Gerald R. Ford International Airport is located in Michigan. Elko Regional Airport is located in Nevada."
+        },
+        {
+          "fixture_id": "qa_2_4k-39",
+          "correct": false,
+          "prediction": "Muncie, Indiana"
+        },
+        {
+          "fixture_id": "qa_2_4k-40",
+          "correct": true,
+          "prediction": "Scotch Collie"
+        },
+        {
+          "fixture_id": "qa_2_4k-41",
+          "correct": false,
+          "prediction": "Tata Consultancy Services (TCS) is headquartered in Mumbai, Maharashtra, India."
+        },
+        {
+          "fixture_id": "qa_2_4k-42",
+          "correct": true,
+          "prediction": "1962"
+        },
+        {
+          "fixture_id": "qa_2_4k-43",
+          "correct": false,
+          "prediction": "Ethiopian sovereignty."
+        },
+        {
+          "fixture_id": "qa_2_4k-44",
+          "correct": false,
+          "prediction": "Lyndon Johnson"
+        },
+        {
+          "fixture_id": "qa_2_4k-45",
+          "correct": false,
+          "prediction": "North Berwick West Links golf course"
+        },
+        {
+          "fixture_id": "qa_2_4k-46",
+          "correct": false,
+          "prediction": "Phil Spector (song \"To Know Him Is Love Him\")"
+        },
+        {
+          "fixture_id": "qa_2_4k-47",
+          "correct": false,
+          "prediction": "World Summit of Nobel Peace Laureates"
+        },
+        {
+          "fixture_id": "qa_2_4k-48",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-49",
+          "correct": true,
+          "prediction": "English Electric Canberra"
+        }
+      ],
+      "budget": 1024,
+      "guardrails": "prefix_plus_recent",
+      "sentence_pooling": "max",
+      "sentence_top_k": 3,
+      "retention_policy": "vorn"
+    },
+    {
+      "label": "sentence_guarded_1024",
+      "method": "sentence_vorn_eviction",
+      "hits": 20,
+      "cases": 50,
+      "hit_rate": 0.4,
+      "wilson_ci_95": [
+        0.2760818978624575,
+        0.5381881089724063
+      ],
+      "elapsed_seconds": 241.147305407,
+      "estimated_cost_usd": 0.167356229952458,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "mean_retention_ratio": 0.2624,
+      "summary_contract": "canonical_hidden_state_float32_per_token_from_layer_L_star",
+      "run_id": "step2-niah-sentence-vorn-live-b1024",
+      "observations": [
+        {
+          "fixture_id": "qa_2_4k-0",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-1",
+          "correct": false,
+          "prediction": "Shirley Temple did not hold a government position. She was an actress, singer, dancer, businesswoman, and diplomat."
+        },
+        {
+          "fixture_id": "qa_2_4k-2",
+          "correct": false,
+          "prediction": "Animorphs (with companion books like The Hork-Bajir Chronicles)"
+        },
+        {
+          "fixture_id": "qa_2_4k-3",
+          "correct": false,
+          "prediction": "No. The Laleli Mosque is located in Laleli, Fatih, Istanbul, while the Esma Sultan Mansion is"
+        },
+        {
+          "fixture_id": "qa_2_4k-4",
+          "correct": false,
+          "prediction": "Greenwich Village"
+        },
+        {
+          "fixture_id": "qa_2_4k-5",
+          "correct": true,
+          "prediction": "YG Entertainment"
+        },
+        {
+          "fixture_id": "qa_2_4k-6",
+          "correct": true,
+          "prediction": "Eenasul Fateh"
+        },
+        {
+          "fixture_id": "qa_2_4k-7",
+          "correct": false,
+          "prediction": "4,000 (Androscoggin Bank Colis\u00e9e)"
+        },
+        {
+          "fixture_id": "qa_2_4k-8",
+          "correct": false,
+          "prediction": "Terry Richardson (born 1965) is older than Annie Morton (born 1970)."
+        },
+        {
+          "fixture_id": "qa_2_4k-9",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-10",
+          "correct": false,
+          "prediction": "Kansas Jayhawk Fight Song (We're From Kansas)"
+        },
+        {
+          "fixture_id": "qa_2_4k-11",
+          "correct": true,
+          "prediction": "David Weissman"
+        },
+        {
+          "fixture_id": "qa_2_4k-12",
+          "correct": true,
+          "prediction": "1999"
+        },
+        {
+          "fixture_id": "qa_2_4k-13",
+          "correct": false,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-14",
+          "correct": false,
+          "prediction": "1992-2013"
+        },
+        {
+          "fixture_id": "qa_2_4k-15",
+          "correct": false,
+          "prediction": "The documents do not provide information about the population of the country where Brown State Fishing Lake is located."
+        },
+        {
+          "fixture_id": "qa_2_4k-16",
+          "correct": false,
+          "prediction": "North Atlantic Conference"
+        },
+        {
+          "fixture_id": "qa_2_4k-17",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-18",
+          "correct": false,
+          "prediction": "Nixon (1969-1974)"
+        },
+        {
+          "fixture_id": "qa_2_4k-19",
+          "correct": false,
+          "prediction": "Henry Roth was from America, not England. Robert Erskine Childers was from England."
+        },
+        {
+          "fixture_id": "qa_2_4k-20",
+          "correct": false,
+          "prediction": "Sergio P\u00e9rez (before 1990)"
+        },
+        {
+          "fixture_id": "qa_2_4k-21",
+          "correct": false,
+          "prediction": "Sonic the Hedgehog (in 2010)"
+        },
+        {
+          "fixture_id": "qa_2_4k-22",
+          "correct": false,
+          "prediction": "iSight iMac G5"
+        },
+        {
+          "fixture_id": "qa_2_4k-23",
+          "correct": false,
+          "prediction": "Badly Drawn Boy (18 instruments to 1 person)"
+        },
+        {
+          "fixture_id": "qa_2_4k-24",
+          "correct": false,
+          "prediction": "IFFHS World's Best Goalkeeper"
+        },
+        {
+          "fixture_id": "qa_2_4k-25",
+          "correct": false,
+          "prediction": "Lee Hazlewood, Nancy Sinatra"
+        },
+        {
+          "fixture_id": "qa_2_4k-26",
+          "correct": true,
+          "prediction": "1838"
+        },
+        {
+          "fixture_id": "qa_2_4k-27",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-28",
+          "correct": true,
+          "prediction": "Henry J. Kaiser"
+        },
+        {
+          "fixture_id": "qa_2_4k-29",
+          "correct": true,
+          "prediction": "Arena of Khazan"
+        },
+        {
+          "fixture_id": "qa_2_4k-30",
+          "correct": true,
+          "prediction": "2000"
+        },
+        {
+          "fixture_id": "qa_2_4k-31",
+          "correct": false,
+          "prediction": "Fujioka, Gunma (Japan)"
+        },
+        {
+          "fixture_id": "qa_2_4k-32",
+          "correct": false,
+          "prediction": "Charles Nungesser"
+        },
+        {
+          "fixture_id": "qa_2_4k-33",
+          "correct": false,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-34",
+          "correct": false,
+          "prediction": "Screaming Trees had more members."
+        },
+        {
+          "fixture_id": "qa_2_4k-35",
+          "correct": false,
+          "prediction": "1924"
+        },
+        {
+          "fixture_id": "qa_2_4k-36",
+          "correct": true,
+          "prediction": "2000"
+        },
+        {
+          "fixture_id": "qa_2_4k-37",
+          "correct": true,
+          "prediction": "World War II"
+        },
+        {
+          "fixture_id": "qa_2_4k-38",
+          "correct": true,
+          "prediction": "No"
+        },
+        {
+          "fixture_id": "qa_2_4k-39",
+          "correct": false,
+          "prediction": "Columbia University is located in New York City. However, the documents do not explicitly state that Ralph Hefferline was a professor at Columbia University. The information"
+        },
+        {
+          "fixture_id": "qa_2_4k-40",
+          "correct": true,
+          "prediction": "Scotch Collie"
+        },
+        {
+          "fixture_id": "qa_2_4k-41",
+          "correct": false,
+          "prediction": "Mumbai, Maharashtra (Tata Consultancy Services)"
+        },
+        {
+          "fixture_id": "qa_2_4k-42",
+          "correct": false,
+          "prediction": "1962 (Masakazu Katsura)"
+        },
+        {
+          "fixture_id": "qa_2_4k-43",
+          "correct": false,
+          "prediction": "Ethiopian sovereignty"
+        },
+        {
+          "fixture_id": "qa_2_4k-44",
+          "correct": true,
+          "prediction": "Nelson Rockefeller"
+        },
+        {
+          "fixture_id": "qa_2_4k-45",
+          "correct": false,
+          "prediction": "Yellowcraigs"
+        },
+        {
+          "fixture_id": "qa_2_4k-46",
+          "correct": true,
+          "prediction": "Phil Spector"
+        },
+        {
+          "fixture_id": "qa_2_4k-47",
+          "correct": false,
+          "prediction": "World Summit of Nobel Peace Laureates"
+        },
+        {
+          "fixture_id": "qa_2_4k-48",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-49",
+          "correct": true,
+          "prediction": "English Electric Canberra"
+        }
+      ],
+      "budget": 1024,
+      "guardrails": "prefix_plus_recent",
+      "sentence_pooling": "max",
+      "sentence_top_k": 3,
+      "retention_policy": "sentence_vorn"
+    },
+    {
+      "label": "sentence_noguards_1024",
+      "method": "sentence_vorn_eviction",
+      "hits": 22,
+      "cases": 50,
+      "hit_rate": 0.44,
+      "wilson_ci_95": [
+        0.3116198721023534,
+        0.5769421319985648
+      ],
+      "elapsed_seconds": 206.382145403,
+      "estimated_cost_usd": 0.143229208909682,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "mean_retention_ratio": 0.2617,
+      "summary_contract": "canonical_hidden_state_float32_per_token_from_layer_L_star",
+      "run_id": "step2-niah-sentence-vorn-live-b1024-noguards",
+      "observations": [
+        {
+          "fixture_id": "qa_2_4k-0",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-1",
+          "correct": false,
+          "prediction": "Not provided in the documents."
+        },
+        {
+          "fixture_id": "qa_2_4k-2",
+          "correct": false,
+          "prediction": "Animorphs, with the companion book \"The Hork-Bajir Chronicles\" narrating the story of the enslaved Hork-B"
+        },
+        {
+          "fixture_id": "qa_2_4k-3",
+          "correct": false,
+          "prediction": "No."
+        },
+        {
+          "fixture_id": "qa_2_4k-4",
+          "correct": false,
+          "prediction": "Greenwich Village"
+        },
+        {
+          "fixture_id": "qa_2_4k-5",
+          "correct": true,
+          "prediction": "YG Entertainment"
+        },
+        {
+          "fixture_id": "qa_2_4k-6",
+          "correct": true,
+          "prediction": "Eenasul Fateh"
+        },
+        {
+          "fixture_id": "qa_2_4k-7",
+          "correct": false,
+          "prediction": "4,000"
+        },
+        {
+          "fixture_id": "qa_2_4k-8",
+          "correct": false,
+          "prediction": "Terry Richardson is older. (He was born in 1965 and Annie Morton was born in 1970.)"
+        },
+        {
+          "fixture_id": "qa_2_4k-9",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-10",
+          "correct": false,
+          "prediction": "Kansas Jayhawk Fight Song"
+        },
+        {
+          "fixture_id": "qa_2_4k-11",
+          "correct": true,
+          "prediction": "David Weissman"
+        },
+        {
+          "fixture_id": "qa_2_4k-12",
+          "correct": true,
+          "prediction": "1999"
+        },
+        {
+          "fixture_id": "qa_2_4k-13",
+          "correct": false,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-14",
+          "correct": false,
+          "prediction": "1992-2004"
+        },
+        {
+          "fixture_id": "qa_2_4k-15",
+          "correct": false,
+          "prediction": "United States (9,984 inhabitants in Brown County, Kansas)"
+        },
+        {
+          "fixture_id": "qa_2_4k-16",
+          "correct": false,
+          "prediction": "North Atlantic Conference"
+        },
+        {
+          "fixture_id": "qa_2_4k-17",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-18",
+          "correct": false,
+          "prediction": "1969-1974"
+        },
+        {
+          "fixture_id": "qa_2_4k-19",
+          "correct": false,
+          "prediction": "Henry Roth was from the United States, not England. Robert Erskine Childers was from England."
+        },
+        {
+          "fixture_id": "qa_2_4k-20",
+          "correct": false,
+          "prediction": "Sergio P\u00e9rez"
+        },
+        {
+          "fixture_id": "qa_2_4k-21",
+          "correct": false,
+          "prediction": "Sonic the Hedgehog"
+        },
+        {
+          "fixture_id": "qa_2_4k-22",
+          "correct": false,
+          "prediction": "iSight iMac G5"
+        },
+        {
+          "fixture_id": "qa_2_4k-23",
+          "correct": true,
+          "prediction": "Badly Drawn Boy"
+        },
+        {
+          "fixture_id": "qa_2_4k-24",
+          "correct": true,
+          "prediction": "World's Best Goalkeeper"
+        },
+        {
+          "fixture_id": "qa_2_4k-25",
+          "correct": false,
+          "prediction": "Lee Hazlewood, Nancy Sinatra, Barton Lee Hazlewood, Judy Mazel"
+        },
+        {
+          "fixture_id": "qa_2_4k-26",
+          "correct": true,
+          "prediction": "1838"
+        },
+        {
+          "fixture_id": "qa_2_4k-27",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-28",
+          "correct": true,
+          "prediction": "Henry J. Kaiser"
+        },
+        {
+          "fixture_id": "qa_2_4k-29",
+          "correct": true,
+          "prediction": "Arena of Khazan"
+        },
+        {
+          "fixture_id": "qa_2_4k-30",
+          "correct": true,
+          "prediction": "2000"
+        },
+        {
+          "fixture_id": "qa_2_4k-31",
+          "correct": false,
+          "prediction": "Japan"
+        },
+        {
+          "fixture_id": "qa_2_4k-32",
+          "correct": false,
+          "prediction": "Charles Nungesser"
+        },
+        {
+          "fixture_id": "qa_2_4k-33",
+          "correct": false,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-34",
+          "correct": false,
+          "prediction": "Screaming Trees had more members."
+        },
+        {
+          "fixture_id": "qa_2_4k-35",
+          "correct": false,
+          "prediction": "1924"
+        },
+        {
+          "fixture_id": "qa_2_4k-36",
+          "correct": true,
+          "prediction": "2000"
+        },
+        {
+          "fixture_id": "qa_2_4k-37",
+          "correct": true,
+          "prediction": "World War II"
+        },
+        {
+          "fixture_id": "qa_2_4k-38",
+          "correct": true,
+          "prediction": "No"
+        },
+        {
+          "fixture_id": "qa_2_4k-39",
+          "correct": false,
+          "prediction": "Columbia University is located in New York City. However, Ralph Hefferline was a psychology professor at Columbia University, not at the university located in New York"
+        },
+        {
+          "fixture_id": "qa_2_4k-40",
+          "correct": true,
+          "prediction": "Scotch Collie"
+        },
+        {
+          "fixture_id": "qa_2_4k-41",
+          "correct": false,
+          "prediction": "Tata Consultancy Services (TCS)"
+        },
+        {
+          "fixture_id": "qa_2_4k-42",
+          "correct": false,
+          "prediction": "1962 (Masakazu Katsura)"
+        },
+        {
+          "fixture_id": "qa_2_4k-43",
+          "correct": false,
+          "prediction": "Ethiopian sovereignty"
+        },
+        {
+          "fixture_id": "qa_2_4k-44",
+          "correct": true,
+          "prediction": "Nelson Rockefeller"
+        },
+        {
+          "fixture_id": "qa_2_4k-45",
+          "correct": false,
+          "prediction": "Yellowcraigs"
+        },
+        {
+          "fixture_id": "qa_2_4k-46",
+          "correct": true,
+          "prediction": "Phil Spector"
+        },
+        {
+          "fixture_id": "qa_2_4k-47",
+          "correct": false,
+          "prediction": "World Summit of Nobel Peace Laureates"
+        },
+        {
+          "fixture_id": "qa_2_4k-48",
+          "correct": true,
+          "prediction": "Yes"
+        },
+        {
+          "fixture_id": "qa_2_4k-49",
+          "correct": true,
+          "prediction": "English Electric Canberra"
+        }
+      ],
+      "budget": 1024,
+      "guardrails": "none",
+      "sentence_pooling": "max",
+      "sentence_top_k": 3,
+      "retention_policy": "sentence_vorn"
+    }
+  ],
+  "pairwise_tests": [
+    {
+      "lhs": "sentence_guarded_1024",
+      "rhs": "token_vorn_1024",
+      "paired": true,
+      "same_n": true,
+      "test": "mcnemar_exact_two_sided",
+      "table": [
+        [
+          14,
+          6
+        ],
+        [
+          2,
+          28
+        ]
+      ],
+      "p_value": 0.2890625,
+      "discordant_pairs": 8,
+      "lhs_discordant_share": 0.75
+    },
+    {
+      "lhs": "sentence_noguards_1024",
+      "rhs": "token_vorn_1024",
+      "paired": true,
+      "same_n": true,
+      "test": "mcnemar_exact_two_sided",
+      "table": [
+        [
+          15,
+          7
+        ],
+        [
+          1,
+          27
+        ]
+      ],
+      "p_value": 0.0703125,
+      "discordant_pairs": 8,
+      "lhs_discordant_share": 0.875
+    },
+    {
+      "lhs": "sentence_guarded_1024",
+      "rhs": "vanilla",
+      "paired": true,
+      "same_n": true,
+      "test": "mcnemar_exact_two_sided",
+      "table": [
+        [
+          19,
+          1
+        ],
+        [
+          5,
+          25
+        ]
+      ],
+      "p_value": 0.21875,
+      "discordant_pairs": 6,
+      "lhs_discordant_share": 0.16666666666666666
+    },
+    {
+      "lhs": "sentence_noguards_1024",
+      "rhs": "vanilla",
+      "paired": true,
+      "same_n": true,
+      "test": "mcnemar_exact_two_sided",
+      "table": [
+        [
+          21,
+          1
+        ],
+        [
+          3,
+          25
+        ]
+      ],
+      "p_value": 0.625,
+      "discordant_pairs": 4,
+      "lhs_discordant_share": 0.25
+    }
+  ],
+  "budget": {
+    "substantive_runs_cost_usd": 0.31058543886213996
+  }
+}

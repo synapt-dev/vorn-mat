@@ -1,0 +1,1201 @@
+{
+  "schema_version": "result-envelope/v0.2",
+  "rows": [
+    {
+      "label": "vanilla_floor",
+      "method": "vanilla",
+      "metric": "needle_hit_rate",
+      "budget": null,
+      "guardrails": "prefix_plus_recent",
+      "hits": 0,
+      "cases": 50,
+      "hit_rate": 0.0,
+      "wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "elapsed_seconds": 245.544709997,
+      "estimated_cost_usd": 0.170408028737918,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "mean_retention_ratio": 1.0,
+      "run_id": "week1-niah-vanilla",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"fair-sprout\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"solid-few\" mentioned in the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"tan-page\" mentioned in the provided text. I need to find"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for tested-familiar mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to quick-mortality from the provided text. I need to go through"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-5",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"round-ruin\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-6",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"troubled-midnight\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-7",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"faint-smolt\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-8",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for spectacular-hail mentioned in the text. I need to find that number"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-9",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"foregoing-counseling\" from the provided text. I"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-10",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"careful-nurse\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-11",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"nappy-limestone\" from the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-12",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"scattered-eaglet\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-13",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for good-speed mentioned in the provided text. I need to find that number"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-14",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"fascinated-bull-fighter\" mentioned in the provided text"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-15",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"efficient-pursuit\" mentioned in the provided text. \n\nFirst"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-16",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for hypnotic-biscuit mentioned in the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-17",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"orange-conversion\" from the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-18",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"handsome-dynamite\" mentioned in the text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-19",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"sticky-platter\" from the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-20",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for abashed-geometry mentioned in the provided text. I need to find"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-21",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"salty-hovel\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-22",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"hot-backdrop\" mentioned in the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-23",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"inconclusive-participation\" from the provided text. I"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-24",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"outrageous-admission\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-25",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"gullible-article\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-26",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"jolly-experience\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-27",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"smelly-root\" mentioned in the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-28",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"womanly-regulator\" mentioned in the provided text. \n\nFirst"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-29",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for ultra-vodka mentioned in the text. I need to find that number"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-30",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"sneaky-vice\" from the provided text. I"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-31",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for trite-icon mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-32",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"onerous-warming\" from the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-33",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"towering-yeast\" mentioned in the provided text. I"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-34",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"shaggy-transformation\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-35",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to functional-panic from the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-36",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"flowery-supplement\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-37",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"exotic-position\" mentioned in the provided text. \n\nFirst,"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-38",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"rough-extremist\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-39",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for adjoining-swivel mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-40",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"glamorous-nightmare\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-41",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"guarded-wasp\" mentioned in the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-42",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"foregoing-syndicate\" from the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-43",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"disgusted-hunchback\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-44",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for shy-mutt mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-45",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for noisy-thyme mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-46",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"illegal-hearth\" from the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-47",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for productive-artery mentioned in the provided text. I need to find"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-48",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"bright-spat\" mentioned in the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-49",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"fearless-tritone\" mentioned in the provided text. I"
+        }
+      ],
+      "model_id": "Qwen/Qwen3-8B"
+    },
+    {
+      "label": "token_1024_guarded",
+      "method": "token_vorn",
+      "metric": "needle_hit_rate",
+      "budget": 1024,
+      "guardrails": "prefix_plus_recent",
+      "hits": 0,
+      "cases": 50,
+      "hit_rate": 0.0,
+      "wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "elapsed_seconds": 661.96387713,
+      "estimated_cost_usd": 0.45940293072821997,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "mean_retention_ratio": 0.2661,
+      "run_id": "step2-niah-vorn-live-b1024",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for fair-sprout from the given text. The user mentioned that the number is hidden"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for solid-f mentioned in the text. The user provided a long text that seems to be"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for tan-page mentioned in the text. The user provided a long text that seems to be"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number mentioned in the text. The user mentioned that the number is hidden within the provided text and"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's tackle this query. The user is asking for the special magic number for quick-mortality mentioned in the provided text. First, I"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-5",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for round-ruin mentioned in the text. The user provided a long text that seems"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-6",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for \"troubled-midnight\" mentioned in the text. The user provided a"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-7",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the answer to this question. The user is asking about a \"special magic number for faint-sm\" mentioned in"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-8",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for \"spectacular-hail\" mentioned in the text. The user provided a long,"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-9",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out what the special magic number is for \"foregoing-counseling\" mentioned in the text. The user provided"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-10",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the answer to this question. The user is asking for the special magic number for \"careful-nurse\""
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-11",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for nappy-limestone from the given text. The user mentioned that the number is hidden"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-12",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for \"scattered-eaglet\" mentioned in the provided text. The user mentioned that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-13",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for good-speed mentioned in the text. First, I need to go through"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-14",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for the fascinated-bull-fighter mentioned in the text. The user mentioned that the number"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-15",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for efficient-pursuit mentioned in the text. The user provided a long text that seems"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-16",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for hypnotic-biscuit from the given text. The user mentioned that the number is"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-17",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for orange-conversion mentioned in the text. The user provided a long text that seems to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-18",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for \"handsome-dynamite\" mentioned in the text. The user provided a long"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-19",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for sticky-platter mentioned in the text. The user provided a long text that seems to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-20",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for ab-geometry mentioned in the text. The user mentioned that the number is hidden within"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-21",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for \"salty-hovel\" mentioned in the provided text. The user has given a"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-22",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the answer to this question. The user is asking about the special magic number for \"hot-backdrop\" mentioned"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-23",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for inconclusive-participation mentioned in the text. The user provided a long text that seems"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-24",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for \"outrageous-admission\" mentioned in the text. The user provided a"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-25",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number mentioned in the text. The user is asking about a \"gullible-article\" and"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-26",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for j-experience mentioned in the text. The user mentioned that the number is hidden within"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-27",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for smelly-root from the given text. The user mentioned that the number is hidden within"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-28",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out what the special magic number for the womanly-regulator is from the given text. First, I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-29",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for ultra-vodka from the given text. The user mentioned that the number is hidden within"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-30",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for sneaky-vice mentioned in the provided text. The user mentioned that the number is"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-31",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the answer to this question. The user is asking for the special magic number mentioned in the provided text related to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-32",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for onerous-warming mentioned in the text. The user provided a long text that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-33",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for \"towering-yeast\" mentioned in the text. The user provided a long"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-34",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for the shag-transformation mentioned in the text. The user mentioned that the number is"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-35",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for functional-panic mentioned in the text. The user mentioned that the number is hidden within"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-36",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the answer to this question. The user is asking for the special magic number related to a \"flowery-sup"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-37",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for exotic-position mentioned in the text. The user provided a long text that seems to be"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-38",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the answer to this question. The user is asking for the special magic number for rough-extremist mentioned in"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-39",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for adjoining-swivel mentioned in the text. The user provided a long text that seems to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-40",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for \"glamorous-nightmare\" mentioned in the provided text. The user has given"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-41",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the answer to this question. The user is asking for the special magic number for \"guarded-w\" mentioned in"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-42",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out what the special magic number for \"foregoing-syndicate\" is based on the given text. The"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-43",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the answer to this question. The user is asking for the special magic number for \"disgusted-hunch"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-44",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out what the special magic number is mentioned in the text. The user is asking about a \"special magic number for"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-45",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for noisy-thyme from the given text. The user mentioned that the number is hidden within"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-46",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out what the special magic number for illegal-hearth is based on the given text. First, I need to go"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-47",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the answer to this question. The user is asking about a \"special magic number for productive\" mentioned in the"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-48",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number for \"bright-spat\" mentioned in the text. First, I need to go through"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-49",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out what the special magic number for the tritone is mentioned in the provided text. The user mentioned \"fear"
+        }
+      ],
+      "sentence_pooling": "max",
+      "sentence_top_k": 3,
+      "retention_policy": "vorn",
+      "model_id": "Qwen/Qwen3-8B"
+    },
+    {
+      "label": "sentence_1024_guarded",
+      "method": "sentence_vorn",
+      "metric": "needle_hit_rate",
+      "budget": 1024,
+      "guardrails": "prefix_plus_recent",
+      "hits": 0,
+      "cases": 50,
+      "hit_rate": 0.0,
+      "wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "elapsed_seconds": 404.692477367,
+      "estimated_cost_usd": 0.28085657929269797,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "mean_retention_ratio": 0.2624,
+      "run_id": "step2-niah-sentence-vorn-live-b1024",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for fair-sprout mentioned in the provided text. I need to find"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"solid-few\" mentioned in the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for tan-page mentioned in the provided text. I need to find that number"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and mentioned that there's a special magic number hidden in it. They also said they'll"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for quick-mortality mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-5",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"round-ruin\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-6",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"troubled-midnight\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-7",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for faint-smolt mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-8",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"spectacular-hail\" mentioned in the provided text. \n\nFirst"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-9",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"foregoing-counseling\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-10",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"careful-nurse\" mentioned in the provided text. \n\nFirst"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-11",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"nappy-limestone\" from the provided text. First,"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-12",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for scattered-eaglet mentioned in the provided text. \n\nFirst, I"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-13",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and is asking for the special magic number for good-speed mentioned in it. They also included"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-14",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"fascinated-bull-fighter\" mentioned in the provided text"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-15",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for efficient-pursuit mentioned in the provided text. I need to go"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-16",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for hypnotic-biscuit mentioned in the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-17",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for orange-conversion mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-18",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"handsome-dynamite\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-19",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for sticky-platter mentioned in the provided text. I need to go through"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-20",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for abashed-geometry mentioned in the provided text. I need to find"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-21",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"salty-hovel\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-22",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for hot-backdrop mentioned in the provided text. I need to go through"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-23",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number mentioned in the text. The user provided a long passage that seems to be a mix of"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-24",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and is asking for the special magic number related to \"outrageous-admission.\""
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-25",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"gullible-article\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-26",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"jolly-experience\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-27",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for smelly-root mentioned in the provided text. I need to go through"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-28",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"womanly-regulator\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-29",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for ultra-vodka mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-30",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"sneaky-vice\" from the provided text. I"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-31",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for trite-icon mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-32",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"onerous-warming\" from the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-33",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"towering-yeast\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-34",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"shaggy-transformation\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-35",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and is asking for the special magic number for functional-panic mentioned in it. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-36",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"flowery-supplement\" from the provided text. First,"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-37",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for exotic-position mentioned in the provided text. I need to go through the"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-38",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for rough-extremist mentioned in the provided text. I need to find"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-39",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for adjoining-swivel mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-40",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"glamorous-nightmare\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-41",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for guarded-wasp mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-42",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and is asking for the special magic number related to \"foregoing-syndicate.\""
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-43",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"disgusted-hunchback\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-44",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and mentioned that there's a special magic number hidden in it. They want me to find"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-45",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for noisy-thyme mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-46",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"illegal-hearth\" from the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-47",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and mentioned that there's a special magic number hidden in it. They want me to find"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-48",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"bright-spat\" mentioned in the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-49",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"fearless-tritone\" mentioned in the provided text."
+        }
+      ],
+      "sentence_pooling": "max",
+      "sentence_top_k": 3,
+      "retention_policy": "sentence_vorn",
+      "model_id": "Qwen/Qwen3-8B"
+    },
+    {
+      "label": "sentence_1024_noguards",
+      "method": "sentence_vorn",
+      "metric": "needle_hit_rate",
+      "budget": 1024,
+      "guardrails": "none",
+      "hits": 0,
+      "cases": 50,
+      "hit_rate": 0.0,
+      "wilson_ci_95": [
+        0.0,
+        0.07135003417431873
+      ],
+      "elapsed_seconds": 435.235375325,
+      "estimated_cost_usd": 0.30205335047555,
+      "preprocessing_elapsed_seconds": 0.0,
+      "preprocessing_cost_usd": 0.0,
+      "mean_retention_ratio": 0.2625,
+      "run_id": "step2-niah-sentence-vorn-live-b1024-noguards",
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for fair-sprout mentioned in the provided text. I need to find"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"solid-few\" mentioned in the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for tan-page mentioned in the provided text. I need to find that number"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and mentioned that there's a special magic number hidden in it. They also said they'll"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for quick-mortality mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-5",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"round-ruin\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-6",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"troubled-midnight\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-7",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for faint-smolt mentioned in the provided text. I need to go through"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-8",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"spectacular-hail\" mentioned in the provided text. \n\nFirst"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-9",
+          "correct": false,
+          "prediction": "<think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think>"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-10",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"careful-nurse\" mentioned in the provided text. \n\nFirst"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-11",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"nappy-limestone\" from the provided text. First,"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-12",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for scattered-eaglet mentioned in the provided text. \n\nFirst, I"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-13",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for good-speed mentioned in the provided text. I need to go through the"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-14",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"fascinated-bull-fighter\" mentioned in the provided text"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-15",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for efficient-pursuit mentioned in the provided text. I need to go"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-16",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for hypnotic-biscuit mentioned in the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-17",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for orange-conversion mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-18",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"handsome-dynamite\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-19",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for sticky-platter mentioned in the provided text. I need to go through"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-20",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for abashed-geometry mentioned in the provided text. I need to find"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-21",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"salty-hovel\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-22",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for hot-backdrop mentioned in the provided text. I need to go through"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-23",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's try to figure out the special magic number mentioned in the text. The user provided a long passage that seems to be a mix of"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-24",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and is asking for the special magic number related to \"outrageous-admission.\""
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-25",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"gullible-article\" mentioned in the provided text. \n\nFirst"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-26",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"jolly-experience\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-27",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for smelly-root mentioned in the provided text. I need to go through"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-28",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"womanly-regulator\" mentioned in the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-29",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for ultra-vodka mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-30",
+          "correct": false,
+          "prediction": "<think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think>"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-31",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for trite-icon mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-32",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"onerous-warming\" from the provided text. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-33",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"towering-yeast\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-34",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"shaggy-transformation\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-35",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and is asking for the special magic number for functional-panic mentioned in it. I need"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-36",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"flowery-supplement\" from the provided text. First,"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-37",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for exotic-position mentioned in the provided text. I need to go through the"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-38",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for rough-extremist mentioned in the provided text. I need to find"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-39",
+          "correct": false,
+          "prediction": "<think><think><think><think><think><think><think><think>\nOkay, let's see. The user is asking for the special magic number for adjoining-swivel mentioned in the provided"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-40",
+          "correct": false,
+          "prediction": "<think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think><think>"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-41",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for guarded-wasp mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-42",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and is asking for the special magic number related to \"foregoing-syndicate.\""
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-43",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"disgusted-hunchback\" mentioned in the provided text."
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-44",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and mentioned that there's a special magic number hidden in it. They want me to find"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-45",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for noisy-thyme mentioned in the provided text. I need to find that"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-46",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to \"illegal-hearth\" from the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-47",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user provided a long text and is asking for the special magic number for productive-artery mentioned in it. I"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-48",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"bright-spat\" mentioned in the provided text. I need to"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-49",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"fearless-tritone\" mentioned in the provided text."
+        }
+      ],
+      "sentence_pooling": "max",
+      "sentence_top_k": 3,
+      "retention_policy": "sentence_vorn",
+      "model_id": "Qwen/Qwen3-8B"
+    }
+  ],
+  "pairwise_tests": [
+    {
+      "lhs": "sentence_1024_guarded",
+      "rhs": "token_1024_guarded",
+      "paired": true,
+      "same_n": true,
+      "test": "mcnemar_exact_two_sided",
+      "table": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          50
+        ]
+      ],
+      "p_value": 1.0,
+      "discordant_pairs": 0,
+      "lhs_discordant_share": null
+    },
+    {
+      "lhs": "sentence_1024_noguards",
+      "rhs": "sentence_1024_guarded",
+      "paired": true,
+      "same_n": true,
+      "test": "mcnemar_exact_two_sided",
+      "table": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          50
+        ]
+      ],
+      "p_value": 1.0,
+      "discordant_pairs": 0,
+      "lhs_discordant_share": null
+    }
+  ],
+  "auxiliary_probes": [
+    {
+      "label": "vanilla_smoke_128tok",
+      "metric": "needle_hit_rate",
+      "cases": 5,
+      "hits": 1,
+      "hit_rate": 0.2,
+      "max_new_tokens": 128,
+      "elapsed_seconds": 242.379190453,
+      "estimated_cost_usd": 0.16821115817438198,
+      "observations": [
+        {
+          "fixture_id": "niah_multikey_1_4k-0",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"fair-sprout\" mentioned in the provided text. I need to find that number.\n\nFirst, I'll go through the text again. The text has several sections with different dates: July 2010, October 2015, and November 2009. The magic numbers are mentioned in different parts. \n\nLooking at the July 2010 section, there's a part where it says: \"One of the special magic numbers for fair-sprout is: 937571"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-1",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"solid-few\" mentioned in the provided text. I need to find that number.\n\nFirst, I'll scan through the text to locate any mentions of \"solid-few\" and the associated number. The text is quite long, so I'll look for the keyword \"solid-few\" and check the surrounding sentences.\n\nLooking through the first part, there's a mention of \"late-kendo\" with the number 4679591. Then later, there's a section about \"solid-few\" where it says:"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-2",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for \"tan-page\" mentioned in the provided text. I need to find that number.\n\nFirst, I'll go through the text again. The text has several sections with different dates: July 2010, October 2015, and November 2009. Each section talks about different topics, but there are mentions of \"special magic numbers\" in each. \n\nLooking at the July 2010 section, there's a part where it says: \"One of the special magic numbers for squealing-dibble"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-3",
+          "correct": true,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number for tested-familiar mentioned in the provided text. I need to find that number.\n\nFirst, I'll scan through the text to look for any mentions of \"special magic numbers.\" The text is quite long, so I'll need to go through it carefully. \n\nLooking at the beginning, there's a line that says: \"One of the special magic numbers for tested-familiar is: 6707197.\" That seems like a direct mention. Then later, there are other numbers mentioned for different categories like utopian-publishing,"
+        },
+        {
+          "fixture_id": "niah_multikey_1_4k-4",
+          "correct": false,
+          "prediction": "<think>\nOkay, let's see. The user is asking for the special magic number related to quick-mortality from the provided text. I need to go through the text carefully to find where that number is mentioned.\n\nFirst, I'll start by scanning the text for any mentions of \"special magic numbers.\" The text has several sections with these numbers. Let me look through each part.\n\nIn the first part, under July 2010, there's a mention of \"One of the special magic numbers for talented-way is: 6007072.\" Then later, under October 2015, there"
+        }
+      ]
+    }
+  ],
+  "run_conditions": {
+    "profile": "author",
+    "dataset_id": "rbiswasfc/ruler",
+    "dataset_config": "niah_multikey_1_4k",
+    "split": "validation[:50]",
+    "model": "Qwen/Qwen3-8B",
+    "random_seed": 17,
+    "canonical_layer": 16,
+    "recent_token_window": 16,
+    "sentence_pooling": "max",
+    "sentence_top_k": 3,
+    "gate_answer_budget_tokens": 32,
+    "note": "Scores use the narrowed RULER NIAH numeric-span compatibility rule for sentence-wrapped numeric answers."
+  }
+}
