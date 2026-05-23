@@ -85,6 +85,73 @@ class LocalModelConfig:
     attention_implementation: str = "eager"
 
 
+_TELEMETRY_NEAR_MISS_RATIO = 0.75
+
+
+def reset_runtime_telemetry() -> None:
+    """Reset CUDA peak-memory counters before a measured cell begins."""
+    try:
+        import torch
+    except ImportError:
+        return
+    if torch.cuda.is_available():
+        torch.cuda.reset_peak_memory_stats()
+
+
+def _capture_env_versions() -> dict[str, str]:
+    versions: dict[str, str] = {}
+    for pkg_name, import_name in (
+        ("transformers", "transformers"),
+        ("torch", "torch"),
+        ("accelerate", "accelerate"),
+        ("datasets", "datasets"),
+        ("sentencepiece", "sentencepiece"),
+        ("huggingface_hub", "huggingface_hub"),
+        ("faiss-cpu", "faiss"),
+    ):
+        try:
+            module = __import__(import_name)
+        except ImportError:
+            versions[pkg_name] = "not_installed"
+            continue
+        versions[pkg_name] = getattr(module, "__version__", "unknown")
+    return versions
+
+
+def capture_runtime_telemetry() -> dict[str, object]:
+    """Snapshot CUDA peak memory + installed package versions for the envelope."""
+    snapshot: dict[str, object] = {
+        "peak_memory_allocated_gb": None,
+        "peak_memory_reserved_gb": None,
+        "oom_near_miss": False,
+        "env_versions": _capture_env_versions(),
+    }
+    try:
+        import torch
+    except ImportError:
+        return snapshot
+    if not torch.cuda.is_available():
+        return snapshot
+    allocated_bytes = int(torch.cuda.max_memory_allocated())
+    reserved_bytes = int(torch.cuda.max_memory_reserved())
+    snapshot["peak_memory_allocated_gb"] = allocated_bytes / (1024 ** 3)
+    snapshot["peak_memory_reserved_gb"] = reserved_bytes / (1024 ** 3)
+    try:
+        total_bytes = int(torch.cuda.get_device_properties(0).total_memory)
+    except (RuntimeError, AssertionError):
+        total_bytes = 0
+    if total_bytes > 0:
+        snapshot["oom_near_miss"] = bool(allocated_bytes > _TELEMETRY_NEAR_MISS_RATIO * total_bytes)
+    return snapshot
+
+
+def attach_runtime_telemetry(result: RunResult) -> RunResult:
+    """Return a new RunResult with capture_runtime_telemetry() fields filled."""
+    from dataclasses import replace
+
+    return replace(result, **capture_runtime_telemetry())
+
+
 SUMMARY_PROMPT_PREFIX = (
     "Summarize the following context concisely while preserving factual details, "
     "numbers, named entities, and identifiers. Do not answer any question.\n\n"
@@ -1499,7 +1566,9 @@ def run_local_vanilla_smoke(
     if generator is None:
         generator = TransformersTextGenerator(model_config)
 
+    reset_runtime_telemetry()
     result, traces = run_vanilla(plan, cases, generator)
+    result = attach_runtime_telemetry(result)
     append_result(output_path, result)
     return result, traces
 
@@ -1526,16 +1595,21 @@ def run_local_step1_pair(
     if vorn_generator is None:
         vorn_generator = TransformersVornGenerator(model_config)
 
+    reset_runtime_telemetry()
     vanilla_result, vanilla_traces = run_vanilla(
         vanilla_plan,
         cases,
         vanilla_generator,
     )
+    vanilla_result = attach_runtime_telemetry(vanilla_result)
+
+    reset_runtime_telemetry()
     vorn_result, vorn_traces = run_vorn(
         vorn_plan,
         cases,
         vorn_generator,
     )
+    vorn_result = attach_runtime_telemetry(vorn_result)
 
     output_dir.mkdir(parents=True, exist_ok=True)
     append_result(output_dir / f"{vanilla_result.run_id}.jsonl", vanilla_result)
@@ -1566,6 +1640,8 @@ def run_local_live_eviction_smoke(
     if generator is None:
         generator = TransformersLiveEvictionGenerator(model_config)
 
+    reset_runtime_telemetry()
     result, traces = run_live_eviction(plan, cases, generator)
+    result = attach_runtime_telemetry(result)
     append_result(output_path, result)
     return result, traces

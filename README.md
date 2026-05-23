@@ -34,6 +34,57 @@ python examples/run_local_vanilla.py --limit 5
 
 For Modal-backed reproduction of the headline cells in the paper, see `docs/RUNBOOK.md`.
 
+## Reproducibility substrate
+
+The canonical reproduction path is a hash-locked Docker image built from the
+repo-root `Dockerfile`. The base image is `nvidia/cuda:12.4.1-cudnn-runtime-ubuntu22.04`
+and the Python dependency closure is pinned by `requirements.lock` (generated
+via `uv pip compile --generate-hashes`).
+
+```bash
+docker build -t vorn-mat:canonical .
+docker run --gpus all -v $(pwd):/app vorn-mat:canonical pytest tests/
+```
+
+The Modal job entry-points (`examples/run_modal_*.py`) build the same image
+through `Image.from_dockerfile(...)`, so local Docker reproduction and Modal
+reproduction share an identical software stack.
+
+To regenerate `requirements.lock` after an intentional pin change in
+`pyproject.toml`:
+
+```bash
+uv pip compile --generate-hashes pyproject.toml --extra local -o requirements.lock
+```
+
+### Reproducibility disclosure
+
+The pin set in `pyproject.toml` and `requirements.lock` is a **best-guess
+reconstruction** based on raw-report timestamps and PyPI release chronology.
+The original public canonical runs did not preserve:
+
+- a `pip freeze` / lockfile inside the prototype
+- a Modal image hash or image id in the result artifacts
+- a persisted `environment_versions` block in the result envelopes
+
+So the pinned substrate above is the closest defensible reconstruction of the
+canonical family-wave software stack, not a recovered exact lockfile. Two
+documented caveats follow from this:
+
+- the earliest May 13 / 14 seed reports likely ran on
+  `huggingface_hub==1.14.0` (since `1.15.0` had not released yet at those
+  timestamps)
+- some late May 20 budget-fill rows may have crossed into
+  `transformers==5.9.0` if Modal rebuilt the image after the `5.9.0` release
+  at `2026-05-20T14:50:45Z`
+
+Going forward, every cell run on the pinned substrate captures
+`env_versions` (transformers / torch / accelerate / datasets / sentencepiece /
+huggingface_hub / faiss-cpu) and CUDA peak-memory telemetry
+(`peak_memory_allocated_gb`, `peak_memory_reserved_gb`, `oom_near_miss`) into
+the result envelope (`vorn_mat.results.RunResult`). This closes the
+provenance hole for all post-2026-05-23 artifacts.
+
 ## Reproducing the paper's headline numbers
 
 The Appendix A totals in the paper (49 artifacts / 299 counted rows / 270 with observations / 18,000 per-fixture observations / $77.78 / 32.72h) are reproducible from this repository's `results/` directory by running:

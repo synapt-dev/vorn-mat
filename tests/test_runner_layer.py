@@ -32,10 +32,16 @@ def test_modal_app_spec_locks_expected_week1_defaults():
     assert spec.hf_secret_name == "huggingface-secret"
     assert spec.gpu == "A100-80GB"
     assert spec.timeout_seconds == 3600
-    assert "torch" in spec.pip_dependencies
-    assert "transformers>=4.44.0" in spec.pip_dependencies
-    assert "datasets" in spec.pip_dependencies
-    assert "faiss-cpu" in spec.pip_dependencies
+    # Canonical Atlas-archaeology pin set (2026-05-23). The Modal image is
+    # built from the repo-root Dockerfile via Image.from_dockerfile; this
+    # tuple stays as the test-surface contract on the canonical pin shape.
+    assert "torch==2.12.0" in spec.pip_dependencies
+    assert "transformers==5.8.1" in spec.pip_dependencies
+    assert "accelerate==1.13.0" in spec.pip_dependencies
+    assert "datasets==4.8.5" in spec.pip_dependencies
+    assert "sentencepiece==0.2.1" in spec.pip_dependencies
+    assert "faiss-cpu==1.13.2" in spec.pip_dependencies
+    assert "huggingface_hub==1.15.0" in spec.pip_dependencies
 
 
 def test_benchmark_registry_contains_week1_targets():
@@ -149,10 +155,20 @@ class _FakeImage:
         return self
 
 
+class _FakeDockerfileImage:
+    def __init__(self, dockerfile_path: str, context_dir: str):
+        self.dockerfile_path = dockerfile_path
+        self.context_dir = context_dir
+
+
 class _FakeImageFactory:
     @staticmethod
     def debian_slim(*, python_version: str):
         return _FakeImage(python_version)
+
+    @staticmethod
+    def from_dockerfile(path: str, *, context_dir: str):
+        return _FakeDockerfileImage(path, context_dir)
 
 
 class _FakeVolumeFactory:

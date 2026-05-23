@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Callable
 
 
@@ -38,18 +39,26 @@ class ModalBinding:
 
 
 def default_modal_app_spec(gpu: str = "A100-80GB") -> ModalAppSpec:
+    """Canonical Modal app spec.
+
+    The pip_dependencies tuple is the canonical pin set (Atlas archaeology
+    2026-05-23) and is the source-of-truth surface that tests assert against.
+    The Modal image itself is built from the repo-root Dockerfile via
+    Image.from_dockerfile in build_modal_artifacts; pip_dependencies is kept
+    here for inspection and for the test surface contract.
+    """
     volume_path = "/vol"
     return ModalAppSpec(
         app_name="vorn-mat-week1-baselines",
         python_version="3.11",
         pip_dependencies=(
-            "torch",
-            "transformers>=4.44.0",
-            "accelerate",
-            "datasets",
-            "faiss-cpu",
-            "huggingface_hub",
-            "sentencepiece",
+            "torch==2.12.0",
+            "transformers==5.8.1",
+            "accelerate==1.13.0",
+            "datasets==4.8.5",
+            "faiss-cpu==1.13.2",
+            "huggingface_hub==1.15.0",
+            "sentencepiece==0.2.1",
         ),
         volume_name="synapt-vorn-mat-vol",
         volume_path=volume_path,
@@ -62,19 +71,34 @@ def default_modal_app_spec(gpu: str = "A100-80GB") -> ModalAppSpec:
     )
 
 
+def _default_dockerfile_path() -> Path:
+    # src/vorn_mat/modal_app.py -> ../../../Dockerfile
+    return Path(__file__).resolve().parent.parent.parent / "Dockerfile"
+
+
 def build_modal_artifacts(
     modal_module: object | None = None,
     app_spec: ModalAppSpec | None = None,
+    dockerfile_path: Path | str | None = None,
 ) -> ModalArtifacts:
-    """Build Modal app primitives lazily so tests do not require Modal."""
+    """Build Modal app primitives lazily so tests do not require Modal.
+
+    The image is built from the repo-root Dockerfile via Image.from_dockerfile.
+    This is the hash-locked reproducibility substrate (see Dockerfile + the
+    requirements.lock file). pip_install of loose-pin tuples is no longer used
+    because the canonical published runs depended on dependency snapshots that
+    pip-install at image-build time cannot reproduce.
+    """
     if modal_module is None:
         import modal as modal_module  # type: ignore[no-redef]
 
     spec = app_spec or default_modal_app_spec()
     app = modal_module.App(spec.app_name)
-    image = modal_module.Image.debian_slim(
-        python_version=spec.python_version
-    ).pip_install(*spec.pip_dependencies)
+    resolved_dockerfile = Path(dockerfile_path) if dockerfile_path else _default_dockerfile_path()
+    image = modal_module.Image.from_dockerfile(
+        str(resolved_dockerfile),
+        context_dir=str(resolved_dockerfile.parent),
+    )
     volume = modal_module.Volume.from_name(spec.volume_name, create_if_missing=True)
     return ModalArtifacts(spec=spec, app=app, image=image, volume=volume)
 
