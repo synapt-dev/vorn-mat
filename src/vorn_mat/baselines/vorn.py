@@ -9,12 +9,13 @@ without hand-waving over rotary-position bookkeeping.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Callable, Protocol
 
 import numpy as np
 
 from ..benchmarks import BenchmarkCase, score_predictions
-from ..results import RunResult
+from ..benchmarks.common import build_case_observation
+from ..results import CaseObservation, RunResult
 from ..runner import ExecutionPlan
 
 
@@ -140,6 +141,8 @@ def run_vorn(
     plan: ExecutionPlan,
     cases: tuple[BenchmarkCase, ...],
     generator: VornTextGenerator,
+    *,
+    on_case: Callable[[CaseObservation], None] | None = None,
 ) -> tuple[RunResult, tuple[VornPredictionTrace, ...]]:
     """Run the Step 1 proxy baseline on a case slice."""
     if plan.run.cache_budget_tokens is None:
@@ -153,6 +156,7 @@ def run_vorn(
 
     predictions: list[str] = []
     traces: list[VornPredictionTrace] = []
+    observations: list[CaseObservation] = []
     total_original = 0
     total_kept = 0
 
@@ -167,6 +171,10 @@ def run_vorn(
                 kept_token_count=stats.kept_token_count,
             )
         )
+        observation = build_case_observation(case, prediction)
+        observations.append(observation)
+        if on_case is not None:
+            on_case(observation)
         total_original += stats.original_token_count
         total_kept += stats.kept_token_count
 
@@ -188,5 +196,6 @@ def run_vorn(
             "compression_mode": plan.run.compression_mode or "unknown",
             "mean_retention_ratio": f"{mean_retention_ratio:.4f}",
         },
+        observations=tuple(observations),
     )
     return result, tuple(traces)

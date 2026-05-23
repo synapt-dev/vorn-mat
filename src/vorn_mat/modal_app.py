@@ -142,12 +142,17 @@ def _build_entrypoint_binding(
     if modal_module is None:
         import modal as modal_module  # type: ignore[no-redef]
 
+    # max_containers caps server-side concurrency to the account's per-profile
+    # GPU pool (Layne directive 2026-05-23: 10 concurrent A100s per profile).
+    # When entrypoints use binding.remote_fn.spawn(spec) per cell, Modal fans
+    # out up to this many invocations in parallel and queues the rest.
     decorator = artifacts.app.function(
         image=artifacts.image,
         gpu=artifacts.spec.gpu,
         timeout=artifacts.spec.timeout_seconds,
         volumes={artifacts.spec.volume_path: artifacts.volume},
         secrets=[modal_module.Secret.from_name(artifacts.spec.hf_secret_name)],
+        max_containers=10,
     )
     remote_fn = decorator(run_callable)
     return ModalBinding(

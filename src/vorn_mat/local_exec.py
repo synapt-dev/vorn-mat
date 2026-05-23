@@ -68,7 +68,13 @@ from .plan import (
     build_live_eviction_run,
     build_step1_run_matrix,
 )
-from .results import CaseObservation, RunResult, append_result
+from .results import (
+    CaseObservation,
+    RunResult,
+    append_observation,
+    append_result,
+    observations_path,
+)
 from .runner import ExecutionPlan, build_execution_plans
 from .score_distribution_observation import (
     ScoreDistributionObservationCase,
@@ -1571,7 +1577,13 @@ def run_local_vanilla_smoke(
         generator = TransformersTextGenerator(model_config)
 
     reset_runtime_telemetry()
-    result, traces = run_vanilla(plan, cases, generator)
+    ledger = observations_path(output_path)
+    result, traces = run_vanilla(
+        plan,
+        cases,
+        generator,
+        on_case=lambda observation: append_observation(ledger, observation),
+    )
     result = attach_runtime_telemetry(result)
     append_result(output_path, result)
     return result, traces
@@ -1599,23 +1611,30 @@ def run_local_step1_pair(
     if vorn_generator is None:
         vorn_generator = TransformersVornGenerator(model_config)
 
+    output_dir.mkdir(parents=True, exist_ok=True)
+    vanilla_output = output_dir / "step1-niah-vanilla.jsonl"
+    vorn_output = output_dir / "step1-niah-vorn.jsonl"
+
     reset_runtime_telemetry()
+    vanilla_ledger = observations_path(vanilla_output)
     vanilla_result, vanilla_traces = run_vanilla(
         vanilla_plan,
         cases,
         vanilla_generator,
+        on_case=lambda observation: append_observation(vanilla_ledger, observation),
     )
     vanilla_result = attach_runtime_telemetry(vanilla_result)
 
     reset_runtime_telemetry()
+    vorn_ledger = observations_path(vorn_output)
     vorn_result, vorn_traces = run_vorn(
         vorn_plan,
         cases,
         vorn_generator,
+        on_case=lambda observation: append_observation(vorn_ledger, observation),
     )
     vorn_result = attach_runtime_telemetry(vorn_result)
 
-    output_dir.mkdir(parents=True, exist_ok=True)
     append_result(output_dir / f"{vanilla_result.run_id}.jsonl", vanilla_result)
     append_result(output_dir / f"{vorn_result.run_id}.jsonl", vorn_result)
     return (vanilla_result, vanilla_traces), (vorn_result, vorn_traces)
@@ -1645,7 +1664,13 @@ def run_local_live_eviction_smoke(
         generator = TransformersLiveEvictionGenerator(model_config)
 
     reset_runtime_telemetry()
-    result, traces = run_live_eviction(plan, cases, generator)
+    ledger = observations_path(output_path)
+    result, traces = run_live_eviction(
+        plan,
+        cases,
+        generator,
+        on_case=lambda observation: append_observation(ledger, observation),
+    )
     result = attach_runtime_telemetry(result)
     append_result(output_path, result)
     return result, traces

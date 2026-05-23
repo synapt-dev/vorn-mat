@@ -25,7 +25,7 @@ from .plan import (
     DEFAULT_MODEL,
     per_second_rate_for_gpu,
 )
-from .results import RunResult, append_result
+from .results import RunResult, append_observation, append_result, observations_path
 from .score_distribution_observation import ScoreDistributionObservationReport
 
 
@@ -139,7 +139,19 @@ def run_modal_vanilla_niah(request: ModalVanillaRunRequest) -> ModalVanillaRunRe
             max_new_tokens=request.max_new_tokens,
         )
     )
-    result, _traces = run_vanilla(plan, cases, generator)
+    ledger = (
+        observations_path(Path(request.output_path)) if request.output_path else None
+    )
+    result, _traces = run_vanilla(
+        plan,
+        cases,
+        generator,
+        on_case=(
+            (lambda observation: append_observation(ledger, observation))
+            if ledger is not None
+            else None
+        ),
+    )
     elapsed_seconds = time.perf_counter() - start
     estimated_cost_usd = elapsed_seconds * per_second_rate
 
@@ -210,7 +222,19 @@ def run_modal_live_eviction_niah(
             max_new_tokens=request.max_new_tokens,
         )
     )
-    result, _traces = run_live_eviction(plan, cases, generator)
+    ledger = (
+        observations_path(Path(request.output_path)) if request.output_path else None
+    )
+    result, _traces = run_live_eviction(
+        plan,
+        cases,
+        generator,
+        on_case=(
+            (lambda observation: append_observation(ledger, observation))
+            if ledger is not None
+            else None
+        ),
+    )
     elapsed_seconds = time.perf_counter() - start
     estimated_cost_usd = elapsed_seconds * per_second_rate
 

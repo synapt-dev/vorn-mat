@@ -140,7 +140,16 @@ from .plan import (
     middle_layer_index,
     per_hour_rate,
 )
-from .results import RunResult, append_result, load_results
+from .orchestration import CellFailure, CellWaveReport, collect_cells_parallel
+from .results import (
+    CaseObservation,
+    RunResult,
+    append_observation,
+    append_result,
+    load_observations,
+    load_results,
+    observations_path,
+)
 from .runner import ExecutionPlan, build_execution_plans
 from .remote_exec import (
     ModalLiveEvictionRunReport,
@@ -171,6 +180,9 @@ __all__ = [
     "BaselineSpec",
     "BenchmarkCase",
     "BenchmarkSpec",
+    "CaseObservation",
+    "CellFailure",
+    "CellWaveReport",
     "EVICTION_ANTAGONIST_FIXTURE",
     "EVICTION_ANTAGONIST_SUITE_ID",
     "ModalLiveEvictionRunReport",
@@ -226,8 +238,10 @@ __all__ = [
     "VornRetentionConfig",
     "VornTextGenerator",
     "Week1Run",
+    "append_observation",
     "append_result",
     "benchmark_case_from_ruler_record",
+    "collect_cells_parallel",
     "build_execution_plans",
     "build_live_eviction_run",
     "build_step1_run_matrix",
@@ -254,9 +268,11 @@ __all__ = [
     "line_char_span",
     "load_cases",
     "load_observation_report",
+    "load_observations",
     "load_eviction_antagonist_cases",
     "load_ruler_hf_niah_slice",
     "load_results",
+    "observations_path",
     "middle_layer_index",
     "paragraph_char_span",
     "residual_l2_norms",

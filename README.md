@@ -105,6 +105,58 @@ huggingface_hub / faiss-cpu) and CUDA peak-memory telemetry
 the result envelope (`vorn_mat.results.RunResult`). This closes the
 provenance hole for all post-2026-05-23 artifacts.
 
+## Resilience: per-case incremental persistence
+
+Every baseline runner (`run_vanilla` / `run_vorn` / `run_live_eviction`)
+accepts an `on_case` callback that fires once per completed case with the
+case's `CaseObservation`. The Modal and local wrappers wire this callback to
+`vorn_mat.results.append_observation`, which appends a single JSONL line +
+`fsync()` to a ledger file at `output_path.with_suffix(".observations.jsonl")`
+**before the next case runs**.
+
+Why this matters: cell runs are minutes-to-an-hour long. Mid-run failures
+(server-side OOM, Modal container kill, network blip, manual kill, account
+GPU cap hit, laptop sleep) used to lose all completed cases because the
+summary `RunResult` envelope only landed on disk after all cases finished.
+The per-case ledger persists every completed case incrementally, so a mid-run
+kill at case N of 50 preserves cases 1..N on disk and only cases N+1..50 are
+lost.
+
+To recover from a mid-run kill:
+- The summary file at `output_path` is missing or partial. Ignore it.
+- The ledger at `output_path.with_suffix(".observations.jsonl")` has all
+  completed cases. Reload with `vorn_mat.results.load_observations(path)`.
+- Re-run the cell with `case_offset_start` (or your wrapper's equivalent) to
+  resume from case N+1.
+
+### Modal-native parallel cell execution
+
+`examples/run_modal_cells_parallel.py` is the canonical entrypoint for firing
+many cells in parallel. It uses Modal-native server-side fanout
+(`binding.remote_fn.spawn(spec)` per cell + per-handle `.get()` collection)
+under `max_containers=10` on the function binding, so one local
+`modal run --detach` invocation fans out to up to 10 concurrent A100s with
+the Modal scheduler handling GPU acquisition.
+
+Per-cell exceptions surface as `CellFailure` entries in the returned
+`CellWaveReport` so partial-wave failures do not kill the whole batch. Each
+cell still benefits from per-case persistence on the Modal Volume mount,
+so even within a failed cell, completed cases are preserved.
+
+This replaces user-side parallelism patterns (ThreadPoolExecutor wrapping
+per-cell `modal run`), which created N independent local-client lifecycles
+and therefore N independent disconnect-class failure points. The Modal-native
+pattern collapses that to one.
+
+```bash
+# Build a cell spec JSON, then fire the wave with one detached invocation:
+modal run --detach examples/run_modal_cells_parallel.py \
+  --cell-spec-path .benchmarks/cell-specs.json
+
+# Aggregate per-cell results into per-family canonical artifacts:
+python examples/build_matrix_backfill_artifact.py --family mistral
+```
+
 ## Reproducing the paper's headline numbers
 
 The Appendix A totals in the paper (49 artifacts / 299 counted rows / 270 with observations / 18,000 per-fixture observations / $77.78 / 32.72h) are reproducible from this repository's `results/` directory by running:
