@@ -36,6 +36,8 @@ class ModalBinding:
     app: object
     entrypoint_name: str
     remote_fn: object
+    image: object = None
+    volume: object = None
 
 
 def default_modal_app_spec(gpu: str = "A100-80GB") -> ModalAppSpec:
@@ -160,4 +162,6 @@ def _build_entrypoint_binding(
         app=artifacts.app,
         entrypoint_name=entrypoint_name,
         remote_fn=remote_fn,
+        image=artifacts.image,
+        volume=artifacts.volume,
     )

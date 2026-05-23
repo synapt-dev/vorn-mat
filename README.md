@@ -129,24 +129,37 @@ To recover from a mid-run kill:
 - Re-run the cell with `case_offset_start` (or your wrapper's equivalent) to
   resume from case N+1.
 
-### Modal-native parallel cell execution
+### Modal-native parallel cell execution (Layer 3: cloud-side orchestrator)
 
 `examples/run_modal_cells_parallel.py` is the canonical entrypoint for firing
-many cells in parallel. It uses Modal-native server-side fanout
-(`binding.remote_fn.spawn(spec)` per cell + per-handle `.get()` collection)
-under `max_containers=10` on the function binding, so one local
-`modal run --detach` invocation fans out to up to 10 concurrent A100s with
-the Modal scheduler handling GPU acquisition.
+many cells in parallel. The local entrypoint makes ONE
+`orchestrate_wave.remote(specs)` call. The cloud-side `orchestrate_wave`
+function is decorated with `@app.function(timeout=86400, ...)` and is what
+issues `binding.remote_fn.spawn()` per cell + per-handle `.get()`
+collection under `max_containers=10` on the cell function binding.
 
-Per-cell exceptions surface as `CellFailure` entries in the returned
-`CellWaveReport` so partial-wave failures do not kill the whole batch. Each
-cell still benefits from per-case persistence on the Modal Volume mount,
-so even within a failed cell, completed cases are preserved.
+Why this shape: Modal's launch warning under `modal run --detach` is
+"running a local entrypoint in detached mode only keeps the last triggered
+Modal function alive after the parent process has been killed or
+disconnected." Moving the `.spawn()` loop one altitude up makes the local
+entrypoint's single `.remote()` call the only thing `--detach` needs to
+protect; the spawned cells become children of that protected call and
+inherit its protection. Local can disconnect freely after kickoff.
 
-This replaces user-side parallelism patterns (ThreadPoolExecutor wrapping
-per-cell `modal run`), which created N independent local-client lifecycles
-and therefore N independent disconnect-class failure points. The Modal-native
-pattern collapses that to one.
+Per-cell exceptions surface as entries in the JSON-safe wave-report dict
+that `orchestrate_wave` returns (`{"reports": [...], "failures": [...]}`),
+so partial-wave failures do not kill the whole batch. Each cell still
+benefits from per-case persistence on the Modal Volume mount, so even
+within a failed cell, completed cases are preserved.
+
+This pattern replaces, in successive layers:
+- (Layer 1) `pip_install` of loose-pin tuples at image-build time, which
+  could not reproduce the dependency closure that produced canonical results.
+- (Layer 2) user-side parallelism (ThreadPoolExecutor wrapping per-cell
+  `modal run`), which created N independent local-client lifecycles = N
+  independent disconnect-class failure points.
+- (Layer 3) local-entrypoint server-side fanout, which had ambiguous
+  protection semantics under `--detach`.
 
 ```bash
 # Build a cell spec JSON, then fire the wave with one detached invocation:

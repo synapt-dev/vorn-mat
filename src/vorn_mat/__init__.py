@@ -140,7 +140,13 @@ from .plan import (
     middle_layer_index,
     per_hour_rate,
 )
-from .orchestration import CellFailure, CellWaveReport, collect_cells_parallel
+from .orchestration import (
+    CellFailure,
+    CellWaveReport,
+    collect_cells_parallel,
+    run_wave_serialized,
+    serialize_cell_wave_report,
+)
 from .results import (
     CaseObservation,
     RunResult,
@@ -242,6 +248,8 @@ __all__ = [
     "append_result",
     "benchmark_case_from_ruler_record",
     "collect_cells_parallel",
+    "run_wave_serialized",
+    "serialize_cell_wave_report",
     "build_execution_plans",
     "build_live_eviction_run",
     "build_step1_run_matrix",
