@@ -50,6 +50,13 @@ The Modal job entry-points (`examples/run_modal_*.py`) build the same image
 through `Image.from_dockerfile(...)`, so local Docker reproduction and Modal
 reproduction share an identical software stack.
 
+Two-layer note: the Dockerfile installs the `vorn_mat` source via
+`pip install --no-deps -e /app` during image build to prime the editable
+install layer. At Modal run time the volume mount overlays the live source,
+so the in-container `vorn_mat` import points at whatever the Modal task
+mounts (not a stale build-time snapshot). Local `docker run -v $(pwd):/app`
+gets the same behavior.
+
 To regenerate `requirements.lock` after an intentional pin change in
 `pyproject.toml`:
 

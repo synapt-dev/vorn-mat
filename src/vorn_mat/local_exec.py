@@ -100,6 +100,10 @@ def reset_runtime_telemetry() -> None:
 
 def _capture_env_versions() -> dict[str, str]:
     versions: dict[str, str] = {}
+    # NOTE: pkg_name is the PyPI distribution name (matches pyproject.toml +
+    # requirements.lock); import_name is the Python module name. They differ
+    # for faiss-cpu (imports as `faiss`). If the canonical pin switches to
+    # faiss-gpu, update both the pkg_name string and the import target.
     for pkg_name, import_name in (
         ("transformers", "transformers"),
         ("torch", "torch"),
