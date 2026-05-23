@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
@@ -53,3 +54,36 @@ def load_results(path: Path) -> list[RunResult]:
         )
         results.append(RunResult(observations=observations, **payload))
     return results
+
+
+# Per-case incremental persistence (Layer 2, Layne directive 2026-05-23:
+# "store each and every result before moving to next one"). The summary
+# envelope still lands at output_path; the per-case ledger lands at
+# observations_path(output_path) and is appended one line per completed case
+# BEFORE the next case runs. Mid-run kills preserve every completed case.
+
+def append_observation(path: Path, observation: CaseObservation) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a") as handle:
+        handle.write(json.dumps(asdict(observation), sort_keys=True))
+        handle.write("\n")
+        handle.flush()
+        try:
+            os.fsync(handle.fileno())
+        except OSError:
+            pass
+
+
+def load_observations(path: Path) -> tuple[CaseObservation, ...]:
+    if not path.exists():
+        return ()
+    items: list[CaseObservation] = []
+    for line in path.read_text().splitlines():
+        if not line.strip():
+            continue
+        items.append(CaseObservation(**json.loads(line)))
+    return tuple(items)
+
+
+def observations_path(output_path: Path) -> Path:
+    return output_path.with_suffix(".observations.jsonl")

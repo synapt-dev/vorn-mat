@@ -55,6 +55,14 @@ def exact_match_rate(
     return hits / len(cases)
 
 
+def build_case_observation(case: BenchmarkCase, prediction: str) -> CaseObservation:
+    return CaseObservation(
+        fixture_id=case.case_id,
+        correct=is_prediction_correct(case, prediction),
+        prediction=prediction,
+    )
+
+
 def build_case_observations(
     cases: tuple[BenchmarkCase, ...],
     predictions: tuple[str, ...],
@@ -62,11 +70,7 @@ def build_case_observations(
     if len(cases) != len(predictions):
         raise ValueError("cases and predictions must have the same length")
     return tuple(
-        CaseObservation(
-            fixture_id=case.case_id,
-            correct=is_prediction_correct(case, prediction),
-            prediction=prediction,
-        )
+        build_case_observation(case, prediction)
         for case, prediction in zip(cases, predictions, strict=True)
     )
 

@@ -38,7 +38,7 @@ def test_run_modal_vanilla_niah_enriches_result_metadata(monkeypatch):
 
     monkeypatch.setattr(remote_exec, "TransformersTextGenerator", FakeGenerator)
 
-    def fake_run_vanilla(plan, cases, generator):
+    def fake_run_vanilla(plan, cases, generator, **kwargs):
         assert plan == "plan"
         assert len(cases) == 1
         return (
@@ -129,7 +129,7 @@ def test_run_modal_live_eviction_niah_enriches_result_metadata(monkeypatch):
 
     monkeypatch.setattr(remote_exec, "TransformersLiveEvictionGenerator", FakeGenerator)
 
-    def fake_run_live_eviction(plan, cases, generator):
+    def fake_run_live_eviction(plan, cases, generator, **kwargs):
         assert plan.run.cache_budget_tokens == 256
         assert len(cases) == 1
         return (
@@ -244,7 +244,7 @@ def test_run_modal_live_eviction_niah_allows_budget_sweep_variants(monkeypatch):
     monkeypatch.setattr(
         remote_exec,
         "run_live_eviction",
-        lambda plan, cases, generator: (
+        lambda plan, cases, generator, **kwargs: (
             RunResult(
                 run_id="step2-niah-sliding-window-live-b256",
                 benchmark="niah",
@@ -324,7 +324,7 @@ def test_run_modal_live_eviction_niah_supports_sentence_level_variants(monkeypat
     monkeypatch.setattr(
         remote_exec,
         "run_live_eviction",
-        lambda plan, cases, generator: (
+        lambda plan, cases, generator, **kwargs: (
             RunResult(
                 run_id="step2-niah-sentence-vorn-live-b1024-noguards",
                 benchmark="niah",
@@ -413,7 +413,7 @@ def test_run_modal_live_eviction_niah_supports_sentence_level_tova_variant(monke
     monkeypatch.setattr(
         remote_exec,
         "run_live_eviction",
-        lambda plan, cases, generator: (
+        lambda plan, cases, generator, **kwargs: (
             RunResult(
                 run_id="step2-niah-sentence-tova-live-b1024",
                 benchmark="niah",
@@ -497,7 +497,7 @@ def test_run_modal_live_eviction_niah_supports_sentence_level_h2o_variant(monkey
     monkeypatch.setattr(
         remote_exec,
         "run_live_eviction",
-        lambda plan, cases, generator: (
+        lambda plan, cases, generator, **kwargs: (
             RunResult(
                 run_id="step2-niah-sentence-h2o-live-b512",
                 benchmark="niah",
@@ -578,7 +578,7 @@ def test_run_modal_live_eviction_niah_supports_word_level_variants(monkeypatch):
     monkeypatch.setattr(
         remote_exec,
         "run_live_eviction",
-        lambda plan, cases, generator: (
+        lambda plan, cases, generator, **kwargs: (
             RunResult(
                 run_id="step2-niah-word-vorn-live-b1536-noguards",
                 benchmark="niah",
@@ -664,7 +664,7 @@ def test_run_modal_live_eviction_niah_supports_adaptive_vorn_variants(monkeypatc
     monkeypatch.setattr(
         remote_exec,
         "run_live_eviction",
-        lambda plan, cases, generator: (
+        lambda plan, cases, generator, **kwargs: (
             RunResult(
                 run_id="step2-niah-adaptive-vorn-live-b1536",
                 benchmark="niah",

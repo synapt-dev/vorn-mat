@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import hashlib
 from dataclasses import dataclass
-from typing import Any, Protocol, Sequence
+from typing import Any, Callable, Protocol, Sequence
 
 import numpy as np
 
 from ..benchmarks import BenchmarkCase, score_predictions
-from ..benchmarks.common import build_case_observations
-from ..results import RunResult
+from ..benchmarks.common import build_case_observation, build_case_observations
+from ..results import CaseObservation, RunResult
 from ..runner import ExecutionPlan
 from ..text_spans import sentence_char_spans, token_span_from_offsets, word_char_spans
 
@@ -607,6 +607,8 @@ def run_live_eviction(
     plan: ExecutionPlan,
     cases: tuple[BenchmarkCase, ...],
     generator: LiveEvictionTextGenerator,
+    *,
+    on_case: Callable[[CaseObservation], None] | None = None,
 ) -> tuple[RunResult, tuple[LiveEvictionPredictionTrace, ...]]:
     if plan.run.cache_budget_tokens is None:
         raise ValueError("live eviction baseline requires cache_budget_tokens")
@@ -656,6 +658,8 @@ def run_live_eviction(
                 edge_kind=edge_kind,
             )
         )
+        if on_case is not None:
+            on_case(build_case_observation(case, prediction))
         mean_retention_total += stats.mean_retention_ratio
         total_eviction_steps += stats.eviction_steps
         total_preprocessing_elapsed_seconds += stats.preprocessing_elapsed_seconds
