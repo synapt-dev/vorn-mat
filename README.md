@@ -61,8 +61,21 @@ To regenerate `requirements.lock` after an intentional pin change in
 `pyproject.toml`:
 
 ```bash
-uv pip compile --generate-hashes pyproject.toml --extra local -o requirements.lock
+uv pip compile \
+    --python-version 3.11 \
+    --python-platform linux \
+    --generate-hashes \
+    pyproject.toml --extra local \
+    -o requirements.lock
 ```
+
+The `--python-platform linux` flag is load-bearing: without it, the resolver
+runs against the host platform (macOS / Windows) and silently omits the
+Linux+CUDA transitive closure (`cuda-toolkit`, `nvidia-cublas`, etc.). The
+Docker image then fails at `pip install --require-hashes` because those
+transitives are pulled at install-time but have no hash entries in the lock.
+Always regenerate with the Linux target since that is what the Dockerfile
+installs into.
 
 ### Reproducibility disclosure
 
