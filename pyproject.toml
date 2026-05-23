@@ -11,11 +11,21 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]
+# Pinned to the best-guess canonical version window (Atlas archaeology
+# 2026-05-23). These pins are a reconstruction from raw-report timestamps and
+# PyPI release chronology, not a recovered lockfile. See README.md
+# "Reproducibility disclosure" for the full provenance read and the two
+# documented caveats (earliest May 13/14 seed runs likely used
+# huggingface_hub==1.14.0; some late May 20 budget-fill rows may have crossed
+# transformers==5.9.0 on a fresh Modal image rebuild).
 local = [
-    "torch",
-    "transformers>=4.44.0",
-    "accelerate",
-    "sentencepiece",
+    "torch==2.12.0",
+    "transformers==5.8.1",
+    "accelerate==1.13.0",
+    "datasets==4.8.5",
+    "sentencepiece==0.2.1",
+    "faiss-cpu==1.13.2",
+    "huggingface_hub==1.15.0",
 ]
 
 [tool.setuptools.packages.find]

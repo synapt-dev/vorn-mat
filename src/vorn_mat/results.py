@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 
@@ -24,6 +24,13 @@ class RunResult:
     preprocessing_elapsed_seconds: float = 0.0
     preprocessing_cost_usd: float = 0.0
     observations: tuple[CaseObservation, ...] = ()
+    # Reproducibility-substrate telemetry (added 2026-05-23). Optional fields
+    # so existing serialized envelopes load unchanged; cells run on the pinned
+    # substrate populate them from local_exec.capture_runtime_telemetry().
+    peak_memory_allocated_gb: float | None = None
+    peak_memory_reserved_gb: float | None = None
+    oom_near_miss: bool = False
+    env_versions: dict[str, str] = field(default_factory=dict)
 
 
 def append_result(path: Path, result: RunResult) -> None:
