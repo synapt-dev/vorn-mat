@@ -2,7 +2,7 @@
 #
 # Canonical Docker image for reproducing the family-wave canonical artifacts
 # documented in the vorn-mat paper. The pin set below is a best-guess
-# reconstruction from raw-report timestamps and PyPI release chronology — the
+# reconstruction from raw-report timestamps and PyPI release chronology. The
 # original public runs did not preserve a lockfile or Modal image hash. See
 # README.md "Reproducibility disclosure" for the full provenance read.
 #
