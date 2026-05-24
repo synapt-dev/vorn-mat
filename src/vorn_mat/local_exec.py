@@ -255,6 +255,29 @@ class _TransformersGeneratorBase:
         attention_mask = attention_mask.to(self._device)
         return input_ids, attention_mask
 
+    def _terminal_token_ids(self) -> tuple[int, ...]:
+        self._ensure_model()
+
+        assert self._tokenizer is not None
+        assert self._model is not None
+
+        generation_eos = getattr(self._model.generation_config, "eos_token_id", None)
+        if generation_eos is None:
+            generation_eos = self._tokenizer.eos_token_id
+
+        if isinstance(generation_eos, int):
+            return (int(generation_eos),)
+
+        if isinstance(generation_eos, (list, tuple, set)):
+            return tuple(int(token_id) for token_id in generation_eos)
+
+        raise TypeError(
+            f"unsupported eos_token_id type: {type(generation_eos).__name__}"
+        )
+
+    def _is_terminal_token_id(self, token_id: int) -> bool:
+        return int(token_id) in set(self._terminal_token_ids())
+
     def _render_prompt_text_with_offsets(
         self,
         prompt: str,
@@ -540,7 +563,7 @@ class TransformersObservationGenerator(_TransformersGeneratorBase):
             )
             previous_top_positions = top_position_ids
 
-            if next_token_id == int(self._tokenizer.eos_token_id):
+            if self._is_terminal_token_id(next_token_id):
                 break
 
             generated_token_ids.append(next_token_id)
@@ -861,7 +884,7 @@ class TransformersScoreDistributionObservationGenerator(_TransformersGeneratorBa
 
             next_token = outputs.logits[:, -1, :].argmax(dim=-1, keepdim=True)
             next_token_id = int(next_token.item())
-            if next_token_id == int(self._tokenizer.eos_token_id):
+            if self._is_terminal_token_id(next_token_id):
                 break
 
             generated_token_ids.append(next_token_id)
@@ -1312,7 +1335,7 @@ class TransformersLiveEvictionGenerator(
 
             next_token = outputs.logits[:, -1, :].argmax(dim=-1, keepdim=True)
             next_token_id = int(next_token.item())
-            if next_token_id == int(self._tokenizer.eos_token_id):
+            if self._is_terminal_token_id(next_token_id):
                 break
 
             generated_token_ids.append(next_token_id)

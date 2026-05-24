@@ -539,6 +539,29 @@ def test_forward_with_hidden_states_allows_attention_outputs_to_be_disabled():
     assert fake_model.calls[0]["output_attentions"] is False
 
 
+def test_terminal_token_ids_prefer_generation_config_over_tokenizer_eos():
+    from types import SimpleNamespace
+
+    from vorn_mat.local_exec import _TransformersGeneratorBase
+
+    class FakeTokenizer:
+        eos_token_id = 1
+
+    fake_model = SimpleNamespace(
+        generation_config=SimpleNamespace(eos_token_id=[1, 106])
+    )
+
+    generator = _TransformersGeneratorBase()
+    object.__setattr__(generator, "_tokenizer", FakeTokenizer())
+    object.__setattr__(generator, "_model", fake_model)
+    object.__setattr__(generator, "_device", "cpu")
+
+    assert generator._terminal_token_ids() == (1, 106)
+    assert generator._is_terminal_token_id(1) is True
+    assert generator._is_terminal_token_id(106) is True
+    assert generator._is_terminal_token_id(999) is False
+
+
 def _load_fixture_prompts(path: Path) -> list[dict[str, str]]:
     import json
 

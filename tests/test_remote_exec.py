@@ -76,6 +76,7 @@ def test_run_modal_vanilla_niah_enriches_result_metadata(monkeypatch):
     assert report.estimated_cost_usd == 12.5 * remote_exec.A100_80GB_PER_SECOND
     assert report.result.metadata["case_count"] == "1"
     assert report.result.metadata["dataset_id"] == "rbiswasfc/ruler"
+    assert report.result.metadata["model"] == "meta-llama/Llama-3.1-8B-Instruct"
     assert report.result.metadata["model_id"] == "meta-llama/Llama-3.1-8B-Instruct"
     assert report.result.observations[0].fixture_id == "c1"
 
@@ -176,6 +177,7 @@ def test_run_modal_live_eviction_niah_enriches_result_metadata(monkeypatch):
     assert report.estimated_cost_usd == 16.0 * remote_exec.A100_80GB_PER_SECOND
     assert report.result.metadata["case_count"] == "1"
     assert report.result.metadata["dataset_id"] == "rbiswasfc/ruler"
+    assert report.result.metadata["model"] == "meta-llama/Llama-3.1-8B-Instruct"
     assert report.result.metadata["model_id"] == "meta-llama/Llama-3.1-8B-Instruct"
     assert report.result.metadata["cache_budget_tokens"] == "256"
     assert report.result.metadata["retention_policy"] == "random"
