@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import hashlib
+import json
 from pathlib import Path
 import time
 from types import MethodType
@@ -198,7 +199,7 @@ class _TransformersGeneratorBase:
             dtype = torch.float16
         elif torch.cuda.is_available():
             device = "cuda"
-            dtype = torch.float16
+            dtype = torch.bfloat16
         else:
             device = "cpu"
             dtype = torch.float32
@@ -278,6 +279,77 @@ class _TransformersGeneratorBase:
 
     def _is_terminal_token_id(self, token_id: int) -> bool:
         return int(token_id) in set(self._terminal_token_ids())
+
+    def _next_token_logits(self, logits: Any) -> Any:
+        """Return `[batch, vocab]` logits for the next token.
+
+        Most causal LMs return `[batch, seq, vocab]`. Gemma 3 generation-
+        prepared calls can surface an extra singleton dimension, so collapse
+        leading singleton axes before selecting the final time step.
+        """
+        while getattr(logits, "ndim", 0) > 3 and logits.shape[1] == 1:
+            logits = logits[:, 0]
+        if logits.ndim == 3:
+            return logits[:, -1, :]
+        if logits.ndim == 2:
+            return logits if logits.shape[0] == 1 else logits[-1:, :]
+        raise ValueError(f"unsupported logits rank: {logits.ndim}")
+
+    def _select_next_token(self, logits: Any) -> Any:
+        """Return a `[batch, 1]` next-token tensor from model logits."""
+        next_token_logits = self._next_token_logits(logits).clone()
+        nan_mask = next_token_logits.isnan()
+        if bool(nan_mask.any().item()):
+            if bool(nan_mask.all(dim=-1).any().item()):
+                raise ValueError("next-token logits contain only NaN values")
+            next_token_logits = next_token_logits.masked_fill(nan_mask, -float("inf"))
+
+        pad_token_id = getattr(self._tokenizer, "pad_token_id", None)
+        if pad_token_id is not None:
+            terminal_token_ids = (
+                set(self._terminal_token_ids())
+                if self._model is not None and self._tokenizer is not None
+                else set()
+            )
+            if int(pad_token_id) not in terminal_token_ids:
+                next_token_logits[:, int(pad_token_id)] = -float("inf")
+        return next_token_logits.argmax(dim=-1, keepdim=True)
+
+    def _top_token_candidates(
+        self,
+        logits: Any,
+        *,
+        k: int = 5,
+    ) -> list[dict[str, object]]:
+        self._ensure_model()
+
+        import torch
+
+        assert self._tokenizer is not None
+
+        next_token_logits = self._next_token_logits(logits)
+        top_values, top_indices = torch.topk(
+            next_token_logits[0],
+            k=min(k, int(next_token_logits.shape[-1])),
+        )
+        candidates: list[dict[str, object]] = []
+        for value, token_id in zip(top_values, top_indices, strict=True):
+            token_int = int(token_id.item())
+            logit = float(value.item())
+            candidates.append(
+                {
+                    "token_id": token_int,
+                    "token_text": self._tokenizer.decode(
+                        [token_int],
+                        skip_special_tokens=False,
+                    ),
+                    "logit": "NaN" if np.isnan(logit) else round(logit, 6),
+                }
+            )
+        return candidates
+
+    def _emit_runtime_event(self, event: str, payload: dict[str, object]) -> None:
+        print(f"{event} " + json.dumps(payload, sort_keys=True), flush=True)
 
     def _render_prompt_text_with_offsets(
         self,
@@ -393,6 +465,24 @@ class _TransformersGeneratorBase:
         assert self._model is not None
 
         with torch.no_grad():
+            model_type = getattr(getattr(self._model, "config", None), "model_type", "")
+            if model_type == "gemma3":
+                prepared = self._model.prepare_inputs_for_generation(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                    position_ids=position_ids,
+                    cache_position=position_ids[0],
+                    use_cache=False,
+                    is_first_iteration=True,
+                )
+                prepared.update(
+                    output_hidden_states=True,
+                    output_attentions=output_attentions,
+                    logits_to_keep=1,
+                    use_cache=False,
+                    return_dict=True,
+                )
+                return self._model(**prepared)
             return self._model(
                 input_ids=input_ids,
                 attention_mask=attention_mask,
@@ -532,7 +622,7 @@ class TransformersObservationGenerator(_TransformersGeneratorBase):
                 top_k=top_k,
             )
 
-            next_token = outputs.logits[:, -1, :].argmax(dim=-1, keepdim=True)
+            next_token = self._select_next_token(outputs.logits)
             next_token_id = int(next_token.item())
             next_token_text = self._tokenizer.decode(
                 [next_token_id],
@@ -683,7 +773,10 @@ class TransformersObservationGenerator(_TransformersGeneratorBase):
                     )
                     layer_scores = weights[0, :, 0, :].mean(dim=0)
                     captured_attentions[str(captured_layer_index)] = round_float_list(
-                        np.asarray(layer_scores.detach().cpu(), dtype=np.float32)
+                        layer_scores.detach().float().cpu().numpy().astype(
+                            np.float32,
+                            copy=False,
+                        )
                     )
                     return attn_output, attn_weights
 
@@ -728,7 +821,7 @@ class TransformersObservationGenerator(_TransformersGeneratorBase):
             layer = attentions[layer_index]
             scores = layer[0, :, -1, :].mean(dim=0)
             result[str(layer_index)] = round_float_list(
-                np.asarray(scores.detach().cpu(), dtype=np.float32)
+                scores.detach().float().cpu().numpy().astype(np.float32, copy=False)
             )
         return result
 
@@ -1076,12 +1169,36 @@ class TransformersLiveEvictionGenerator(
         adaptive_token_steps = 0
         adaptive_sentence_steps = 0
 
-        for _ in range(self.config.max_new_tokens):
+        for step_index in range(self.config.max_new_tokens):
+            self._emit_runtime_event(
+                "generation_step_start",
+                {
+                    "model_id": self.config.model_id,
+                    "retention_policy": config.retention_policy,
+                    "cache_budget_tokens": config.cache_budget_tokens,
+                    "step_index": step_index,
+                    "active_token_count": int(active_input_ids.shape[-1]),
+                    "generated_token_count": len(generated_token_ids),
+                    "eviction_steps": eviction_steps,
+                },
+            )
             outputs = self._forward_with_hidden_states(
                 input_ids=active_input_ids,
                 attention_mask=active_attention_mask,
                 position_ids=active_position_ids,
                 output_attentions=needs_attention_scores,
+            )
+            self._emit_runtime_event(
+                "generation_step_forward_done",
+                {
+                    "model_id": self.config.model_id,
+                    "retention_policy": config.retention_policy,
+                    "cache_budget_tokens": config.cache_budget_tokens,
+                    "step_index": step_index,
+                    "active_token_count": int(active_input_ids.shape[-1]),
+                    "logits_shape": list(outputs.logits.shape),
+                    "hidden_state_layers": len(outputs.hidden_states),
+                },
             )
             token_summaries = extract_canonical_token_summaries(
                 outputs.hidden_states,
@@ -1334,9 +1451,31 @@ class TransformersLiveEvictionGenerator(
             else:
                 retained_token_counts.append(int(active_input_ids.shape[-1]))
 
-            next_token = outputs.logits[:, -1, :].argmax(dim=-1, keepdim=True)
+            next_token = self._select_next_token(outputs.logits)
             next_token_id = int(next_token.item())
-            if self._is_terminal_token_id(next_token_id):
+            next_token_text = self._tokenizer.decode(
+                [next_token_id],
+                skip_special_tokens=False,
+            )
+            is_terminal = self._is_terminal_token_id(next_token_id)
+            self._emit_runtime_event(
+                "token_step",
+                {
+                    "model_id": self.config.model_id,
+                    "retention_policy": config.retention_policy,
+                    "cache_budget_tokens": config.cache_budget_tokens,
+                    "step_index": step_index,
+                    "active_token_count": int(active_input_ids.shape[-1]),
+                    "eviction_steps": eviction_steps,
+                    "next_token_id": next_token_id,
+                    "next_token_text": next_token_text,
+                    "top_token_candidates": self._top_token_candidates(
+                        outputs.logits
+                    ),
+                    "is_terminal": is_terminal,
+                },
+            )
+            if is_terminal:
                 break
 
             generated_token_ids.append(next_token_id)

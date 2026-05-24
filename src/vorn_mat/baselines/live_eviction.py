@@ -97,7 +97,10 @@ def extract_canonical_token_summaries(
             f"canonical_layer {canonical_layer} is unavailable for this model"
         )
     token_summaries = hidden_states[layer_index][0]
-    return np.asarray(token_summaries.detach().cpu(), dtype=np.float32)
+    return token_summaries.detach().float().cpu().numpy().astype(
+        np.float32,
+        copy=False,
+    )
 
 
 def summary_fingerprint(token_summaries: np.ndarray) -> str:
@@ -119,7 +122,7 @@ def extract_last_token_attention_scores(
     if getattr(final_layer, "ndim", None) != 4:
         raise ValueError("attention tensor must be rank-4")
     scores = final_layer[0, :, -1, :].mean(dim=0)
-    return np.asarray(scores.detach().cpu(), dtype=np.float32)
+    return scores.detach().float().cpu().numpy().astype(np.float32, copy=False)
 
 
 def select_attention_score_retained_positions(

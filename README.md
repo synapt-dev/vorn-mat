@@ -67,6 +67,28 @@ overwriting `metadata.model` with the request model id. This prevents stale
 canonical-plan metadata from leaking into rerun artifacts when the request
 model differs from the default family.
 
+### Substrate improvement from failure: bf16 live generation stability
+
+The same Gemma 3 rerun later exposed a deeper numerical-correctness defect:
+manual live generation on CUDA float16 could emit NaN next-token logits.
+Because the hand-rolled greedy loop did not suppress non-terminal pad tokens
+or treat NaN logits explicitly, the pad-mask path could surface NaN top
+candidates and collapse into immediate blank / terminal behavior. Those
+blank constrained-row outputs were harness artifacts, not evidence about
+Gemma 3 retrieval behavior.
+
+The live harness now loads CUDA models in `bfloat16`, casts hidden-state and
+attention tensors back to `float32` before NumPy scoring boundaries, suppresses
+non-terminal pad tokens during greedy selection, and raises explicitly if a
+row contains only NaN logits. Live-eviction generation also emits structured
+`generation_step_*` and `token_step` diagnostic lines so token-level failures
+are visible in Modal logs.
+
+Verify-by-fruit anchor: a one-case Gemma 3 control rerun
+(`google/gemma-3-12b-it`, `sentence_vorn`, `B=8192`, `n=1`,
+`max_new_tokens=8`) produced prediction `9375710` with `correct=true`,
+`hit_rate=1.0`, and estimated cost `$0.1119` after the bf16 + cast fix.
+
 Two-layer note: the Dockerfile installs the `vorn_mat` source via
 `pip install --no-deps -e /app` during image build to prime the editable
 install layer. At Modal run time the volume mount overlays the live source,
