@@ -50,6 +50,23 @@ The Modal job entry-points (`examples/run_modal_*.py`) build the same image
 through `Image.from_dockerfile(...)`, so local Docker reproduction and Modal
 reproduction share an identical software stack.
 
+### Substrate improvement from failure: multi-token EOS support
+
+A 2026-05-23 Gemma 3 instruct rerun surfaced a harness defect in the
+hand-rolled live-eviction generation loops. Some chat-tuned models expose
+multiple terminal token ids through `generation_config.eos_token_id`
+(for example `google/gemma-3-12b-it` uses both `<eos>` and
+`<end_of_turn>`). The earlier harness stopped only on the tokenizer's
+singular `eos_token_id`, which could let the loop consume terminal special
+tokens and decode them away to an empty string. The live-eviction and
+streaming loops now honor the full terminal-token set from
+`generation_config`.
+
+The same patch also strengthens metadata isolation in the Modal wrappers by
+overwriting `metadata.model` with the request model id. This prevents stale
+canonical-plan metadata from leaking into rerun artifacts when the request
+model differs from the default family.
+
 Two-layer note: the Dockerfile installs the `vorn_mat` source via
 `pip install --no-deps -e /app` during image build to prime the editable
 install layer. At Modal run time the volume mount overlays the live source,
