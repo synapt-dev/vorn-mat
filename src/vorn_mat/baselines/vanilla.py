@@ -7,6 +7,12 @@ from typing import Callable, Protocol
 
 from ..benchmarks import BenchmarkCase, score_predictions
 from ..benchmarks.common import build_case_observation
+from ..progress import (
+    ProgressLogger,
+    format_case_progress,
+    format_complete,
+    format_dataset_loaded,
+)
 from ..results import CaseObservation, RunResult
 from ..runner import ExecutionPlan
 
@@ -27,11 +33,16 @@ def run_vanilla(
     generator: TextGenerator,
     *,
     on_case: Callable[[CaseObservation], None] | None = None,
+    progress_logger: ProgressLogger | None = None,
 ) -> tuple[RunResult, tuple[PredictionTrace, ...]]:
+    n_cases = len(cases)
+    if progress_logger is not None:
+        progress_logger(format_dataset_loaded(n_cases))
     predictions: list[str] = []
     traces: list[PredictionTrace] = []
     observations: list[CaseObservation] = []
-    for case in cases:
+    running_hits = 0
+    for case_index, case in enumerate(cases, start=1):
         prediction = generator.generate(case.prompt)
         predictions.append(prediction)
         traces.append(PredictionTrace(case_id=case.case_id, prediction=prediction))
@@ -39,7 +50,22 @@ def run_vanilla(
         observations.append(observation)
         if on_case is not None:
             on_case(observation)
+        if observation.correct:
+            running_hits += 1
+        if progress_logger is not None:
+            progress_logger(
+                format_case_progress(
+                    case_index,
+                    n_cases,
+                    observation.correct,
+                    running_hits / case_index,
+                )
+            )
     metrics = score_predictions(plan.benchmark.name, cases, tuple(predictions))
+    if progress_logger is not None:
+        progress_logger(
+            format_complete(n_cases, running_hits / n_cases if n_cases else 0.0)
+        )
     result = RunResult(
         run_id=plan.run.run_id,
         benchmark=plan.benchmark.name,

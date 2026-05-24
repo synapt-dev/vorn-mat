@@ -29,7 +29,7 @@ from vorn_mat.results import (
 def _stub_runner_that_fires_on_case(captured_observations: list[CaseObservation]):
     """Returns a stub run_vanilla-shaped function that fires on_case per fixture."""
 
-    def _stub(plan, cases, generator, *, on_case=None):
+    def _stub(plan, cases, generator, *, on_case=None, **kwargs):
         for case in cases:
             obs = CaseObservation(
                 fixture_id=case.case_id,

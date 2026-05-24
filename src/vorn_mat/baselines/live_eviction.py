@@ -10,6 +10,12 @@ import numpy as np
 
 from ..benchmarks import BenchmarkCase, score_predictions
 from ..benchmarks.common import build_case_observation, build_case_observations
+from ..progress import (
+    ProgressLogger,
+    format_case_progress,
+    format_complete,
+    format_dataset_loaded,
+)
 from ..results import CaseObservation, RunResult
 from ..runner import ExecutionPlan
 from ..text_spans import sentence_char_spans, token_span_from_offsets, word_char_spans
@@ -609,6 +615,7 @@ def run_live_eviction(
     generator: LiveEvictionTextGenerator,
     *,
     on_case: Callable[[CaseObservation], None] | None = None,
+    progress_logger: ProgressLogger | None = None,
 ) -> tuple[RunResult, tuple[LiveEvictionPredictionTrace, ...]]:
     if plan.run.cache_budget_tokens is None:
         raise ValueError("live eviction baseline requires cache_budget_tokens")
@@ -644,7 +651,12 @@ def run_live_eviction(
     edge_kinds: set[str] = set()
     suite_ids: set[str] = set()
 
-    for case in cases:
+    n_cases = len(cases)
+    if progress_logger is not None:
+        progress_logger(format_dataset_loaded(n_cases))
+    running_hits = 0
+
+    for case_index, case in enumerate(cases, start=1):
         prediction, stats = generator.generate_with_live_eviction(case.prompt, config)
         predictions.append(prediction)
         edge_kind = case.metadata.get("edge_kind", "")
@@ -658,8 +670,20 @@ def run_live_eviction(
                 edge_kind=edge_kind,
             )
         )
+        observation = build_case_observation(case, prediction)
         if on_case is not None:
-            on_case(build_case_observation(case, prediction))
+            on_case(observation)
+        if observation.correct:
+            running_hits += 1
+        if progress_logger is not None:
+            progress_logger(
+                format_case_progress(
+                    case_index,
+                    n_cases,
+                    observation.correct,
+                    running_hits / case_index,
+                )
+            )
         mean_retention_total += stats.mean_retention_ratio
         total_eviction_steps += stats.eviction_steps
         total_preprocessing_elapsed_seconds += stats.preprocessing_elapsed_seconds
@@ -683,6 +707,10 @@ def run_live_eviction(
 
     metrics = score_predictions(plan.benchmark.name, cases, tuple(predictions))
     observations = build_case_observations(cases, tuple(predictions))
+    if progress_logger is not None:
+        progress_logger(
+            format_complete(n_cases, running_hits / n_cases if n_cases else 0.0)
+        )
     mean_retention_ratio = (
         mean_retention_total / len(cases) if cases else 0.0
     )

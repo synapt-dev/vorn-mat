@@ -68,6 +68,7 @@ from .plan import (
     build_live_eviction_run,
     build_step1_run_matrix,
 )
+from .progress import ProgressLogger, default_progress_logger
 from .results import (
     CaseObservation,
     RunResult,
@@ -1590,6 +1591,7 @@ def run_local_vanilla_smoke(
     case_limit: int = 5,
     generator: TextGenerator | None = None,
     model_config: LocalModelConfig = LocalModelConfig(),
+    progress_logger: ProgressLogger | None = default_progress_logger,
 ) -> tuple[RunResult, tuple[PredictionTrace, ...]]:
     if case_limit <= 0:
         raise ValueError("case_limit must be positive")
@@ -1606,6 +1608,7 @@ def run_local_vanilla_smoke(
         cases,
         generator,
         on_case=lambda observation: append_observation(ledger, observation),
+        progress_logger=progress_logger,
     )
     result = attach_runtime_telemetry(result)
     append_result(output_path, result)
@@ -1673,6 +1676,7 @@ def run_local_live_eviction_smoke(
     random_seed: int = 17,
     generator: LiveEvictionTextGenerator | None = None,
     model_config: LocalModelConfig = LocalModelConfig(),
+    progress_logger: ProgressLogger | None = default_progress_logger,
 ) -> tuple[RunResult, tuple[Any, ...]]:
     if case_limit <= 0:
         raise ValueError("case_limit must be positive")
@@ -1693,6 +1697,7 @@ def run_local_live_eviction_smoke(
         cases,
         generator,
         on_case=lambda observation: append_observation(ledger, observation),
+        progress_logger=progress_logger,
     )
     result = attach_runtime_telemetry(result)
     append_result(output_path, result)
