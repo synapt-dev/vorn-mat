@@ -147,6 +147,13 @@ from .orchestration import (
     run_wave_serialized,
     serialize_cell_wave_report,
 )
+from .progress import (
+    ProgressLogger,
+    default_progress_logger,
+    format_case_progress,
+    format_complete,
+    format_dataset_loaded,
+)
 from .results import (
     CaseObservation,
     RunResult,
@@ -218,6 +225,7 @@ __all__ = [
     "ModalArtifacts",
     "ModalBinding",
     "PredictionTrace",
+    "ProgressLogger",
     "RetentionStats",
     "RunResult",
     "ModalVanillaObservationRequest",
@@ -267,6 +275,10 @@ __all__ = [
     "compute_vorn_direction",
     "cosine_similarity",
     "default_modal_app_spec",
+    "default_progress_logger",
+    "format_case_progress",
+    "format_complete",
+    "format_dataset_loaded",
     "estimate_week1_cost_window",
     "expand_token_span",
     "find_subsequence_spans",

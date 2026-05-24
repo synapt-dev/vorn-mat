@@ -15,6 +15,12 @@ import numpy as np
 
 from ..benchmarks import BenchmarkCase, score_predictions
 from ..benchmarks.common import build_case_observation
+from ..progress import (
+    ProgressLogger,
+    format_case_progress,
+    format_complete,
+    format_dataset_loaded,
+)
 from ..results import CaseObservation, RunResult
 from ..runner import ExecutionPlan
 
@@ -143,6 +149,7 @@ def run_vorn(
     generator: VornTextGenerator,
     *,
     on_case: Callable[[CaseObservation], None] | None = None,
+    progress_logger: ProgressLogger | None = None,
 ) -> tuple[RunResult, tuple[VornPredictionTrace, ...]]:
     """Run the Step 1 proxy baseline on a case slice."""
     if plan.run.cache_budget_tokens is None:
@@ -154,13 +161,18 @@ def run_vorn(
         cache_budget_tokens=plan.run.cache_budget_tokens,
     )
 
+    n_cases = len(cases)
+    if progress_logger is not None:
+        progress_logger(format_dataset_loaded(n_cases))
+
     predictions: list[str] = []
     traces: list[VornPredictionTrace] = []
     observations: list[CaseObservation] = []
     total_original = 0
     total_kept = 0
+    running_hits = 0
 
-    for case in cases:
+    for case_index, case in enumerate(cases, start=1):
         prediction, stats = generator.generate_with_retention(case.prompt, config)
         predictions.append(prediction)
         traces.append(
@@ -175,10 +187,25 @@ def run_vorn(
         observations.append(observation)
         if on_case is not None:
             on_case(observation)
+        if observation.correct:
+            running_hits += 1
+        if progress_logger is not None:
+            progress_logger(
+                format_case_progress(
+                    case_index,
+                    n_cases,
+                    observation.correct,
+                    running_hits / case_index,
+                )
+            )
         total_original += stats.original_token_count
         total_kept += stats.kept_token_count
 
     metrics = score_predictions(plan.benchmark.name, cases, tuple(predictions))
+    if progress_logger is not None:
+        progress_logger(
+            format_complete(n_cases, running_hits / n_cases if n_cases else 0.0)
+        )
     mean_retention_ratio = (
         (total_kept / total_original) if total_original else 0.0
     )

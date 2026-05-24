@@ -25,6 +25,7 @@ from .plan import (
     DEFAULT_MODEL,
     per_second_rate_for_gpu,
 )
+from .progress import default_progress_logger
 from .results import RunResult, append_observation, append_result, observations_path
 from .score_distribution_observation import ScoreDistributionObservationReport
 
@@ -151,6 +152,7 @@ def run_modal_vanilla_niah(request: ModalVanillaRunRequest) -> ModalVanillaRunRe
             if ledger is not None
             else None
         ),
+        progress_logger=default_progress_logger,
     )
     elapsed_seconds = time.perf_counter() - start
     estimated_cost_usd = elapsed_seconds * per_second_rate
@@ -235,6 +237,7 @@ def run_modal_live_eviction_niah(
             if ledger is not None
             else None
         ),
+        progress_logger=default_progress_logger,
     )
     elapsed_seconds = time.perf_counter() - start
     estimated_cost_usd = elapsed_seconds * per_second_rate

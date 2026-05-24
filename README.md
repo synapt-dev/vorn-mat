@@ -187,6 +187,29 @@ modal run --detach examples/run_modal_cells_parallel.py \
 python examples/build_matrix_backfill_artifact.py --family mistral
 ```
 
+### Observability (Layer 4: Modal-visible progress logging)
+
+Long-running cells (30-60min A100 inference) used to go silent after the
+HuggingFace model-load phase. Modal captures stdout to the dashboard and
+`modal app logs` CLI, but cells emitted nothing during the silent inference
+phase, so from outside the local terminal there was no mid-cell progress
+visibility.
+
+Every baseline runner (`run_vanilla` / `run_vorn` / `run_live_eviction`)
+accepts a `progress_logger: Callable[[str], None] | None` keyword. When set,
+the runner emits a line-based progress trace to Modal's stdout capture:
+
+- Once at start: `vorn-mat: dataset_loaded n_cases=N`
+- Per case: `vorn-mat: case I/N correct=true running_accuracy=0.XXX`
+- Once at end: `vorn-mat: complete n_cases=N hit_rate=0.XXX`
+
+The Modal entry-points (`run_modal_*_niah`) default `progress_logger` to
+`vorn_mat.progress.default_progress_logger`, which prints with `flush=True`
+so Modal sees output immediately rather than buffered until container exit.
+Modal auto-timestamps each line in the dashboard, so no local timestamping
+is added. To suppress emissions in non-Modal contexts (tests, library use),
+pass `progress_logger=None`.
+
 ## Reproducing the paper's headline numbers
 
 The Appendix A totals in the paper (49 artifacts / 299 counted rows / 270 with observations / 18,000 per-fixture observations / $77.78 / 32.72h) are reproducible from this repository's `results/` directory by running:
