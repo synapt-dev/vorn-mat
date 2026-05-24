@@ -55,6 +55,21 @@ def test_extract_canonical_token_summaries_is_float32_and_deterministic():
     assert np.array_equal(first, np.array([[5.0, 6.0], [7.0, 8.0]], dtype=np.float32))
 
 
+def test_extract_canonical_token_summaries_accepts_bfloat16_boundary():
+    hidden_states = (
+        torch.tensor([[[0.0, 0.0], [0.0, 0.0]]], dtype=torch.bfloat16),
+        torch.tensor([[[1.0, 2.0], [3.0, 4.0]]], dtype=torch.bfloat16),
+    )
+
+    summaries = extract_canonical_token_summaries(hidden_states, canonical_layer=0)
+
+    assert summaries.dtype == np.float32
+    assert np.array_equal(
+        summaries,
+        np.array([[1.0, 2.0], [3.0, 4.0]], dtype=np.float32),
+    )
+
+
 def test_summary_fingerprint_is_stable_for_same_input():
     summaries = np.array([[1.0, 0.0], [0.5, 0.5]], dtype=np.float32)
 

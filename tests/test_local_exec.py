@@ -539,6 +539,55 @@ def test_forward_with_hidden_states_allows_attention_outputs_to_be_disabled():
     assert fake_model.calls[0]["output_attentions"] is False
 
 
+def test_forward_with_hidden_states_uses_prepare_inputs_for_gemma3():
+    import torch
+
+    from vorn_mat.local_exec import _TransformersGeneratorBase
+
+    class FakeModel:
+        class config:
+            model_type = "gemma3"
+
+        def __init__(self):
+            self.prepare_calls = []
+            self.calls = []
+
+        def prepare_inputs_for_generation(self, **kwargs):
+            self.prepare_calls.append(kwargs)
+            return {
+                "input_ids": kwargs["input_ids"],
+                "attention_mask": kwargs["attention_mask"],
+                "position_ids": kwargs["position_ids"],
+                "cache_position": kwargs["cache_position"],
+            }
+
+        def __call__(self, **kwargs):
+            self.calls.append(kwargs)
+            return object()
+
+    generator = _TransformersGeneratorBase()
+    fake_model = FakeModel()
+    object.__setattr__(generator, "_tokenizer", object())
+    object.__setattr__(generator, "_model", fake_model)
+    object.__setattr__(generator, "_device", "cpu")
+
+    position_ids = torch.tensor([[0, 1, 2]])
+    result = generator._forward_with_hidden_states(
+        input_ids=torch.tensor([[1, 2, 3]]),
+        attention_mask=torch.tensor([[1, 1, 1]]),
+        position_ids=position_ids,
+        output_attentions=False,
+    )
+
+    assert result is not None
+    assert fake_model.prepare_calls[0]["cache_position"].tolist() == [0, 1, 2]
+    assert fake_model.prepare_calls[0]["position_ids"].tolist() == [[0, 1, 2]]
+    assert fake_model.calls[0]["cache_position"].tolist() == [0, 1, 2]
+    assert fake_model.calls[0]["position_ids"].tolist() == [[0, 1, 2]]
+    assert fake_model.calls[0]["output_hidden_states"] is True
+    assert fake_model.calls[0]["output_attentions"] is False
+
+
 def test_terminal_token_ids_prefer_generation_config_over_tokenizer_eos():
     from types import SimpleNamespace
 
@@ -560,6 +609,140 @@ def test_terminal_token_ids_prefer_generation_config_over_tokenizer_eos():
     assert generator._is_terminal_token_id(1) is True
     assert generator._is_terminal_token_id(106) is True
     assert generator._is_terminal_token_id(999) is False
+
+
+def test_select_next_token_supports_standard_3d_logits():
+    import torch
+
+    from vorn_mat.local_exec import _TransformersGeneratorBase
+
+    generator = _TransformersGeneratorBase()
+    logits = torch.tensor(
+        [[[0.1, 0.2, 0.3], [0.4, 0.9, 0.1]]],
+        dtype=torch.float32,
+    )
+
+    next_token = generator._select_next_token(logits)
+
+    assert next_token.tolist() == [[1]]
+
+
+def test_select_next_token_supports_extra_singleton_axis():
+    import torch
+
+    from vorn_mat.local_exec import _TransformersGeneratorBase
+
+    generator = _TransformersGeneratorBase()
+    logits = torch.tensor(
+        [[[[0.1, 0.2, 0.3], [0.4, 0.9, 0.1]]]],
+        dtype=torch.float32,
+    )
+
+    next_token = generator._select_next_token(logits)
+
+    assert next_token.tolist() == [[1]]
+
+
+def test_select_next_token_supports_sequence_by_vocab_logits():
+    import torch
+
+    from vorn_mat.local_exec import _TransformersGeneratorBase
+
+    generator = _TransformersGeneratorBase()
+    logits = torch.tensor(
+        [[0.1, 0.9, 0.0], [0.5, 0.2, 0.8]],
+        dtype=torch.float32,
+    )
+
+    next_token = generator._select_next_token(logits)
+
+    assert next_token.tolist() == [[2]]
+
+
+def test_select_next_token_suppresses_non_terminal_pad_token():
+    import torch
+    from types import SimpleNamespace
+
+    from vorn_mat.local_exec import _TransformersGeneratorBase
+
+    class FakeTokenizer:
+        pad_token_id = 0
+        eos_token_id = 1
+
+    generator = _TransformersGeneratorBase()
+    object.__setattr__(generator, "_tokenizer", FakeTokenizer())
+    object.__setattr__(
+        generator,
+        "_model",
+        SimpleNamespace(generation_config=SimpleNamespace(eos_token_id=[1, 106])),
+    )
+    object.__setattr__(generator, "_device", "cpu")
+    logits = torch.tensor(
+        [[[10.0, 0.1, 9.0]]],
+        dtype=torch.float32,
+    )
+
+    next_token = generator._select_next_token(logits)
+
+    assert next_token.tolist() == [[2]]
+
+
+def test_select_next_token_ignores_nan_when_finite_candidates_remain():
+    import torch
+
+    from vorn_mat.local_exec import _TransformersGeneratorBase
+
+    generator = _TransformersGeneratorBase()
+    logits = torch.tensor(
+        [[[float("nan"), 0.5, 0.9]]],
+        dtype=torch.float32,
+    )
+
+    next_token = generator._select_next_token(logits)
+
+    assert next_token.tolist() == [[2]]
+
+
+def test_select_next_token_rejects_all_nan_logits():
+    import pytest
+    import torch
+
+    from vorn_mat.local_exec import _TransformersGeneratorBase
+
+    generator = _TransformersGeneratorBase()
+    logits = torch.tensor(
+        [[[float("nan"), float("nan"), float("nan")]]],
+        dtype=torch.float32,
+    )
+
+    with pytest.raises(ValueError, match="only NaN values"):
+        generator._select_next_token(logits)
+
+
+def test_runtime_event_logging_emits_json_line(capsys):
+    import json
+
+    from vorn_mat.local_exec import _TransformersGeneratorBase
+
+    generator = _TransformersGeneratorBase()
+
+    generator._emit_runtime_event(
+        "token_step",
+        {
+            "step_index": 0,
+            "next_token_id": 106,
+            "is_terminal": True,
+        },
+    )
+
+    captured = capsys.readouterr().out.strip()
+    prefix, payload = captured.split(" ", 1)
+    assert prefix == "token_step"
+    assert json.loads(payload) == {
+        "step_index": 0,
+        "next_token_id": 106,
+        "is_terminal": True,
+    }
 
 
 def _load_fixture_prompts(path: Path) -> list[dict[str, str]]:
