@@ -508,6 +508,80 @@ def test_render_prompt_accepts_mapping_output_from_chat_template():
     assert attention_mask.tolist() == [[1, 1, 1]]
 
 
+def test_render_prompt_disables_qwen3_thinking():
+    import torch
+
+    from vorn_mat.local_exec import LocalModelConfig, _TransformersGeneratorBase
+
+    class FakeTokenizer:
+        chat_template = "{{ messages }}"
+
+        def apply_chat_template(
+            self,
+            messages,
+            add_generation_prompt,
+            return_tensors,
+            enable_thinking,
+        ):
+            assert messages == [{"role": "user", "content": "needle prompt"}]
+            assert add_generation_prompt is True
+            assert return_tensors == "pt"
+            assert enable_thinking is False
+            return {"input_ids": torch.tensor([[11, 22, 33]])}
+
+    generator = _TransformersGeneratorBase(
+        LocalModelConfig(model_id="Qwen/Qwen3-8B")
+    )
+    object.__setattr__(generator, "_tokenizer", FakeTokenizer())
+    object.__setattr__(generator, "_model", object())
+    object.__setattr__(generator, "_device", "cpu")
+
+    input_ids, attention_mask = generator._render_prompt("needle prompt")
+
+    assert input_ids.tolist() == [[11, 22, 33]]
+    assert attention_mask.tolist() == [[1, 1, 1]]
+
+
+def test_render_prompt_text_with_offsets_disables_qwen3_thinking():
+    from vorn_mat.local_exec import LocalModelConfig, _TransformersGeneratorBase
+
+    class FakeTokenizer:
+        chat_template = "{{ messages }}"
+
+        def apply_chat_template(
+            self,
+            messages,
+            tokenize,
+            add_generation_prompt,
+            enable_thinking,
+        ):
+            assert messages == [{"role": "user", "content": "needle prompt"}]
+            assert tokenize is False
+            assert add_generation_prompt is True
+            assert enable_thinking is False
+            return "rendered prompt"
+
+        def __call__(self, rendered_prompt, add_special_tokens, return_offsets_mapping):
+            assert rendered_prompt == "rendered prompt"
+            assert add_special_tokens is False
+            assert return_offsets_mapping is True
+            return {"offset_mapping": [(0, 8), (9, 15)]}
+
+    generator = _TransformersGeneratorBase(
+        LocalModelConfig(model_id="Qwen/Qwen3-8B")
+    )
+    object.__setattr__(generator, "_tokenizer", FakeTokenizer())
+    object.__setattr__(generator, "_model", object())
+    object.__setattr__(generator, "_device", "cpu")
+
+    rendered_prompt, offsets = generator._render_prompt_text_with_offsets(
+        "needle prompt"
+    )
+
+    assert rendered_prompt == "rendered prompt"
+    assert offsets == ((0, 8), (9, 15))
+
+
 def test_forward_with_hidden_states_allows_attention_outputs_to_be_disabled():
     import torch
 

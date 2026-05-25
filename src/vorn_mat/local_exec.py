@@ -275,6 +275,11 @@ class _TransformersGeneratorBase:
         self._model = model
         self._device = device
 
+    def _chat_template_kwargs(self) -> dict[str, object]:
+        if "qwen3" in self.config.model_id.lower():
+            return {"enable_thinking": False}
+        return {}
+
     def _render_prompt(self, prompt: str) -> tuple[Any, Any]:
         self._ensure_model()
 
@@ -289,6 +294,7 @@ class _TransformersGeneratorBase:
                 messages,
                 add_generation_prompt=True,
                 return_tensors="pt",
+                **self._chat_template_kwargs(),
             )
             if hasattr(inputs, "keys"):
                 input_ids = inputs["input_ids"]
@@ -415,6 +421,7 @@ class _TransformersGeneratorBase:
                 messages,
                 tokenize=False,
                 add_generation_prompt=True,
+                **self._chat_template_kwargs(),
             )
         else:
             rendered_prompt = prompt
