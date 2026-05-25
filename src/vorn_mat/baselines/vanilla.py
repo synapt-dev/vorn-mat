@@ -7,6 +7,7 @@ from typing import Callable, Protocol
 
 from ..benchmarks import BenchmarkCase, score_predictions
 from ..benchmarks.common import build_case_observation
+from ..memory import capture_case_memory_stats, reset_case_memory_stats
 from ..progress import (
     ProgressLogger,
     format_case_progress,
@@ -43,10 +44,17 @@ def run_vanilla(
     observations: list[CaseObservation] = []
     running_hits = 0
     for case_index, case in enumerate(cases, start=1):
+        reset_case_memory_stats()
         prediction = generator.generate(case.prompt)
+        memory_stats = capture_case_memory_stats()
         predictions.append(prediction)
         traces.append(PredictionTrace(case_id=case.case_id, prediction=prediction))
-        observation = build_case_observation(case, prediction)
+        observation = build_case_observation(
+            case,
+            prediction,
+            peak_memory_allocated_mb=memory_stats.peak_memory_allocated_mb,
+            peak_memory_reserved_mb=memory_stats.peak_memory_reserved_mb,
+        )
         observations.append(observation)
         if on_case is not None:
             on_case(observation)

@@ -73,13 +73,21 @@ def exact_match_rate(
     return hits / len(cases)
 
 
-def build_case_observation(case: BenchmarkCase, prediction: str) -> CaseObservation:
+def build_case_observation(
+    case: BenchmarkCase,
+    prediction: str,
+    *,
+    peak_memory_allocated_mb: float | None = None,
+    peak_memory_reserved_mb: float | None = None,
+) -> CaseObservation:
     scored_prediction = score_prediction_text(prediction)
     return CaseObservation(
         fixture_id=case.case_id,
         correct=is_prediction_correct(case, prediction),
         prediction=prediction,
         scored_prediction=scored_prediction if scored_prediction != prediction else None,
+        peak_memory_allocated_mb=peak_memory_allocated_mb,
+        peak_memory_reserved_mb=peak_memory_reserved_mb,
     )
 
 
