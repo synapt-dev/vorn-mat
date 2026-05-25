@@ -816,11 +816,62 @@ def test_select_next_token_rejects_all_nan_logits():
         generator._select_next_token(logits)
 
 
-def test_runtime_event_logging_emits_json_line(capsys):
+def test_runtime_event_logging_defaults_to_progress_only(capsys):
+    from vorn_mat.local_exec import _TransformersGeneratorBase
+
+    generator = _TransformersGeneratorBase()
+
+    generator._emit_runtime_event(
+        "token_step",
+        {
+            "step_index": 0,
+            "next_token_id": 106,
+            "is_terminal": True,
+        },
+    )
+
+    assert capsys.readouterr().out == ""
+
+
+def test_runtime_event_logging_emits_answer_tier(capsys, monkeypatch):
     import json
 
     from vorn_mat.local_exec import _TransformersGeneratorBase
 
+    monkeypatch.setenv("VORN_MAT_RUNTIME_LOG_LEVEL", "answer")
+    generator = _TransformersGeneratorBase()
+
+    generator._emit_runtime_event(
+        "answer_retention_step",
+        {
+            "step_index": 0,
+            "retained_answer_token_count_after": 7,
+        },
+    )
+    generator._emit_runtime_event(
+        "token_step",
+        {
+            "step_index": 0,
+            "next_token_id": 106,
+            "is_terminal": True,
+        },
+    )
+
+    captured = capsys.readouterr().out.strip()
+    prefix, payload = captured.split(" ", 1)
+    assert prefix == "answer_retention_step"
+    assert json.loads(payload) == {
+        "step_index": 0,
+        "retained_answer_token_count_after": 7,
+    }
+
+
+def test_runtime_event_logging_emits_debug_tier(capsys, monkeypatch):
+    import json
+
+    from vorn_mat.local_exec import _TransformersGeneratorBase
+
+    monkeypatch.setenv("VORN_MAT_RUNTIME_LOG_LEVEL", "debug")
     generator = _TransformersGeneratorBase()
 
     generator._emit_runtime_event(

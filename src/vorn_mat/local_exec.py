@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import hashlib
 import json
+import os
 from pathlib import Path
 import time
 from types import MethodType
@@ -93,6 +94,18 @@ class LocalModelConfig:
 
 
 _TELEMETRY_NEAR_MISS_RATIO = 0.75
+_RUNTIME_LOG_LEVELS = {
+    "off": 0,
+    "progress": 1,
+    "answer": 2,
+    "debug": 3,
+}
+_RUNTIME_EVENT_LEVELS = {
+    "answer_retention_step": "answer",
+    "generation_step_start": "debug",
+    "generation_step_forward_done": "debug",
+    "token_step": "debug",
+}
 
 
 def reset_runtime_telemetry() -> None:
@@ -405,6 +418,17 @@ class _TransformersGeneratorBase:
         return candidates
 
     def _emit_runtime_event(self, event: str, payload: dict[str, object]) -> None:
+        configured_level = os.environ.get(
+            "VORN_MAT_RUNTIME_LOG_LEVEL",
+            "progress",
+        ).strip().lower()
+        configured_rank = _RUNTIME_LOG_LEVELS.get(configured_level, 1)
+        event_rank = _RUNTIME_LOG_LEVELS.get(
+            _RUNTIME_EVENT_LEVELS.get(event, "debug"),
+            3,
+        )
+        if configured_rank < event_rank:
+            return
         print(f"{event} " + json.dumps(payload, sort_keys=True), flush=True)
 
     def _render_prompt_text_with_offsets(
