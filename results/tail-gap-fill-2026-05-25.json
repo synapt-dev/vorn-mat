@@ -1,0 +1,123 @@
+{
+  "schema": "result-envelope/v0.2",
+  "artifact_id": "tail-gap-fill-2026-05-25",
+  "created_at": "2026-05-25T13:50:00-05:00",
+  "harness_commit": "a7911e78d45f0c77b401c76b432a12740f3a4977",
+  "modal_profile": "layne-79000",
+  "modal_apps": [
+    "ap-z5ztb34B4gqT5uafptWARb"
+  ],
+  "hf_dataset_repo": "synapt/vorn-mat-cross-family-results",
+  "hf_path": "eval-results/vorn-mat/tail-gap-fill-2026-05-25",
+  "contract": {
+    "dataset_id": "rbiswasfc/ruler",
+    "dataset_config": "niah_multikey_1_4k",
+    "split": "validation[:50]",
+    "max_new_tokens": 32,
+    "precision": "bf16",
+    "gpu": "A100-80GB",
+    "guardrails": "prefix_plus_recent",
+    "memory_telemetry": "default_on",
+    "authorized_cells": 6
+  },
+  "rows": [
+    {
+      "family": "Mistral 7B v0.3",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "method": "h2o",
+      "budget": 256,
+      "status": "oom_partial",
+      "n_completed_before_oom": 3,
+      "hits_before_oom": 0,
+      "hit_rate_before_oom": 0.0,
+      "peak_memory_allocated_mb_before_oom": 53493.838,
+      "peak_memory_reserved_mb_before_oom": 71864.0,
+      "oom_signature": "CUDA OOM in transformers.models.mistral.modeling_mistral eager_attention_forward softmax; attempted 2.09 GiB allocation with 79.03 GiB process memory in use."
+    },
+    {
+      "family": "Mistral 7B v0.3",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "method": "sentence_h2o",
+      "budget": 256,
+      "status": "oom_partial",
+      "n_completed_before_oom": 3,
+      "hits_before_oom": 3,
+      "hit_rate_before_oom": 1.0,
+      "peak_memory_allocated_mb_before_oom": 53493.838,
+      "peak_memory_reserved_mb_before_oom": 71864.0,
+      "oom_signature": "CUDA OOM in transformers.models.mistral.modeling_mistral eager_attention_forward softmax; attempted 2.09 GiB allocation with 79.03 GiB process memory in use."
+    },
+    {
+      "family": "Gemma 4 E4B-it",
+      "model_id": "google/gemma-4-E4B-it",
+      "method": "h2o",
+      "budget": 256,
+      "status": "completed",
+      "n": 50,
+      "hits": 28,
+      "hit_rate": 0.56,
+      "elapsed_seconds": 341.696,
+      "estimated_cost_usd": 0.2371,
+      "peak_memory_allocated_mb": 29944.715,
+      "peak_memory_reserved_mb": 35738.0
+    },
+    {
+      "family": "Gemma 4 E4B-it",
+      "model_id": "google/gemma-4-E4B-it",
+      "method": "sentence_h2o",
+      "budget": 256,
+      "status": "completed",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "elapsed_seconds": 272.108,
+      "estimated_cost_usd": 0.1888,
+      "peak_memory_allocated_mb": 29944.715,
+      "peak_memory_reserved_mb": 35782.0
+    },
+    {
+      "family": "Gemma 4 E4B-it",
+      "model_id": "google/gemma-4-E4B-it",
+      "method": "vorn",
+      "budget": 512,
+      "status": "completed",
+      "n": 50,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "elapsed_seconds": 314.059,
+      "estimated_cost_usd": 0.218,
+      "peak_memory_allocated_mb": 19948.313,
+      "peak_memory_reserved_mb": 26178.0
+    },
+    {
+      "family": "Gemma 4 E4B-it",
+      "model_id": "google/gemma-4-E4B-it",
+      "method": "h2o",
+      "budget": 512,
+      "status": "completed",
+      "n": 50,
+      "hits": 24,
+      "hit_rate": 0.48,
+      "elapsed_seconds": 330.481,
+      "estimated_cost_usd": 0.2294,
+      "peak_memory_allocated_mb": 29944.715,
+      "peak_memory_reserved_mb": 35696.0
+    }
+  ],
+  "wave_summary": {
+    "cells_fired": 6,
+    "cells_completed": 4,
+    "cells_oom_partial": 2,
+    "reported_completed_cell_cost_usd": 0.8733,
+    "note": "Reported cost excludes unreported burn from the two OOM-partial Mistral cells."
+  },
+  "read": {
+    "summary": "Gemma 4 fills all four tail cells; Mistral 7B v0.3 B=256 H2O variants hit the known attention-memory OOM path after three completed fixtures.",
+    "new_completed_matrix_values": [
+      "Gemma 4 E4B-it h2o@256 = 28/50 (0.56)",
+      "Gemma 4 E4B-it sentence_h2o@256 = 49/50 (0.98)",
+      "Gemma 4 E4B-it vorn@512 = 0/50 (0.00)",
+      "Gemma 4 E4B-it h2o@512 = 24/50 (0.48)"
+    ]
+  }
+}

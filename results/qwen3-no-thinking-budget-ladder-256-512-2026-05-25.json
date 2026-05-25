@@ -1,0 +1,458 @@
+{
+  "schema": "result-envelope/v0.2",
+  "artifact_id": "qwen3-no-thinking-budget-ladder-256-512-2026-05-25",
+  "created_at": "2026-05-25T13:35:00-05:00",
+  "harness_commit": "a7911e78d45f0c77b401c76b432a12740f3a4977",
+  "modal_profile": "layne-79000",
+  "modal_apps": [
+    "ap-zGF3cVwvi0CIaxfOvfIvcK",
+    "ap-BDrCCLwfcZwD1MSZ2TpbMO",
+    "ap-5XiAMSXc1nLlDvVEFaIJMk",
+    "ap-HDhPvagjY0Vq6Rkoj7fDTN"
+  ],
+  "hf_dataset_repo": "synapt/vorn-mat-cross-family-results",
+  "hf_path": "eval-results/vorn-mat/qwen3-no-thinking-4k-budget-ladder-2026-05-25",
+  "contract": {
+    "model_id": "Qwen/Qwen3-8B",
+    "enable_thinking": false,
+    "dataset_id": "rbiswasfc/ruler",
+    "dataset_config": "niah_multikey_1_4k",
+    "split": "validation[:50]",
+    "budgets": [
+      256,
+      512
+    ],
+    "methods": [
+      "vorn",
+      "sentence_vorn",
+      "tova",
+      "sentence_tova",
+      "h2o",
+      "sentence_h2o"
+    ],
+    "extra_anchor": {
+      "method": "vanilla",
+      "budget": 1024
+    },
+    "max_new_tokens": 32,
+    "memory_telemetry": "default_on"
+  },
+  "rows": [
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "vorn",
+      "budget": 256,
+      "status": "completed",
+      "n": 50,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 0.2104,
+      "reported_success_elapsed_seconds": 303.21,
+      "peak_memory_allocated_mb": 21434.99,
+      "peak_memory_reserved_mb": 32386.0,
+      "chunks": [
+        {
+          "source": "b256-b512-output",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.2104,
+          "elapsed_seconds": 303.21
+        }
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "sentence_vorn",
+      "budget": 256,
+      "status": "completed",
+      "n": 50,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 0.1782,
+      "reported_success_elapsed_seconds": 256.725,
+      "peak_memory_allocated_mb": 21434.99,
+      "peak_memory_reserved_mb": 32386.0,
+      "chunks": [
+        {
+          "source": "b256-b512-output",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.1782,
+          "elapsed_seconds": 256.725
+        }
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "tova",
+      "budget": 256,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 0.1148,
+      "reported_success_elapsed_seconds": 165.438,
+      "peak_memory_allocated_mb": 53286.166,
+      "peak_memory_reserved_mb": 74078.0,
+      "chunks": [
+        {
+          "source": "recovery-output",
+          "case_offset_start": 34,
+          "case_count": 16,
+          "estimated_cost_usd": 0.1148,
+          "elapsed_seconds": 165.438
+        }
+      ],
+      "notes": [
+        "Initial full-cell attention run OOMed around case 34; completed via case_offset_start recovery chunks."
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "sentence_tova",
+      "budget": 256,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 20,
+      "hit_rate": 0.4,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 0.0999,
+      "reported_success_elapsed_seconds": 143.921,
+      "peak_memory_allocated_mb": 53286.166,
+      "peak_memory_reserved_mb": 74078.0,
+      "chunks": [
+        {
+          "source": "recovery-output",
+          "case_offset_start": 34,
+          "case_count": 16,
+          "estimated_cost_usd": 0.0999,
+          "elapsed_seconds": 143.921
+        }
+      ],
+      "notes": [
+        "Initial full-cell attention run OOMed around case 34; completed via case_offset_start recovery chunks."
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "h2o",
+      "budget": 256,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 0.0986,
+      "reported_success_elapsed_seconds": 142.124,
+      "peak_memory_allocated_mb": 53284.99,
+      "peak_memory_reserved_mb": 74078.0,
+      "chunks": [
+        {
+          "source": "recovery-output",
+          "case_offset_start": 34,
+          "case_count": 16,
+          "estimated_cost_usd": 0.0986,
+          "elapsed_seconds": 142.124
+        }
+      ],
+      "notes": [
+        "Initial full-cell attention run OOMed around case 34; completed via case_offset_start recovery chunks."
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "sentence_h2o",
+      "budget": 256,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 20,
+      "hit_rate": 0.4,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 0.1121,
+      "reported_success_elapsed_seconds": 161.581,
+      "peak_memory_allocated_mb": 53286.166,
+      "peak_memory_reserved_mb": 74078.0,
+      "chunks": [
+        {
+          "source": "recovery-output",
+          "case_offset_start": 34,
+          "case_count": 16,
+          "estimated_cost_usd": 0.1121,
+          "elapsed_seconds": 161.581
+        }
+      ],
+      "notes": [
+        "Initial full-cell attention run OOMed around case 34; completed via case_offset_start recovery chunks."
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "vorn",
+      "budget": 512,
+      "status": "completed",
+      "n": 50,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 0.2865,
+      "reported_success_elapsed_seconds": 412.845,
+      "peak_memory_allocated_mb": 21434.99,
+      "peak_memory_reserved_mb": 32388.0,
+      "chunks": [
+        {
+          "source": "b256-b512-output",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.2865,
+          "elapsed_seconds": 412.845
+        }
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "sentence_vorn",
+      "budget": 512,
+      "status": "completed",
+      "n": 50,
+      "hits": 7,
+      "hit_rate": 0.14,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 0.2051,
+      "reported_success_elapsed_seconds": 295.484,
+      "peak_memory_allocated_mb": 21434.99,
+      "peak_memory_reserved_mb": 32388.0,
+      "chunks": [
+        {
+          "source": "b256-b512-output",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.2051,
+          "elapsed_seconds": 295.484
+        }
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "tova",
+      "budget": 512,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 0.1405,
+      "reported_success_elapsed_seconds": 202.4,
+      "peak_memory_allocated_mb": 53286.166,
+      "peak_memory_reserved_mb": 74080.0,
+      "chunks": [
+        {
+          "source": "recovery-output",
+          "case_offset_start": 34,
+          "case_count": 16,
+          "estimated_cost_usd": 0.1405,
+          "elapsed_seconds": 202.4
+        }
+      ],
+      "notes": [
+        "Initial full-cell attention run OOMed around case 34; completed via case_offset_start recovery chunks."
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "sentence_tova",
+      "budget": 512,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 35,
+      "hit_rate": 0.7,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 0.1172,
+      "reported_success_elapsed_seconds": 168.818,
+      "peak_memory_allocated_mb": 53286.166,
+      "peak_memory_reserved_mb": 74080.0,
+      "chunks": [
+        {
+          "source": "recovery-output",
+          "case_offset_start": 34,
+          "case_count": 16,
+          "estimated_cost_usd": 0.1172,
+          "elapsed_seconds": 168.818
+        }
+      ],
+      "notes": [
+        "Initial full-cell attention run OOMed around case 34; completed via case_offset_start recovery chunks."
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "h2o",
+      "budget": 512,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 0,
+      "hit_rate": 0.0,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 0.1382,
+      "reported_success_elapsed_seconds": 199.137,
+      "peak_memory_allocated_mb": 53286.166,
+      "peak_memory_reserved_mb": 79502.0,
+      "chunks": [
+        {
+          "source": "recovery-output",
+          "case_offset_start": 34,
+          "case_count": 16,
+          "estimated_cost_usd": 0.1382,
+          "elapsed_seconds": 199.137
+        }
+      ],
+      "notes": [
+        "Initial full-cell attention run OOMed around case 34; completed via case_offset_start recovery chunks."
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "sentence_h2o",
+      "budget": 512,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 36,
+      "hit_rate": 0.72,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 1.0186,
+      "reported_success_elapsed_seconds": 1467.78,
+      "peak_memory_allocated_mb": 53286.166,
+      "peak_memory_reserved_mb": 79502.0,
+      "chunks": [
+        {
+          "source": "recovery-output",
+          "case_offset_start": 34,
+          "case_count": 16,
+          "estimated_cost_usd": 0.123,
+          "elapsed_seconds": 177.196
+        },
+        {
+          "source": "sentence-h2o-b512-microrecovery-output",
+          "case_offset_start": 5,
+          "case_count": 3,
+          "estimated_cost_usd": 0.091,
+          "elapsed_seconds": 131.076
+        },
+        {
+          "source": "sentence-h2o-b512-microrecovery-output",
+          "case_offset_start": 8,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0879,
+          "elapsed_seconds": 126.655
+        },
+        {
+          "source": "sentence-h2o-b512-microrecovery-output",
+          "case_offset_start": 11,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0987,
+          "elapsed_seconds": 142.266
+        },
+        {
+          "source": "sentence-h2o-b512-microrecovery-output",
+          "case_offset_start": 14,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0905,
+          "elapsed_seconds": 130.338
+        },
+        {
+          "source": "sentence-h2o-b512-microrecovery-output",
+          "case_offset_start": 17,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0995,
+          "elapsed_seconds": 143.437
+        },
+        {
+          "source": "sentence-h2o-b512-microrecovery-output",
+          "case_offset_start": 20,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0814,
+          "elapsed_seconds": 117.238
+        },
+        {
+          "source": "sentence-h2o-b512-microrecovery-output",
+          "case_offset_start": 23,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0838,
+          "elapsed_seconds": 120.744
+        },
+        {
+          "source": "sentence-h2o-b512-microrecovery-output",
+          "case_offset_start": 26,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0888,
+          "elapsed_seconds": 127.921
+        },
+        {
+          "source": "sentence-h2o-b512-microrecovery-output",
+          "case_offset_start": 29,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0894,
+          "elapsed_seconds": 128.89
+        },
+        {
+          "source": "sentence-h2o-b512-microrecovery-output",
+          "case_offset_start": 32,
+          "case_count": 2,
+          "estimated_cost_usd": 0.0847,
+          "elapsed_seconds": 122.019
+        }
+      ],
+      "notes": [
+        "Initial full-cell attention run OOMed around case 34; completed via case_offset_start recovery chunks.",
+        "Offset-2 recovery chunk hit an infra/GPU XID after cases 2-4; cases 5-33 recovered via microchunks and cases 34-49 via back-16 chunk."
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "vanilla",
+      "budget": 1024,
+      "status": "completed",
+      "n": 50,
+      "hits": 50,
+      "hit_rate": 1.0,
+      "reported_success_cost_usd": 0.1601,
+      "reported_success_elapsed_seconds": 230.638,
+      "peak_memory_allocated_mb": 20938.232,
+      "peak_memory_reserved_mb": 28762.0
+    }
+  ],
+  "read": {
+    "summary": "Qwen3 no-thinking vanilla is perfect at full context, while low-budget token policies collapse and sentence attention policies retain partial retrieval. Attention rows required case-offset recovery after repeatable cumulative OOM around case 34.",
+    "qwen3_vanilla_b1024_hit_rate": 1.0,
+    "qwen3_best_low_budget_row": "sentence_h2o@512 = 36/50 (0.72)",
+    "qwen3_attention_oom_pattern": "repeatable cumulative OOM around case 34 on attention-output rows; recovered with case_offset_start/back-chunk and microchunk retries."
+  }
+}
