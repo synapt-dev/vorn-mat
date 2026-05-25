@@ -1,0 +1,117 @@
+{
+  "artifact_id": "mistral-memory-rerun-2026-05-25",
+  "created_at": "2026-05-25",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "dataset_id": "rbiswasfc/ruler",
+  "dataset_config": "niah_multikey_1_4k",
+  "split": "validation[:50]",
+  "precision": "bf16 model load on patched vorn-mat substrate",
+  "gpu": "A100-80GB",
+  "max_new_tokens": 32,
+  "guardrails": "prefix_plus_recent",
+  "raw_hf_path": "https://huggingface.co/datasets/synapt/vorn-mat-cross-family-results/tree/main/eval-results/vorn-mat/mistral-memory-rerun-2026-05-25",
+  "read": "Current-substrate rerun of Mistral late-budget rows with default per-case memory telemetry. Vorn controls complete with low memory. TOVA at 2048 now completes but runs near the A100-80GB ceiling. TOVA at 1536 and sentence-TOVA at 1536/2048 reproduce the historical OOM boundary after three completed fixtures.",
+  "rows": [
+    {
+      "method": "vorn",
+      "budget": 1536,
+      "status": "completed",
+      "n": 50,
+      "hits": 48,
+      "hit_rate": 0.96,
+      "elapsed_seconds": 624.405,
+      "estimated_cost_usd": 0.4333,
+      "peak_memory_allocated_mb": 20437.104,
+      "peak_memory_reserved_mb": 35610.0
+    },
+    {
+      "method": "sentence_vorn",
+      "budget": 1536,
+      "status": "completed",
+      "n": 50,
+      "hits": 50,
+      "hit_rate": 1.0,
+      "elapsed_seconds": 306.195,
+      "estimated_cost_usd": 0.2125,
+      "peak_memory_allocated_mb": 20437.104,
+      "peak_memory_reserved_mb": 35610.0
+    },
+    {
+      "method": "tova",
+      "budget": 1536,
+      "status": "failed_oom",
+      "n_completed_before_oom": 3,
+      "hits_before_oom": 3,
+      "peak_memory_allocated_mb_before_oom": 54961.856,
+      "peak_memory_reserved_mb_before_oom": 72440.0,
+      "oom_signature": "CUDA OOM in transformers.models.mistral.modeling_mistral eager_attention_forward softmax; attempted 2.09 GiB allocation with 77.50 GiB process memory in use."
+    },
+    {
+      "method": "sentence_tova",
+      "budget": 1536,
+      "status": "failed_oom",
+      "n_completed_before_oom": 3,
+      "hits_before_oom": 3,
+      "peak_memory_allocated_mb_before_oom": 54927.37,
+      "peak_memory_reserved_mb_before_oom": 72440.0,
+      "oom_signature": "CUDA OOM in transformers.models.mistral.modeling_mistral eager_attention_forward softmax; attempted 2.09 GiB allocation with 77.50 GiB process memory in use."
+    },
+    {
+      "method": "vorn",
+      "budget": 2048,
+      "status": "completed",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "elapsed_seconds": 868.786,
+      "estimated_cost_usd": 0.6029,
+      "peak_memory_allocated_mb": 20437.104,
+      "peak_memory_reserved_mb": 35610.0
+    },
+    {
+      "method": "sentence_vorn",
+      "budget": 2048,
+      "status": "completed",
+      "n": 50,
+      "hits": 50,
+      "hit_rate": 1.0,
+      "elapsed_seconds": 435.269,
+      "estimated_cost_usd": 0.3021,
+      "peak_memory_allocated_mb": 20437.104,
+      "peak_memory_reserved_mb": 35610.0
+    },
+    {
+      "method": "tova",
+      "budget": 2048,
+      "status": "completed",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "elapsed_seconds": 755.745,
+      "estimated_cost_usd": 0.5245,
+      "peak_memory_allocated_mb": 59346.583,
+      "peak_memory_reserved_mb": 79298.0
+    },
+    {
+      "method": "sentence_tova",
+      "budget": 2048,
+      "status": "failed_oom",
+      "n_completed_before_oom": 3,
+      "hits_before_oom": 3,
+      "peak_memory_allocated_mb_before_oom": 59104.685,
+      "peak_memory_reserved_mb_before_oom": 78856.0,
+      "oom_signature": "CUDA OOM in transformers.models.mistral.modeling_mistral eager_attention_forward softmax; attempted 2.09 GiB allocation with 77.50 GiB process memory in use."
+    }
+  ],
+  "provenance": {
+    "modal_profile": "layne-79000",
+    "modal_apps": [
+      "ap-masMnJzf1YjSdS9LSMlRg0",
+      "ap-5LQPfXZtNjke5znzo9o6af",
+      "ap-fTv7tiwaYdJLRFYmLWFdRJ",
+      "ap-VmxSEQCiTpcQ8RbH7kAiOn"
+    ],
+    "local_artifact_root": "vorn-mat/.benchmarks/mistral-memory-rerun-2026-05-25",
+    "hf_raw_artifact_root": "eval-results/vorn-mat/mistral-memory-rerun-2026-05-25"
+  }
+}
