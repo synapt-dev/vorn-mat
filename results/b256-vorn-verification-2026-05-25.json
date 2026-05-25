@@ -1,0 +1,117 @@
+{
+  "schema": "result-envelope/v0.2",
+  "artifact_id": "b256-vorn-verification-2026-05-25",
+  "created_at": "2026-05-25T18:06:14-05:00",
+  "harness_commit": "d9a09bd4485b33f2cfe641fb16dc309e11e425a9",
+  "modal_profile": "layne-79000",
+  "modal_apps": [
+    "ap-9o1bhVERTz5ONtoeAkHkGV"
+  ],
+  "hf_dataset_repo": "synapt/vorn-mat-cross-family-results",
+  "hf_path": "eval-results/vorn-mat/b256-vorn-verification-2026-05-25",
+  "contract": {
+    "dataset_id": "rbiswasfc/ruler",
+    "dataset_config": "niah_multikey_1_4k",
+    "split": "validation[:50]",
+    "max_new_tokens": 32,
+    "precision": "bf16",
+    "gpu": "A100-80GB",
+    "guardrails": "prefix_plus_recent",
+    "memory_telemetry": "default_on",
+    "budget": 256,
+    "authorized_cells": 4
+  },
+  "rows": [
+    {
+      "family": "Mistral 7B v0.3",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "method": "vorn",
+      "budget": 256,
+      "status": "completed",
+      "n": 50,
+      "hits": 45,
+      "hit_rate": 0.9,
+      "elapsed_seconds": 256.138,
+      "estimated_cost_usd": 0.1778,
+      "peak_memory_allocated_mb": 20437.104,
+      "peak_memory_reserved_mb": 35610.0,
+      "mean_retention_ratio": 0.0612,
+      "total_eviction_steps": 1092
+    },
+    {
+      "family": "Mistral 7B v0.3",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "method": "sentence_vorn",
+      "budget": 256,
+      "status": "completed",
+      "n": 50,
+      "hits": 28,
+      "hit_rate": 0.56,
+      "elapsed_seconds": 207.726,
+      "estimated_cost_usd": 0.1442,
+      "peak_memory_allocated_mb": 20437.104,
+      "peak_memory_reserved_mb": 35610.0,
+      "mean_retention_ratio": 0.0562,
+      "total_eviction_steps": 80
+    },
+    {
+      "family": "Llama 3.1 8B",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "method": "vorn",
+      "budget": 256,
+      "status": "completed",
+      "n": 50,
+      "hits": 27,
+      "hit_rate": 0.54,
+      "elapsed_seconds": 235.997,
+      "estimated_cost_usd": 0.1638,
+      "peak_memory_allocated_mb": 20984.149,
+      "peak_memory_reserved_mb": 33780.0,
+      "mean_retention_ratio": 0.0666,
+      "total_eviction_steps": 932
+    },
+    {
+      "family": "Llama 3.1 8B",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "method": "sentence_vorn",
+      "budget": 256,
+      "status": "completed",
+      "n": 50,
+      "hits": 50,
+      "hit_rate": 1.0,
+      "elapsed_seconds": 202.652,
+      "estimated_cost_usd": 0.1406,
+      "peak_memory_allocated_mb": 20984.149,
+      "peak_memory_reserved_mb": 33780.0,
+      "mean_retention_ratio": 0.0624,
+      "total_eviction_steps": 86
+    }
+  ],
+  "wave_summary": {
+    "cells_fired": 4,
+    "cells_completed": 4,
+    "cells_failed": 0,
+    "total_estimated_cost_usd": 0.6263,
+    "max_elapsed_seconds": 256.138
+  },
+  "read": {
+    "summary": "Current-substrate B=256 verification confirms the Mistral sentence-vorn low-budget regression and the Llama sentence-vorn ceiling-stability pattern.",
+    "matrix_updates": [
+      "Mistral 7B v0.3 vorn@256 = 45/50 (0.90)",
+      "Mistral 7B v0.3 sentence_vorn@256 = 28/50 (0.56)",
+      "Llama 3.1 8B vorn@256 = 27/50 (0.54)",
+      "Llama 3.1 8B sentence_vorn@256 = 50/50 (1.00)"
+    ],
+    "interpretation": [
+      "Mistral sentence-vorn remains below token-vorn at B=256 under the current patched substrate, so the counterintuitive 50%-ish sentence result is not explained by stale harness drift.",
+      "Llama token-vorn remains near the prior low-budget value while sentence-vorn remains ceiling-preserving at B=256."
+    ]
+  },
+  "provenance": {
+    "cell_spec_path": "vorn-mat/.benchmarks/b256-vorn-verification-2026-05-25/cell-specs.json",
+    "local_report_path": "vorn-mat/.benchmarks/b256-vorn-verification-2026-05-25/reports.json",
+    "local_volume_pull_path": "vorn-mat/.benchmarks/b256-vorn-verification-2026-05-25/raw/b256-vorn-verification-2026-05-25",
+    "runner": "examples/run_modal_cells_parallel.py",
+    "profile": "layne-79000"
+  }
+}
