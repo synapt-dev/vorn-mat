@@ -14,6 +14,8 @@ class CaseObservation:
     correct: bool
     prediction: str
     scored_prediction: str | None = None
+    peak_memory_allocated_mb: float | None = None
+    peak_memory_reserved_mb: float | None = None
 
 
 @dataclass(frozen=True)

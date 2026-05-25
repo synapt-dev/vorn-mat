@@ -9,7 +9,8 @@ from typing import Any, Callable, Protocol, Sequence
 import numpy as np
 
 from ..benchmarks import BenchmarkCase, score_predictions
-from ..benchmarks.common import build_case_observation, build_case_observations
+from ..benchmarks.common import build_case_observation
+from ..memory import capture_case_memory_stats, reset_case_memory_stats
 from ..progress import (
     ProgressLogger,
     format_case_progress,
@@ -656,6 +657,7 @@ def run_live_eviction(
     adaptive_selector_contract = ""
     edge_kinds: set[str] = set()
     suite_ids: set[str] = set()
+    observations: list[CaseObservation] = []
 
     n_cases = len(cases)
     if progress_logger is not None:
@@ -663,12 +665,14 @@ def run_live_eviction(
     running_hits = 0
 
     for case_index, case in enumerate(cases, start=1):
+        reset_case_memory_stats()
         prediction, stats = generator.generate_with_live_eviction(
             case.prompt,
             config,
             case_id=case.case_id,
             expected_answer=case.expected_answer,
         )
+        memory_stats = capture_case_memory_stats()
         predictions.append(prediction)
         edge_kind = case.metadata.get("edge_kind", "")
         suite_id = case.metadata.get("suite_id", "")
@@ -681,7 +685,13 @@ def run_live_eviction(
                 edge_kind=edge_kind,
             )
         )
-        observation = build_case_observation(case, prediction)
+        observation = build_case_observation(
+            case,
+            prediction,
+            peak_memory_allocated_mb=memory_stats.peak_memory_allocated_mb,
+            peak_memory_reserved_mb=memory_stats.peak_memory_reserved_mb,
+        )
+        observations.append(observation)
         if on_case is not None:
             on_case(observation)
         if observation.correct:
@@ -717,7 +727,6 @@ def run_live_eviction(
         suite_id_value = ",".join(sorted(suite_ids))
 
     metrics = score_predictions(plan.benchmark.name, cases, tuple(predictions))
-    observations = build_case_observations(cases, tuple(predictions))
     if progress_logger is not None:
         progress_logger(
             format_complete(n_cases, running_hits / n_cases if n_cases else 0.0)
@@ -763,6 +772,6 @@ def run_live_eviction(
             "edge_kinds": ",".join(sorted(edge_kinds)),
         },
         preprocessing_elapsed_seconds=total_preprocessing_elapsed_seconds,
-        observations=observations,
+        observations=tuple(observations),
     )
     return result, tuple(traces)
