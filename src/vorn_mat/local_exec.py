@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 import time
 from types import MethodType
-from typing import Any
+from typing import Any, Sequence
 
 import numpy as np
 
@@ -176,6 +176,57 @@ ANSWER_FROM_SUMMARY_PREFIX = (
 )
 ANSWER_FROM_SUMMARY_MIDDLE = "\n\nQuestion:\n"
 ANSWER_FROM_SUMMARY_SUFFIX = "\n\nAnswer:"
+
+
+def _answer_retention_payload(
+    *,
+    case_id: str,
+    expected_answer: str | None,
+    answer_token_spans: Sequence[tuple[int, int]],
+    active_absolute_positions: Sequence[int],
+    keep_positions: Sequence[int],
+) -> dict[str, object]:
+    answer_positions = tuple(
+        position
+        for start, end in answer_token_spans
+        for position in range(start, end)
+    )
+    active_answer_positions = tuple(
+        position for position in answer_positions if position in set(active_absolute_positions)
+    )
+    kept_absolute_positions = tuple(
+        int(active_absolute_positions[position])
+        for position in keep_positions
+        if 0 <= position < len(active_absolute_positions)
+    )
+    kept_set = set(kept_absolute_positions)
+    retained_answer_positions = tuple(
+        position for position in active_answer_positions if position in kept_set
+    )
+    dropped_answer_positions = tuple(
+        position for position in active_answer_positions if position not in kept_set
+    )
+    return {
+        "case_id": case_id,
+        "expected_answer": expected_answer or "",
+        "answer_span_count": len(answer_token_spans),
+        "answer_token_count": len(answer_positions),
+        "active_answer_token_count_before": len(active_answer_positions),
+        "retained_answer_token_count_after": len(retained_answer_positions),
+        "dropped_answer_token_count_this_step": len(dropped_answer_positions),
+        "answer_fully_active_before": bool(
+            answer_positions and len(active_answer_positions) == len(answer_positions)
+        ),
+        "answer_fully_retained_after": bool(
+            answer_positions and len(retained_answer_positions) == len(answer_positions)
+        ),
+        "answer_fully_dropped_after": bool(
+            answer_positions and len(retained_answer_positions) == 0
+        ),
+        "answer_positions": list(answer_positions),
+        "retained_answer_positions": list(retained_answer_positions),
+        "dropped_answer_positions": list(dropped_answer_positions),
+    }
 
 
 class _TransformersGeneratorBase:
@@ -467,11 +518,16 @@ class _TransformersGeneratorBase:
         with torch.no_grad():
             model_type = getattr(getattr(self._model, "config", None), "model_type", "")
             if model_type == "gemma3":
+                compact_cache_position = torch.arange(
+                    input_ids.shape[-1],
+                    device=input_ids.device,
+                    dtype=torch.long,
+                )
                 prepared = self._model.prepare_inputs_for_generation(
                     input_ids=input_ids,
                     attention_mask=attention_mask,
                     position_ids=position_ids,
-                    cache_position=position_ids[0],
+                    cache_position=compact_cache_position,
                     use_cache=False,
                     is_first_iteration=True,
                 )
@@ -1113,6 +1169,9 @@ class TransformersLiveEvictionGenerator(
         self,
         prompt: str,
         config: LiveEvictionConfig,
+        *,
+        case_id: str = "",
+        expected_answer: str | None = None,
     ) -> tuple[str, LiveEvictionStats]:
         self._ensure_model()
 
@@ -1122,6 +1181,14 @@ class TransformersLiveEvictionGenerator(
 
         prompt_input_ids, prompt_attention_mask = self._render_prompt(prompt)
         prompt_token_count = int(prompt_input_ids.shape[-1])
+        answer_token_spans: tuple[tuple[int, int], ...] = ()
+        if expected_answer:
+            prompt_token_ids = prompt_input_ids[0].detach().cpu().tolist()
+            answer_ids = self._tokenizer(
+                expected_answer,
+                add_special_tokens=False,
+            )["input_ids"]
+            answer_token_spans = find_subsequence_spans(prompt_token_ids, answer_ids)
         prompt_unit_ids: tuple[int, ...] = ()
         sentence_level_policies = {
             "sentence_vorn",
@@ -1433,6 +1500,31 @@ class TransformersLiveEvictionGenerator(
                     keep_positions,
                     device=active_input_ids.device,
                 )
+                if expected_answer is not None:
+                    active_absolute_positions = tuple(
+                        int(position)
+                        for position in active_position_ids[0]
+                        .detach()
+                        .cpu()
+                        .tolist()
+                    )
+                    self._emit_runtime_event(
+                        "answer_retention_step",
+                        {
+                            "model_id": self.config.model_id,
+                            "retention_policy": config.retention_policy,
+                            "cache_budget_tokens": config.cache_budget_tokens,
+                            "step_index": step_index,
+                            "eviction_steps": eviction_steps + 1,
+                            **_answer_retention_payload(
+                                case_id=case_id,
+                                expected_answer=expected_answer,
+                                answer_token_spans=answer_token_spans,
+                                active_absolute_positions=active_absolute_positions,
+                                keep_positions=keep_positions,
+                            ),
+                        },
+                    )
                 active_input_ids = active_input_ids.index_select(1, keep_tensor)
                 active_attention_mask = active_attention_mask.index_select(1, keep_tensor)
                 active_position_ids = active_position_ids.index_select(1, keep_tensor)

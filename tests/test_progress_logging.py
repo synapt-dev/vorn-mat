@@ -74,7 +74,7 @@ class _FakeLiveGenerator(LiveEvictionTextGenerator):
         self.answers = answers
         self.stats = stats
 
-    def generate_with_live_eviction(self, prompt: str, config):
+    def generate_with_live_eviction(self, prompt: str, config, **kwargs):
         return self.answers[prompt], self.stats
 
 

@@ -82,6 +82,9 @@ class LiveEvictionTextGenerator(Protocol):
         self,
         prompt: str,
         config: LiveEvictionConfig,
+        *,
+        case_id: str = "",
+        expected_answer: str | None = None,
     ) -> tuple[str, LiveEvictionStats]: ...
 
 
@@ -660,7 +663,12 @@ def run_live_eviction(
     running_hits = 0
 
     for case_index, case in enumerate(cases, start=1):
-        prediction, stats = generator.generate_with_live_eviction(case.prompt, config)
+        prediction, stats = generator.generate_with_live_eviction(
+            case.prompt,
+            config,
+            case_id=case.case_id,
+            expected_answer=case.expected_answer,
+        )
         predictions.append(prediction)
         edge_kind = case.metadata.get("edge_kind", "")
         suite_id = case.metadata.get("suite_id", "")

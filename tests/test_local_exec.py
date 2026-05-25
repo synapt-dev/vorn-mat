@@ -45,7 +45,7 @@ class FakeLiveGenerator(LiveEvictionTextGenerator):
         self.answers = answers
         self.stats = stats
 
-    def generate_with_live_eviction(self, prompt: str, config):
+    def generate_with_live_eviction(self, prompt: str, config, **kwargs):
         return self.answers[prompt], self.stats
 
 
@@ -539,7 +539,7 @@ def test_forward_with_hidden_states_allows_attention_outputs_to_be_disabled():
     assert fake_model.calls[0]["output_attentions"] is False
 
 
-def test_forward_with_hidden_states_uses_prepare_inputs_for_gemma3():
+def test_forward_with_hidden_states_uses_compact_cache_position_for_gemma3():
     import torch
 
     from vorn_mat.local_exec import _TransformersGeneratorBase
@@ -571,7 +571,7 @@ def test_forward_with_hidden_states_uses_prepare_inputs_for_gemma3():
     object.__setattr__(generator, "_model", fake_model)
     object.__setattr__(generator, "_device", "cpu")
 
-    position_ids = torch.tensor([[0, 1, 2]])
+    position_ids = torch.tensor([[0, 7, 42]])
     result = generator._forward_with_hidden_states(
         input_ids=torch.tensor([[1, 2, 3]]),
         attention_mask=torch.tensor([[1, 1, 1]]),
@@ -581,11 +581,34 @@ def test_forward_with_hidden_states_uses_prepare_inputs_for_gemma3():
 
     assert result is not None
     assert fake_model.prepare_calls[0]["cache_position"].tolist() == [0, 1, 2]
-    assert fake_model.prepare_calls[0]["position_ids"].tolist() == [[0, 1, 2]]
+    assert fake_model.prepare_calls[0]["position_ids"].tolist() == [[0, 7, 42]]
     assert fake_model.calls[0]["cache_position"].tolist() == [0, 1, 2]
-    assert fake_model.calls[0]["position_ids"].tolist() == [[0, 1, 2]]
+    assert fake_model.calls[0]["position_ids"].tolist() == [[0, 7, 42]]
     assert fake_model.calls[0]["output_hidden_states"] is True
     assert fake_model.calls[0]["output_attentions"] is False
+
+
+def test_answer_retention_payload_reports_retained_and_dropped_answer_tokens():
+    from vorn_mat.local_exec import _answer_retention_payload
+
+    payload = _answer_retention_payload(
+        case_id="fixture-1",
+        expected_answer="1234",
+        answer_token_spans=((10, 14),),
+        active_absolute_positions=(0, 10, 11, 12, 13, 20),
+        keep_positions=(0, 1, 3, 5),
+    )
+
+    assert payload["case_id"] == "fixture-1"
+    assert payload["answer_positions"] == [10, 11, 12, 13]
+    assert payload["retained_answer_positions"] == [10, 12]
+    assert payload["dropped_answer_positions"] == [11, 13]
+    assert payload["active_answer_token_count_before"] == 4
+    assert payload["retained_answer_token_count_after"] == 2
+    assert payload["dropped_answer_token_count_this_step"] == 2
+    assert payload["answer_fully_active_before"] is True
+    assert payload["answer_fully_retained_after"] is False
+    assert payload["answer_fully_dropped_after"] is False
 
 
 def test_terminal_token_ids_prefer_generation_config_over_tokenizer_eos():
