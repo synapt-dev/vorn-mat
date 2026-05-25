@@ -57,6 +57,7 @@ class ModalLiveEvictionRunRequest:
     dataset_config: str = "niah_multikey_1_4k"
     split: str = "validation"
     case_limit: int = 50
+    case_offset_start: int = 0
     benchmark: str = "niah"
     output_path: str | None = None
     max_new_tokens: int = 32
@@ -80,6 +81,7 @@ class ModalLiveEvictionRunReport:
     dataset_config: str
     split: str
     case_count: int
+    case_offset_start: int
     elapsed_seconds: float
     estimated_cost_usd: float
     cache_budget_tokens: int
@@ -206,6 +208,7 @@ def run_modal_live_eviction_niah(
         request.dataset_config,
         split=request.split,
         case_limit=request.case_limit,
+        case_offset_start=request.case_offset_start,
     )
     plan = select_live_eviction_plan(
         cache_budget_tokens=request.cache_budget_tokens,
@@ -249,6 +252,7 @@ def run_modal_live_eviction_niah(
             "dataset_config": request.dataset_config,
             "split": request.split,
             "case_count": str(len(cases)),
+            "case_offset_start": str(request.case_offset_start),
             "model": request.model_id,
             "model_id": request.model_id,
             "elapsed_seconds": f"{elapsed_seconds:.3f}",
@@ -290,6 +294,7 @@ def run_modal_live_eviction_niah(
         dataset_config=request.dataset_config,
         split=request.split,
         case_count=len(cases),
+        case_offset_start=request.case_offset_start,
         elapsed_seconds=elapsed_seconds,
         estimated_cost_usd=estimated_cost_usd,
         cache_budget_tokens=request.cache_budget_tokens,

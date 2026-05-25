@@ -21,7 +21,7 @@ def test_run_modal_vanilla_niah_enriches_result_metadata(monkeypatch):
     monkeypatch.setattr(
         remote_exec,
         "load_ruler_hf_niah_slice",
-        lambda dataset_config, split, case_limit: (
+        lambda dataset_config, split, case_limit, **kwargs: (
             BenchmarkCase("c1", "prompt", "answer", {}),
         ),
     )
@@ -82,12 +82,16 @@ def test_run_modal_vanilla_niah_enriches_result_metadata(monkeypatch):
 
 
 def test_run_modal_live_eviction_niah_enriches_result_metadata(monkeypatch):
+    loader_calls = []
+
+    def fake_load_slice(dataset_config, split, case_limit, **kwargs):
+        loader_calls.append((dataset_config, split, case_limit, kwargs))
+        return (BenchmarkCase("c1", "prompt", "answer", {}),)
+
     monkeypatch.setattr(
         remote_exec,
         "load_ruler_hf_niah_slice",
-        lambda dataset_config, split, case_limit: (
-            BenchmarkCase("c1", "prompt", "answer", {}),
-        ),
+        fake_load_slice,
     )
     class Plan:
         class Run:
@@ -158,7 +162,8 @@ def test_run_modal_live_eviction_niah_enriches_result_metadata(monkeypatch):
     counter = iter([20.0, 36.0])
     report = remote_exec.run_modal_live_eviction_niah(
         remote_exec.ModalLiveEvictionRunRequest(
-            case_limit=1,
+            case_limit=16,
+            case_offset_start=34,
             cache_budget_tokens=256,
             retention_policy="random",
             random_seed=23,
@@ -170,12 +175,22 @@ def test_run_modal_live_eviction_niah_enriches_result_metadata(monkeypatch):
     )
 
     assert report.dataset_config == "niah_multikey_1_4k"
+    assert loader_calls == [
+        (
+            "niah_multikey_1_4k",
+            "validation",
+            16,
+            {"case_offset_start": 34},
+        )
+    ]
     assert report.case_count == 1
+    assert report.case_offset_start == 34
     assert report.cache_budget_tokens == 256
     assert report.retention_policy == "random"
     assert report.elapsed_seconds == 16.0
     assert report.estimated_cost_usd == 16.0 * remote_exec.A100_80GB_PER_SECOND
     assert report.result.metadata["case_count"] == "1"
+    assert report.result.metadata["case_offset_start"] == "34"
     assert report.result.metadata["dataset_id"] == "rbiswasfc/ruler"
     assert report.result.metadata["model"] == "meta-llama/Llama-3.1-8B-Instruct"
     assert report.result.metadata["model_id"] == "meta-llama/Llama-3.1-8B-Instruct"
@@ -203,7 +218,7 @@ def test_run_modal_live_eviction_niah_allows_budget_sweep_variants(monkeypatch):
     monkeypatch.setattr(
         remote_exec,
         "load_ruler_hf_niah_slice",
-        lambda dataset_config, split, case_limit: (
+        lambda dataset_config, split, case_limit, **kwargs: (
             BenchmarkCase("c1", "prompt", "answer", {}),
         ),
     )
@@ -277,7 +292,7 @@ def test_run_modal_live_eviction_niah_supports_sentence_level_variants(monkeypat
     monkeypatch.setattr(
         remote_exec,
         "load_ruler_hf_niah_slice",
-        lambda dataset_config, split, case_limit: (
+        lambda dataset_config, split, case_limit, **kwargs: (
             BenchmarkCase("c1", "prompt", "answer", {}),
         ),
     )
@@ -366,7 +381,7 @@ def test_run_modal_live_eviction_niah_supports_sentence_level_tova_variant(monke
     monkeypatch.setattr(
         remote_exec,
         "load_ruler_hf_niah_slice",
-        lambda dataset_config, split, case_limit: (
+        lambda dataset_config, split, case_limit, **kwargs: (
             BenchmarkCase("c1", "prompt", "answer", {}),
         ),
     )
@@ -450,7 +465,7 @@ def test_run_modal_live_eviction_niah_supports_sentence_level_h2o_variant(monkey
     monkeypatch.setattr(
         remote_exec,
         "load_ruler_hf_niah_slice",
-        lambda dataset_config, split, case_limit: (
+        lambda dataset_config, split, case_limit, **kwargs: (
             BenchmarkCase("c1", "prompt", "answer", {}),
         ),
     )
@@ -533,7 +548,7 @@ def test_run_modal_live_eviction_niah_supports_word_level_variants(monkeypatch):
     monkeypatch.setattr(
         remote_exec,
         "load_ruler_hf_niah_slice",
-        lambda dataset_config, split, case_limit: (
+        lambda dataset_config, split, case_limit, **kwargs: (
             BenchmarkCase("c1", "prompt", "answer", {}),
         ),
     )
@@ -620,7 +635,7 @@ def test_run_modal_live_eviction_niah_supports_adaptive_vorn_variants(monkeypatc
     monkeypatch.setattr(
         remote_exec,
         "load_ruler_hf_niah_slice",
-        lambda dataset_config, split, case_limit: (
+        lambda dataset_config, split, case_limit, **kwargs: (
             BenchmarkCase("c1", "prompt", "answer", {}),
         ),
     )
@@ -709,7 +724,7 @@ def test_run_modal_vanilla_observation_niah_returns_structured_report(monkeypatc
     monkeypatch.setattr(
         remote_exec,
         "load_ruler_hf_niah_slice",
-        lambda dataset_config, split, case_limit: (
+        lambda dataset_config, split, case_limit, **kwargs: (
             BenchmarkCase("c1", "prompt", "answer", {}),
         ),
     )
@@ -762,7 +777,7 @@ def test_run_modal_score_distribution_observation_niah_returns_structured_report
     monkeypatch.setattr(
         remote_exec,
         "load_ruler_hf_niah_slice",
-        lambda dataset_config, split, case_limit: (
+        lambda dataset_config, split, case_limit, **kwargs: (
             BenchmarkCase("c1", "prompt", "answer", {}),
         ),
     )

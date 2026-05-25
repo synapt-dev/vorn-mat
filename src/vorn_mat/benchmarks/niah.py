@@ -61,24 +61,32 @@ def load_ruler_hf_niah_slice(
     dataset_id: str = "rbiswasfc/ruler",
     split: str = "validation",
     case_limit: int = 50,
+    case_offset_start: int = 0,
 ) -> tuple[BenchmarkCase, ...]:
     """Load a real NIAH slice from a published RULER dataset mirror."""
     if case_limit <= 0:
         raise ValueError("case_limit must be positive")
+    if case_offset_start < 0:
+        raise ValueError("case_offset_start must be non-negative")
 
     from datasets import load_dataset
 
+    split_slice = (
+        f"{split}[:{case_limit}]"
+        if case_offset_start == 0
+        else f"{split}[{case_offset_start}:{case_offset_start + case_limit}]"
+    )
     dataset = load_dataset(
         dataset_id,
         dataset_config,
-        split=f"{split}[:{case_limit}]",
+        split=split_slice,
     )
     return tuple(
         benchmark_case_from_ruler_record(
             dict(row),
             dataset_id=dataset_id,
             dataset_config=dataset_config,
-            split=split,
+            split=split_slice,
         )
         for row in dataset
     )
