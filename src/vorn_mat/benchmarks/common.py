@@ -39,6 +39,24 @@ def normalize_answer(text: str) -> str:
     return " ".join(text.strip().lower().split())
 
 
+_THINK_BLOCK_RE = re.compile(r"<think\b[^>]*>.*?</think\s*>", re.IGNORECASE | re.DOTALL)
+_UNCLOSED_THINK_RE = re.compile(r"<think\b[^>]*>.*$", re.IGNORECASE | re.DOTALL)
+_STRAY_THINK_CLOSE_RE = re.compile(r"</think\s*>", re.IGNORECASE)
+
+
+def score_prediction_text(prediction: str) -> str:
+    """Return the answer surface used for scoring while preserving raw output.
+
+    Qwen reasoning checkpoints may emit `<think>...</think>` before the final
+    answer. The raw prediction remains stored in artifacts, but correctness
+    should be computed on the post-thinking answer surface.
+    """
+
+    without_closed_blocks = _THINK_BLOCK_RE.sub("", prediction)
+    without_unclosed_block = _UNCLOSED_THINK_RE.sub("", without_closed_blocks)
+    return _STRAY_THINK_CLOSE_RE.sub("", without_unclosed_block).strip()
+
+
 def exact_match_rate(
     cases: tuple[BenchmarkCase, ...],
     predictions: tuple[str, ...],
@@ -56,10 +74,12 @@ def exact_match_rate(
 
 
 def build_case_observation(case: BenchmarkCase, prediction: str) -> CaseObservation:
+    scored_prediction = score_prediction_text(prediction)
     return CaseObservation(
         fixture_id=case.case_id,
         correct=is_prediction_correct(case, prediction),
         prediction=prediction,
+        scored_prediction=scored_prediction if scored_prediction != prediction else None,
     )
 
 
@@ -77,10 +97,15 @@ def build_case_observations(
 
 def is_prediction_correct(case: BenchmarkCase, prediction: str) -> bool:
     acceptable_answers = _acceptable_answers(case)
-    normalized_prediction = normalize_answer(prediction)
+    scored_prediction = score_prediction_text(prediction)
+    normalized_prediction = normalize_answer(scored_prediction)
     if normalized_prediction in acceptable_answers:
         return True
-    return _matches_ruler_niah_numeric_answer(case, prediction, acceptable_answers)
+    return _matches_ruler_niah_numeric_answer(
+        case,
+        scored_prediction,
+        acceptable_answers,
+    )
 
 
 def _acceptable_answers(case: BenchmarkCase) -> set[str]:
