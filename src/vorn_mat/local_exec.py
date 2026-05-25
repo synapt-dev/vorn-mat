@@ -52,7 +52,7 @@ from .baselines.vorn import (
     select_retained_positions,
 )
 from .benchmarks import load_cases
-from .benchmarks.common import BenchmarkCase, _acceptable_answers, normalize_answer
+from .benchmarks.common import BenchmarkCase, build_case_observation, is_prediction_correct
 from .observation import (
     ObservationCase,
     ObservationStep,
@@ -71,7 +71,6 @@ from .plan import (
 )
 from .progress import ProgressLogger, default_progress_logger
 from .results import (
-    CaseObservation,
     RunResult,
     append_observation,
     append_result,
@@ -743,7 +742,7 @@ class TransformersObservationGenerator(_TransformersGeneratorBase):
             generated_token_ids,
             skip_special_tokens=True,
         ).strip()
-        success = normalize_answer(prediction) in _acceptable_answers(case)
+        success = is_prediction_correct(case, prediction)
         return ObservationCase(
             case_id=case.case_id,
             expected_answer=case.expected_answer,
@@ -1067,19 +1066,13 @@ class TransformersScoreDistributionObservationGenerator(_TransformersGeneratorBa
             generated_token_ids,
             skip_special_tokens=True,
         ).strip()
-        success = normalize_answer(prediction) in _acceptable_answers(case)
+        success = is_prediction_correct(case, prediction)
         return ScoreDistributionObservationCase(
             case_id=case.case_id,
             expected_answer=case.expected_answer,
             prediction=prediction,
             success=success,
-            observations=(
-                CaseObservation(
-                    fixture_id=case.case_id,
-                    correct=success,
-                    prediction=prediction,
-                ),
-            ),
+            observations=(build_case_observation(case, prediction),),
             steps=tuple(steps),
         )
 

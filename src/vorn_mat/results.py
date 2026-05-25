@@ -13,6 +13,7 @@ class CaseObservation:
     fixture_id: str
     correct: bool
     prediction: str
+    scored_prediction: str | None = None
 
 
 @dataclass(frozen=True)
@@ -34,10 +35,23 @@ class RunResult:
     env_versions: dict[str, str] = field(default_factory=dict)
 
 
+def _case_observation_payload(observation: CaseObservation) -> dict[str, object]:
+    payload = asdict(observation)
+    return {key: value for key, value in payload.items() if value is not None}
+
+
+def _run_result_payload(result: RunResult) -> dict[str, object]:
+    payload = asdict(result)
+    payload["observations"] = [
+        _case_observation_payload(observation) for observation in result.observations
+    ]
+    return payload
+
+
 def append_result(path: Path, result: RunResult) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a") as handle:
-        handle.write(json.dumps(asdict(result), sort_keys=True))
+        handle.write(json.dumps(_run_result_payload(result), sort_keys=True))
         handle.write("\n")
 
 
@@ -65,7 +79,7 @@ def load_results(path: Path) -> list[RunResult]:
 def append_observation(path: Path, observation: CaseObservation) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a") as handle:
-        handle.write(json.dumps(asdict(observation), sort_keys=True))
+        handle.write(json.dumps(_case_observation_payload(observation), sort_keys=True))
         handle.write("\n")
         handle.flush()
         try:
