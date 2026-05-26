@@ -140,6 +140,11 @@ from .plan import (
     middle_layer_index,
     per_hour_rate,
 )
+from .async_dispatch import (
+    WaveStateFile,
+    collect_wave_results,
+    dispatch_wave_async,
+)
 from .orchestration import (
     CellFailure,
     CellWaveReport,
@@ -255,7 +260,10 @@ __all__ = [
     "append_observation",
     "append_result",
     "benchmark_case_from_ruler_record",
+    "WaveStateFile",
     "collect_cells_parallel",
+    "collect_wave_results",
+    "dispatch_wave_async",
     "run_wave_serialized",
     "serialize_cell_wave_report",
     "build_execution_plans",

@@ -168,22 +168,34 @@ To recover from a mid-run kill:
 - Re-run the cell with `case_offset_start` (or your wrapper's equivalent) to
   resume from case N+1.
 
-### Modal-native parallel cell execution (Layer 3: cloud-side orchestrator)
+### Modal-native parallel cell execution (Layer 5: fire-and-forget + collect)
 
 `examples/run_modal_cells_parallel.py` is the canonical entrypoint for firing
-many cells in parallel. The local entrypoint makes ONE
-`orchestrate_wave.remote(specs)` call. The cloud-side `orchestrate_wave`
-function is decorated with `@app.function(timeout=86400, ...)` and is what
-issues `binding.remote_fn.spawn()` per cell + per-handle `.get()`
-collection under `max_containers=10` on the cell function binding.
+many cells in parallel. The local entrypoint defaults to fire-and-forget:
+it calls `orchestrate_wave.spawn(specs)`, persists the resulting `call_id`
+to `wave-state.json`, and exits within seconds. The cloud-side
+`orchestrate_wave` function (decorated with `@app.function(timeout=86400, ...)`)
+runs to completion independent of the spawning local client; it issues
+`binding.remote_fn.spawn()` per cell + per-handle `.get()` collection under
+`max_containers=10` on the cell function binding.
 
-Why this shape: Modal's launch warning under `modal run --detach` is
-"running a local entrypoint in detached mode only keeps the last triggered
-Modal function alive after the parent process has been killed or
-disconnected." Moving the `.spawn()` loop one altitude up makes the local
-entrypoint's single `.remote()` call the only thing `--detach` needs to
-protect; the spawned cells become children of that protected call and
-inherit its protection. Local can disconnect freely after kickoff.
+Results are materialized by a separate `examples/collect_modal_wave.py`
+script that retrieves the wave_report via
+`modal.FunctionCall.from_id(call_id).get()` and writes `reports.json` +
+`failures.json` to the output_dir recorded in `wave-state.json`. The collect
+step is idempotent: re-running with the same wave-state.json returns the
+on-disk artifacts without re-fetching.
+
+Why this shape (Layer 5 substrate-fix, 2026-05-26 second-occurrence of
+Modal-client-disconnect class-of-failure): Layer 3's ONE-`.remote()` call
+correctly protected the cloud function under `--detach`, but `.remote()`
+BLOCKS the local entrypoint synchronously waiting on the wave_report. If
+local disconnects mid-wait, `--detach` keeps the function running but the
+local artifact-writing step (reports.json/failures.json) is lost. Switching
+dispatch to `.spawn()` + on-disk `wave-state.json` + a separate collect
+script gives the canonical Modal fire-and-forget pattern: local exits within
+seconds carrying only the call_id; cloud function runs independent of
+spawning client lifecycle; collect step materializes artifacts later.
 
 Per-cell exceptions surface as entries in the JSON-safe wave-report dict
 that `orchestrate_wave` returns (`{"reports": [...], "failures": [...]}`),
@@ -199,14 +211,33 @@ This pattern replaces, in successive layers:
   independent disconnect-class failure points.
 - (Layer 3) local-entrypoint server-side fanout, which had ambiguous
   protection semantics under `--detach`.
+- (Layer 4) cloud-side orchestrator via `.remote()`, which protected the
+  cloud function but required local to stay attached for the synchronous
+  wave_report return (the artifact-writing step).
+- (Layer 5) fire-and-forget `.spawn()` + persisted `call_id` + separate
+  idempotent collect; local exits in seconds; collect retrieves later.
 
 ```bash
-# Build a cell spec JSON, then fire the wave with one detached invocation:
+# Build a cell spec JSON, then fire the wave (returns within seconds):
 modal run --detach examples/run_modal_cells_parallel.py \
   --cell-spec-path .benchmarks/cell-specs.json
+# Output: call_id=fc_..., wave_state_path=.benchmarks/parallel-cells/wave-state.json
+
+# Walk away. Cloud runs to completion. Come back later and collect:
+python examples/collect_modal_wave.py \
+  --wave-state-path .benchmarks/parallel-cells/wave-state.json
+# Output: cells_succeeded=N, cells_failed=M, output_dir=...
 
 # Aggregate per-cell results into per-family canonical artifacts:
 python examples/build_matrix_backfill_artifact.py --family mistral
+```
+
+Legacy sync mode (--wait flag preserves the prior Layer 4 behavior for
+short waves / interactive dev):
+
+```bash
+modal run examples/run_modal_cells_parallel.py \
+  --cell-spec-path .benchmarks/cell-specs.json --wait
 ```
 
 ### Observability (Layer 4: Modal-visible progress logging)
