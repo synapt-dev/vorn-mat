@@ -1,0 +1,437 @@
+{
+  "case_count": 50,
+  "dataset_config": "niah_multikey_1_4k",
+  "elapsed_seconds": 374.122699285,
+  "estimated_cost_usd": 0.25964115330379,
+  "result": {
+    "baseline": "vanilla",
+    "benchmark": "niah",
+    "env_versions": {},
+    "metadata": {
+      "canonical_layer": "16",
+      "case_count": "50",
+      "dataset_config": "niah_multikey_1_4k",
+      "dataset_id": "rbiswasfc/ruler",
+      "elapsed_seconds": "374.123",
+      "estimated_cost_usd": "0.2596",
+      "eviction_unit": "token_position",
+      "gpu": "A100-80GB",
+      "model": "google/gemma-3-12b-pt",
+      "model_id": "google/gemma-3-12b-pt",
+      "recent_token_window": "16",
+      "split": "validation"
+    },
+    "metrics": {
+      "needle_hit_rate": 1.0
+    },
+    "observations": [
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-0",
+        "peak_memory_allocated_mb": 27445.239,
+        "peak_memory_reserved_mb": 28706.0,
+        "prediction": "9375710.\nWhat is the special magic number for faded-site mentioned in the provided text? The special magic number for faded",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-1",
+        "peak_memory_allocated_mb": 27443.65,
+        "peak_memory_reserved_mb": 28706.0,
+        "prediction": "7700828.\nWhat is the special magic number for dark-aardvark mentioned in the provided text? The special magic number",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-2",
+        "peak_memory_allocated_mb": 27442.06,
+        "peak_memory_reserved_mb": 29650.0,
+        "prediction": "3684052.\nWhat is the special magic number for used-commotion mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-3",
+        "peak_memory_allocated_mb": 27440.473,
+        "peak_memory_reserved_mb": 29650.0,
+        "prediction": "6707197. July 2010.\nWhat is the special magic number for utopian-publishing mentioned in the provided text",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-4",
+        "peak_memory_allocated_mb": 27442.06,
+        "peak_memory_reserved_mb": 29650.0,
+        "prediction": "2785277.\nWhat is the special magic number for pumped-sill mentioned in the provided text? The special magic number for pumped",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-5",
+        "peak_memory_allocated_mb": 27442.06,
+        "peak_memory_reserved_mb": 29650.0,
+        "prediction": "9897858.\nWhat is the special magic number for colossal-duck mentioned in the provided text? The special magic number for colossal",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-6",
+        "peak_memory_allocated_mb": 27442.06,
+        "peak_memory_reserved_mb": 29650.0,
+        "prediction": "8973915.\nWhat is the special magic number for bright-system mentioned in the provided text? The special magic number for bright",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-7",
+        "peak_memory_allocated_mb": 27450.008,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "4374754.\nWhat is the special magic number for noxious-mincemeat mentioned in the provided text? The special magic number",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-8",
+        "peak_memory_allocated_mb": 27443.65,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "4694634.\nWhat is the special magic number for abject-tavern mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-9",
+        "peak_memory_allocated_mb": 27455.81,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "5672073.\nWhat is the special magic number for fallacious-spatula mentioned in the provided text? The special magic",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-10",
+        "peak_memory_allocated_mb": 27448.664,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "2626229. This number is used to represent the concept of being a careful nurse, which is a quality that is important in the",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-11",
+        "peak_memory_allocated_mb": 27451.598,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "4078418.\nWhat is the special magic number for furtive-gearshift mentioned in the provided text? The special magic number",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-12",
+        "peak_memory_allocated_mb": 27451.598,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "2642635.\nWhat is the special magic number for distinct-naturalisation mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-13",
+        "peak_memory_allocated_mb": 27442.06,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "8633773.\nWhat is the special magic number for abaft-pistol mentioned in the provided text? The special magic number",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-14",
+        "peak_memory_allocated_mb": 27449.292,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "1981186.\nWhat is the special magic number for aquatic-wing mentioned in the provided text? The special magic number for aquatic",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-15",
+        "peak_memory_allocated_mb": 27445.239,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "2149597.\nWhat is the special magic number for melted-carpenter mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-16",
+        "peak_memory_allocated_mb": 27449.292,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "5374922.\nWhat is the special magic number for mute-cupboard mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-17",
+        "peak_memory_allocated_mb": 27443.65,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "6304573.",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-18",
+        "peak_memory_allocated_mb": 27445.239,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "3646552.\nWhat is the special magic number for noxious-plasterboard mentioned in the provided text? The special magic number",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-19",
+        "peak_memory_allocated_mb": 27443.65,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "4533779.\nWhat is the special magic number for godly-transfer mentioned in the provided text? The special magic number for godly",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-20",
+        "peak_memory_allocated_mb": 27451.598,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "6596150.\nWhat is the special magic number for capable-booster mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-21",
+        "peak_memory_allocated_mb": 27445.239,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "1604451.\nWhat is the special magic number for sharp-furnace mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-22",
+        "peak_memory_allocated_mb": 27438.905,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "7117837. This number is used to describe the growth rate of a startup that is considered to be impressive and attractive to investors.",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-23",
+        "peak_memory_allocated_mb": 27448.664,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "7907400.\nWhat is the special magic number for inconclusive-participation mentioned in the provided text? The special magic number for inconclusive",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-24",
+        "peak_memory_allocated_mb": 27445.239,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "6866294. This number is used to represent the concept of something we like too much, which is a phenomenon that is becoming increasingly",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-25",
+        "peak_memory_allocated_mb": 27448.664,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "6891254.\nWhat is the special magic number for materialistic-bartender mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-26",
+        "peak_memory_allocated_mb": 27445.239,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "6262632.\nWhat is the special magic number for snobbish-pseudocode mentioned in the provided text? The special magic",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-27",
+        "peak_memory_allocated_mb": 27440.473,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "4188992.",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-28",
+        "peak_memory_allocated_mb": 27450.008,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "6038571.",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-29",
+        "peak_memory_allocated_mb": 27450.008,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "7361002.\nWhat is the special magic number for waggish-subcontractor mentioned in the provided text? The special magic",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-30",
+        "peak_memory_allocated_mb": 27440.473,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "6406444.\nWhat is the special magic number for scandalous-felony mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-31",
+        "peak_memory_allocated_mb": 27445.239,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "2422633.\nWhat is the special magic number for zonked-sanity mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-32",
+        "peak_memory_allocated_mb": 27440.473,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "7953166.\nWhat is the special magic number for defeated-chemotaxis mentioned in the provided text? The special magic number",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-33",
+        "peak_memory_allocated_mb": 27448.664,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "1093026.\nWhat is the special magic number for fresh-obesity mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-34",
+        "peak_memory_allocated_mb": 27449.292,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "6323376.\nWhat is the special magic number for daffy-south mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-35",
+        "peak_memory_allocated_mb": 27440.473,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "5652512.\nWhat is the special magic number for receptive-handlebar mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-36",
+        "peak_memory_allocated_mb": 27442.06,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "5558623.\nWhat is the special magic number for inquisitive-circuit mentioned in the provided text? The special magic number for inquisitive",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-37",
+        "peak_memory_allocated_mb": 27445.239,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "8048838.\nWhat is the special magic number for motionless-staircase mentioned in the provided text? The special magic number",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-38",
+        "peak_memory_allocated_mb": 27449.292,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "4700025. This number is mentioned in the context of a startup that has decent initial growth but is only moderately appealing. The founders",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-39",
+        "peak_memory_allocated_mb": 27445.239,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "7523941.\nWhat is the special magic number for adjoining-swivel mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-40",
+        "peak_memory_allocated_mb": 27445.239,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "7360307.\nWhat is the special magic number for breezy-scalp mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-41",
+        "peak_memory_allocated_mb": 27445.239,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "8072684.\nWhat is the special magic number for round-skeleton mentioned in the provided text? The special magic number for round",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-42",
+        "peak_memory_allocated_mb": 27449.292,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "3117636.\nWhat is the special magic number for accessible-conclusion mentioned in the provided text? The special magic number for accessible",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-43",
+        "peak_memory_allocated_mb": 27450.008,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "6218367.\nWhat is the special magic number for humorous-pantsuit mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-44",
+        "peak_memory_allocated_mb": 27448.664,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "1689025.",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-45",
+        "peak_memory_allocated_mb": 27451.598,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "7076506.\nWhat is the special magic number for possessive-warren mentioned in the provided text? The special magic number",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-46",
+        "peak_memory_allocated_mb": 27443.65,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "5118725.\nWhat is the special magic number for overrated-pile mentioned in the provided text? The special magic number for overrated",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-47",
+        "peak_memory_allocated_mb": 27448.664,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "6452832.\nWhat is the special magic number for inquisitive-spruce mentioned in the provided text? The special magic number for",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-48",
+        "peak_memory_allocated_mb": 27450.008,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "5049282.",
+        "scored_prediction": null
+      },
+      {
+        "correct": true,
+        "fixture_id": "niah_multikey_1_4k-49",
+        "peak_memory_allocated_mb": 27448.664,
+        "peak_memory_reserved_mb": 31546.0,
+        "prediction": "7784725.",
+        "scored_prediction": null
+      }
+    ],
+    "oom_near_miss": false,
+    "peak_memory_allocated_gb": null,
+    "peak_memory_reserved_gb": null,
+    "preprocessing_cost_usd": 0.0,
+    "preprocessing_elapsed_seconds": 0.0,
+    "run_id": "week1-niah-vanilla"
+  },
+  "split": "validation"
+}
