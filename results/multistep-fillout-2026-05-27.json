@@ -1,0 +1,858 @@
+{
+  "schema_version": "multistep-fillout/v0.1",
+  "experiment": "Multi-step ministral gap-fill + b=1536/2048 fill-out + Mistral micro-recovery promotion (Steps 3-5)",
+  "date": "2026-05-27",
+  "note": "Cells run across two Modal profiles (layne-79000 billing-capped mid-Step-4; layne profile resumed remaining); Volume artifacts harvested + composed.",
+  "total_cells_succeeded": 69,
+  "cells_by_family": {
+    "Ministral 8B": [
+      {
+        "method": "tova",
+        "budget": 256,
+        "hit_rate": 0.0,
+        "n": 50,
+        "wilson": [
+          0,
+          0.07135003417431873
+        ],
+        "profile": "layne-79000",
+        "wave": "step3"
+      },
+      {
+        "method": "h2o",
+        "budget": 256,
+        "hit_rate": 0.0,
+        "n": 50,
+        "wilson": [
+          0,
+          0.07135003417431873
+        ],
+        "profile": "layne-79000",
+        "wave": "step3"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 256,
+        "hit_rate": 0.4,
+        "n": 50,
+        "wilson": [
+          0.2760818978624575,
+          0.5381881089724063
+        ],
+        "profile": "layne-79000",
+        "wave": "step3"
+      },
+      {
+        "method": "tova",
+        "budget": 512,
+        "hit_rate": 0.06,
+        "n": 50,
+        "wilson": [
+          0.020614596364630478,
+          0.16217343370877002
+        ],
+        "profile": "layne-79000",
+        "wave": "step3"
+      },
+      {
+        "method": "h2o",
+        "budget": 512,
+        "hit_rate": 0.06,
+        "n": 50,
+        "wilson": [
+          0.020614596364630478,
+          0.16217343370877002
+        ],
+        "profile": "layne-79000",
+        "wave": "step3"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 512,
+        "hit_rate": 0.7,
+        "n": 50,
+        "wilson": [
+          0.562493877226366,
+          0.8089661091039063
+        ],
+        "profile": "layne-79000",
+        "wave": "step3"
+      },
+      {
+        "method": "h2o",
+        "budget": 1024,
+        "hit_rate": 0.46,
+        "n": 50,
+        "wilson": [
+          0.3296943460178263,
+          0.5960136567161192
+        ],
+        "profile": "layne-79000",
+        "wave": "step3"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 1024,
+        "hit_rate": 0.98,
+        "n": 50,
+        "wilson": [
+          0.8950431352816304,
+          0.9964608319110235
+        ],
+        "profile": "layne-79000",
+        "wave": "step3"
+      },
+      {
+        "method": "vorn",
+        "budget": 1536,
+        "hit_rate": 0.98,
+        "n": 50,
+        "wilson": [
+          0.8950431352816304,
+          0.9964608319110235
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_vorn",
+        "budget": 1536,
+        "hit_rate": 1.0,
+        "n": 50,
+        "wilson": [
+          0.9286499658256813,
+          1
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "tova",
+        "budget": 1536,
+        "hit_rate": 0.74,
+        "n": 50,
+        "wilson": [
+          0.6044657801100008,
+          0.8412862034863262
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_tova",
+        "budget": 1536,
+        "hit_rate": 1.0,
+        "n": 50,
+        "wilson": [
+          0.9286499658256813,
+          1
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "h2o",
+        "budget": 1536,
+        "hit_rate": 0.72,
+        "n": 50,
+        "wilson": [
+          0.5833461285401034,
+          0.8252598564231963
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 1536,
+        "hit_rate": 1.0,
+        "n": 50,
+        "wilson": [
+          0.9286499658256813,
+          1
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "vorn",
+        "budget": 2048,
+        "hit_rate": 1.0,
+        "n": 50,
+        "wilson": [
+          0.9286499658256813,
+          1
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_vorn",
+        "budget": 2048,
+        "hit_rate": 1.0,
+        "n": 50,
+        "wilson": [
+          0.9286499658256813,
+          1
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "tova",
+        "budget": 2048,
+        "hit_rate": 0.9,
+        "n": 50,
+        "wilson": [
+          0.7863950966521162,
+          0.956524876008429
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_tova",
+        "budget": 2048,
+        "hit_rate": 1.0,
+        "n": 50,
+        "wilson": [
+          0.9286499658256813,
+          1
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "h2o",
+        "budget": 2048,
+        "hit_rate": 0.92,
+        "n": 50,
+        "wilson": [
+          0.8116149745493629,
+          0.9684509967442093
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 2048,
+        "hit_rate": 1.0,
+        "n": 50,
+        "wilson": [
+          0.9286499658256813,
+          1
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      }
+    ],
+    "Gemma 2 9B": [
+      {
+        "method": "vorn",
+        "budget": 1536,
+        "hit_rate": 0.6,
+        "n": 50,
+        "wilson": [
+          0.4618118910275937,
+          0.7239181021375425
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_vorn",
+        "budget": 1536,
+        "hit_rate": 0.96,
+        "n": 50,
+        "wilson": [
+          0.8653966212204534,
+          0.9889613473391734
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "tova",
+        "budget": 1536,
+        "hit_rate": 0.86,
+        "n": 50,
+        "wilson": [
+          0.738135428014719,
+          0.9304925473797714
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_tova",
+        "budget": 1536,
+        "hit_rate": 0.92,
+        "n": 50,
+        "wilson": [
+          0.8116149745493629,
+          0.9684509967442093
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "h2o",
+        "budget": 1536,
+        "hit_rate": 0.86,
+        "n": 50,
+        "wilson": [
+          0.738135428014719,
+          0.9304925473797714
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 1536,
+        "hit_rate": 0.92,
+        "n": 50,
+        "wilson": [
+          0.8116149745493629,
+          0.9684509967442093
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "vorn",
+        "budget": 2048,
+        "hit_rate": 0.86,
+        "n": 50,
+        "wilson": [
+          0.738135428014719,
+          0.9304925473797714
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_vorn",
+        "budget": 2048,
+        "hit_rate": 0.98,
+        "n": 50,
+        "wilson": [
+          0.8950431352816304,
+          0.9964608319110235
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "tova",
+        "budget": 2048,
+        "hit_rate": 0.92,
+        "n": 50,
+        "wilson": [
+          0.8116149745493629,
+          0.9684509967442093
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_tova",
+        "budget": 2048,
+        "hit_rate": 0.98,
+        "n": 50,
+        "wilson": [
+          0.8950431352816304,
+          0.9964608319110235
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "h2o",
+        "budget": 2048,
+        "hit_rate": 0.92,
+        "n": 50,
+        "wilson": [
+          0.8116149745493629,
+          0.9684509967442093
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 2048,
+        "hit_rate": 0.98,
+        "n": 50,
+        "wilson": [
+          0.8950431352816304,
+          0.9964608319110235
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      }
+    ],
+    "Qwen 2.5 7B": [
+      {
+        "method": "vorn",
+        "budget": 1536,
+        "hit_rate": 0.62,
+        "n": 50,
+        "wilson": [
+          0.4815019502239357,
+          0.7413740415742278
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_vorn",
+        "budget": 1536,
+        "hit_rate": 0.7,
+        "n": 50,
+        "wilson": [
+          0.562493877226366,
+          0.8089661091039063
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "tova",
+        "budget": 1536,
+        "hit_rate": 0.7,
+        "n": 50,
+        "wilson": [
+          0.562493877226366,
+          0.8089661091039063
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_tova",
+        "budget": 1536,
+        "hit_rate": 0.68,
+        "n": 50,
+        "wilson": [
+          0.5418944286372394,
+          0.792419559060006
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "h2o",
+        "budget": 1536,
+        "hit_rate": 0.7,
+        "n": 50,
+        "wilson": [
+          0.562493877226366,
+          0.8089661091039063
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 1536,
+        "hit_rate": 0.68,
+        "n": 50,
+        "wilson": [
+          0.5418944286372394,
+          0.792419559060006
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "vorn",
+        "budget": 2048,
+        "hit_rate": 0.68,
+        "n": 50,
+        "wilson": [
+          0.5418944286372394,
+          0.792419559060006
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "sentence_vorn",
+        "budget": 2048,
+        "hit_rate": 0.66,
+        "n": 50,
+        "wilson": [
+          0.5215356854148285,
+          0.7756323036493895
+        ],
+        "profile": "layne-79000",
+        "wave": "step4-partial"
+      },
+      {
+        "method": "tova",
+        "budget": 2048,
+        "hit_rate": 0.68,
+        "n": 50,
+        "wilson": [
+          0.5418944286372394,
+          0.792419559060006
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_tova",
+        "budget": 2048,
+        "hit_rate": 0.7,
+        "n": 50,
+        "wilson": [
+          0.562493877226366,
+          0.8089661091039063
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "h2o",
+        "budget": 2048,
+        "hit_rate": 0.68,
+        "n": 50,
+        "wilson": [
+          0.5418944286372394,
+          0.792419559060006
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 2048,
+        "hit_rate": 0.7,
+        "n": 50,
+        "wilson": [
+          0.562493877226366,
+          0.8089661091039063
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      }
+    ],
+    "Qwen 3 8B": [
+      {
+        "method": "vorn",
+        "budget": 1536,
+        "hit_rate": 0.0,
+        "n": 50,
+        "wilson": [
+          0,
+          0.07135003417431873
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_vorn",
+        "budget": 1536,
+        "hit_rate": 0.82,
+        "n": 50,
+        "wilson": [
+          0.6920368054529739,
+          0.902299172675462
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "tova",
+        "budget": 1536,
+        "hit_rate": 0.26,
+        "n": 50,
+        "wilson": [
+          0.15871379651367384,
+          0.3955342198899992
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_tova",
+        "budget": 1536,
+        "hit_rate": 1.0,
+        "n": 50,
+        "wilson": [
+          0.9286499658256813,
+          1
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "h2o",
+        "budget": 1536,
+        "hit_rate": 0.26,
+        "n": 50,
+        "wilson": [
+          0.15871379651367384,
+          0.3955342198899992
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 1536,
+        "hit_rate": 1.0,
+        "n": 50,
+        "wilson": [
+          0.9286499658256813,
+          1
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "vorn",
+        "budget": 2048,
+        "hit_rate": 0.1,
+        "n": 50,
+        "wilson": [
+          0.04347512399157111,
+          0.2136049033478839
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_vorn",
+        "budget": 2048,
+        "hit_rate": 0.92,
+        "n": 50,
+        "wilson": [
+          0.8116149745493629,
+          0.9684509967442093
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "tova",
+        "budget": 2048,
+        "hit_rate": 0.46,
+        "n": 50,
+        "wilson": [
+          0.3296943460178263,
+          0.5960136567161192
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_tova",
+        "budget": 2048,
+        "hit_rate": 1.0,
+        "n": 50,
+        "wilson": [
+          0.9286499658256813,
+          1
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "h2o",
+        "budget": 2048,
+        "hit_rate": 0.46,
+        "n": 50,
+        "wilson": [
+          0.3296943460178263,
+          0.5960136567161192
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 2048,
+        "hit_rate": 1.0,
+        "n": 50,
+        "wilson": [
+          0.9286499658256813,
+          1
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      }
+    ],
+    "Qwen 3 30B-A3B": [
+      {
+        "method": "vorn",
+        "budget": 1536,
+        "hit_rate": 0.1,
+        "n": 50,
+        "wilson": [
+          0.04347512399157111,
+          0.2136049033478839
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "vorn",
+        "budget": 2048,
+        "hit_rate": 0.38,
+        "n": 50,
+        "wilson": [
+          0.2586259584257722,
+          0.5184980497760643
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      }
+    ],
+    "Gemma 3 12B-pt": [
+      {
+        "method": "sentence_vorn",
+        "budget": 1536,
+        "hit_rate": 0.0,
+        "n": 50,
+        "wilson": [
+          0,
+          0.07135003417431873
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_tova",
+        "budget": 1536,
+        "hit_rate": 0.0,
+        "n": 50,
+        "wilson": [
+          0,
+          0.07135003417431873
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 1536,
+        "hit_rate": 0.0,
+        "n": 50,
+        "wilson": [
+          0,
+          0.07135003417431873
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_vorn",
+        "budget": 2048,
+        "hit_rate": 0.0,
+        "n": 50,
+        "wilson": [
+          0,
+          0.07135003417431873
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_tova",
+        "budget": 2048,
+        "hit_rate": 0.0,
+        "n": 50,
+        "wilson": [
+          0,
+          0.07135003417431873
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 2048,
+        "hit_rate": 0.0,
+        "n": 50,
+        "wilson": [
+          0,
+          0.07135003417431873
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      }
+    ],
+    "Mistral 7B v0.3": [
+      {
+        "method": "h2o",
+        "budget": 256,
+        "hit_rate": 0.04,
+        "n": 50,
+        "wilson": [
+          0.011038652660826577,
+          0.13460337877954667
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_h2o",
+        "budget": 256,
+        "hit_rate": 0.76,
+        "n": 50,
+        "wilson": [
+          0.6258705062480763,
+          0.8570274759812779
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "tova",
+        "budget": 1536,
+        "hit_rate": 0.98,
+        "n": 50,
+        "wilson": [
+          0.8950431352816304,
+          0.9964608319110235
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_tova",
+        "budget": 1536,
+        "hit_rate": 0.98,
+        "n": 50,
+        "wilson": [
+          0.8950431352816304,
+          0.9964608319110235
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      },
+      {
+        "method": "sentence_tova",
+        "budget": 2048,
+        "hit_rate": 1.0,
+        "n": 50,
+        "wilson": [
+          0.9286499658256813,
+          1
+        ],
+        "profile": "layne",
+        "wave": "resume"
+      }
+    ]
+  },
+  "session_costs": {
+    "step3_layne79000": 1.572170905707856,
+    "step4_layne79000_partial": "~9-10 (Modal-reported)",
+    "step4_step5_resume_layne": 15.29366188472524,
+    "step1_ministral_oom_wasted": "~1.28",
+    "step2_verify": "~0.20"
+  }
+}
