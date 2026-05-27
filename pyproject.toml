@@ -10,7 +10,7 @@ requires-python = ">=3.11"
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["pytest>=7.0", "numpy>=1.26"]
+dev = ["pytest>=7.0", "numpy>=1.26", "matplotlib>=3.7"]
 # Pinned to the best-guess canonical version window (Atlas archaeology
 # 2026-05-23). These pins are a reconstruction from raw-report timestamps and
 # PyPI release chronology, not a recovered lockfile. See README.md
