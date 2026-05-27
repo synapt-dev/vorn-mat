@@ -63,7 +63,7 @@ As of 2026-05-21, these model cards are public and do not require a gated-access
 - Ministral 8B Instruct 2410: <https://huggingface.co/mistralai/Ministral-8B-Instruct-2410>
 - Mistral 7B Instruct v0.3: <https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3>
 - Qwen 2.5 7B Instruct: <https://huggingface.co/Qwen/Qwen2.5-7B-Instruct>
-- Qwen 3 8B: <https://huggingface.co/Qwen/Qwen3-8B>
+- Qwen 3-NT 8B (Qwen 3 8B with `enable_thinking=False` rendering): <https://huggingface.co/Qwen/Qwen3-8B>
 - Qwen 3 30B-A3B: <https://huggingface.co/Qwen/Qwen3-30B-A3B>
 
 If you substitute a different model or revision, re-check the current model card before assuming access behavior is unchanged.

@@ -11,7 +11,7 @@ This repository contains the prototype source, all released result artifacts, su
   - `baselines/live_eviction.py`: token-level and sentence-level retention policies, plus TOVA-style and H2O-style attention-weight baselines under the same one-shot prefill contract.
   - `plan.py`, `runner.py`, `remote_exec.py`: experiment plan dataclasses, result-envelope JSON schemas, and Modal job dispatch.
   - `paired_stats.py`: exact paired McNemar tests over per-fixture observations preserved in each result row.
-- **`results/`**: 49 released JSON artifacts (each paired with a Markdown summary) covering the nine-model panel, the granularity rescue spectrum, the cross-task validation surface, and the supporting probes documented in the paper.
+- **`results/`**: 67 released JSON artifacts (each paired with a Markdown summary) covering the seven-family active claim panel (Mistral 7B v0.3, Llama 3.1 8B, Ministral 8B, Gemma 2 9B, Gemma 4 E4B-it, Qwen 2.5 7B, Qwen 3-NT 8B), the granularity rescue spectrum, the cross-task validation surface, two observational-boundary entries (Gemma 3 12B-pt, Qwen 3 30B-A3B), and the supporting probes documented in the paper. The cross-family finding is family-conditional: five families are channel-tolerant (Mistral, Llama 3.1, Ministral, Gemma 2, Qwen 2.5) and two families are attention-favoring at the shared b=1024 gate (Gemma 4 and Qwen 3-NT 8B).
 - **`scripts/`**: the Appendix A artifact-accounting recompute script (`appendix_a_recompute.py`) and the cross-family statistics script (`vorn_mat_cross_family_stats.py`) referenced in the paper.
 - **`examples/`**: Modal job harness for live-eviction experiments.
 - **`tests/`**: pytest suite covering plan, results, paired_stats.
@@ -19,9 +19,18 @@ This repository contains the prototype source, all released result artifacts, su
 
 ## Quickstart
 
+The lightweight quickstart installs only the lightweight dev dependencies (`pytest`, `numpy`) and runs the 133 torch-free tests — the plan/result/paired-stats/orchestration layer that doesn't need a GPU:
+
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
+pytest tests/ --ignore=tests/test_live_eviction_runner.py --ignore=tests/test_local_exec.py
+```
+
+For the full 186-test suite (which exercises the live-eviction runner and the local-execution path through `transformers`), install the `[local]` extras as well. `[local]` pulls torch + transformers + accelerate + datasets + faiss-cpu + sentencepiece + huggingface_hub at the canonical pin set (~5 GB total; CPU-only is fine for running the tests, GPU is needed for the headline cells):
+
+```bash
+pip install -e ".[dev,local]"
 pytest tests/
 ```
 
@@ -42,9 +51,11 @@ and the Python dependency closure is pinned by `requirements.lock` (generated
 via `uv pip compile --generate-hashes`).
 
 ```bash
-docker build -t vorn-mat:canonical .
+docker build --platform linux/amd64 -t vorn-mat:canonical .
 docker run --gpus all -v $(pwd):/app vorn-mat:canonical pytest tests/
 ```
+
+The `--platform linux/amd64` flag is required on macOS arm64 and other non-x86 hosts: the base image `nvidia/cuda:12.4.1-cudnn-runtime-ubuntu22.04` and the pinned torch wheel target Linux x86_64. Without the flag, Docker silently pulls an emulated image (or fails to find one) and reproduction drifts from the canonical Modal-run platform.
 
 The Modal job entry-points (`examples/run_modal_*.py`) build the same image
 through `Image.from_dockerfile(...)`, so local Docker reproduction and Modal
@@ -234,15 +245,15 @@ pass `progress_logger=None`.
 
 ## Reproducing the paper's headline numbers
 
-The Appendix A totals in the paper (49 artifacts / 299 counted rows / 270 with observations / 18,000 per-fixture observations / $77.78 / 32.72h) are reproducible from this repository's `results/` directory by running:
+The Appendix A v1.1 totals (67 artifacts / 446 counted rows / 342 with observations / 21,600 per-fixture observations / $119.59 / 49.46h) are reproducible from this repository's `results/` directory by running:
 
 ```bash
 python scripts/appendix_a_recompute.py
 ```
 
-The script defines the explicit counting contract (which row-array fields are counted versus excluded, and why) and recomputes the totals against the released artifacts directly.
+The script defines the explicit counting contract (which row-array fields are counted versus excluded, and why) and recomputes the totals against the released artifacts directly. The script handles the canonical result-envelope schemas plus the Phase 3 composed-artifact schemas (`phase1_cells`, `phase3_a100_cells`), top-level single-cell diagnostic artifacts, top-level list envelopes, `models[]`/`families[]` wrapper-descent for v0.2 extension-wave artifacts, and nested `row.result.observations[]` descent for rows that wrap a `result` sub-dict. `cells_by_family` (merged-view summary) and failure-list envelopes are excluded by design.
 
-The paired McNemar p-values cited in the paper are recoverable from the per-fixture `observations[]` arrays in the claim-bearing result rows. 270 of the 299 counted rows carry observations. See Appendix A for the counting contract. For example, the Llama 3.1 vorn cross-task headline cell (sentence-vorn 92/200 versus token-vorn 52/200 at b=1024 on qa_2_4k, paired exact McNemar `p = 1.03e-08`) traces to `results/token-vorn-qa2-cross-task-2026-05-20.json`.
+The paired McNemar p-values cited in the paper are recoverable from the per-fixture `observations[]` arrays in the claim-bearing result rows. 342 of the 446 counted rows carry observations. See Appendix A for the counting contract. For example, the Llama 3.1 vorn cross-task headline cell (sentence-vorn 92/200 versus token-vorn 52/200 at b=1024 on qa_2_4k, paired exact McNemar `p = 1.03e-08`) traces to `results/token-vorn-qa2-cross-task-2026-05-20.json`.
 
 ## Citation
 
