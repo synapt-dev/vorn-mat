@@ -1,0 +1,471 @@
+[
+  {
+    "always_keep_prefix_tokens": 1,
+    "cache_budget_tokens": 1024,
+    "case_count": 50,
+    "case_offset_start": 0,
+    "dataset_config": "niah_multikey_1_4k",
+    "elapsed_seconds": 564.633934306,
+    "estimated_cost_usd": 0.39185595040836396,
+    "eviction_trigger": "budget_threshold",
+    "force_eviction_overflow_ratio": 1.2,
+    "model_id": "google/gemma-3-12b-it",
+    "preserve_recent_window": true,
+    "result": {
+      "baseline": "sentence_vorn_live",
+      "benchmark": "niah",
+      "env_versions": {},
+      "metadata": {
+        "adaptive_selector_contract": "",
+        "adaptive_sentence_steps": "0",
+        "adaptive_token_steps": "0",
+        "always_keep_prefix_tokens": "1",
+        "cache_budget_tokens": "1024",
+        "canonical_layer": "16",
+        "case_count": "50",
+        "case_offset_start": "0",
+        "compression_mode": "live_eviction_sentence_vorn_max",
+        "dataset_config": "niah_multikey_1_4k",
+        "dataset_id": "rbiswasfc/ruler",
+        "edge_kinds": "",
+        "elapsed_seconds": "564.634",
+        "estimated_cost_usd": "0.3919",
+        "eviction_trigger": "budget_threshold",
+        "eviction_unit": "sentence",
+        "force_eviction_overflow_ratio": "1.20",
+        "gpu": "A100-80GB",
+        "mean_retention_ratio": "0.2566",
+        "model": "google/gemma-3-12b-it",
+        "model_id": "google/gemma-3-12b-it",
+        "preserve_recent_window": "true",
+        "random_seed": "17",
+        "recent_token_window": "16",
+        "retention_policy": "sentence_vorn",
+        "sentence_boundary_lookahead_tokens": "25",
+        "sentence_pooling": "max",
+        "sentence_top_k": "3",
+        "split": "validation",
+        "suite_id": "",
+        "summary_contract": "canonical_hidden_state_float32_per_token_from_layer_L_star",
+        "summary_fingerprint": "0dac4d26ca57937d55b432e77a29ca12dbf910ad5a94447a0cc8c2ee087291bb",
+        "total_eviction_steps": "132"
+      },
+      "metrics": {
+        "needle_hit_rate": 0.0
+      },
+      "observations": [
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 27229.867,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "the last date the date the date the last date date date date date date date date date date date date date date date date date date date date date date date",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 27228.242,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", for, even, for and for.\n, even, even, even more than, the and the first place for, the and the first, and",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 27226.617,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "the start of the date date date faster than hire date date date date date date date date date date date date date date date date date date date date date date",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 27224.993,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "\ufffdm.\n\n, because, but not given, because, because, the, because, but not grow, the, not given, the, the,",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 27226.617,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "\ufffdm I'P anyway, the date single, the date date ordinary, the date date date date date date date date date date date date date date date",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 27226.617,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", factory floor, factory floor.\n\nthe number, factory floor ability chase that and email etc etc etc etc etc \" the floor etc etc \" the chase floor",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 27226.617,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the and the and the and the ability, how to say they want to avoid the last year email once.\n\nthe last year email once. Once,",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 27234.745,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "is like, the last. The first, the last. The over, the last the. the last the last thing, the last. the last. the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 27228.242,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the, the, then, the, the and, the and the and the and the and the, the and nothing, the and the and the last",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 27239.623,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "\ufffdmotedict approve of the last year by the last year of the last year by the last year by the last year, the last. the last.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 27231.493,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the, the, the, the, the, the, the last, the last. The last, the last, the last, the last, the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 27236.37,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", and ask, the, the problem.\"\n\n, what?, the problem, the Tuesday?\n\n, the Tuesday, the Tuesday, perhaps, the Tuesday?",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 27236.37,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the maybe, the last the last the last year by the last year by the last year by the last year by the last year, the last year,",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 27226.617,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the and the and the and the and the maybe keep coming from of the and the and the and ask \" the and grow quick extra than, the \"",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 27233.117,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "\ufffdm.\n\nthe date date date with the date date date date date date date date date date date date date date date date date date date date date date",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 27229.867,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the last. \" the date blue silver letter because I was email before the last year email date date date date date over the date because date ordinary, the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 27233.117,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ". I was asked, the and the and the last. The. The over a and asked questions asked questions asked questions asked questions asked about the last.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 27228.242,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "over, the and the and the and the. The and over time to and over time to grow. the last year by the last week, the last.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 27229.867,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", what' of the lives of, the lives of the lives were, lives of what lives were lives of what lives of what lives of what lives of what",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 27228.242,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the and the and the start working away, the and the and the and the and the and the last year come framework given, the last long last.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 27236.37,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "cant, the list afford the last year email send like that'ive been \" over a lot of the last year by the last year can's the last",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 27229.867,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the and the and the and the last.\n\n, the and the and, the and especially and the last year by the last year, the and the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 27223.369,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the and, the and the and the and the and the and the and the and, the and, the ability, the last the last. The last",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 27231.493,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", and then the last date and the last date date date date date date date date date date blue date date date date date date date date date date date date",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 27229.867,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", we. We', we. We's by the start working, we' of a lot of the start, we. We' we's",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 27231.493,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", because, because, because, because, because, because, because, the over-class, because they don' as the over. The over. We",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 27229.867,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the amazing, the amazing, the last week, the last week, the last week, the last week' the last week? The last week? The",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 27224.993,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "\ufffdm.\n\nI.\n\nI. The goal click, the last year by the last year of the last week the last the last year by the last",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 27234.745,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "\ufffdm's away, the and ask more than, the date date date date date date date date date date date date date date more than date date date",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 27234.745,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "\ufffdm's the last. The.\n\nI am I for.\n\n, the last week email precisely what bloom?\n\nthe last.\n\n, what",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 27224.993,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "the and the and, the last.\n\n\ufffdm. The and the last year by the last year by the last week before the last year by the last",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 27229.867,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "asked, the I like for the . . . . the date date and asked about the date time I want date fail date time and asked date fail fast by",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 27224.993,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "the last.\n\nI given, the last week before the last the last week before the last week before the last week before the last week before the last week",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 27231.493,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "- because, the and the and the and when, the and the and don\u2019 the and the and the and the and the and the and the and the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "peak_memory_allocated_mb": 27233.117,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "the last the and the last the and the last the last year, the last year's box office as the last year' cant.\n\nthe last.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "peak_memory_allocated_mb": 27224.993,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ". And when, isn' JavaScript.\n\n, isn' ch, but when, what?, what?, or over, what?\n\n, what?, or over",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "peak_memory_allocated_mb": 27226.617,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the and for, the and the and the and the and the and the start of the and the ability, and email click here click here click here click",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "peak_memory_allocated_mb": 27229.867,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "is the. \" the. \" the. the. \" the. \" the way. \" the one. \" the. \" the. \" the.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "peak_memory_allocated_mb": 27233.117,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "\ufffdmoted, the date less than, the date faster the date faster the date faster the date date faster the date faster than, the date with the date",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "peak_memory_allocated_mb": 27229.867,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the, the and the, the, the way, the way, the one, the one way they can' way, the one, the one,",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "peak_memory_allocated_mb": 27229.867,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "### the and the date blue number own \" the date date and date \" date date date date \" date opinion poll vote vote vote date opinion polls were asked date",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "peak_memory_allocated_mb": 27229.867,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "the thing like that number one's the last thing like space they want the last thing about the last thing about the last thing about the last thing, the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "peak_memory_allocated_mb": 27233.117,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "\ufffdm I due diligence more than, the and the and the and the last year email before the last year email before the last decade the last decade the last",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "peak_memory_allocated_mb": 27234.745,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the, what?, the, the, the, the, the, the, the, the, the, the, the, the, the, the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "peak_memory_allocated_mb": 27231.493,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "- especially over time to the and the last. the and the and the last. the last the last the last? the last and the last? the last",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "peak_memory_allocated_mb": 27236.37,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "\ufffdm's the last year by the date once over time record, the last year come from the last year like once over, the last year, the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "peak_memory_allocated_mb": 27228.242,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the and for, the last the and the last mile away email email \" the last week email sent away last email away email last email away email away email",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "peak_memory_allocated_mb": 27231.493,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": ", the last year by the start working, the start working hard time to say, the start working hard except say goodbye more than often, the last. The",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "peak_memory_allocated_mb": 27234.745,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "\ufffdm I think, the\ufffdm.\n\nI liked date date date date date date date date date date date date date date date date date date date date",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "peak_memory_allocated_mb": 27231.493,
+          "peak_memory_reserved_mb": 27330.0,
+          "prediction": "feels chase, the date less costly chase that chase that' until now fewer chase when's chase and the chase when.\n\nthe last.\n\n, what",
+          "scored_prediction": null
+        }
+      ],
+      "oom_near_miss": false,
+      "peak_memory_allocated_gb": null,
+      "peak_memory_reserved_gb": null,
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "run_id": "step2-niah-sentence-vorn-live-b1024"
+    },
+    "retention_policy": "sentence_vorn",
+    "sentence_boundary_lookahead_tokens": 25,
+    "sentence_pooling": "max",
+    "sentence_top_k": 3,
+    "split": "validation"
+  }
+]
