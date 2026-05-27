@@ -447,12 +447,19 @@ class _TransformersGeneratorBase:
                 add_generation_prompt=True,
                 **self._chat_template_kwargs(),
             )
+            tokenizer_add_special_tokens = False
         else:
+            # Base models (e.g. google/gemma-3-12b-pt) have no chat_template.
+            # The main encoding path at _render_prompt uses raw self._tokenizer(prompt)
+            # which defaults to add_special_tokens=True and prepends BOS. The offset
+            # path must match that token count so the sentence-level eviction
+            # assertion at the score-observation site does not fire on base models.
             rendered_prompt = prompt
+            tokenizer_add_special_tokens = True
 
         encoded = self._tokenizer(
             rendered_prompt,
-            add_special_tokens=False,
+            add_special_tokens=tokenizer_add_special_tokens,
             return_offsets_mapping=True,
         )
         offsets = tuple(
