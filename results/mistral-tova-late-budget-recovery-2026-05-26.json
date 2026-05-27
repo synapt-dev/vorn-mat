@@ -1,0 +1,2066 @@
+{
+  "schema": "result-envelope/v0.2",
+  "artifact_id": "mistral-tova-late-budget-recovery-2026-05-26",
+  "created_at": "2026-05-26T11:51:45-05:00",
+  "harness_commit": "a7911e78d45f0c77b401c76b432a12740f3a4977",
+  "modal_profile": "layne-79000",
+  "modal_apps": [
+    "ap-MhY7W0CX6guZcFU7ITo6EZ",
+    "ap-o1rWu5glQdujU7gnnMOrij"
+  ],
+  "hf_dataset_repo": "synapt/vorn-mat-cross-family-results",
+  "hf_path": "eval-results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26",
+  "contract": {
+    "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+    "dataset_id": "rbiswasfc/ruler",
+    "dataset_config": "niah_multikey_1_4k",
+    "split": "validation[:50]",
+    "budgets": [
+      1536,
+      2048
+    ],
+    "methods": [
+      "tova",
+      "sentence_tova"
+    ],
+    "max_new_tokens": 32,
+    "guardrails": "prefix_plus_recent",
+    "precision": "bf16",
+    "gpu": "H100",
+    "composition": "existing first-3 partials plus H100 3-case microrecovery offsets 3-49 plus H100 single-case fills after OOM; tova@2048 came from original completed n=50 run"
+  },
+  "rows": [
+    {
+      "family": "Mistral 7B v0.3",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "method": "tova",
+      "budget": 1536,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 1.8553,
+      "reported_success_elapsed_seconds": 1691.206,
+      "peak_memory_allocated_mb": 55189.927,
+      "peak_memory_reserved_mb": 85388.0,
+      "failed_attempts": [
+        {
+          "case_offset_start": 48,
+          "case_limit": 2,
+          "error": "CUDA OOM softmax allocation; see microrecovery failures.json"
+        }
+      ],
+      "chunks": [
+        {
+          "source": "original_partial_first3",
+          "case_offset_start": 0,
+          "case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-7b-v03-4k-tova-b1536-n50-memory-2026-05-25.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 3,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset3-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 6,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset6-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 9,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset9-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 12,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset12-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 15,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset15-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 18,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset18-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 21,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 2,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset21-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 24,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset24-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 27,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset27-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 30,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset30-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 33,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset33-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 36,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset36-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 39,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset39-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 42,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset42-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 45,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset45-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 48,
+          "case_count": 1,
+          "planned_case_count": 2,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset48-n2-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 49,
+          "case_count": 1,
+          "planned_case_count": 1,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-tova-b1536-offset49-n1-singlecase-recovery-2026-05-26.observations.jsonl"
+        }
+      ],
+      "observations": [
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 54927.37,
+          "peak_memory_reserved_mb": 55352.0,
+          "prediction": "The special magic number for fair-sprout mentioned in the text is 9375710."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 54961.856,
+          "peak_memory_reserved_mb": 72440.0,
+          "prediction": "The special magic number for solid-few mentioned in the text is 7700828."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 54928.058,
+          "peak_memory_reserved_mb": 72440.0,
+          "prediction": "The special magic number for tan-page mentioned in the text is 3684052."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 55017.808,
+          "peak_memory_reserved_mb": 55460.0,
+          "prediction": "The special magic number for tested-familiar mentioned in the text is 6707197."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 54967.624,
+          "peak_memory_reserved_mb": 55460.0,
+          "prediction": "The special magic number for quick-mortality mentioned in the text is 2785277."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 54967.624,
+          "peak_memory_reserved_mb": 55460.0,
+          "prediction": "9897858."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 54985.075,
+          "peak_memory_reserved_mb": 55420.0,
+          "prediction": "8973915."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 55035.274,
+          "peak_memory_reserved_mb": 74662.0,
+          "prediction": "4374754."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 54950.21,
+          "peak_memory_reserved_mb": 74662.0,
+          "prediction": "4694634."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 55168.741,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "5672073"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 55051.719,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "The special magic number for careful-nurse mentioned in the text is 2626229."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 55068.362,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "4078418"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 55051.625,
+          "peak_memory_reserved_mb": 55496.0,
+          "prediction": "The special magic number for scattered-eaglet mentioned in the text is 2642635."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 54968.565,
+          "peak_memory_reserved_mb": 55496.0,
+          "prediction": "The special magic number for good-speed mentioned in the text is 8633773."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 55189.927,
+          "peak_memory_reserved_mb": 74828.0,
+          "prediction": "The special magic number for fascinated-bull-fighter mentioned in the provided text is 1981186."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 55051.625,
+          "peak_memory_reserved_mb": 55496.0,
+          "prediction": "2149597."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 55134.972,
+          "peak_memory_reserved_mb": 76956.0,
+          "prediction": "The special magic number for hypnotic-biscuit mentioned in the text is 5374922."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 54985.779,
+          "peak_memory_reserved_mb": 76956.0,
+          "prediction": "The special magic number for orange-conversion mentioned in the text is 6304573."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 55002.416,
+          "peak_memory_reserved_mb": 55420.0,
+          "prediction": "The special magic number for handsome-dynamite mentioned in the text is 3646552."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 55051.714,
+          "peak_memory_reserved_mb": 76820.0,
+          "prediction": "4533779."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 55016.542,
+          "peak_memory_reserved_mb": 76820.0,
+          "prediction": "6596150"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 55098.935,
+          "peak_memory_reserved_mb": 55536.0,
+          "prediction": "The special magic number for salty-hovel mentioned in the text is 1604451."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 55001.815,
+          "peak_memory_reserved_mb": 55536.0,
+          "prediction": "The text does not provide a special magic number for hot-backdrop. The numbers mentioned in the text are related to other concepts such as technological progress, add"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 55124.293,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "7907400"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 55067.784,
+          "peak_memory_reserved_mb": 55536.0,
+          "prediction": "The special magic number for outrageous-admission mentioned in the text is 6866294."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 55035.081,
+          "peak_memory_reserved_mb": 55536.0,
+          "prediction": "6891254."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 55068.362,
+          "peak_memory_reserved_mb": 55536.0,
+          "prediction": "6262632."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 55002.416,
+          "peak_memory_reserved_mb": 55420.0,
+          "prediction": "The special magic number for smelly-root mentioned in the text is 4188992."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 55051.714,
+          "peak_memory_reserved_mb": 76820.0,
+          "prediction": "The special magic number for womanly-regulator mentioned in the text is 6038571."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 55003.019,
+          "peak_memory_reserved_mb": 76820.0,
+          "prediction": "7361002"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 55034.955,
+          "peak_memory_reserved_mb": 55460.0,
+          "prediction": "The special magic number for sneaky-vice mentioned in the text is 6406444."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 54967.624,
+          "peak_memory_reserved_mb": 55460.0,
+          "prediction": "2422633"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 55101.659,
+          "peak_memory_reserved_mb": 76900.0,
+          "prediction": "7953166."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 55018.683,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "1093026."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "peak_memory_allocated_mb": 55151.62,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "The special magic number for shaggy-transformation mentioned in the provided text is 6323376."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "peak_memory_allocated_mb": 54919.393,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "5652512"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "peak_memory_allocated_mb": 55001.815,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "5558623"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "peak_memory_allocated_mb": 55001.815,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "8048838."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "peak_memory_allocated_mb": 55068.356,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "4700025."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "peak_memory_allocated_mb": 55085.962,
+          "peak_memory_reserved_mb": 85388.0,
+          "prediction": "7523941"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "peak_memory_allocated_mb": 55085.962,
+          "peak_memory_reserved_mb": 85388.0,
+          "prediction": "7360307."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "peak_memory_allocated_mb": 55003.019,
+          "peak_memory_reserved_mb": 85388.0,
+          "prediction": "8072684"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "peak_memory_allocated_mb": 55018.987,
+          "peak_memory_reserved_mb": 55536.0,
+          "prediction": "The special magic number for foregoing-syndicate mentioned in the text is 3117636."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "peak_memory_allocated_mb": 55124.293,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "6218367"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "peak_memory_allocated_mb": 55001.815,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "The special magic number for shy-mutt mentioned in the text is 1689025."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "peak_memory_allocated_mb": 55099.497,
+          "peak_memory_reserved_mb": 78962.0,
+          "prediction": "The special magic number for noisy-thyme mentioned in the text is 7076506."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "peak_memory_allocated_mb": 54951.433,
+          "peak_memory_reserved_mb": 55508.0,
+          "prediction": "5118725"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "peak_memory_allocated_mb": 55001.891,
+          "peak_memory_reserved_mb": 55508.0,
+          "prediction": "The special magic number for productive-artery mentioned in the text is 6452832."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "peak_memory_allocated_mb": 54986.279,
+          "peak_memory_reserved_mb": 74662.0,
+          "prediction": "5049282."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "peak_memory_allocated_mb": 55132.971,
+          "peak_memory_reserved_mb": 55572.0,
+          "prediction": "7784725"
+        }
+      ]
+    },
+    {
+      "family": "Mistral 7B v0.3",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "method": "sentence_tova",
+      "budget": 1536,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 1.5256,
+      "reported_success_elapsed_seconds": 1390.723,
+      "peak_memory_allocated_mb": 55175.054,
+      "peak_memory_reserved_mb": 91820.0,
+      "failed_attempts": [
+        {
+          "case_offset_start": 12,
+          "case_limit": 3,
+          "error": "CUDA OOM softmax allocation; see microrecovery failures.json"
+        },
+        {
+          "case_offset_start": 27,
+          "case_limit": 3,
+          "error": "CUDA OOM softmax allocation; see microrecovery failures.json"
+        },
+        {
+          "case_offset_start": 42,
+          "case_limit": 3,
+          "error": "CUDA OOM softmax allocation; see microrecovery failures.json"
+        }
+      ],
+      "chunks": [
+        {
+          "source": "original_partial_first3",
+          "case_offset_start": 0,
+          "case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-7b-v03-4k-sentence-tova-b1536-n50-memory-2026-05-25.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 3,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset3-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 6,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset6-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 9,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset9-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 12,
+          "case_count": 2,
+          "planned_case_count": 3,
+          "hits": 2,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset12-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 14,
+          "case_count": 1,
+          "planned_case_count": 1,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset14-n1-singlecase-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 15,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset15-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 18,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 2,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset18-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 21,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset21-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 24,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset24-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 27,
+          "case_count": 1,
+          "planned_case_count": 3,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset27-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 28,
+          "case_count": 1,
+          "planned_case_count": 1,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset28-n1-singlecase-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 29,
+          "case_count": 1,
+          "planned_case_count": 1,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset29-n1-singlecase-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 30,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset30-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 33,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset33-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 36,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset36-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 39,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset39-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 42,
+          "case_count": 1,
+          "planned_case_count": 3,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset42-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 43,
+          "case_count": 1,
+          "planned_case_count": 1,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset43-n1-singlecase-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 44,
+          "case_count": 1,
+          "planned_case_count": 1,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset44-n1-singlecase-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 45,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset45-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 48,
+          "case_count": 2,
+          "planned_case_count": 2,
+          "hits": 2,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b1536-offset48-n2-recovery-2026-05-26.observations.jsonl"
+        }
+      ],
+      "observations": [
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 54927.37,
+          "peak_memory_reserved_mb": 55352.0,
+          "prediction": "9375710"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 54868.703,
+          "peak_memory_reserved_mb": 72440.0,
+          "prediction": "7700828."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 54855.871,
+          "peak_memory_reserved_mb": 72440.0,
+          "prediction": "The special magic number for tan-page mentioned in the provided text is 3684052."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 54862.787,
+          "peak_memory_reserved_mb": 74828.0,
+          "prediction": "6707197. The text mentions this number as one of the special magic numbers for the term \"tested-familiar\"."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 54882.384,
+          "peak_memory_reserved_mb": 74828.0,
+          "prediction": "The special magic number for quick-mortality mentioned in the text is 2785277."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 54968.565,
+          "peak_memory_reserved_mb": 74828.0,
+          "prediction": "The special magic number for round-ruin mentioned in the provided text is 9897858."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 54969.318,
+          "peak_memory_reserved_mb": 76900.0,
+          "prediction": "The special magic number for troubled-midnight mentioned in the provided text is 8973915."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 54811.378,
+          "peak_memory_reserved_mb": 76900.0,
+          "prediction": "4374754"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 54679.974,
+          "peak_memory_reserved_mb": 76900.0,
+          "prediction": "The special magic number for spectacular-hail mentioned in the text is 4694634."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 55000.608,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "The special magic number for foregoing-counseling mentioned in the text is 5672073."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 54937.711,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "The special magic number for careful-nurse mentioned in the text is 2626229."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 55017.737,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "4078418"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 54945.106,
+          "peak_memory_reserved_mb": 72580.0,
+          "prediction": "2642635."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 54856.038,
+          "peak_memory_reserved_mb": 72580.0,
+          "prediction": "The special magic number for good-speed mentioned in the text is 8633773."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 55175.054,
+          "peak_memory_reserved_mb": 55936.0,
+          "prediction": "The special magic number for fascinated-bull-fighter mentioned in the text is 1981186."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 54827.143,
+          "peak_memory_reserved_mb": 76956.0,
+          "prediction": "The special magic number for efficient-pursuit mentioned in the text is 2149597."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 55118.906,
+          "peak_memory_reserved_mb": 76956.0,
+          "prediction": "The special magic number for hypnotic-biscuit mentioned in the text is 5374922."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 54969.725,
+          "peak_memory_reserved_mb": 76956.0,
+          "prediction": "6304573."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 54832.086,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "The special magic number for handsome-dynamite mentioned in the provided text is: 3646552."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 54973.51,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "The special magic number for sticky-platter mentioned in the provided text is 4533779."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 54960.843,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "1852264"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 55013.775,
+          "peak_memory_reserved_mb": 85388.0,
+          "prediction": "The special magic number for salty-hovel mentioned in the provided text is 1604451."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 54910.709,
+          "peak_memory_reserved_mb": 85388.0,
+          "prediction": "The special magic number for hot-backdrop mentioned in the text is 7117837."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 55053.127,
+          "peak_memory_reserved_mb": 91820.0,
+          "prediction": "The special magic number for inconclusive-participation mentioned in the text is 7907400."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 55004.119,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "The special magic number for outrageous-admission mentioned in the text is 6866294."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 54886.833,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "6891254."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 54976.534,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "6262632."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 54903.674,
+          "peak_memory_reserved_mb": 78946.0,
+          "prediction": "4188992"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 55028.656,
+          "peak_memory_reserved_mb": 55784.0,
+          "prediction": "The special magic number for womanly-regulator mentioned in the text is 6038571."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 54811.984,
+          "peak_memory_reserved_mb": 55400.0,
+          "prediction": "The special magic number for ultra-vodka mentioned in the text is 7361002."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 54991.165,
+          "peak_memory_reserved_mb": 55794.0,
+          "prediction": "6406444. This number is not explicitly stated as a fact or a date, but it is mentioned as one of the special magic"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 54884.776,
+          "peak_memory_reserved_mb": 55794.0,
+          "prediction": "2422633"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 55078.804,
+          "peak_memory_reserved_mb": 75090.0,
+          "prediction": "7953166"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 54919.51,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "The special magic number for towering-yeast mentioned in the text is 1093026."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "peak_memory_allocated_mb": 55096.32,
+          "peak_memory_reserved_mb": 83418.0,
+          "prediction": "6323376"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "peak_memory_allocated_mb": 54860.539,
+          "peak_memory_reserved_mb": 83418.0,
+          "prediction": "5652512"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "peak_memory_allocated_mb": 54880.761,
+          "peak_memory_reserved_mb": 76900.0,
+          "prediction": "The special magic number for flowery-supplement mentioned in the text is 5558623."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "peak_memory_allocated_mb": 54957.654,
+          "peak_memory_reserved_mb": 76900.0,
+          "prediction": "The special magic number for exotic-position mentioned in the text is 8048838."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "peak_memory_allocated_mb": 54843.286,
+          "peak_memory_reserved_mb": 76900.0,
+          "prediction": "4700025."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "peak_memory_allocated_mb": 54956.969,
+          "peak_memory_reserved_mb": 76970.0,
+          "prediction": "7523941"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "peak_memory_allocated_mb": 54965.741,
+          "peak_memory_reserved_mb": 76970.0,
+          "prediction": "The special magic number for glamorous-nightmare mentioned in the text is 7360307."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "peak_memory_allocated_mb": 54769.999,
+          "peak_memory_reserved_mb": 76970.0,
+          "prediction": "The special magic number for guarded-wasp mentioned in the text is 8072684."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "peak_memory_allocated_mb": 54989.132,
+          "peak_memory_reserved_mb": 79012.0,
+          "prediction": "The special magic number for foregoing-syndicate mentioned in the text is 3117636."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "peak_memory_allocated_mb": 55077.3,
+          "peak_memory_reserved_mb": 55568.0,
+          "prediction": "6218367."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "peak_memory_allocated_mb": 54953.104,
+          "peak_memory_reserved_mb": 55702.0,
+          "prediction": "The special magic number for shy-mutt mentioned in the text is 1689025."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "peak_memory_allocated_mb": 54929.723,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "The special magic number for noisy-thyme mentioned in the text is 7076506."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "peak_memory_allocated_mb": 54880.199,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "The special magic number for illegal-hearth mentioned in the text is 5118725."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "peak_memory_allocated_mb": 54911.919,
+          "peak_memory_reserved_mb": 55648.0,
+          "prediction": "The special magic number for productive-artery mentioned in the text is 6452832."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "peak_memory_allocated_mb": 54899.668,
+          "peak_memory_reserved_mb": 76956.0,
+          "prediction": "5049282"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "peak_memory_allocated_mb": 55095.218,
+          "peak_memory_reserved_mb": 76956.0,
+          "prediction": "7784725"
+        }
+      ]
+    },
+    {
+      "family": "Mistral 7B v0.3",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "method": "tova",
+      "budget": 2048,
+      "status": "completed",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": null,
+      "reported_success_elapsed_seconds": null,
+      "peak_memory_allocated_mb": 59346.583,
+      "peak_memory_reserved_mb": 79298.0,
+      "failed_attempts": [],
+      "chunks": [
+        {
+          "source": "original_single_shot",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "hits": 49,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-7b-v03-4k-tova-b2048-n50-memory-2026-05-25.observations.jsonl"
+        }
+      ],
+      "observations": [
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 59107.136,
+          "peak_memory_reserved_mb": 59896.0,
+          "prediction": "The special magic number for fair-sprout mentioned in the text is 9375710."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 59142.293,
+          "peak_memory_reserved_mb": 76984.0,
+          "prediction": "The special magic number for solid-few mentioned in the text is 7700828."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 59108.479,
+          "peak_memory_reserved_mb": 76984.0,
+          "prediction": "The special magic number for tan-page mentioned in the provided text is 3684052."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 59175.011,
+          "peak_memory_reserved_mb": 79122.0,
+          "prediction": "The special magic number for tested-familiar mentioned in the text is 6707197. However, it's important to note that"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 59125.237,
+          "peak_memory_reserved_mb": 59966.0,
+          "prediction": "2785277."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 59125.237,
+          "peak_memory_reserved_mb": 59966.0,
+          "prediction": "9897858."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 59141.745,
+          "peak_memory_reserved_mb": 59966.0,
+          "prediction": "8973915."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 59192.15,
+          "peak_memory_reserved_mb": 59966.0,
+          "prediction": "4374754."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 59108.479,
+          "peak_memory_reserved_mb": 59966.0,
+          "prediction": "4694634."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 59324.948,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "5672073"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 59208.308,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for careful-nurse mentioned in the text is 2626229."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 59224.964,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "4078418"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 59208.308,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for scattered-eaglet mentioned in the text is 2642635."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 59125.237,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "8633773."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 59346.583,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "1981186"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 59208.308,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for efficient-pursuit mentioned in the provided text is 2149597."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 59291.604,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for hypnotic-biscuit mentioned in the text is 5374922."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 59141.745,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for orange-conversion mentioned in the text is 6304573."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 59158.386,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for handsome-dynamite mentioned in the text is 3646552."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 59208.308,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for sticky-platter mentioned in the text is 4533779."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 59175.011,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "6596150"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 59241.604,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for salty-hovel mentioned in the text is 1604451."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 59158.386,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for hot-backdrop mentioned in the text is 7117837."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 59274.933,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "7907400"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 59224.964,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "6866294"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 59192.15,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "6891254."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 59224.964,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "6262632."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 59158.386,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for smelly-root mentioned in the text is 4188992."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 59208.308,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for womanly-regulator mentioned in the text is 6038571."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 59158.386,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "7361002"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 59192.15,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for sneaky-vice mentioned in the text is not explicitly stated. However, it is mentioned that one of the special magic numbers for"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 59125.237,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for trite-icon mentioned in the text is 2422633."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 59258.276,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for onerous-warming mentioned in the text is 7953166."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 59175.011,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "1093026."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "peak_memory_allocated_mb": 59308.261,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "6323376"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "peak_memory_allocated_mb": 59075.834,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "5652512"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "peak_memory_allocated_mb": 59158.386,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for flowery-supplement mentioned in the text is 5558623."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "peak_memory_allocated_mb": 59158.386,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for exotic-position mentioned in the text is 8048838."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "peak_memory_allocated_mb": 59224.964,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "4700025."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "peak_memory_allocated_mb": 59241.604,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "7523941"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "peak_memory_allocated_mb": 59241.604,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for glamorous-nightmare mentioned in the provided text is 7360307."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "peak_memory_allocated_mb": 59158.386,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for guarded-wasp mentioned in the text is 8072684."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "peak_memory_allocated_mb": 59175.011,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for foregoing-syndicate mentioned in the text is 3117636."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "peak_memory_allocated_mb": 59274.933,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "6218367"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "peak_memory_allocated_mb": 59158.386,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for shy-mutt mentioned in the provided text is 1689025."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "peak_memory_allocated_mb": 59241.604,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for noisy-thyme mentioned in the text is 7076506."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "peak_memory_allocated_mb": 59108.479,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "5118725"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "peak_memory_allocated_mb": 59158.386,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for productive-artery mentioned in the text is 6452832."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "peak_memory_allocated_mb": 59141.745,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "5049282."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "peak_memory_allocated_mb": 59274.933,
+          "peak_memory_reserved_mb": 79298.0,
+          "prediction": "The special magic number for fearless-tritone mentioned in the text is 7784725."
+        }
+      ]
+    },
+    {
+      "family": "Mistral 7B v0.3",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "method": "sentence_tova",
+      "budget": 2048,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 1.3782,
+      "reported_success_elapsed_seconds": 1256.374,
+      "peak_memory_allocated_mb": 59368.339,
+      "peak_memory_reserved_mb": 93968.0,
+      "failed_attempts": [
+        {
+          "case_offset_start": 12,
+          "case_limit": 3,
+          "error": "CUDA OOM softmax allocation; see microrecovery failures.json"
+        },
+        {
+          "case_offset_start": 24,
+          "case_limit": 3,
+          "error": "CUDA OOM softmax allocation; see microrecovery failures.json"
+        },
+        {
+          "case_offset_start": 48,
+          "case_limit": 2,
+          "error": "CUDA OOM softmax allocation; see microrecovery failures.json"
+        }
+      ],
+      "chunks": [
+        {
+          "source": "original_partial_first3",
+          "case_offset_start": 0,
+          "case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-7b-v03-4k-sentence-tova-b2048-n50-memory-2026-05-25.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 3,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset3-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 6,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset6-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 9,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset9-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 12,
+          "case_count": 2,
+          "planned_case_count": 3,
+          "hits": 2,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset12-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 14,
+          "case_count": 1,
+          "planned_case_count": 1,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset14-n1-singlecase-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 15,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset15-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 18,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset18-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 21,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset21-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 24,
+          "case_count": 1,
+          "planned_case_count": 1,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset24-n1-singlecase-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 25,
+          "case_count": 1,
+          "planned_case_count": 1,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset25-n1-singlecase-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 26,
+          "case_count": 1,
+          "planned_case_count": 1,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset26-n1-singlecase-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 27,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset27-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 30,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 2,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset30-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 33,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset33-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 36,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset36-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 39,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset39-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 42,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset42-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 45,
+          "case_count": 3,
+          "planned_case_count": 3,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset45-n3-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "microrecovery_or_partial_failed_chunk",
+          "case_offset_start": 48,
+          "case_count": 1,
+          "planned_case_count": 2,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset48-n2-recovery-2026-05-26.observations.jsonl"
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 49,
+          "case_count": 1,
+          "planned_case_count": 1,
+          "hits": 1,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/mistral-tova-late-budget-recovery-2026-05-26/mistral-7b-v03-4k-sentence-tova-b2048-offset49-n1-singlecase-recovery-2026-05-26.observations.jsonl"
+        }
+      ],
+      "observations": [
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 59034.429,
+          "peak_memory_reserved_mb": 78856.0,
+          "prediction": "The special magic number for fair-sprout mentioned in the text is 9375710."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 59104.685,
+          "peak_memory_reserved_mb": 78856.0,
+          "prediction": "7700828."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 58969.88,
+          "peak_memory_reserved_mb": 78856.0,
+          "prediction": "The special magic number for tan-page mentioned in the provided text is 3684052."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 59161.826,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "6707197. The text mentions this number as one of the special magic numbers for the term \"tested-familiar\"."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 58917.793,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "2785277."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 59056.679,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "The special magic number for round-ruin mentioned in the text is 9897858."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 59073.109,
+          "peak_memory_reserved_mb": 78946.0,
+          "prediction": "The special magic number for troubled-midnight mentioned in the provided text is 8973915."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 59067.948,
+          "peak_memory_reserved_mb": 78946.0,
+          "prediction": "The special magic number for faint-smolt mentioned in the text is 4374754."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 59123.098,
+          "peak_memory_reserved_mb": 78946.0,
+          "prediction": "4694634."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 59306.878,
+          "peak_memory_reserved_mb": 93968.0,
+          "prediction": "5672073"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 59195.123,
+          "peak_memory_reserved_mb": 61676.0,
+          "prediction": "The special magic number for careful-nurse mentioned in the text is 2626229."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 59248.839,
+          "peak_memory_reserved_mb": 61676.0,
+          "prediction": "4078418"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 59150.326,
+          "peak_memory_reserved_mb": 75090.0,
+          "prediction": "2642635."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 59002.292,
+          "peak_memory_reserved_mb": 75090.0,
+          "prediction": "The special magic number for good-speed mentioned in the text is 8633773."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 59368.339,
+          "peak_memory_reserved_mb": 60192.0,
+          "prediction": "1981186."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 59213.652,
+          "peak_memory_reserved_mb": 83418.0,
+          "prediction": "The special magic number for efficient-pursuit mentioned in the text is 2149597."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 59195.305,
+          "peak_memory_reserved_mb": 85564.0,
+          "prediction": "The special magic number for hypnotic-biscuit mentioned in the text is 5374922."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 59100.826,
+          "peak_memory_reserved_mb": 85564.0,
+          "prediction": "6304573."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 59154.742,
+          "peak_memory_reserved_mb": 76900.0,
+          "prediction": "The special magic number for handsome-dynamite mentioned in the text is 3646552."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 59103.292,
+          "peak_memory_reserved_mb": 76900.0,
+          "prediction": "The special magic number for sticky-platter mentioned in the text is 4533779."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 58967.349,
+          "peak_memory_reserved_mb": 76900.0,
+          "prediction": "6596150"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 59136.083,
+          "peak_memory_reserved_mb": 76970.0,
+          "prediction": "1604451."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 58987.485,
+          "peak_memory_reserved_mb": 76970.0,
+          "prediction": "The special magic number for hot-backdrop mentioned in the provided text is 7117837."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 59160.208,
+          "peak_memory_reserved_mb": 76970.0,
+          "prediction": "The special magic number for inconclusive-participation mentioned in the text is 7907400."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 59126.716,
+          "peak_memory_reserved_mb": 60020.0,
+          "prediction": "6866294"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 59168.028,
+          "peak_memory_reserved_mb": 59984.0,
+          "prediction": "The special magic number for gullible-article mentioned in the text is 6891254."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 59173.857,
+          "peak_memory_reserved_mb": 60060.0,
+          "prediction": "6262632."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 58932.381,
+          "peak_memory_reserved_mb": 60148.0,
+          "prediction": "4188992"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 59181.227,
+          "peak_memory_reserved_mb": 62698.0,
+          "prediction": "6038571"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 59182.261,
+          "peak_memory_reserved_mb": 62698.0,
+          "prediction": "7361002"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 58974.813,
+          "peak_memory_reserved_mb": 76956.0,
+          "prediction": "The special magic number for sneaky-vice mentioned in the text is not explicitly provided. However, the text does mention a few special magic numbers for other"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 58973.6,
+          "peak_memory_reserved_mb": 76956.0,
+          "prediction": "2422633"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 59272.895,
+          "peak_memory_reserved_mb": 76956.0,
+          "prediction": "7953166"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 59097.154,
+          "peak_memory_reserved_mb": 78946.0,
+          "prediction": "The special magic number for towering-yeast mentioned in the text is 1093026."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "peak_memory_allocated_mb": 59233.353,
+          "peak_memory_reserved_mb": 78946.0,
+          "prediction": "6323376"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "peak_memory_allocated_mb": 58831.741,
+          "peak_memory_reserved_mb": 60572.0,
+          "prediction": "5652512"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "peak_memory_allocated_mb": 58886.567,
+          "peak_memory_reserved_mb": 79398.0,
+          "prediction": "5558623"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "peak_memory_allocated_mb": 58914.049,
+          "peak_memory_reserved_mb": 79398.0,
+          "prediction": "8048838."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "peak_memory_allocated_mb": 59063.841,
+          "peak_memory_reserved_mb": 79398.0,
+          "prediction": "4700025."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "peak_memory_allocated_mb": 59191.421,
+          "peak_memory_reserved_mb": 61676.0,
+          "prediction": "7523941"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "peak_memory_allocated_mb": 59108.474,
+          "peak_memory_reserved_mb": 61676.0,
+          "prediction": "7360307. This number is not explicitly stated in the text, but it is mentioned in a note as one of the \"special"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "peak_memory_allocated_mb": 58978.358,
+          "peak_memory_reserved_mb": 61676.0,
+          "prediction": "The special magic number for guarded-wasp mentioned in the text is 8072684."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "peak_memory_allocated_mb": 59116.514,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "The special magic number for foregoing-syndicate mentioned in the text is 3117636."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "peak_memory_allocated_mb": 59082.377,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "6218367"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "peak_memory_allocated_mb": 59163.73,
+          "peak_memory_reserved_mb": 72688.0,
+          "prediction": "The special magic number for shy-mutt mentioned in the text is 1689025."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "peak_memory_allocated_mb": 59251.228,
+          "peak_memory_reserved_mb": 85564.0,
+          "prediction": "The special magic number for noisy-thyme mentioned in the text is 7076506."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "peak_memory_allocated_mb": 59095.294,
+          "peak_memory_reserved_mb": 85564.0,
+          "prediction": "5118725"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "peak_memory_allocated_mb": 59117.466,
+          "peak_memory_reserved_mb": 85564.0,
+          "prediction": "The special magic number for productive-artery mentioned in the text is 6452832."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "peak_memory_allocated_mb": 58879.101,
+          "peak_memory_reserved_mb": 79012.0,
+          "prediction": "5049282"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "peak_memory_allocated_mb": 58916.978,
+          "peak_memory_reserved_mb": 60000.0,
+          "prediction": "The special magic number for fearless-tritone mentioned in the text is 7784725."
+        }
+      ]
+    }
+  ],
+  "read": {
+    "summary": "Mistral late-budget TOVA rows are all 49/50 after recovery/composition. The previous hardcoded Figure 3 values overstated tova@1536 and both sentence-TOVA late-budget points as 1.00.",
+    "figure3_values": {
+      "mistral_token_tova": [
+        0.04,
+        0.3,
+        0.86,
+        0.98,
+        0.98
+      ],
+      "mistral_sentence_tova": [
+        0.74,
+        0.96,
+        1.0,
+        0.98,
+        0.98
+      ]
+    },
+    "success_cost_usd_observed_reports_only": 4.7591,
+    "microrecovery_failures": 7,
+    "singlecase_failures": 0
+  }
+}
