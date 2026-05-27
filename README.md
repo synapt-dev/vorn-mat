@@ -11,7 +11,7 @@ This repository contains the prototype source, all released result artifacts, su
   - `baselines/live_eviction.py`: token-level and sentence-level retention policies, plus TOVA-style and H2O-style attention-weight baselines under the same one-shot prefill contract.
   - `plan.py`, `runner.py`, `remote_exec.py`: experiment plan dataclasses, result-envelope JSON schemas, and Modal job dispatch.
   - `paired_stats.py`: exact paired McNemar tests over per-fixture observations preserved in each result row.
-- **`results/`**: 49 released JSON artifacts (each paired with a Markdown summary) covering the nine-model panel, the granularity rescue spectrum, the cross-task validation surface, and the supporting probes documented in the paper.
+- **`results/`**: 64 released JSON artifacts (each paired with a Markdown summary) covering the seven-family active claim panel (Mistral 7B v0.3, Llama 3.1 8B, Ministral 8B, Gemma 2 9B, Gemma 4 E4B-it, Qwen 2.5 7B, Qwen 3-NT 8B), the granularity rescue spectrum, the cross-task validation surface, two observational-boundary entries (Gemma 3 12B-pt, Qwen 3 30B-A3B), and the supporting probes documented in the paper. The cross-family finding is family-conditional: five families are channel-tolerant (Mistral, Llama 3.1, Ministral, Gemma 2, Qwen 2.5) and two families are attention-favoring at the shared b=1024 gate (Gemma 4 and Qwen 3-NT 8B).
 - **`scripts/`**: the Appendix A artifact-accounting recompute script (`appendix_a_recompute.py`) and the cross-family statistics script (`vorn_mat_cross_family_stats.py`) referenced in the paper.
 - **`examples/`**: Modal job harness for live-eviction experiments.
 - **`tests/`**: pytest suite covering plan, results, paired_stats.
@@ -234,15 +234,15 @@ pass `progress_logger=None`.
 
 ## Reproducing the paper's headline numbers
 
-The Appendix A totals in the paper (49 artifacts / 299 counted rows / 270 with observations / 18,000 per-fixture observations / $77.78 / 32.72h) are reproducible from this repository's `results/` directory by running:
+The Appendix A totals in the paper (64 artifacts / 390 counted rows / 361 with observations / 25,437 per-fixture observations / $134.50 / 37.81h) are reproducible from this repository's `results/` directory by running:
 
 ```bash
 python scripts/appendix_a_recompute.py
 ```
 
-The script defines the explicit counting contract (which row-array fields are counted versus excluded, and why) and recomputes the totals against the released artifacts directly.
+The script defines the explicit counting contract (which row-array fields are counted versus excluded, and why) and recomputes the totals against the released artifacts directly. The script handles the canonical result-envelope schemas plus the Phase 3 composed-artifact schemas (`phase1_cells`, `phase3_a100_cells`), top-level single-cell diagnostic artifacts, top-level list envelopes, and `models[]`/`families[]` wrapper-descent for v0.2 extension-wave artifacts.
 
-The paired McNemar p-values cited in the paper are recoverable from the per-fixture `observations[]` arrays in the claim-bearing result rows. 270 of the 299 counted rows carry observations. See Appendix A for the counting contract. For example, the Llama 3.1 vorn cross-task headline cell (sentence-vorn 92/200 versus token-vorn 52/200 at b=1024 on qa_2_4k, paired exact McNemar `p = 1.03e-08`) traces to `results/token-vorn-qa2-cross-task-2026-05-20.json`.
+The paired McNemar p-values cited in the paper are recoverable from the per-fixture `observations[]` arrays in the claim-bearing result rows. 361 of the 390 counted rows carry observations. See Appendix A for the counting contract. For example, the Llama 3.1 vorn cross-task headline cell (sentence-vorn 92/200 versus token-vorn 52/200 at b=1024 on qa_2_4k, paired exact McNemar `p = 1.03e-08`) traces to `results/token-vorn-qa2-cross-task-2026-05-20.json`.
 
 ## Citation
 
