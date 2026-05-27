@@ -42,9 +42,11 @@ and the Python dependency closure is pinned by `requirements.lock` (generated
 via `uv pip compile --generate-hashes`).
 
 ```bash
-docker build -t vorn-mat:canonical .
+docker build --platform linux/amd64 -t vorn-mat:canonical .
 docker run --gpus all -v $(pwd):/app vorn-mat:canonical pytest tests/
 ```
+
+The `--platform linux/amd64` flag is required on macOS arm64 and other non-x86 hosts: the base image `nvidia/cuda:12.4.1-cudnn-runtime-ubuntu22.04` and the pinned torch wheel target Linux x86_64. Without the flag, Docker silently pulls an emulated image (or fails to find one) and reproduction drifts from the canonical Modal-run platform.
 
 The Modal job entry-points (`examples/run_modal_*.py`) build the same image
 through `Image.from_dockerfile(...)`, so local Docker reproduction and Modal
@@ -234,15 +236,15 @@ pass `progress_logger=None`.
 
 ## Reproducing the paper's headline numbers
 
-The Appendix A totals in the paper (64 artifacts / 390 counted rows / 361 with observations / 25,437 per-fixture observations / $134.50 / 37.81h) are reproducible from this repository's `results/` directory by running:
+The Appendix A v1.1 totals (64 artifacts / 432 counted rows / 340 with observations / 21,500 per-fixture observations / $115.82 / 47.95h) are reproducible from this repository's `results/` directory by running:
 
 ```bash
 python scripts/appendix_a_recompute.py
 ```
 
-The script defines the explicit counting contract (which row-array fields are counted versus excluded, and why) and recomputes the totals against the released artifacts directly. The script handles the canonical result-envelope schemas plus the Phase 3 composed-artifact schemas (`phase1_cells`, `phase3_a100_cells`), top-level single-cell diagnostic artifacts, top-level list envelopes, and `models[]`/`families[]` wrapper-descent for v0.2 extension-wave artifacts.
+The script defines the explicit counting contract (which row-array fields are counted versus excluded, and why) and recomputes the totals against the released artifacts directly. The script handles the canonical result-envelope schemas plus the Phase 3 composed-artifact schemas (`phase1_cells`, `phase3_a100_cells`), top-level single-cell diagnostic artifacts, top-level list envelopes, `models[]`/`families[]` wrapper-descent for v0.2 extension-wave artifacts, and nested `row.result.observations[]` descent for rows that wrap a `result` sub-dict. `cells_by_family` (merged-view summary) and failure-list envelopes are excluded by design.
 
-The paired McNemar p-values cited in the paper are recoverable from the per-fixture `observations[]` arrays in the claim-bearing result rows. 361 of the 390 counted rows carry observations. See Appendix A for the counting contract. For example, the Llama 3.1 vorn cross-task headline cell (sentence-vorn 92/200 versus token-vorn 52/200 at b=1024 on qa_2_4k, paired exact McNemar `p = 1.03e-08`) traces to `results/token-vorn-qa2-cross-task-2026-05-20.json`.
+The paired McNemar p-values cited in the paper are recoverable from the per-fixture `observations[]` arrays in the claim-bearing result rows. 340 of the 432 counted rows carry observations. See Appendix A for the counting contract. For example, the Llama 3.1 vorn cross-task headline cell (sentence-vorn 92/200 versus token-vorn 52/200 at b=1024 on qa_2_4k, paired exact McNemar `p = 1.03e-08`) traces to `results/token-vorn-qa2-cross-task-2026-05-20.json`.
 
 ## Citation
 
