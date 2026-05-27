@@ -19,9 +19,18 @@ This repository contains the prototype source, all released result artifacts, su
 
 ## Quickstart
 
+The lightweight quickstart installs only the lightweight dev dependencies (`pytest`, `numpy`) and runs the 133 torch-free tests — the plan/result/paired-stats/orchestration layer that doesn't need a GPU:
+
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
+pytest tests/ --ignore=tests/test_live_eviction_runner.py --ignore=tests/test_local_exec.py
+```
+
+For the full 186-test suite (which exercises the live-eviction runner and the local-execution path through `transformers`), install the `[local]` extras as well. `[local]` pulls torch + transformers + accelerate + datasets + faiss-cpu + sentencepiece + huggingface_hub at the canonical pin set (~5 GB total; CPU-only is fine for running the tests, GPU is needed for the headline cells):
+
+```bash
+pip install -e ".[dev,local]"
 pytest tests/
 ```
 
