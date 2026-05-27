@@ -1,0 +1,2347 @@
+[
+  {
+    "always_keep_prefix_tokens": 1,
+    "cache_budget_tokens": 1024,
+    "case_count": 50,
+    "case_offset_start": 0,
+    "dataset_config": "niah_multikey_1_4k",
+    "elapsed_seconds": 863.1165534070001,
+    "estimated_cost_usd": 0.599002888064458,
+    "eviction_trigger": "budget_threshold",
+    "force_eviction_overflow_ratio": 1.2,
+    "model_id": "google/gemma-3-12b-pt",
+    "preserve_recent_window": true,
+    "result": {
+      "baseline": "vorn_live",
+      "benchmark": "niah",
+      "env_versions": {},
+      "metadata": {
+        "adaptive_selector_contract": "",
+        "adaptive_sentence_steps": "0",
+        "adaptive_token_steps": "0",
+        "always_keep_prefix_tokens": "1",
+        "cache_budget_tokens": "1024",
+        "canonical_layer": "16",
+        "case_count": "50",
+        "case_offset_start": "0",
+        "compression_mode": "live_eviction_only_vorn",
+        "dataset_config": "niah_multikey_1_4k",
+        "dataset_id": "rbiswasfc/ruler",
+        "edge_kinds": "",
+        "elapsed_seconds": "863.117",
+        "estimated_cost_usd": "0.5990",
+        "eviction_trigger": "budget_threshold",
+        "eviction_unit": "token_position",
+        "force_eviction_overflow_ratio": "1.20",
+        "gpu": "A100-80GB",
+        "mean_retention_ratio": "0.2603",
+        "model": "google/gemma-3-12b-pt",
+        "model_id": "google/gemma-3-12b-pt",
+        "preserve_recent_window": "true",
+        "random_seed": "17",
+        "recent_token_window": "16",
+        "retention_policy": "vorn",
+        "sentence_boundary_lookahead_tokens": "25",
+        "sentence_pooling": "max",
+        "sentence_top_k": "3",
+        "split": "validation",
+        "suite_id": "",
+        "summary_contract": "canonical_hidden_state_float32_per_token_from_layer_L_star",
+        "summary_fingerprint": "d4b7517cfcd496d349bb1ff854935694ab550551a64af548ceeed066db6896ad",
+        "total_eviction_steps": "1600"
+      },
+      "metrics": {
+        "needle_hit_rate": 0.0
+      },
+      "observations": [
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 27325.462,
+          "peak_memory_reserved_mb": 28712.0,
+          "prediction": "\" the \" the' the \" the to be, to be, the to grow Sprout the to \" the growth'\" the to be, the growth'\"",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 27323.887,
+          "peak_memory_reserved_mb": 28712.0,
+          "prediction": "' the of \" the's revenue ' to be, the' to be, the growth'. to be, growth to'. growth App store'. It'.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 27322.311,
+          "peak_memory_reserved_mb": 28712.0,
+          "prediction": "New York Times New York times New York times the top ten the other' the top ten the top be of' the top'.\n\ufffd\ufffd Kashyap'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 27320.737,
+          "peak_memory_reserved_mb": 28712.0,
+          "prediction": "\" the \" the new. \" the \" App it 're, the're priced App it '\n\n<h4>'.</h4>\n<h4>'. To be App'\"",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 27322.311,
+          "peak_memory_reserved_mb": 28712.0,
+          "prediction": "the of the before the of the growth' the'\"' growth' the' growth to' growth' the' growth the top App store' the top'.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 27322.311,
+          "peak_memory_reserved_mb": 28712.0,
+          "prediction": ": of \" the of8 the growth' before'\" before'\" before'\" before'\" before'\" before'\" before'\" before'\" before'\" before'\" before'\" before",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 27322.311,
+          "peak_memory_reserved_mb": 28712.0,
+          "prediction": "the growth' before'\" before'\" price'\" before'\"' growth'\" growth'\" before'\" before'\" growth to' growth to' growth'\" price'\" before'\"",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 27330.191,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "80808 it' to be, the' to. The' before'\" before'\" before'\" before'\" to be of' before'\" before'\"",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 27323.887,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "' the' the' the 're always' the to, the to be, the to're to' the growth're the to be, the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 27335.952,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the' the' the of' the' the' before them' the' to.\n' to' the' the' the growth Charts the' the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 27328.874,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "' the800800 to be, the' to be, App Store' the growth to be, App Store'. the growth App Store'.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 27331.767,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "' the ' the first of the growth'. the growth of'\" before they before ' growth App Store of' growth App store'.\nArabic an price tag\u0127",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 27331.767,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "' the of the' the of're it ' the' the growth'. the' the' the growth an growth'.\n\ufffd\ufffd to' the'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 27322.311,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the of the company the of \" the' the' the' the growth' the' growth App store of' growth to run to' the' the top",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 27329.488,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "New York Times New York times New York Post to be, the growth App store' the' growth revenue growth to be App store'.\nthe growth App the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 27325.462,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "of. the top' the growth'. the top be, the top be but it or area normalizations the top be but' the top be but before them",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 27329.488,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "New York times four the of the to the're the growth of the to the' to be, to be, the' to be App store of'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 27323.887,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "' the8080800800 to \" to be, App store' the growth'\" the growth App store'.\n the' growth",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 27325.462,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": ": \" the \" the of. The'\" before'\" before'\" before'\" before'\" before'\" before'\" before'\" before'\" before'\" before'\" before'\" before",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 27323.887,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the of8 it the of \" the to, the growth'. the growth of' the growth' the growth it on' growth of' growth the' growth",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 27331.767,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the' the' the' the \" the to the growth the to' the to be, the to' the to' the' the' to' the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 27325.462,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the growth' the' the New York times New York times the' the' growth' growth' growth' to' growth an growth' the' growth to",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 27319.163,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "\" the ' the new the \" the top ten growth company of' the top ten the top ten the growth'.\n Norwegian ten product' growth'. top ten",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 27328.874,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the' the new' the \" the' the growth'.\n the growth'.\n the' the to'\n the growth of' the'\n'\"",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 27325.462,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "\" the ' the're \" the growth price'\"'re priced, the growth' another version' growth to be, the growth ' growth' another version",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 27328.874,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "\" the and before \" the \" the growth the to the growth the before the to be, the to be, the to \" to \" the growth it on",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 27325.462,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "' the ' the' the ' the company of' the're of ' the growth're' growth an' to' to' growth an growth'.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 27320.737,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the \" the new the of the growth the growth' the growth the' the' the growth'.\n', the growth'.\n', the growth an growth'.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 27330.191,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the of8 it' \" the' the growth'.\n', the growth'.\n' growth to' growth'. App Store'. App Store' growth of the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 27330.191,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "New York Times New York times80 to, the' to' to' to' to' to' to be, the' to' to' to",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 27320.737,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the ' the company the of. The' the of' the're of' the' the' the' the' the' to' the' the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 27325.462,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "New York times four the \" the \" the to be, the to, the to be, the' to be, the' the' to be \" the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 27320.737,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the' the4 the of. the' the' the're of' the' the' the' growth App Store of' to' the' the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 27328.874,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "New York Times New York times the' the' to' the growth revenue' the' the' growth'.\n\ufffd\ufffd public'.\n' growth'. growth",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "peak_memory_allocated_mb": 27329.488,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "' the ' before they growth New York times the growth' the' the growth' the' growth App store'.\n', the' before'.\n', before",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "peak_memory_allocated_mb": 27320.737,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the ' the ' the growth New York Times'\" the growth'\" before'\" before'\" before'\" before'\" before'\" before'\" before'\" before'\" before'\" before",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "peak_memory_allocated_mb": 27322.311,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "\" the growth \" the ' the growth the growth of the growth the growth the' the growth to be, growth to \" growth of' growth' the growth",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "peak_memory_allocated_mb": 27325.462,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the \" the growth \" the \" the' the' the' the growth it on' growth' the growth and' growth' the growth' growth' the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "peak_memory_allocated_mb": 27329.488,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "New York Times New York times New York' the' the' the growth'.\nArabic the growth to be able stor'\" the' the to be, the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "peak_memory_allocated_mb": 27325.462,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "New York times New York times New York times the growth the to the' the to be the growth' the growth to' growth an growth'.\n the growth",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "peak_memory_allocated_mb": 27325.462,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "\"88 it. \"8 to be of'\" the growth'\"' growth the growth' growth' the growth the growth the growth'.\n the to be",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "peak_memory_allocated_mb": 27325.462,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "\" the ' the ' the \" the growth the first of the growth the growth the to be, the to \" growth'\"' growth to be of'\" growth",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "peak_memory_allocated_mb": 27329.488,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "New York Times New York New York times'\" the growth' the' the growth App store'.\nArabic the growth App store'.\nthe new get of'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "peak_memory_allocated_mb": 27330.191,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the ' the ' the' the growth'.\n\ufffd\ufffd the growth business of' growth to be of're to be able to' growth an of'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "peak_memory_allocated_mb": 27328.874,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the ' the company' the New York Times New York times the growth the to' growth' growth revenue to' growth App store' growth'.\n\ufffd\ufffd",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "peak_memory_allocated_mb": 27331.767,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "New York Times New York times New York times New York times the 're to' to' to' the' to' the to' the' to'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "peak_memory_allocated_mb": 27323.887,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the of the company' the ' the' the company' the and the to be, the to be, the to beU better the' to be App",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "peak_memory_allocated_mb": 27328.874,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the' the \" the \" the' the to\" the' the growth to be, the' the growth'\" the growth'\" the growth the' the growth",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "peak_memory_allocated_mb": 27330.191,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "the' the company the' the're to' the' to runionary' to' to run the' to run email to the' growth an",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "peak_memory_allocated_mb": 27328.874,
+          "peak_memory_reserved_mb": 30608.0,
+          "prediction": "New York times New York times New York times the growth charts the growth the to be of' growth'.\n the growth App it'.\n the top ten the",
+          "scored_prediction": null
+        }
+      ],
+      "oom_near_miss": false,
+      "peak_memory_allocated_gb": null,
+      "peak_memory_reserved_gb": null,
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "run_id": "step2-niah-vorn-live-b1024"
+    },
+    "retention_policy": "vorn",
+    "sentence_boundary_lookahead_tokens": 25,
+    "sentence_pooling": "max",
+    "sentence_top_k": 3,
+    "split": "validation"
+  },
+  {
+    "always_keep_prefix_tokens": 1,
+    "cache_budget_tokens": 1024,
+    "case_count": 50,
+    "case_offset_start": 0,
+    "dataset_config": "niah_multikey_1_4k",
+    "elapsed_seconds": 898.393732021,
+    "estimated_cost_usd": 0.6234852500225739,
+    "eviction_trigger": "budget_threshold",
+    "force_eviction_overflow_ratio": 1.2,
+    "model_id": "google/gemma-3-12b-pt",
+    "preserve_recent_window": true,
+    "result": {
+      "baseline": "tova_live",
+      "benchmark": "niah",
+      "env_versions": {},
+      "metadata": {
+        "adaptive_selector_contract": "",
+        "adaptive_sentence_steps": "0",
+        "adaptive_token_steps": "0",
+        "always_keep_prefix_tokens": "1",
+        "cache_budget_tokens": "1024",
+        "canonical_layer": "16",
+        "case_count": "50",
+        "case_offset_start": "0",
+        "compression_mode": "live_eviction_only_tova",
+        "dataset_config": "niah_multikey_1_4k",
+        "dataset_id": "rbiswasfc/ruler",
+        "edge_kinds": "",
+        "elapsed_seconds": "898.394",
+        "estimated_cost_usd": "0.6235",
+        "eviction_trigger": "budget_threshold",
+        "eviction_unit": "token_position",
+        "force_eviction_overflow_ratio": "1.20",
+        "gpu": "A100-80GB",
+        "mean_retention_ratio": "0.2603",
+        "model": "google/gemma-3-12b-pt",
+        "model_id": "google/gemma-3-12b-pt",
+        "preserve_recent_window": "true",
+        "random_seed": "17",
+        "recent_token_window": "16",
+        "retention_policy": "tova",
+        "sentence_boundary_lookahead_tokens": "25",
+        "sentence_pooling": "max",
+        "sentence_top_k": "3",
+        "split": "validation",
+        "suite_id": "",
+        "summary_contract": "last_token_attention_mean_over_final_layer_heads",
+        "summary_fingerprint": "4e0ef835e1b6ec40732224ce7f0ee3a8690728aa2bcef81da6af976bb9844a01",
+        "total_eviction_steps": "1557"
+      },
+      "metrics": {
+        "needle_hit_rate": 0.0
+      },
+      "observations": [
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": "and also of a lot of a lot of a lot of an of a lot of an' of a lot of a lot of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 49510.756,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": "of.\n' of all of all of the \" of the of. And of a lot of a lot of a lot of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 49497.889,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": ", of a lot of a lot of all of a lot of a lot of a lot of a lot of a lot of a lot of the same thing'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 49485.047,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": "not of a lot of a lot of a. And that of a' of a. of a' of. And of. of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 49497.889,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": "' of a lot of a lot of a lot of a lot of a lot of a lot of a' of a lot of a lot of' of'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 49497.889,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": "a lot of a lot of a lot of a lot of a lot of. It's not of a lot of a lot of a' of the'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 49497.889,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": "another of. of.\n' of.\n' of all of.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 49564.18,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": ", of all of a lot of all of all of. And' of.\n. And' of.\n' of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 49510.756,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "that of. And a lot of.\n' of a lot of.\n' of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 49607.004,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": ", \" of a lot of' of a lot of a lot of a lot of a lot of a lot of a lot of a lot of' of'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a' of a lot of an' of a' of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 49576.566,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 49576.566,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "another word of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 49497.889,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a.\n' A' of a.\n' A' of a.\nIt' of a' of a. It' of a' of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 49560.27,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a. And of a. And of a. And of. And of. And' of. And of. And' of a lot of. And",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": ". And of a lot of a lot of a lot of. And of. And also. And of a lot of.\n' of, App- of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 49560.27,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of a lot of a lot of all of all of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 49510.756,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "not- and also- of a lot of a lot of a lot of a lot of a lot of a lot of a' of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of. And of. And of a lot of a lot of. And of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 49510.756,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of: \" of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 49576.566,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": ", of all of a lot of a lot of a lot of a lot of a lot of' of' of a lot of a' of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 49472.204,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of. And of a lot of a lot of a lot of a lot of a lot of a' of a' of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "\" of all of. And' of the. And of. And of. And of. And' of the \" of. And of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of the of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of all of a lot of.\n' of a lot of a lot of a lot of a lot of a' of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 49485.047,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": ", of. And a lot of a lot of a lot of' of a lot of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 49564.18,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of a lot of a lot of a lot of a lot of a' of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 49564.18,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of.\n' of the' of a. And' of.\n.\n.\n' of.\n.\n' of' of'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 49485.047,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "' of a lot of a lot of' of a lot of' of' of a lot of' of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of. And a lot of a lot of a lot of a lot of a lot of that of a lot of a lot of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 49485.047,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of.\n's a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of all of' of' of all of a lot of a lot of a lot of' a lot of a lot of a lot of the' of'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "peak_memory_allocated_mb": 49560.27,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of a lot of a lot of a lot of a lot of a lot of a's not of a lot of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "peak_memory_allocated_mb": 49485.047,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "not only of.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "peak_memory_allocated_mb": 49497.889,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "and also of a lot of a lot of a lot of a lot of.\n' a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "peak_memory_allocated_mb": 49560.27,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of a lot of a lot of a lot of a lot of a lot of' of a lot of a lot of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": ", App' of.\n' of a set of' of all of a set of.\n' of a lot of.\n' of.\n'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of' of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "peak_memory_allocated_mb": 49560.27,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of a lot of a lot of a lot of a lot of a lot of a' to' to' of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "peak_memory_allocated_mb": 49564.18,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "not of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of the' of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "peak_memory_allocated_mb": 49576.566,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of of.\n' of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "peak_memory_allocated_mb": 49510.756,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "not. And also of a' of a lot of a lot of a lot of a lot of a' of a lot of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a' the' of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "peak_memory_allocated_mb": 49564.18,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "another. And' of. And' of all of a lot of a lot of a lot of all of the' of the's of of the same",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of of",
+          "scored_prediction": null
+        }
+      ],
+      "oom_near_miss": false,
+      "peak_memory_allocated_gb": null,
+      "peak_memory_reserved_gb": null,
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "run_id": "step2-niah-tova-live-b1024"
+    },
+    "retention_policy": "tova",
+    "sentence_boundary_lookahead_tokens": 25,
+    "sentence_pooling": "max",
+    "sentence_top_k": 3,
+    "split": "validation"
+  },
+  {
+    "always_keep_prefix_tokens": 1,
+    "cache_budget_tokens": 1024,
+    "case_count": 50,
+    "case_offset_start": 0,
+    "dataset_config": "niah_multikey_1_4k",
+    "elapsed_seconds": 837.614865454,
+    "estimated_cost_usd": 0.581304716625076,
+    "eviction_trigger": "budget_threshold",
+    "force_eviction_overflow_ratio": 1.2,
+    "model_id": "google/gemma-3-12b-pt",
+    "preserve_recent_window": true,
+    "result": {
+      "baseline": "h2o_live",
+      "benchmark": "niah",
+      "env_versions": {},
+      "metadata": {
+        "adaptive_selector_contract": "",
+        "adaptive_sentence_steps": "0",
+        "adaptive_token_steps": "0",
+        "always_keep_prefix_tokens": "1",
+        "cache_budget_tokens": "1024",
+        "canonical_layer": "16",
+        "case_count": "50",
+        "case_offset_start": "0",
+        "compression_mode": "live_eviction_only_h2o",
+        "dataset_config": "niah_multikey_1_4k",
+        "dataset_id": "rbiswasfc/ruler",
+        "edge_kinds": "",
+        "elapsed_seconds": "837.615",
+        "estimated_cost_usd": "0.5813",
+        "eviction_trigger": "budget_threshold",
+        "eviction_unit": "token_position",
+        "force_eviction_overflow_ratio": "1.20",
+        "gpu": "A100-80GB",
+        "mean_retention_ratio": "0.2603",
+        "model": "google/gemma-3-12b-pt",
+        "model_id": "google/gemma-3-12b-pt",
+        "preserve_recent_window": "true",
+        "random_seed": "17",
+        "recent_token_window": "16",
+        "retention_policy": "h2o",
+        "sentence_boundary_lookahead_tokens": "25",
+        "sentence_pooling": "max",
+        "sentence_top_k": "3",
+        "split": "validation",
+        "suite_id": "",
+        "summary_contract": "accumulated_last_token_attention_mean_over_final_layer_heads",
+        "summary_fingerprint": "4e0ef835e1b6ec40732224ce7f0ee3a8690728aa2bcef81da6af976bb9844a01",
+        "total_eviction_steps": "1573"
+      },
+      "metrics": {
+        "needle_hit_rate": 0.0
+      },
+      "observations": [
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": "and also of a lot of a lot of a lot of an' of a lot of a lot of an' of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 49510.756,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": "of.\n' of all of all of the \" of a lot of the \" of a lot of: of: of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 49497.889,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": ", of a lot of a lot of all of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 49485.047,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": "not of a lot of a lot of a. And that of a. Of course of. That' of. And of. of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 49497.889,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": "' of a lot of a lot of a lot of a lot of a lot of a lot of a' of a lot of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 49497.889,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": "a lot of a lot of a lot of a lot of a lot of. of. The of. And that of a lot of. Of course of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 49497.889,
+          "peak_memory_reserved_mb": 50470.0,
+          "prediction": "another of. \" of.\n' of.\n' recently, of.\n.\n' of.\n' of.\n' of.\n'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 49564.18,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": ", of a lot of a lot of all of. And of. And of. And of. A- of. And of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 49510.756,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "that of. And a lot of.\n' of a lot of. And a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 49607.004,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": ", \" of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a. And of a' of a lot of a' of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 49576.566,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a' of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 49576.566,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "another word of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 49497.889,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a.\n' A- of a.\n' A' of a.\nIt' of a.\n' to' of a.\n'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 49560.27,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a. And of. And of a. And of. And' of. And' of. And of. And' of a lot of. And",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": ". And of.\n' of. App of.\n.\n. of.\n.\nApp of a lot of.\n.\nApp- of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 49560.27,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of a lot of all of a lot of all of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 49510.756,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "not- and also- of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of. And of. And of a lot of a. And of. of. And of a lot of.\n. And of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 49510.756,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of: of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of' of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 49576.566,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": ", of all of all of a lot of all of' of a lot of a lot of a lot of a lot of a' of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 49472.204,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of. And of a lot of. And of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "\" of all of. And' of the. And of. And of.\n' of.\n' of the. And of a lot of a.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of all of a lot of the \" of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 49485.047,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": ", of. And a lot of a lot of a lot of all that of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 49564.18,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of a lot of a lot of a lot of a lot of' of a' of a lot of a lot of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 49564.18,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of. The. The' of a. And' of. of.\n' of.\n' of a lot of a lot of' of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 49485.047,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "' of' of a lot of' of a lot of a lot of another of a lot of' of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of. And also of a lot of a lot of the same thing' of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 49485.047,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of.\n's a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of all of' of. And' of a lot of all of a lot of a lot of a lot of a lot of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "peak_memory_allocated_mb": 49560.27,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "peak_memory_allocated_mb": 49485.047,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "not only of.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "peak_memory_allocated_mb": 49497.889,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "and also of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of.\n' of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "peak_memory_allocated_mb": 49560.27,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of a lot of a lot of a lot of a lot of a lot of a lot of a- of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": ", App of.\n' set of a set of' of all of a set of.\n' a lot of a \" of a set of.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "peak_memory_allocated_mb": 49523.622,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of' of a lot of' of a lot of a lot of. And that. And that. And of a lot of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "peak_memory_allocated_mb": 49560.27,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of a lot of a lot of a lot of a lot of a lot of a' to' to.\n's- of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "peak_memory_allocated_mb": 49564.18,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "not of a lot of a lot of a lot of a- and also. And' to' of a- of' of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of' of a lot of a lot of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "peak_memory_allocated_mb": 49576.566,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "peak_memory_allocated_mb": 49510.756,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "not. And also of a' of a lot of a lot of a' of a lot of a' of a lot of a lot of a lot of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a' of a- It's of a lot of a lot of a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "peak_memory_allocated_mb": 49564.18,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "another. And' of. And's of. And' the' of. And' of a lot of the' of all of the' of'",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "peak_memory_allocated_mb": 49559.415,
+          "peak_memory_reserved_mb": 61846.0,
+          "prediction": "of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a lot of a",
+          "scored_prediction": null
+        }
+      ],
+      "oom_near_miss": false,
+      "peak_memory_allocated_gb": null,
+      "peak_memory_reserved_gb": null,
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "run_id": "step2-niah-h2o-live-b1024"
+    },
+    "retention_policy": "h2o",
+    "sentence_boundary_lookahead_tokens": 25,
+    "sentence_pooling": "max",
+    "sentence_top_k": 3,
+    "split": "validation"
+  },
+  {
+    "always_keep_prefix_tokens": 1,
+    "cache_budget_tokens": 1024,
+    "case_count": 50,
+    "case_offset_start": 0,
+    "dataset_config": "niah_multikey_1_4k",
+    "elapsed_seconds": 1273.937699693,
+    "estimated_cost_usd": 0.8841127635869419,
+    "eviction_trigger": "budget_threshold",
+    "force_eviction_overflow_ratio": 1.2,
+    "model_id": "Qwen/Qwen3-30B-A3B",
+    "preserve_recent_window": true,
+    "result": {
+      "baseline": "vorn_live",
+      "benchmark": "niah",
+      "env_versions": {},
+      "metadata": {
+        "adaptive_selector_contract": "",
+        "adaptive_sentence_steps": "0",
+        "adaptive_token_steps": "0",
+        "always_keep_prefix_tokens": "1",
+        "cache_budget_tokens": "1024",
+        "canonical_layer": "16",
+        "case_count": "50",
+        "case_offset_start": "0",
+        "compression_mode": "live_eviction_only_vorn",
+        "dataset_config": "niah_multikey_1_4k",
+        "dataset_id": "rbiswasfc/ruler",
+        "edge_kinds": "",
+        "elapsed_seconds": "1273.938",
+        "estimated_cost_usd": "0.8841",
+        "eviction_trigger": "budget_threshold",
+        "eviction_unit": "token_position",
+        "force_eviction_overflow_ratio": "1.20",
+        "gpu": "A100-80GB",
+        "mean_retention_ratio": "0.2658",
+        "model": "Qwen/Qwen3-30B-A3B",
+        "model_id": "Qwen/Qwen3-30B-A3B",
+        "preserve_recent_window": "true",
+        "random_seed": "17",
+        "recent_token_window": "16",
+        "retention_policy": "vorn",
+        "sentence_boundary_lookahead_tokens": "25",
+        "sentence_pooling": "max",
+        "sentence_top_k": "3",
+        "split": "validation",
+        "suite_id": "",
+        "summary_contract": "canonical_hidden_state_float32_per_token_from_layer_L_star",
+        "summary_fingerprint": "b521a9f2801e36092db4879042cd89d9aa528f235267bd2b9d122006ae2bcf8f",
+        "total_eviction_steps": "1536"
+      },
+      "metrics": {
+        "needle_hit_rate": 0.0
+      },
+      "observations": [
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for **fair-sprout** mentioned in the provided text is **6441**. \n\nHowever, I need to clarify that",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for **solid-f** mentioned in the provided text is **8187926**. This number is explicitly stated in the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 63623.614,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for **tan** mentioned in the provided text is **3005**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for **tested-familiar** mentioned in the provided text is **59411**.\n\n**Step-by-Step Explanation:**",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 63623.614,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for quick-mortality mentioned in the provided text is **440**. The text states, \"The special magic number for quick-m",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for **round-in** mentioned in the provided text is **7000**.\n\n**Step-by-Step Explanation:**\n\n1.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for \"troubled-mnight\" mentioned in the provided text is 83915. However, there seems to be a",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for \"faint-smolt\" mentioned in the provided text is **43754**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 63632.279,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for \"spectacular-h\" mentioned in the provided text is **1**. \n\nThe text contains several instances where numbers are mentioned, but",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 63652.243,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **\"foregoing-counseling\"** mentioned in the provided text is **32182**. \n\nHowever, there",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 63642.577,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for \"careful-nurse\" mentioned in the provided text is **82313**. \n\nWait, let me check again",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The text you provided is highly fragmented, nonsensical, and appears to be a jumble of random words, numbers, and phrases. It seems to be",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for \"scattered-eaglet\" mentioned in the provided text is\nOkay, let's try to figure out the answer to this question",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 63626.176,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **good-speed** mentioned in the provided text is **80688**. \n\nThis number is explicitly stated in the text",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 63642.577,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **fascinated-bull-fighter** mentioned in the provided text is **198118**.\n\n### Explanation:",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 63645.152,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **efficient-puit** mentioned in the provided text is **2145**. \n\nHowever, I need to clarify that the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 63652.939,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **hypnotic-biscuit** mentioned in the provided text is **222**. \n\nHowever, I need to clarify",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **conversion** mentioned in the provided text is **440**. \n\nThe text states: \"The special magic number for conversion",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for \"handsome-dite\" mentioned in the provided text is 71635. However, there seems to be a typo",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **sticky-platter** mentioned in the provided text is **453377**.\n\nThe text states:  \n\"One of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **abashed-geometry** mentioned in the provided text is **6551**. \n\nWait, let me check again.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 63629.704,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for \"salty-hovel\" mentioned in the provided text is not explicitly stated. However, there are references to \"special magic numbers\"",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **hot** mentioned in the provided text is **733**. \n\nHowever, I need to clarify that the text provided is",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 63652.243,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **inconclusive-part** mentioned in the provided text is **440**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **outrageous-admission** mentioned in the provided text is **89686**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 63642.577,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for \"gullible-article\" mentioned in the provided text is 220. The text states: \"One of the special magic",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **jolly-experience** mentioned in the provided text is **5778**.\n\nWait, let me check again. The",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for smelly mentioned in the provided text is **41992**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 63645.152,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for \"womanly-regulator\" mentioned in the provided text is 603571. However, it's important to note",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **ultra-vodka** mentioned in the provided text is **70002**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 63645.152,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **sneaky-vice** mentioned in the provided text is **6444**.\n\n**Step-by-Step Explanation:",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for \"trite-icon\" mentioned in the provided text is not explicitly stated. However, there are several numbers mentioned in the text that are",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **onerous-warming** mentioned in the provided text is **73316**.\n\n**Step-by-Step Explanation:",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for \"towering-**\" mentioned in the provided text is **10,226**. \n\nThe text states: \"",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "peak_memory_allocated_mb": 63663.72,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **shag-transformation** mentioned in the provided text is **858158**.\n\nOkay, let me try to",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "peak_memory_allocated_mb": 63629.704,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **-panic** mentioned in the provided text is **8371**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for \"flowery-supplement\" mentioned in the provided text is 353018. However, the text is quite fragmented",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for \"exotic-position\" mentioned in the provided text is **73838**. \n\nThe text mentions: \"of the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "peak_memory_allocated_mb": 63642.577,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for \"rough-extremist\" mentioned in the provided text is 40022. However, there seems to be a typo",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for \"adjoining-swivel\" mentioned in the provided text is\n<think>\nOkay, let's try to figure out the special magic number",
+          "scored_prediction": "The special magic number for \"adjoining-swivel\" mentioned in the provided text is"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for \"glamorous-nightmare\" mentioned in the provided text is **73330**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "peak_memory_allocated_mb": 63629.704,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **guarded-wasp** mentioned in the provided text is **87268**. \n\nThe text mentions:  \n> \"",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "peak_memory_allocated_mb": 63645.152,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **\"sicate\"** mentioned in the provided text is **31733**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for \"disgusted-hunchback\" mentioned in the provided text is 29154. The text states: \"of",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for \"shy-mutt\" mentioned in the provided text is 30333. However, I need to clarify that the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **noisy-thyme** mentioned in the provided text is **8047416**. This number is explicitly stated",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for \"illegal-he\" mentioned in the provided text is **822**. \n\nHowever, I need to clarify that the text provided",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for \"productive-y\" mentioned in the provided text is **93838**. \n\nWait, let me check again. The",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "peak_memory_allocated_mb": 63642.577,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for \"bright-s\" mentioned in the provided text is not explicitly stated. However, there are several references to \"special magic numbers\" in",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **\"fearless-tritone\"** mentioned in the provided text is **934615**.\n\n### Explanation:",
+          "scored_prediction": null
+        }
+      ],
+      "oom_near_miss": false,
+      "peak_memory_allocated_gb": null,
+      "peak_memory_reserved_gb": null,
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "run_id": "step2-niah-vorn-live-b1024"
+    },
+    "retention_policy": "vorn",
+    "sentence_boundary_lookahead_tokens": 25,
+    "sentence_pooling": "max",
+    "sentence_top_k": 3,
+    "split": "validation"
+  },
+  {
+    "always_keep_prefix_tokens": 1,
+    "cache_budget_tokens": 1024,
+    "case_count": 50,
+    "case_offset_start": 0,
+    "dataset_config": "niah_multikey_1_4k",
+    "elapsed_seconds": 863.1532446970001,
+    "estimated_cost_usd": 0.599028351819718,
+    "eviction_trigger": "budget_threshold",
+    "force_eviction_overflow_ratio": 1.2,
+    "model_id": "Qwen/Qwen3-30B-A3B",
+    "preserve_recent_window": true,
+    "result": {
+      "baseline": "sentence_vorn_live",
+      "benchmark": "niah",
+      "env_versions": {},
+      "metadata": {
+        "adaptive_selector_contract": "",
+        "adaptive_sentence_steps": "0",
+        "adaptive_token_steps": "0",
+        "always_keep_prefix_tokens": "1",
+        "cache_budget_tokens": "1024",
+        "canonical_layer": "16",
+        "case_count": "50",
+        "case_offset_start": "0",
+        "compression_mode": "live_eviction_sentence_vorn_max",
+        "dataset_config": "niah_multikey_1_4k",
+        "dataset_id": "rbiswasfc/ruler",
+        "edge_kinds": "",
+        "elapsed_seconds": "863.153",
+        "estimated_cost_usd": "0.5990",
+        "eviction_trigger": "budget_threshold",
+        "eviction_unit": "sentence",
+        "force_eviction_overflow_ratio": "1.20",
+        "gpu": "A100-80GB",
+        "mean_retention_ratio": "0.2634",
+        "model": "Qwen/Qwen3-30B-A3B",
+        "model_id": "Qwen/Qwen3-30B-A3B",
+        "preserve_recent_window": "true",
+        "random_seed": "17",
+        "recent_token_window": "16",
+        "retention_policy": "sentence_vorn",
+        "sentence_boundary_lookahead_tokens": "25",
+        "sentence_pooling": "max",
+        "sentence_top_k": "3",
+        "split": "validation",
+        "suite_id": "",
+        "summary_contract": "canonical_hidden_state_float32_per_token_from_layer_L_star",
+        "summary_fingerprint": "b521a9f2801e36092db4879042cd89d9aa528f235267bd2b9d122006ae2bcf8f",
+        "total_eviction_steps": "243"
+      },
+      "metrics": {
+        "needle_hit_rate": 0.42
+      },
+      "observations": [
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for **fair-sprout** mentioned in the provided text is **8698256**.\n\nThis number is explicitly stated",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for \"solid-few\" mentioned in the provided text is **40**.\n\nThe text mentions:\n\n- \"the world will get more",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 63623.614,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for tan-page mentioned in the provided text is:\n\n**3684052**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for **tested-familiar** mentioned in the provided text is:\n\n**6707197**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 63623.614,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for **quick-mortality** mentioned in the provided text is **9517169**.\n\nOkay, let's try to",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for **round-ruin** mentioned in the provided text is:\n\n**9897858**.\n\nThis number is explicitly",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for **troubled-midnight** mentioned in the provided text is **9937326**.\n\nOkay, let",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for **faint-smolt** mentioned in the provided text is **4374754**.\n\nThe text contains the line",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 63632.279,
+          "peak_memory_reserved_mb": 63946.0,
+          "prediction": "The special magic number for **spectacular-hail** mentioned in the provided text is **1352896**.\n\nOkay, let's see",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 63652.243,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **forbearing-counseling** mentioned in the provided text is **9143903**.\n\nOkay, let's",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 63642.577,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **careful-nurse** mentioned in the provided text is **8835373**.\n\nOkay, let me try",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **nappy-limestone** mentioned in the provided text is **9997381**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **scattered-eaglet** mentioned in the provided text is:\n\n**2642635**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 63626.176,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **good-speed** mentioned in the provided text is **not explicitly stated**. However, based on the pattern in the text, there",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 63642.577,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **fascinated-bull-fighter** mentioned in the provided text is:\n\n**1981186**\n\n---\n\n**",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 63645.152,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **efficient-pursuit** mentioned in the provided text is **2149597**.\n\nThe text includes the line",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 63652.939,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **hypnotic-biscuit** is **not explicitly mentioned** in the provided text.\n\nHowever, based on the pattern in the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **orange-conversion** mentioned in the provided text is **1156287**.\n\nThis number is explicitly stated in",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **handsome-dynamite** mentioned in the provided text is:\n\n**3646552**",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **sticky-platter** mentioned in the provided text is **2936571**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **abashed-geometry** mentioned in the provided text is:\n\n**6596150**",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 63629.704,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **salty-hovel** mentioned in the provided text is:\n\n**1604451**\n\n---\n\n**Explanation:**",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **hot-backdrop** mentioned in the provided text is **10**.\n\nThis number is referenced in the text as \"October",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 63652.243,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **inconclusive-participation** mentioned in the provided text is **40**.\n\nThis number appears in the following sentence:\n\n>",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **outrageous-admission** mentioned in the provided text is **not explicitly stated**.\n\nHowever, based on the pattern in",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 63642.577,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **gullible-article** mentioned in the provided text is **not explicitly stated**.\n\nHowever, based on the pattern in the text",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **jolly-experience** mentioned in the provided text is **6262632**.\n\nThe text states:\n\n>",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **smelly-root** mentioned in the provided text is:\n\n**4188992**\n\n---\n\n**Explanation:**\n\nThe",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 63645.152,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **womanly-regulator** mentioned in the provided text is **6266630**.\n\nThis number is explicitly stated",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for ultra-vodka mentioned in the provided text is:\n\n**7361002**\n\nOkay, so I need to find the",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 63645.152,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **sneaky-vice** mentioned in the provided text is:\n\n**6406444**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **trite-icon** mentioned in the provided text is:\n\n**2422633**\n\n---\n\n### Explanation:\n\nThe text",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **onerous-warming** mentioned in the provided text is **5107776**.\n\nOkay, let me try",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 67578.0,
+          "prediction": "The special magic number for **towering-yeast** mentioned in the provided text is **not explicitly stated**.\n\nHowever, the text does mention a **",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "peak_memory_allocated_mb": 63663.72,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **shaggy-transformation** mentioned in the provided text is **8658158**.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "peak_memory_allocated_mb": 63629.704,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **functional-panic** mentioned in the provided text is:\n\n**8963715**\n\nThis number is explicitly stated in",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **flowery-supplement** mentioned in the provided text is **5558623**.\n\nThe text includes the line",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "peak_memory_allocated_mb": 63638.263,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **exotic-position** mentioned in the provided text is:\n\n**8048838**\n\n---\n\n### Explanation:\n\nThe text",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "peak_memory_allocated_mb": 63642.577,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **rough-extremist** mentioned in the provided text is **4700025**.\n\nThe text includes the line",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **adjoining-swivel** mentioned in the provided text is:\n\n**7523941**\n\n**Step-by-Step",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **glamorous-nightmare** mentioned in the provided text is **7360307**.\n\nWait, but the",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "peak_memory_allocated_mb": 63629.704,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **guarded-wasp** mentioned in the provided text is **1873851**.\n\nOkay, let's see.",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "peak_memory_allocated_mb": 63645.152,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **forbearing-syndicate** mentioned in the provided text is **4344717**.\n\nOkay, let",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **disgusted-hunchback** mentioned in the provided text is **not explicitly stated**. However, based on the pattern in",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **shy-mutt** mentioned in the provided text is **3030966**.\n\nOkay, let me try",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **noisy-thyme** mentioned in the provided text is **not explicitly stated**. However, based on the pattern in the text",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "peak_memory_allocated_mb": 63634.851,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **illegal-hearth** mentioned in the provided text is **not explicitly stated**.\n\nHowever, the text does mention two special magic numbers",
+          "scored_prediction": null
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "peak_memory_allocated_mb": 63647.73,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **productive-artery** mentioned in the provided text is:\n\n**6452832**",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "peak_memory_allocated_mb": 63642.577,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **bright-spat** mentioned in the provided text is **not explicitly stated**.\n\nHowever, based on the pattern in the text,",
+          "scored_prediction": null
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "peak_memory_allocated_mb": 63641.831,
+          "peak_memory_reserved_mb": 71218.0,
+          "prediction": "The special magic number for **fearless-tritone** mentioned in the provided text is **not explicitly stated**.\n\nHowever, the text does mention two special",
+          "scored_prediction": null
+        }
+      ],
+      "oom_near_miss": false,
+      "peak_memory_allocated_gb": null,
+      "peak_memory_reserved_gb": null,
+      "preprocessing_cost_usd": 0.0,
+      "preprocessing_elapsed_seconds": 0.0,
+      "run_id": "step2-niah-sentence-vorn-live-b1024"
+    },
+    "retention_policy": "sentence_vorn",
+    "sentence_boundary_lookahead_tokens": 25,
+    "sentence_pooling": "max",
+    "sentence_top_k": 3,
+    "split": "validation"
+  }
+]
