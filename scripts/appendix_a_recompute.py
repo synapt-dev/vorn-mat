@@ -98,11 +98,25 @@ def classify_bucket(d, top_keys):
 
 
 def _accumulate_row(row, counts):
-    """Add a single row dict's contributions to the running counts."""
+    """Add a single row dict's contributions to the running counts.
+
+    Observations may live at one of two row-relative paths depending on the
+    artifact schema:
+      - `row.observations[]` (canonical result-envelope rows)
+      - `row.result.observations[]` (Phase 3 composed cells + top-level-list
+        envelopes where the row wraps a `result` sub-dict)
+
+    Prefer the direct path; fall back to the nested path if the direct slot
+    is empty or absent. Never double-count.
+    """
     if not isinstance(row, dict):
         return
     counts["n_rows"] += 1
     obs = row.get("observations")
+    if not (isinstance(obs, list) and obs):
+        inner = row.get("result")
+        if isinstance(inner, dict):
+            obs = inner.get("observations")
     if isinstance(obs, list) and obs:
         counts["rows_with_obs"] += 1
         counts["total_obs"] += len(obs)
