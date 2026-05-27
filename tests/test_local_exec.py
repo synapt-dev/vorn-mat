@@ -582,6 +582,64 @@ def test_render_prompt_text_with_offsets_disables_qwen3_thinking():
     assert offsets == ((0, 8), (9, 15))
 
 
+def test_render_prompt_text_with_offsets_matches_main_encoding_for_base_models_without_chat_template():
+    """Base models like google/gemma-3-12b-pt have no chat_template. The main
+    encoding path at _render_prompt falls back to ``self._tokenizer(prompt,
+    return_tensors="pt")`` which by default uses ``add_special_tokens=True`` and
+    prepends BOS (and any other configured specials). The offset-rendering path
+    must produce the same number of offsets as the main encoding produces token
+    ids, otherwise the assertion at local_exec.py:1225 fires with
+    ``sentence_<method> prompt offsets do not match rendered prompt token count``
+    and blocks all sentence-level eviction on base models.
+
+    Regression for 2026-05-26 Gemma 3 12B-pt eviction-gate failure.
+    """
+    from vorn_mat.local_exec import LocalModelConfig, _TransformersGeneratorBase
+
+    class FakeBaseTokenizer:
+        chat_template = None
+        # Main encoding adds 1 BOS token by default (mimics Gemma 3 12B-pt).
+        # Offset rendering must produce an offset for that BOS too.
+
+        def __call__(
+            self,
+            text,
+            add_special_tokens=True,
+            return_offsets_mapping=False,
+            return_tensors=None,
+        ):
+            # Two body tokens for the literal "hello world"; BOS prepended when
+            # add_special_tokens is True (Gemma 3-style base tokenizer).
+            body_ids = [101, 202]
+            body_offsets = [(0, 5), (6, 11)]
+            if add_special_tokens:
+                ids = [2] + body_ids
+                offsets = [(0, 0)] + body_offsets
+            else:
+                ids = body_ids
+                offsets = body_offsets
+            payload = {"input_ids": ids}
+            if return_offsets_mapping:
+                payload["offset_mapping"] = offsets
+            return payload
+
+    generator = _TransformersGeneratorBase(LocalModelConfig(model_id="google/gemma-3-12b-pt"))
+    object.__setattr__(generator, "_tokenizer", FakeBaseTokenizer())
+    object.__setattr__(generator, "_model", object())
+    object.__setattr__(generator, "_device", "cpu")
+
+    rendered_prompt, offsets = generator._render_prompt_text_with_offsets("hello world")
+    main_path_token_count = len(generator._tokenizer("hello world")["input_ids"])
+
+    assert rendered_prompt == "hello world"
+    assert len(offsets) == main_path_token_count, (
+        f"offset count {len(offsets)} must match main encoding token count "
+        f"{main_path_token_count} for the no-chat-template fallback path; otherwise "
+        f"sentence-level eviction fires the assertion at local_exec.py:1225 on "
+        f"base models."
+    )
+
+
 def test_forward_with_hidden_states_allows_attention_outputs_to_be_disabled():
     import torch
 
