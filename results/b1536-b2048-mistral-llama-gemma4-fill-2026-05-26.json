@@ -1,0 +1,667 @@
+{
+  "schema": "result-envelope/v0.2",
+  "artifact_id": "b1536-b2048-mistral-llama-gemma4-fill-2026-05-26",
+  "created_at": "2026-05-25T20:37:06-05:00",
+  "harness_commit": "b0223afa2c6cda598321ca1f6dd545c88211ce66",
+  "modal_profile": "layne-79000",
+  "modal_apps": [
+    "ap-8fyE8ClqgCRlKb0wPkWO1A",
+    "ap-O7B6T0lyHNhMbDicm6waMH",
+    "ap-efWtuCgtibTHt6FfROls1n"
+  ],
+  "hf_dataset_repo": "synapt/vorn-mat-cross-family-results",
+  "hf_path": "eval-results/vorn-mat/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/b1536-b2048-mistral-llama-gemma4-fill.json",
+  "sync_status": "synced_to_hf_commit_69468e9fbfe23007605877a9b5c75bed7a6b26ea",
+  "contract": {
+    "dataset_id": "rbiswasfc/ruler",
+    "dataset_config": "niah_multikey_1_4k",
+    "split": "validation[:50]",
+    "max_new_tokens": 32,
+    "precision": "bf16",
+    "gpu": "A100-80GB",
+    "guardrails": "prefix_plus_recent",
+    "memory_telemetry": "default_on",
+    "budgets": [
+      1536,
+      2048
+    ],
+    "authorized_cells": 12,
+    "single_shot_first": true,
+    "recovery_policy": "case_offset_start micro-recovery; 3-case chunks after early OOM, then one-case chunks for remaining failed fixtures"
+  },
+  "rows": [
+    {
+      "family": "Mistral 7B v0.3",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "method": "h2o",
+      "budget": 1536,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 1.3246,
+      "reported_success_elapsed_seconds": 1908.576,
+      "peak_memory_allocated_mb": 55166.052,
+      "peak_memory_reserved_mb": 78934.0,
+      "chunks": [
+        {
+          "source": "microrecovery",
+          "case_offset_start": 3,
+          "case_count": 3,
+          "estimated_cost_usd": 0.087,
+          "elapsed_seconds": 125.288
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 6,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0772,
+          "elapsed_seconds": 111.219
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 9,
+          "case_count": 3,
+          "estimated_cost_usd": 0.1191,
+          "elapsed_seconds": 171.669
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 12,
+          "case_count": 3,
+          "estimated_cost_usd": 0.1133,
+          "elapsed_seconds": 163.308
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 15,
+          "case_count": 3,
+          "estimated_cost_usd": 0.1174,
+          "elapsed_seconds": 169.235
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 18,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0813,
+          "elapsed_seconds": 117.2
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 21,
+          "case_count": 3,
+          "estimated_cost_usd": 0.095,
+          "elapsed_seconds": 136.842
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 24,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0894,
+          "elapsed_seconds": 128.826
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 27,
+          "case_count": 3,
+          "estimated_cost_usd": 0.1249,
+          "elapsed_seconds": 180.015
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 32,
+          "case_count": 1,
+          "estimated_cost_usd": 0.0725,
+          "elapsed_seconds": 104.507
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 33,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0464,
+          "elapsed_seconds": 66.837
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 36,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0402,
+          "elapsed_seconds": 57.884
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 39,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0519,
+          "elapsed_seconds": 74.847
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 42,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0642,
+          "elapsed_seconds": 92.498
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 45,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0686,
+          "elapsed_seconds": 98.849
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 48,
+          "case_count": 2,
+          "estimated_cost_usd": 0.076,
+          "elapsed_seconds": 109.551
+        }
+      ],
+      "failed_attempts": [
+        {
+          "source": "single_shot",
+          "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+          "method": "h2o",
+          "budget": 1536,
+          "case_offset_start": 0,
+          "case_limit": 50,
+          "error_class": "OutOfMemoryError",
+          "error_excerpt": "Input failed with an exception that was too large: OutOfMemoryError('CUDA out of memory. Tried to allocate 2.09 GiB. GPU 0 has a total capacity of 79.25 GiB of which 1.74 GiB is free. Process 1 has 77.50 GiB memory in use. Of the allocated memory 48.04 GiB is allocated by PyTorch, and 28.97 GiB is reserved by PyTorch but unallocated. If reserved but unalloca"
+        },
+        {
+          "source": "microrecovery",
+          "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+          "method": "h2o",
+          "budget": 1536,
+          "case_offset_start": 30,
+          "case_limit": 3,
+          "error_class": "OutOfMemoryError",
+          "error_excerpt": "Input failed with an exception that was too large: OutOfMemoryError('CUDA out of memory. Tried to allocate 2.09 GiB. GPU 0 has a total capacity of 79.25 GiB of which 1.66 GiB is free. Process 1 has 77.58 GiB memory in use. Of the allocated memory 48.12 GiB is allocated by PyTorch, and 28.96 GiB is reserved by PyTorch but unallocated. If reserved but unalloca"
+        }
+      ],
+      "notes": [
+        "Initial single-shot n=50 attempt OOMed after 3 completed cases.",
+        "3-case micro-recovery still OOMed for selected chunks; final missing fixtures completed with one-case recovery.",
+        "reported_success_cost_usd excludes failed OOM attempt burn."
+      ]
+    },
+    {
+      "family": "Mistral 7B v0.3",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "method": "sentence_h2o",
+      "budget": 1536,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "missing_fixture_indices": [],
+      "reported_success_cost_usd": 0.9632,
+      "reported_success_elapsed_seconds": 1387.946,
+      "peak_memory_allocated_mb": 55105.06,
+      "peak_memory_reserved_mb": 78992.0,
+      "chunks": [
+        {
+          "source": "microrecovery",
+          "case_offset_start": 3,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0588,
+          "elapsed_seconds": 84.719
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 6,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0412,
+          "elapsed_seconds": 59.426
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 9,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0642,
+          "elapsed_seconds": 92.549
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 12,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0418,
+          "elapsed_seconds": 60.289
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 15,
+          "case_count": 1,
+          "estimated_cost_usd": 0.0723,
+          "elapsed_seconds": 104.151
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 16,
+          "case_count": 1,
+          "estimated_cost_usd": 0.0976,
+          "elapsed_seconds": 140.582
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 17,
+          "case_count": 1,
+          "estimated_cost_usd": 0.0334,
+          "elapsed_seconds": 48.063
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 18,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0534,
+          "elapsed_seconds": 76.913
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 21,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0557,
+          "elapsed_seconds": 80.222
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 24,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0387,
+          "elapsed_seconds": 55.705
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 27,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0422,
+          "elapsed_seconds": 60.853
+        },
+        {
+          "source": "singlecase_recovery",
+          "case_offset_start": 32,
+          "case_count": 1,
+          "estimated_cost_usd": 0.0332,
+          "elapsed_seconds": 47.91
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 33,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0545,
+          "elapsed_seconds": 78.594
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 36,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0582,
+          "elapsed_seconds": 83.888
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 39,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0668,
+          "elapsed_seconds": 96.186
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 42,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0616,
+          "elapsed_seconds": 88.706
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 45,
+          "case_count": 3,
+          "estimated_cost_usd": 0.0559,
+          "elapsed_seconds": 80.532
+        },
+        {
+          "source": "microrecovery",
+          "case_offset_start": 48,
+          "case_count": 2,
+          "estimated_cost_usd": 0.0338,
+          "elapsed_seconds": 48.658
+        }
+      ],
+      "failed_attempts": [
+        {
+          "source": "single_shot",
+          "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+          "method": "sentence_h2o",
+          "budget": 1536,
+          "case_offset_start": 0,
+          "case_limit": 50,
+          "error_class": "OutOfMemoryError",
+          "error_excerpt": "Input failed with an exception that was too large: OutOfMemoryError('CUDA out of memory. Tried to allocate 2.09 GiB. GPU 0 has a total capacity of 79.25 GiB of which 1.74 GiB is free. Process 1 has 77.50 GiB memory in use. Of the allocated memory 48.04 GiB is allocated by PyTorch, and 28.97 GiB is reserved by PyTorch but unallocated. If reserved but unalloca"
+        },
+        {
+          "source": "microrecovery",
+          "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+          "method": "sentence_h2o",
+          "budget": 1536,
+          "case_offset_start": 15,
+          "case_limit": 3,
+          "error_class": "OutOfMemoryError",
+          "error_excerpt": "Input failed with an exception that was too large: OutOfMemoryError('CUDA out of memory. Tried to allocate 2.09 GiB. GPU 0 has a total capacity of 79.25 GiB of which 1.66 GiB is free. Process 1 has 77.58 GiB memory in use. Of the allocated memory 48.07 GiB is allocated by PyTorch, and 29.01 GiB is reserved by PyTorch but unallocated. If reserved but unalloca"
+        },
+        {
+          "source": "microrecovery",
+          "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+          "method": "sentence_h2o",
+          "budget": 1536,
+          "case_offset_start": 30,
+          "case_limit": 3,
+          "error_class": "OutOfMemoryError",
+          "error_excerpt": "Input failed with an exception that was too large: OutOfMemoryError('CUDA out of memory. Tried to allocate 2.09 GiB. GPU 0 has a total capacity of 79.25 GiB of which 1.66 GiB is free. Process 1 has 77.58 GiB memory in use. Of the allocated memory 48.12 GiB is allocated by PyTorch, and 28.96 GiB is reserved by PyTorch but unallocated. If reserved but unalloca"
+        }
+      ],
+      "notes": [
+        "Initial single-shot n=50 attempt OOMed after 3 completed cases.",
+        "3-case micro-recovery still OOMed for selected chunks; final missing fixtures completed with one-case recovery.",
+        "reported_success_cost_usd excludes failed OOM attempt burn."
+      ]
+    },
+    {
+      "family": "Mistral 7B v0.3",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "method": "h2o",
+      "budget": 2048,
+      "status": "completed",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "elapsed_seconds": 753.463,
+      "estimated_cost_usd": 0.5229,
+      "peak_memory_allocated_mb": 59346.583,
+      "peak_memory_reserved_mb": 79298.0,
+      "chunks": [
+        {
+          "source": "single_shot",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.5229,
+          "elapsed_seconds": 753.463
+        }
+      ],
+      "mean_retention_ratio": 0.4894,
+      "total_eviction_steps": 930
+    },
+    {
+      "family": "Mistral 7B v0.3",
+      "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+      "method": "sentence_h2o",
+      "budget": 2048,
+      "status": "completed",
+      "n": 50,
+      "hits": 50,
+      "hit_rate": 1.0,
+      "elapsed_seconds": 437.78,
+      "estimated_cost_usd": 0.3038,
+      "peak_memory_allocated_mb": 59279.32,
+      "peak_memory_reserved_mb": 79618.0,
+      "chunks": [
+        {
+          "source": "single_shot",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.3038,
+          "elapsed_seconds": 437.78
+        }
+      ],
+      "mean_retention_ratio": 0.4869,
+      "total_eviction_steps": 95
+    },
+    {
+      "family": "Llama 3.1 8B",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "method": "h2o",
+      "budget": 1536,
+      "status": "completed",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "elapsed_seconds": 380.857,
+      "estimated_cost_usd": 0.2643,
+      "peak_memory_allocated_mb": 51886.191,
+      "peak_memory_reserved_mb": 79868.0,
+      "chunks": [
+        {
+          "source": "single_shot",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.2643,
+          "elapsed_seconds": 380.857
+        }
+      ],
+      "mean_retention_ratio": 0.3996,
+      "total_eviction_steps": 564
+    },
+    {
+      "family": "Llama 3.1 8B",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "method": "sentence_h2o",
+      "budget": 1536,
+      "status": "completed",
+      "n": 50,
+      "hits": 50,
+      "hit_rate": 1.0,
+      "elapsed_seconds": 302.432,
+      "estimated_cost_usd": 0.2099,
+      "peak_memory_allocated_mb": 51871.655,
+      "peak_memory_reserved_mb": 80150.0,
+      "chunks": [
+        {
+          "source": "single_shot",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.2099,
+          "elapsed_seconds": 302.432
+        }
+      ],
+      "mean_retention_ratio": 0.3969,
+      "total_eviction_steps": 86
+    },
+    {
+      "family": "Llama 3.1 8B",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "method": "h2o",
+      "budget": 2048,
+      "status": "completed",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "elapsed_seconds": 432.34,
+      "estimated_cost_usd": 0.3,
+      "peak_memory_allocated_mb": 56065.28,
+      "peak_memory_reserved_mb": 80412.0,
+      "chunks": [
+        {
+          "source": "single_shot",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.3,
+          "elapsed_seconds": 432.34
+        }
+      ],
+      "mean_retention_ratio": 0.5328,
+      "total_eviction_steps": 459
+    },
+    {
+      "family": "Llama 3.1 8B",
+      "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+      "method": "sentence_h2o",
+      "budget": 2048,
+      "status": "completed",
+      "n": 50,
+      "hits": 50,
+      "hit_rate": 1.0,
+      "elapsed_seconds": 369.156,
+      "estimated_cost_usd": 0.2562,
+      "peak_memory_allocated_mb": 56028.88,
+      "peak_memory_reserved_mb": 79950.0,
+      "chunks": [
+        {
+          "source": "single_shot",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.2562,
+          "elapsed_seconds": 369.156
+        }
+      ],
+      "mean_retention_ratio": 0.5306,
+      "total_eviction_steps": 83
+    },
+    {
+      "family": "Gemma 4 E4B-it",
+      "model_id": "google/gemma-4-E4B-it",
+      "method": "vorn",
+      "budget": 1536,
+      "status": "completed",
+      "n": 50,
+      "hits": 11,
+      "hit_rate": 0.22,
+      "elapsed_seconds": 486.606,
+      "estimated_cost_usd": 0.3377,
+      "peak_memory_allocated_mb": 19948.313,
+      "peak_memory_reserved_mb": 26172.0,
+      "chunks": [
+        {
+          "source": "single_shot",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.3377,
+          "elapsed_seconds": 486.606
+        }
+      ],
+      "mean_retention_ratio": 0.3896,
+      "total_eviction_steps": 1120
+    },
+    {
+      "family": "Gemma 4 E4B-it",
+      "model_id": "google/gemma-4-E4B-it",
+      "method": "h2o",
+      "budget": 1536,
+      "status": "completed",
+      "n": 50,
+      "hits": 49,
+      "hit_rate": 0.98,
+      "elapsed_seconds": 508.026,
+      "estimated_cost_usd": 0.3526,
+      "peak_memory_allocated_mb": 31342.591,
+      "peak_memory_reserved_mb": 35692.0,
+      "chunks": [
+        {
+          "source": "single_shot",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.3526,
+          "elapsed_seconds": 508.026
+        }
+      ],
+      "mean_retention_ratio": 0.3896,
+      "total_eviction_steps": 1228
+    },
+    {
+      "family": "Gemma 4 E4B-it",
+      "model_id": "google/gemma-4-E4B-it",
+      "method": "vorn",
+      "budget": 2048,
+      "status": "completed",
+      "n": 50,
+      "hits": 28,
+      "hit_rate": 0.56,
+      "elapsed_seconds": 668.239,
+      "estimated_cost_usd": 0.4638,
+      "peak_memory_allocated_mb": 20498.4,
+      "peak_memory_reserved_mb": 78852.0,
+      "chunks": [
+        {
+          "source": "single_shot",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.4638,
+          "elapsed_seconds": 668.239
+        }
+      ],
+      "mean_retention_ratio": 0.5195,
+      "total_eviction_steps": 1248
+    },
+    {
+      "family": "Gemma 4 E4B-it",
+      "model_id": "google/gemma-4-E4B-it",
+      "method": "h2o",
+      "budget": 2048,
+      "status": "completed",
+      "n": 50,
+      "hits": 50,
+      "hit_rate": 1.0,
+      "elapsed_seconds": 646.743,
+      "estimated_cost_usd": 0.4488,
+      "peak_memory_allocated_mb": 33182.565,
+      "peak_memory_reserved_mb": 78852.0,
+      "chunks": [
+        {
+          "source": "single_shot",
+          "case_offset_start": 0,
+          "case_count": 50,
+          "estimated_cost_usd": 0.4488,
+          "elapsed_seconds": 646.743
+        }
+      ],
+      "mean_retention_ratio": 0.5195,
+      "total_eviction_steps": 1244
+    }
+  ],
+  "wave_summary": {
+    "matrix_cells_requested": 12,
+    "matrix_cells_completed": 12,
+    "single_shot_cells_fired": 12,
+    "single_shot_cells_succeeded": 10,
+    "single_shot_cells_failed": 2,
+    "microrecovery_cells_fired": 32,
+    "microrecovery_cells_succeeded": 29,
+    "microrecovery_cells_failed": 3,
+    "singlecase_recovery_cells_fired": 5,
+    "singlecase_recovery_cells_succeeded": 5,
+    "reported_success_cost_usd": 5.7478,
+    "cost_note": "Reported success cost excludes failed OOM attempts and Modal internal failure burn; dispatch ceiling was $25."
+  },
+  "read": {
+    "summary": "All 12 requested B=1536/B=2048 cells have n=50 data. Mistral B=1536 H2O rows required micro-recovery because single-shot OOMed after 3 cases; all other cells completed single-shot.",
+    "matrix_updates": [
+      "Mistral 7B v0.3 h2o@1536 = 49/50 (0.98)",
+      "Mistral 7B v0.3 sentence_h2o@1536 = 49/50 (0.98)",
+      "Mistral 7B v0.3 h2o@2048 = 49/50 (0.98)",
+      "Mistral 7B v0.3 sentence_h2o@2048 = 50/50 (1.00)",
+      "Llama 3.1 8B h2o@1536 = 49/50 (0.98)",
+      "Llama 3.1 8B sentence_h2o@1536 = 50/50 (1.00)",
+      "Llama 3.1 8B h2o@2048 = 49/50 (0.98)",
+      "Llama 3.1 8B sentence_h2o@2048 = 50/50 (1.00)",
+      "Gemma 4 E4B-it vorn@1536 = 11/50 (0.22)",
+      "Gemma 4 E4B-it h2o@1536 = 49/50 (0.98)",
+      "Gemma 4 E4B-it vorn@2048 = 28/50 (0.56)",
+      "Gemma 4 E4B-it h2o@2048 = 50/50 (1.00)"
+    ],
+    "notable_results": [
+      "Mistral 7B v0.3 h2o@1536 recovered to 49/50 (0.98); sentence_h2o@1536 recovered to 49/50 (0.98).",
+      "Mistral 7B v0.3 h2o@2048 = 49/50 (0.98); sentence_h2o@2048 = 50/50 (1.00).",
+      "Llama 3.1 8B H2O rows are 49/50 or 50/50 across both budgets.",
+      "Gemma 4 token-vorn improves from 11/50 at B=1536 to 28/50 at B=2048; Gemma 4 h2o reaches 49/50 and 50/50."
+    ]
+  },
+  "provenance": {
+    "single_shot_cell_spec_path": "vorn-mat/.benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/single-shot-cell-specs.json",
+    "microrecovery_cell_spec_path": "vorn-mat/.benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/mistral-b1536-microrecovery-cell-specs.json",
+    "singlecase_recovery_cell_spec_path": "vorn-mat/.benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/mistral-b1536-singlecase-recovery-cell-specs.json",
+    "single_shot_report_path": "vorn-mat/.benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/single-shot/reports.json",
+    "microrecovery_report_path": "vorn-mat/.benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/mistral-b1536-microrecovery/reports.json",
+    "singlecase_recovery_report_path": "vorn-mat/.benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/mistral-b1536-singlecase-recovery/reports.json",
+    "local_volume_pull_path": "vorn-mat/.benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/raw-final/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26",
+    "runner": "examples/run_modal_cells_parallel.py"
+  }
+}
