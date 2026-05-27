@@ -44,6 +44,63 @@ def test_modal_app_spec_locks_expected_week1_defaults():
     assert "huggingface_hub==1.15.0" in spec.pip_dependencies
 
 
+def test_modal_app_spec_carries_pytorch_cuda_alloc_conf_expandable_segments():
+    """PyTorch's documented fix for caching-allocator fragmentation under
+    varying-size allocations across many fixtures must be baked into the
+    canonical app spec. Filed 2026-05-27 after Ministral 8B TOVA/H2O n=50
+    cells OOMed on A100-80GB with ~27 GB reserved-but-unallocated overhead.
+    """
+    spec = default_modal_app_spec()
+
+    env_dict = dict(spec.env_vars)
+    assert env_dict.get("PYTORCH_CUDA_ALLOC_CONF") == "expandable_segments:True", (
+        f"PYTORCH_CUDA_ALLOC_CONF must default to expandable_segments:True; "
+        f"got env_vars={spec.env_vars!r}"
+    )
+
+
+def test_build_modal_artifacts_applies_env_vars_to_image():
+    """When ModalAppSpec.env_vars is non-empty, build_modal_artifacts must
+    apply them to the image via image.env(...) so PyTorch reads
+    PYTORCH_CUDA_ALLOC_CONF at module import time in the per-cell container.
+    """
+    from vorn_mat.modal_app import build_modal_artifacts
+
+    env_calls: list[dict] = []
+
+    class FakeImage:
+        def env(self, env_dict):
+            env_calls.append(dict(env_dict))
+            return self
+
+    class FakeApp:
+        def __init__(self, name):
+            self.name = name
+
+    class FakeVolume:
+        @classmethod
+        def from_name(cls, name, create_if_missing=False):
+            return cls()
+
+    class FakeImageFactory:
+        @staticmethod
+        def from_dockerfile(path, context_dir):
+            return FakeImage()
+
+    class FakeModal:
+        App = FakeApp
+        Image = FakeImageFactory
+        Volume = FakeVolume
+
+    artifacts = build_modal_artifacts(modal_module=FakeModal, dockerfile_path="/tmp/fake-dockerfile")
+
+    assert len(env_calls) == 1, f"image.env() should be invoked exactly once; got {len(env_calls)} calls"
+    assert env_calls[0].get("PYTORCH_CUDA_ALLOC_CONF") == "expandable_segments:True", (
+        f"image.env() must receive PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True; "
+        f"got {env_calls[0]!r}"
+    )
+
+
 def test_benchmark_registry_contains_week1_targets():
     assert set(BENCHMARKS) == {"ruler", "niah"}
     assert BENCHMARKS["ruler"].metric_name == "task_accuracy"
@@ -159,6 +216,11 @@ class _FakeDockerfileImage:
     def __init__(self, dockerfile_path: str, context_dir: str):
         self.dockerfile_path = dockerfile_path
         self.context_dir = context_dir
+        self.env_vars: dict[str, str] = {}
+
+    def env(self, env_dict):
+        self.env_vars = dict(env_dict)
+        return self
 
 
 class _FakeImageFactory:

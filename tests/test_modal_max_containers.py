@@ -45,6 +45,11 @@ class _FakeDockerfileImage:
     def __init__(self, dockerfile_path: str, context_dir: str):
         self.dockerfile_path = dockerfile_path
         self.context_dir = context_dir
+        self.env_vars: dict[str, str] = {}
+
+    def env(self, env_dict):
+        self.env_vars = dict(env_dict)
+        return self
 
 
 class _FakeImageFactory:

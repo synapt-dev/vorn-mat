@@ -20,6 +20,7 @@ class ModalAppSpec:
     hf_secret_name: str
     gpu: str
     timeout_seconds: int
+    env_vars: tuple[tuple[str, str], ...] = ()
 
 
 @dataclass(frozen=True)
@@ -70,6 +71,13 @@ def default_modal_app_spec(gpu: str = "A100-80GB") -> ModalAppSpec:
         hf_secret_name="huggingface-secret",
         gpu=gpu,
         timeout_seconds=60 * 60,
+        env_vars=(
+            # PyTorch's documented fix for caching-allocator fragmentation under
+            # varying-size allocations across many fixtures. Surfaced 2026-05-27
+            # when Ministral 8B TOVA/H2O n=50 cells OOMed on A100-80GB with
+            # ~27 GB reserved-but-unallocated fragmentation overhead.
+            ("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True"),
+        ),
     )
 
 
@@ -101,6 +109,8 @@ def build_modal_artifacts(
         str(resolved_dockerfile),
         context_dir=str(resolved_dockerfile.parent),
     )
+    if spec.env_vars:
+        image = image.env(dict(spec.env_vars))
     volume = modal_module.Volume.from_name(spec.volume_name, create_if_missing=True)
     return ModalArtifacts(spec=spec, app=app, image=image, volume=volume)
 
