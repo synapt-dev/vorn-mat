@@ -15,6 +15,8 @@ from .local_exec import (
     TransformersLiveEvictionGenerator,
     TransformersScoreDistributionObservationGenerator,
     TransformersTextGenerator,
+    attach_runtime_telemetry,
+    reset_runtime_telemetry,
     select_live_eviction_plan,
     select_week1_plan,
 )
@@ -130,6 +132,7 @@ def run_modal_vanilla_niah(request: ModalVanillaRunRequest) -> ModalVanillaRunRe
     """Run a real vanilla-only NIAH slice on remote GPU infrastructure."""
     per_second_rate = per_second_rate_for_gpu(request.gpu)
     start = time.perf_counter()
+    reset_runtime_telemetry()
     cases = load_ruler_hf_niah_slice(
         request.dataset_config,
         split=request.split,
@@ -184,6 +187,7 @@ def run_modal_vanilla_niah(request: ModalVanillaRunRequest) -> ModalVanillaRunRe
         ),
         observations=result.observations,
     )
+    enriched_result = attach_runtime_telemetry(enriched_result)
 
     if request.output_path:
         append_result(Path(request.output_path), enriched_result)
@@ -204,6 +208,7 @@ def run_modal_live_eviction_niah(
     """Run the live eviction-only NIAH arm on remote GPU infrastructure."""
     per_second_rate = per_second_rate_for_gpu(request.gpu)
     start = time.perf_counter()
+    reset_runtime_telemetry()
     cases = load_ruler_hf_niah_slice(
         request.dataset_config,
         split=request.split,
@@ -285,6 +290,7 @@ def run_modal_live_eviction_niah(
         ),
         observations=result.observations,
     )
+    enriched_result = attach_runtime_telemetry(enriched_result)
 
     if request.output_path:
         append_result(Path(request.output_path), enriched_result)
