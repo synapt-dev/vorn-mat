@@ -31,6 +31,8 @@ def test_capture_case_memory_stats_reads_cuda_peak_counters(monkeypatch):
         is_available=lambda: True,
         reset_peak_memory_stats=lambda: calls.append("reset"),
         synchronize=lambda: calls.append("sync"),
+        memory_allocated=lambda: 128 * 1024 * 1024,
+        memory_reserved=lambda: 384 * 1024 * 1024,
         max_memory_allocated=lambda: 256 * 1024 * 1024,
         max_memory_reserved=lambda: 512 * 1024 * 1024,
     )
@@ -41,6 +43,8 @@ def test_capture_case_memory_stats_reads_cuda_peak_counters(monkeypatch):
 
     assert calls == ["reset", "sync"]
     assert stats == CaseMemoryStats(
+        active_memory_allocated_mb=128.0,
+        active_memory_reserved_mb=384.0,
         peak_memory_allocated_mb=256.0,
         peak_memory_reserved_mb=512.0,
     )
@@ -52,6 +56,8 @@ def test_case_observation_memory_fields_round_trip_jsonl(tmp_path: Path):
         fixture_id="case-1",
         correct=True,
         prediction="9375710",
+        active_memory_allocated_mb=1111.5,
+        active_memory_reserved_mb=2222.5,
         peak_memory_allocated_mb=1234.5,
         peak_memory_reserved_mb=2345.5,
     )
@@ -74,8 +80,18 @@ def test_run_vanilla_attaches_per_case_memory_to_observations(monkeypatch):
 
     captures = iter(
         (
-            CaseMemoryStats(peak_memory_allocated_mb=101.0, peak_memory_reserved_mb=201.0),
-            CaseMemoryStats(peak_memory_allocated_mb=102.0, peak_memory_reserved_mb=202.0),
+            CaseMemoryStats(
+                active_memory_allocated_mb=51.0,
+                active_memory_reserved_mb=151.0,
+                peak_memory_allocated_mb=101.0,
+                peak_memory_reserved_mb=201.0,
+            ),
+            CaseMemoryStats(
+                active_memory_allocated_mb=52.0,
+                active_memory_reserved_mb=152.0,
+                peak_memory_allocated_mb=102.0,
+                peak_memory_reserved_mb=202.0,
+            ),
         )
     )
     reset_calls = 0
@@ -90,6 +106,8 @@ def test_run_vanilla_attaches_per_case_memory_to_observations(monkeypatch):
     result, _traces = run_vanilla(plan, cases, FakeGenerator())
 
     assert reset_calls == 2
+    assert [obs.active_memory_allocated_mb for obs in result.observations] == [51.0, 52.0]
+    assert [obs.active_memory_reserved_mb for obs in result.observations] == [151.0, 152.0]
     assert [obs.peak_memory_allocated_mb for obs in result.observations] == [101.0, 102.0]
     assert [obs.peak_memory_reserved_mb for obs in result.observations] == [201.0, 202.0]
 
@@ -120,8 +138,18 @@ def test_run_live_eviction_carries_memory_to_callback_and_final_report(monkeypat
 
     captures = iter(
         (
-            CaseMemoryStats(peak_memory_allocated_mb=301.0, peak_memory_reserved_mb=401.0),
-            CaseMemoryStats(peak_memory_allocated_mb=302.0, peak_memory_reserved_mb=402.0),
+            CaseMemoryStats(
+                active_memory_allocated_mb=201.0,
+                active_memory_reserved_mb=301.0,
+                peak_memory_allocated_mb=301.0,
+                peak_memory_reserved_mb=401.0,
+            ),
+            CaseMemoryStats(
+                active_memory_allocated_mb=202.0,
+                active_memory_reserved_mb=302.0,
+                peak_memory_allocated_mb=302.0,
+                peak_memory_reserved_mb=402.0,
+            ),
         )
     )
     monkeypatch.setattr(live_module, "reset_case_memory_stats", lambda: None)
@@ -137,4 +165,6 @@ def test_run_live_eviction_carries_memory_to_callback_and_final_report(monkeypat
 
     assert [obs.peak_memory_allocated_mb for obs in persisted] == [301.0, 302.0]
     assert [obs.peak_memory_reserved_mb for obs in persisted] == [401.0, 402.0]
+    assert [obs.active_memory_allocated_mb for obs in persisted] == [201.0, 202.0]
+    assert [obs.active_memory_reserved_mb for obs in persisted] == [301.0, 302.0]
     assert result.observations == tuple(persisted)

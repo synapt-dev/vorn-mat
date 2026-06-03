@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
+import json
 from pathlib import Path
 import time
 
@@ -55,6 +56,45 @@ from .progress import default_progress_logger
 from .results import RunResult, append_observation, append_result, observations_path
 from .runner import build_execution_plans
 from .score_distribution_observation import ScoreDistributionObservationReport
+
+
+def _runtime_failure_diagnostics(exc: Exception) -> dict[str, object]:
+    diagnostics: dict[str, object] = {
+        "exception_type": type(exc).__name__,
+        "error_text": str(exc)[:4000],
+    }
+    try:
+        import torch
+    except ImportError:
+        return diagnostics
+
+    if not torch.cuda.is_available():
+        return diagnostics
+
+    diagnostics.update(
+        {
+            "active_memory_allocated_gb": torch.cuda.memory_allocated()
+            / (1024 ** 3),
+            "active_memory_reserved_gb": torch.cuda.memory_reserved() / (1024 ** 3),
+            "peak_memory_allocated_gb": torch.cuda.max_memory_allocated()
+            / (1024 ** 3),
+            "peak_memory_reserved_gb": torch.cuda.max_memory_reserved()
+            / (1024 ** 3),
+        }
+    )
+    try:
+        diagnostics["gpu_total_memory_gb"] = (
+            torch.cuda.get_device_properties(0).total_memory / (1024 ** 3)
+        )
+    except (RuntimeError, AssertionError):
+        pass
+    try:
+        diagnostics["cuda_memory_summary"] = torch.cuda.memory_summary(
+            abbreviated=True,
+        )[:4000]
+    except RuntimeError:
+        pass
+    return diagnostics
 
 
 @dataclass(frozen=True)
@@ -340,6 +380,7 @@ def run_modal_vanilla_niah(request: ModalVanillaRunRequest) -> ModalVanillaRunRe
             "case_count": str(len(cases)),
             "model": request.model_id,
             "model_id": request.model_id,
+            "gpu": request.gpu,
             "elapsed_seconds": f"{elapsed_seconds:.3f}",
             "estimated_cost_usd": f"{estimated_cost_usd:.4f}",
         }
@@ -429,6 +470,7 @@ def run_modal_live_eviction_niah(
             "case_offset_start": str(request.case_offset_start),
             "model": request.model_id,
             "model_id": request.model_id,
+            "gpu": request.gpu,
             "elapsed_seconds": f"{elapsed_seconds:.3f}",
             "estimated_cost_usd": f"{estimated_cost_usd:.4f}",
             "cache_budget_tokens": str(request.cache_budget_tokens),
@@ -550,20 +592,25 @@ def run_modal_live_eviction_longbench_passage_retrieval(
             max_new_tokens=request.max_new_tokens,
         )
     )
+    model_load_elapsed_seconds = generator.ensure_model_loaded()
     ledger = (
         observations_path(Path(request.output_path)) if request.output_path else None
     )
-    result, _traces = run_live_eviction(
-        plan,
-        cases,
-        generator,
-        on_case=(
-            (lambda observation: append_observation(ledger, observation))
-            if ledger is not None
-            else None
-        ),
-        progress_logger=default_progress_logger,
-    )
+    try:
+        result, _traces = run_live_eviction(
+            plan,
+            cases,
+            generator,
+            on_case=(
+                (lambda observation: append_observation(ledger, observation))
+                if ledger is not None
+                else None
+            ),
+            progress_logger=default_progress_logger,
+        )
+    except Exception as exc:
+        diagnostics = _runtime_failure_diagnostics(exc)
+        raise RuntimeError(json.dumps(diagnostics, sort_keys=True)) from exc
     elapsed_seconds = time.perf_counter() - start
     estimated_cost_usd = elapsed_seconds * per_second_rate
 
@@ -583,6 +630,7 @@ def run_modal_live_eviction_longbench_passage_retrieval(
             "case_offset_start": str(request.case_offset_start),
             "model": request.model_id,
             "model_id": request.model_id,
+            "gpu": request.gpu,
             "elapsed_seconds": f"{elapsed_seconds:.3f}",
             "estimated_cost_usd": f"{estimated_cost_usd:.4f}",
             "cache_budget_tokens": str(request.cache_budget_tokens),
@@ -605,6 +653,13 @@ def run_modal_live_eviction_longbench_passage_retrieval(
             "secondary_metric": "binary_paragraph_hit_rate",
             "license_note": PASSAGE_RETRIEVAL_EN_LICENSE_NOTE,
             "preregistration": "config#316",
+            "gpu_hours": f"{(elapsed_seconds / 3600):.6f}",
+            "model_load_elapsed_seconds": (
+                f"{model_load_elapsed_seconds:.6f}"
+            ),
+            "cache_stats_available": "false",
+            "vanilla_delta_available": "false",
+            "vanilla_delta_reason": "no_vanilla_baseline_in_config316",
         }
     )
     enriched_result = RunResult(
@@ -620,6 +675,12 @@ def run_modal_live_eviction_longbench_passage_retrieval(
         observations=result.observations,
     )
     enriched_result = attach_runtime_telemetry(enriched_result)
+    model_unload_elapsed_seconds = generator.unload_model()
+    enriched_metadata = dict(enriched_result.metadata)
+    enriched_metadata["model_unload_elapsed_seconds"] = (
+        f"{model_unload_elapsed_seconds:.6f}"
+    )
+    enriched_result = replace(enriched_result, metadata=enriched_metadata)
 
     if request.output_path:
         append_result(Path(request.output_path), enriched_result)

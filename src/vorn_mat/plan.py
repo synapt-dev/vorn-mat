@@ -22,6 +22,7 @@ DEFAULT_RANDOM_LIVE_EVICTION_SEED = 17
 
 A100_80GB_PER_SECOND = 0.000694
 H100_PER_SECOND = 0.001097
+H200_PER_SECOND = 0.001261
 
 
 @dataclass(frozen=True)
@@ -40,6 +41,8 @@ def per_second_rate_for_gpu(gpu: str) -> float:
         return A100_80GB_PER_SECOND
     if gpu == "H100":
         return H100_PER_SECOND
+    if gpu == "H200":
+        return H200_PER_SECOND
     raise ValueError(f"unsupported gpu for cost modeling: {gpu}")
 
 

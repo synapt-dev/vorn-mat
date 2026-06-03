@@ -145,8 +145,11 @@ def _capture_env_versions() -> dict[str, str]:
 def capture_runtime_telemetry() -> dict[str, object]:
     """Snapshot CUDA peak memory + installed package versions for the envelope."""
     snapshot: dict[str, object] = {
+        "active_memory_allocated_gb": None,
+        "active_memory_reserved_gb": None,
         "peak_memory_allocated_gb": None,
         "peak_memory_reserved_gb": None,
+        "gpu_total_memory_gb": None,
         "oom_near_miss": False,
         "env_versions": _capture_env_versions(),
     }
@@ -156,8 +159,12 @@ def capture_runtime_telemetry() -> dict[str, object]:
         return snapshot
     if not torch.cuda.is_available():
         return snapshot
+    active_allocated_bytes = int(torch.cuda.memory_allocated())
+    active_reserved_bytes = int(torch.cuda.memory_reserved())
     allocated_bytes = int(torch.cuda.max_memory_allocated())
     reserved_bytes = int(torch.cuda.max_memory_reserved())
+    snapshot["active_memory_allocated_gb"] = active_allocated_bytes / (1024 ** 3)
+    snapshot["active_memory_reserved_gb"] = active_reserved_bytes / (1024 ** 3)
     snapshot["peak_memory_allocated_gb"] = allocated_bytes / (1024 ** 3)
     snapshot["peak_memory_reserved_gb"] = reserved_bytes / (1024 ** 3)
     try:
@@ -165,6 +172,7 @@ def capture_runtime_telemetry() -> dict[str, object]:
     except (RuntimeError, AssertionError):
         total_bytes = 0
     if total_bytes > 0:
+        snapshot["gpu_total_memory_gb"] = total_bytes / (1024 ** 3)
         snapshot["oom_near_miss"] = bool(allocated_bytes > _TELEMETRY_NEAR_MISS_RATIO * total_bytes)
     return snapshot
 
@@ -249,6 +257,7 @@ class _TransformersGeneratorBase:
         self._tokenizer = None
         self._model = None
         self._device = None
+        self._model_load_elapsed_seconds = 0.0
 
     def _ensure_model(self) -> None:
         if self._model is not None and self._tokenizer is not None and self._device is not None:
@@ -267,6 +276,7 @@ class _TransformersGeneratorBase:
             device = "cpu"
             dtype = torch.float32
 
+        load_start = time.perf_counter()
         tokenizer = AutoTokenizer.from_pretrained(
             self.config.model_id,
             trust_remote_code=self.config.trust_remote_code,
@@ -283,10 +293,34 @@ class _TransformersGeneratorBase:
         )
         model.to(device)
         model.eval()
+        self._model_load_elapsed_seconds = time.perf_counter() - load_start
 
         self._tokenizer = tokenizer
         self._model = model
         self._device = device
+
+    def ensure_model_loaded(self) -> float:
+        """Load model/tokenizer now and return the measured load duration."""
+        self._ensure_model()
+        return self._model_load_elapsed_seconds
+
+    def unload_model(self) -> float:
+        """Release model references and CUDA cache; return unload duration."""
+        start = time.perf_counter()
+        self._model = None
+        self._tokenizer = None
+        self._device = None
+        try:
+            import torch
+        except ImportError:
+            return time.perf_counter() - start
+        if torch.cuda.is_available():
+            try:
+                torch.cuda.empty_cache()
+                torch.cuda.synchronize()
+            except RuntimeError:
+                pass
+        return time.perf_counter() - start
 
     def _chat_template_kwargs(self) -> dict[str, object]:
         if "qwen3" in self.config.model_id.lower():
@@ -1408,6 +1442,13 @@ class TransformersLiveEvictionGenerator(
 
         assert self._tokenizer is not None
 
+        case_start = time.perf_counter()
+        prefill_elapsed_seconds = 0.0
+        forward_elapsed_seconds = 0.0
+        eviction_score_elapsed_seconds = 0.0
+        eviction_selection_elapsed_seconds = 0.0
+        eviction_apply_elapsed_seconds = 0.0
+        time_to_first_token_seconds = 0.0
         prompt_input_ids, prompt_attention_mask = self._render_prompt(prompt)
         prompt_token_count = int(prompt_input_ids.shape[-1])
         answer_token_spans: tuple[tuple[int, int], ...] = ()
@@ -1478,12 +1519,17 @@ class TransformersLiveEvictionGenerator(
                     "eviction_steps": eviction_steps,
                 },
             )
+            forward_start = time.perf_counter()
             outputs = self._forward_with_hidden_states(
                 input_ids=active_input_ids,
                 attention_mask=active_attention_mask,
                 position_ids=active_position_ids,
                 output_attentions=needs_attention_scores,
             )
+            step_forward_elapsed = time.perf_counter() - forward_start
+            forward_elapsed_seconds += step_forward_elapsed
+            if step_index == 0:
+                prefill_elapsed_seconds += step_forward_elapsed
             self._emit_runtime_event(
                 "generation_step_forward_done",
                 {
@@ -1510,8 +1556,12 @@ class TransformersLiveEvictionGenerator(
             )
             current_attention_scores: np.ndarray | None = None
             if config.retention_policy in attention_score_policies:
+                attention_score_start = time.perf_counter()
                 current_attention_scores = extract_last_token_attention_scores(
                     outputs.attentions
+                )
+                eviction_score_elapsed_seconds += (
+                    time.perf_counter() - attention_score_start
                 )
                 if first_policy_fingerprint is None:
                     first_policy_fingerprint = summary_fingerprint(
@@ -1567,6 +1617,7 @@ class TransformersLiveEvictionGenerator(
                             assert accumulated_attention_scores is not None
                             unit_scores = accumulated_attention_scores
                     else:
+                        score_start = time.perf_counter()
                         vorn_direction = compute_vorn_direction(
                             token_summaries,
                             recent_token_window=config.recent_token_window,
@@ -1581,6 +1632,9 @@ class TransformersLiveEvictionGenerator(
                             ],
                             dtype=np.float32,
                         )
+                        eviction_score_elapsed_seconds += (
+                            time.perf_counter() - score_start
+                        )
                     unit_ids = build_unit_ids_for_active_positions(
                         prompt_unit_ids=prompt_unit_ids,
                         active_absolute_positions=tuple(
@@ -1588,6 +1642,7 @@ class TransformersLiveEvictionGenerator(
                             for position in active_position_ids[0].detach().cpu().tolist()
                         ),
                     )
+                    selection_start = time.perf_counter()
                     keep_positions = select_sentence_retained_positions(
                         unit_scores,
                         unit_ids=unit_ids,
@@ -1596,6 +1651,9 @@ class TransformersLiveEvictionGenerator(
                         preserve_recent_window=preserve_recent_window,
                         pooling=config.sentence_pooling,
                         top_k=config.sentence_top_k,
+                    )
+                    eviction_selection_elapsed_seconds += (
+                        time.perf_counter() - selection_start
                     )
                 elif config.retention_policy == "adaptive_vorn":
                     vorn_direction = compute_vorn_direction(
@@ -1754,6 +1812,7 @@ class TransformersLiveEvictionGenerator(
                             ),
                         },
                     )
+                apply_start = time.perf_counter()
                 active_input_ids = active_input_ids.index_select(1, keep_tensor)
                 active_attention_mask = active_attention_mask.index_select(1, keep_tensor)
                 active_position_ids = active_position_ids.index_select(1, keep_tensor)
@@ -1761,18 +1820,23 @@ class TransformersLiveEvictionGenerator(
                     accumulated_attention_scores = accumulated_attention_scores[
                         list(keep_positions)
                     ]
+                eviction_apply_elapsed_seconds += time.perf_counter() - apply_start
                 retained_token_counts.append(len(keep_positions))
                 eviction_steps += 1
+                forward_start = time.perf_counter()
                 outputs = self._forward_with_hidden_states(
                     input_ids=active_input_ids,
                     attention_mask=active_attention_mask,
                     position_ids=active_position_ids,
                     output_attentions=needs_attention_scores,
                 )
+                forward_elapsed_seconds += time.perf_counter() - forward_start
             else:
                 retained_token_counts.append(int(active_input_ids.shape[-1]))
 
             next_token = self._select_next_token(outputs.logits)
+            if time_to_first_token_seconds == 0.0:
+                time_to_first_token_seconds = time.perf_counter() - case_start
             next_token_id = int(next_token.item())
             next_token_text = self._tokenizer.decode(
                 [next_token_id],
@@ -1833,6 +1897,10 @@ class TransformersLiveEvictionGenerator(
             next_absolute_position += 1
 
         generated_token_count = len(generated_token_ids)
+        elapsed_seconds = time.perf_counter() - case_start
+        if time_to_first_token_seconds == 0.0:
+            time_to_first_token_seconds = elapsed_seconds
+        decode_elapsed_seconds = max(0.0, elapsed_seconds - time_to_first_token_seconds)
         mean_kept_token_count = (
             float(sum(retained_token_counts)) / len(retained_token_counts)
             if retained_token_counts
@@ -1874,6 +1942,14 @@ class TransformersLiveEvictionGenerator(
                 if config.retention_policy == "adaptive_vorn"
                 else ""
             ),
+            elapsed_seconds=elapsed_seconds,
+            time_to_first_token_seconds=time_to_first_token_seconds,
+            prefill_elapsed_seconds=prefill_elapsed_seconds,
+            decode_elapsed_seconds=decode_elapsed_seconds,
+            forward_elapsed_seconds=forward_elapsed_seconds,
+            eviction_score_elapsed_seconds=eviction_score_elapsed_seconds,
+            eviction_selection_elapsed_seconds=eviction_selection_elapsed_seconds,
+            eviction_apply_elapsed_seconds=eviction_apply_elapsed_seconds,
         )
 
     @staticmethod

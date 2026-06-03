@@ -131,6 +131,7 @@ def build_passage_retrieval_en_cell_specs(
     case_offset_start: int = 0,
     dataset_revision: str = LONGBENCH_REVISION,
     attempt_label: str = "config316",
+    gpu: str = "A100-80GB",
 ) -> tuple[dict[str, object], ...]:
     """Return the exact 8 Modal request specs locked by config#316."""
 
@@ -167,6 +168,7 @@ def build_passage_retrieval_en_cell_specs(
                 "sentence_boundary_lookahead_tokens": 25,
                 "force_eviction_overflow_ratio": 1.2,
                 "model_id": cell.model_id,
+                "gpu": gpu,
             }
         )
     return tuple(specs)

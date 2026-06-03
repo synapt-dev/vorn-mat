@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""H100 variant of the config#316 LongBench PassageRetrieval-en wave runner.
+"""H200 variant of the config#316 LongBench PassageRetrieval-en wave runner.
 
-This keeps the same locked task, slice, models, methods, budget, prompt, and
-scorer. Only the Modal GPU substrate changes after the A100 wave exposed
-long-context-forward OOM.
+This keeps the locked task, slice, models, methods, budget, prompt, scorer,
+bf16 precision, and greedy decoding. Only the Modal GPU substrate changes
+after A100 and H100 exposed long-context-forward OOM.
 """
 # ruff: noqa: E402
 
@@ -33,7 +33,7 @@ from vorn_mat.modal_app import default_modal_app_spec
 binding = build_vorn_entrypoint(
     run_modal_live_eviction_longbench_passage_retrieval,
     modal_module=modal,
-    app_spec=replace(default_modal_app_spec(), gpu="H100"),
+    app_spec=replace(default_modal_app_spec(), gpu="H200"),
 )
 app = binding.app
 
@@ -56,7 +56,7 @@ def orchestrate_wave(cell_specs: list[dict]) -> dict:
 @app.local_entrypoint()
 def main(
     cell_spec_path: str = "",
-    output_dir: str = str(ROOT / ".benchmarks" / "longbench-passage-wave-h100"),
+    output_dir: str = str(ROOT / ".benchmarks" / "longbench-passage-wave-h200"),
     dry_run: bool = False,
     dataset_revision: str = LONGBENCH_REVISION,
 ) -> None:
@@ -67,8 +67,8 @@ def main(
             build_passage_retrieval_en_cell_specs(
                 results_root=binding.spec.results_root,
                 dataset_revision=dataset_revision,
-                attempt_label="config316-h100",
-                gpu="H100",
+                attempt_label="config316-h200",
+                gpu="H200",
             )
         )
 
@@ -80,7 +80,7 @@ def main(
 
     if dry_run:
         print("dry_run=true")
-        print("gpu=H100")
+        print("gpu=H200")
         print(f"cells_prepared={len(cell_specs)}")
         print(f"output_dir={output_path}")
         return
@@ -96,7 +96,7 @@ def main(
         )
 
     print("profile=laynepenney")
-    print("gpu=H100")
+    print("gpu=H200")
     print(f"cells_fired={len(cell_specs)}")
     print(f"cells_succeeded={len(wave_report['reports'])}")
     print(f"cells_failed={len(wave_report['failures'])}")

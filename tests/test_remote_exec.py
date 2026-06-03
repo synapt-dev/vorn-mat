@@ -500,6 +500,12 @@ def test_run_modal_live_eviction_longbench_uses_preregistered_contract(monkeypat
             assert config.model_id == "meta-llama/Llama-3.1-8B-Instruct"
             assert config.max_new_tokens == 32
 
+        def ensure_model_loaded(self):
+            return 4.25
+
+        def unload_model(self):
+            return 0.75
+
     monkeypatch.setattr(remote_exec, "TransformersLiveEvictionGenerator", FakeGenerator)
 
     def fake_build_execution_plans(runs):
@@ -551,6 +557,7 @@ def test_run_modal_live_eviction_longbench_uses_preregistered_contract(monkeypat
             case_limit=1,
             model_id="meta-llama/Llama-3.1-8B-Instruct",
             retention_policy="sentence_vorn",
+            gpu="H200",
         )
     )
 
@@ -567,6 +574,11 @@ def test_run_modal_live_eviction_longbench_uses_preregistered_contract(monkeypat
     assert report.result.metadata["primary_metric"] == "mean_official_score"
     assert report.result.metadata["secondary_metric"] == "binary_paragraph_hit_rate"
     assert report.result.metadata["preregistration"] == "config#316"
+    assert report.result.metadata["gpu_hours"] == "0.008333"
+    assert report.result.metadata["model_load_elapsed_seconds"] == "4.250000"
+    assert report.result.metadata["model_unload_elapsed_seconds"] == "0.750000"
+    assert report.result.metadata["vanilla_delta_available"] == "false"
+    assert report.estimated_cost_usd == 30.0 * remote_exec.per_second_rate_for_gpu("H200")
     assert report.elapsed_seconds == 30.0
 
 

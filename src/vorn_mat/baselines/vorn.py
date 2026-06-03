@@ -189,6 +189,8 @@ def run_vorn(
         observation = build_case_observation(
             case,
             prediction,
+            active_memory_allocated_mb=memory_stats.active_memory_allocated_mb,
+            active_memory_reserved_mb=memory_stats.active_memory_reserved_mb,
             peak_memory_allocated_mb=memory_stats.peak_memory_allocated_mb,
             peak_memory_reserved_mb=memory_stats.peak_memory_reserved_mb,
         )

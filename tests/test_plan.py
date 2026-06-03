@@ -16,6 +16,7 @@ from vorn_mat import (
     middle_layer_index,
     per_hour_rate,
 )
+from vorn_mat.plan import per_second_rate_for_gpu
 
 
 def test_middle_layer_index_uses_zero_based_middle():
@@ -64,3 +65,8 @@ def test_a100_cost_window_matches_spec():
     assert round(per_hour_rate(A100_80GB_PER_SECOND), 4) == 2.4984
     assert round(lower, 3) == 524.664
     assert round(upper, 3) == 874.440
+
+
+def test_h200_cost_model_matches_modal_current_rate():
+    assert per_second_rate_for_gpu("H200") == 0.001261
+    assert round(per_hour_rate(per_second_rate_for_gpu("H200")), 4) == 4.5396

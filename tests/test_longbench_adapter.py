@@ -267,6 +267,7 @@ def test_build_preregistered_cell_specs_are_run_ready_and_unique() -> None:
     assert {spec["case_limit"] for spec in specs} == {50}
     assert {spec["case_offset_start"] for spec in specs} == {0}
     assert {spec["max_new_tokens"] for spec in specs} == {32}
+    assert {spec["gpu"] for spec in specs} == {"A100-80GB"}
     assert {spec["sentence_pooling"] for spec in specs} == {"max"}
     assert {spec["sentence_top_k"] for spec in specs} == {3}
     assert {spec["always_keep_prefix_tokens"] for spec in specs} == {1}
@@ -291,9 +292,22 @@ def test_build_preregistered_cell_specs_supports_attempt_label_isolation() -> No
     specs = build_passage_retrieval_en_cell_specs(
         results_root="/vol/results/vorn-mat",
         attempt_label="config316-h100",
+        gpu="H100",
     )
 
     assert all("config316-h100-" in str(spec["output_path"]) for spec in specs)
+    assert {spec["gpu"] for spec in specs} == {"H100"}
+
+
+def test_build_preregistered_cell_specs_supports_h200_substrate_metadata() -> None:
+    specs = build_passage_retrieval_en_cell_specs(
+        results_root="/vol/results/vorn-mat",
+        attempt_label="config316-h200",
+        gpu="H200",
+    )
+
+    assert all("config316-h200-" in str(spec["output_path"]) for spec in specs)
+    assert {spec["gpu"] for spec in specs} == {"H200"}
 
 
 @pytest.mark.parametrize(
