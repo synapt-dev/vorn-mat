@@ -287,15 +287,25 @@ def test_build_preregistered_cell_specs_are_run_ready_and_unique() -> None:
     }
 
 
+def test_build_preregistered_cell_specs_supports_attempt_label_isolation() -> None:
+    specs = build_passage_retrieval_en_cell_specs(
+        results_root="/vol/results/vorn-mat",
+        attempt_label="config316-h100",
+    )
+
+    assert all("config316-h100-" in str(spec["output_path"]) for spec in specs)
+
+
 @pytest.mark.parametrize(
     ("kwargs", "match"),
     [
         ({"case_limit": 49}, "case_limit=50"),
         ({"case_offset_start": 1}, "case_offset_start=0"),
+        ({"attempt_label": ""}, "attempt_label"),
     ],
 )
 def test_build_preregistered_cell_specs_rejects_contract_drift(
-    kwargs: dict[str, int],
+    kwargs: dict[str, object],
     match: str,
 ) -> None:
     with pytest.raises(ValueError, match=match):

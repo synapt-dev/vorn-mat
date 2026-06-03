@@ -130,6 +130,7 @@ def build_passage_retrieval_en_cell_specs(
     case_limit: int = 50,
     case_offset_start: int = 0,
     dataset_revision: str = LONGBENCH_REVISION,
+    attempt_label: str = "config316",
 ) -> tuple[dict[str, object], ...]:
     """Return the exact 8 Modal request specs locked by config#316."""
 
@@ -137,6 +138,8 @@ def build_passage_retrieval_en_cell_specs(
         raise ValueError("config#316 locks case_limit=50")
     if case_offset_start != 0:
         raise ValueError("config#316 locks case_offset_start=0")
+    if not attempt_label:
+        raise ValueError("attempt_label must be non-empty")
 
     specs: list[dict[str, object]] = []
     for cell in PASSAGE_RETRIEVAL_EN_PREREGISTERED_CELLS:
@@ -149,7 +152,7 @@ def build_passage_retrieval_en_cell_specs(
                 "case_offset_start": case_offset_start,
                 "output_path": (
                     f"{results_root}/longbench-passage-retrieval-en/"
-                    f"config316-{family_slug}-{model_slug}-"
+                    f"{attempt_label}-{family_slug}-{model_slug}-"
                     f"{cell.retention_policy}-b1024-n50.jsonl"
                 ),
                 "max_new_tokens": PASSAGE_RETRIEVAL_EN_MAX_NEW_TOKENS,
