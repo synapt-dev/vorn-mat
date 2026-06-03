@@ -49,6 +49,7 @@ from .plan import (
     DEFAULT_LIVE_EVICTION_CACHE_BUDGET,
     DEFAULT_MODEL,
     LiveEvictionDefaults,
+    Week1Run,
     build_live_eviction_run,
     per_second_rate_for_gpu,
 )
@@ -56,6 +57,16 @@ from .progress import default_progress_logger
 from .results import RunResult, append_observation, append_result, observations_path
 from .runner import build_execution_plans
 from .score_distribution_observation import ScoreDistributionObservationReport
+
+
+LONGBENCH_ALLOWED_RETENTION_POLICIES = {
+    "sentence_vorn",
+    "sentence_tova",
+    "sentence_snapkv",
+    "sentence_l2_norm",
+    "sentence_streaming_llm",
+    "vanilla",
+}
 
 
 def _runtime_failure_diagnostics(exc: Exception) -> dict[str, object]:
@@ -186,6 +197,8 @@ class ModalLongBenchLiveEvictionRunRequest:
     force_eviction_overflow_ratio: float = 1.2
     model_id: str = DEFAULT_MODEL
     gpu: str = "A100-80GB"
+    modal_profile: str = ""
+    preregistration: str = "config#316"
 
 
 @dataclass(frozen=True)
@@ -546,10 +559,10 @@ def run_modal_live_eviction_longbench_passage_retrieval(
             "LongBench preregistration requires max_new_tokens="
             f"{PASSAGE_RETRIEVAL_EN_MAX_NEW_TOKENS}"
         )
-    if request.retention_policy not in {"sentence_vorn", "sentence_tova"}:
+    if request.retention_policy not in LONGBENCH_ALLOWED_RETENTION_POLICIES:
         raise ValueError(
             "LongBench preregistration only permits retention_policy "
-            "'sentence_vorn' or 'sentence_tova'"
+            f"{sorted(LONGBENCH_ALLOWED_RETENTION_POLICIES)!r}"
         )
     per_second_rate = per_second_rate_for_gpu(request.gpu)
     start = time.perf_counter()
@@ -560,54 +573,89 @@ def run_modal_live_eviction_longbench_passage_retrieval(
         dataset_id=request.dataset_id,
         revision=request.dataset_revision,
     )
-    run = build_live_eviction_run(
-        live=LiveEvictionDefaults(
+    if request.retention_policy == "vanilla":
+        run = Week1Run(
+            run_id="longbench-passage-retrieval-en-vanilla",
+            model=request.model_id,
             benchmark=request.benchmark,
+            baseline="vanilla",
+            gpu=request.gpu,
+            canonical_layer=0,
+            recent_token_window=0,
+            eviction_unit="none",
             case_limit=request.case_limit,
-            cache_budget_tokens=request.cache_budget_tokens,
-            baseline=(
-                "sentence_vorn_live"
-                if request.retention_policy == "sentence_vorn"
-                else "sentence_tova_live"
-                if request.retention_policy == "sentence_tova"
-                else f"{request.retention_policy}_live"
-            ),
-            retention_policy=request.retention_policy,
-            random_seed=request.random_seed,
-            always_keep_prefix_tokens=request.always_keep_prefix_tokens,
-            preserve_recent_window=request.preserve_recent_window,
-            eviction_unit="sentence",
-            sentence_pooling=request.sentence_pooling,
-            sentence_top_k=request.sentence_top_k,
-            eviction_trigger=request.eviction_trigger,
-            sentence_boundary_lookahead_tokens=request.sentence_boundary_lookahead_tokens,
-            force_eviction_overflow_ratio=request.force_eviction_overflow_ratio,
-            compression_mode=f"longbench_{request.retention_policy}_b{request.cache_budget_tokens}",
+            experiment_stage="longbench_expanded_config321",
+            compression_mode="none",
         )
-    )
+    else:
+        baseline = (
+            "sentence_vorn_live"
+            if request.retention_policy == "sentence_vorn"
+            else "sentence_tova_live"
+            if request.retention_policy == "sentence_tova"
+            else "sentence_snapkv_live"
+            if request.retention_policy == "sentence_snapkv"
+            else "sentence_l2_norm_live"
+            if request.retention_policy == "sentence_l2_norm"
+            else "sentence_streaming_llm_live"
+            if request.retention_policy == "sentence_streaming_llm"
+            else f"{request.retention_policy}_live"
+        )
+        run = build_live_eviction_run(
+            live=LiveEvictionDefaults(
+                benchmark=request.benchmark,
+                case_limit=request.case_limit,
+                cache_budget_tokens=request.cache_budget_tokens,
+                baseline=baseline,
+                retention_policy=request.retention_policy,
+                random_seed=request.random_seed,
+                always_keep_prefix_tokens=request.always_keep_prefix_tokens,
+                preserve_recent_window=request.preserve_recent_window,
+                eviction_unit="sentence",
+                sentence_pooling=request.sentence_pooling,
+                sentence_top_k=request.sentence_top_k,
+                eviction_trigger=request.eviction_trigger,
+                sentence_boundary_lookahead_tokens=request.sentence_boundary_lookahead_tokens,
+                force_eviction_overflow_ratio=request.force_eviction_overflow_ratio,
+                compression_mode=f"longbench_{request.retention_policy}_b{request.cache_budget_tokens}",
+            )
+        )
     plan = build_execution_plans((run,))[0]
-    generator = TransformersLiveEvictionGenerator(
-        LocalModelConfig(
-            model_id=request.model_id,
-            max_new_tokens=request.max_new_tokens,
-        )
+    generator_config = LocalModelConfig(
+        model_id=request.model_id,
+        max_new_tokens=request.max_new_tokens,
+    )
+    generator = (
+        TransformersTextGenerator(generator_config)
+        if request.retention_policy == "vanilla"
+        else TransformersLiveEvictionGenerator(generator_config)
     )
     model_load_elapsed_seconds = generator.ensure_model_loaded()
     ledger = (
         observations_path(Path(request.output_path)) if request.output_path else None
     )
     try:
-        result, _traces = run_live_eviction(
-            plan,
-            cases,
-            generator,
-            on_case=(
-                (lambda observation: append_observation(ledger, observation))
-                if ledger is not None
-                else None
-            ),
-            progress_logger=default_progress_logger,
+        on_case = (
+            (lambda observation: append_observation(ledger, observation))
+            if ledger is not None
+            else None
         )
+        if request.retention_policy == "vanilla":
+            result, _traces = run_vanilla(
+                plan,
+                cases,
+                generator,
+                on_case=on_case,
+                progress_logger=default_progress_logger,
+            )
+        else:
+            result, _traces = run_live_eviction(
+                plan,
+                cases,
+                generator,
+                on_case=on_case,
+                progress_logger=default_progress_logger,
+            )
     except Exception as exc:
         diagnostics = _runtime_failure_diagnostics(exc)
         raise RuntimeError(json.dumps(diagnostics, sort_keys=True)) from exc
@@ -631,9 +679,15 @@ def run_modal_live_eviction_longbench_passage_retrieval(
             "model": request.model_id,
             "model_id": request.model_id,
             "gpu": request.gpu,
+            "modal_profile": request.modal_profile,
             "elapsed_seconds": f"{elapsed_seconds:.3f}",
             "estimated_cost_usd": f"{estimated_cost_usd:.4f}",
-            "cache_budget_tokens": str(request.cache_budget_tokens),
+            "cache_budget_tokens": (
+                "unbounded"
+                if request.retention_policy == "vanilla"
+                else str(request.cache_budget_tokens)
+            ),
+            "comparison_budget_tokens": str(request.cache_budget_tokens),
             "retention_policy": request.retention_policy,
             "random_seed": str(request.random_seed),
             "always_keep_prefix_tokens": str(request.always_keep_prefix_tokens),
@@ -652,14 +706,20 @@ def run_modal_live_eviction_longbench_passage_retrieval(
             "primary_metric": "mean_official_score",
             "secondary_metric": "binary_paragraph_hit_rate",
             "license_note": PASSAGE_RETRIEVAL_EN_LICENSE_NOTE,
-            "preregistration": "config#316",
+            "preregistration": request.preregistration,
             "gpu_hours": f"{(elapsed_seconds / 3600):.6f}",
             "model_load_elapsed_seconds": (
                 f"{model_load_elapsed_seconds:.6f}"
             ),
             "cache_stats_available": "false",
-            "vanilla_delta_available": "false",
-            "vanilla_delta_reason": "no_vanilla_baseline_in_config316",
+            "vanilla_delta_available": (
+                "self" if request.retention_policy == "vanilla" else "false"
+            ),
+            "vanilla_delta_reason": (
+                "self_baseline"
+                if request.retention_policy == "vanilla"
+                else "computed_downstream_from_config321_vanilla_cells"
+            ),
         }
     )
     enriched_result = RunResult(

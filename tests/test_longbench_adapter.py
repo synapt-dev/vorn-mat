@@ -13,9 +13,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 from vorn_mat import (
     PASSAGE_RETRIEVAL_EN_MAX_NEW_TOKENS,
     PASSAGE_RETRIEVAL_EN_PROMPT,
+    PASSAGE_RETRIEVAL_EN_EXPANDED_COMPARISON_CELLS,
     PASSAGE_RETRIEVAL_EN_PREREGISTERED_CELLS,
     BenchmarkCase,
     build_passage_retrieval_en_cell_specs,
+    build_passage_retrieval_en_expanded_comparison_specs,
     get_benchmark,
     load_longbench_passage_retrieval_en_slice,
     official_retrieval_score,
@@ -324,6 +326,75 @@ def test_build_preregistered_cell_specs_rejects_contract_drift(
 ) -> None:
     with pytest.raises(ValueError, match=match):
         build_passage_retrieval_en_cell_specs(
+            results_root="/vol/results/vorn-mat",
+            **kwargs,
+        )
+
+
+def test_expanded_comparison_cell_list_matches_config321_table() -> None:
+    assert len(PASSAGE_RETRIEVAL_EN_EXPANDED_COMPARISON_CELLS) == 16
+    assert {
+        (cell.model_id, cell.retention_policy)
+        for cell in PASSAGE_RETRIEVAL_EN_EXPANDED_COMPARISON_CELLS
+    } == {
+        (model_id, retention_policy)
+        for model_id in {
+            "mistralai/Mistral-7B-Instruct-v0.3",
+            "meta-llama/Llama-3.1-8B-Instruct",
+            "google/gemma-4-E4B-it",
+            "Qwen/Qwen3-8B",
+        }
+        for retention_policy in {
+            "sentence_snapkv",
+            "sentence_l2_norm",
+            "sentence_streaming_llm",
+            "vanilla",
+        }
+    }
+
+
+def test_build_expanded_comparison_specs_are_run_ready_and_unique() -> None:
+    specs = build_passage_retrieval_en_expanded_comparison_specs(
+        results_root="/vol/results/vorn-mat",
+    )
+
+    assert len(specs) == 16
+    assert len({spec["output_path"] for spec in specs}) == 16
+    assert {spec["retention_policy"] for spec in specs} == {
+        "sentence_snapkv",
+        "sentence_l2_norm",
+        "sentence_streaming_llm",
+        "vanilla",
+    }
+    assert {spec["cache_budget_tokens"] for spec in specs} == {1024}
+    assert {spec["case_limit"] for spec in specs} == {50}
+    assert {spec["case_offset_start"] for spec in specs} == {0}
+    assert {spec["max_new_tokens"] for spec in specs} == {32}
+    assert {spec["gpu"] for spec in specs} == {"H200"}
+    assert {spec["modal_profile"] for spec in specs} == {"layne1penney"}
+    assert {spec["preregistration"] for spec in specs} == {"config#321"}
+    assert {spec["sentence_pooling"] for spec in specs} == {"max"}
+    assert {spec["sentence_top_k"] for spec in specs} == {3}
+    assert {spec["always_keep_prefix_tokens"] for spec in specs} == {1}
+    assert {spec["preserve_recent_window"] for spec in specs} == {True}
+
+
+@pytest.mark.parametrize(
+    ("kwargs", "match"),
+    [
+        ({"case_limit": 49}, "case_limit=50"),
+        ({"case_offset_start": 1}, "case_offset_start=0"),
+        ({"gpu": "A100-80GB"}, "gpu=H200"),
+        ({"modal_profile": ""}, "modal_profile"),
+        ({"attempt_label": ""}, "attempt_label"),
+    ],
+)
+def test_build_expanded_comparison_specs_rejects_contract_drift(
+    kwargs: dict[str, object],
+    match: str,
+) -> None:
+    with pytest.raises(ValueError, match=match):
+        build_passage_retrieval_en_expanded_comparison_specs(
             results_root="/vol/results/vorn-mat",
             **kwargs,
         )

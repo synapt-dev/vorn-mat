@@ -62,6 +62,13 @@ class PassageRetrievalCell:
     retention_policy: str
 
 
+PASSAGE_RETRIEVAL_EN_FAMILY_CELLS = (
+    ("Mistral", "mistralai/Mistral-7B-Instruct-v0.3"),
+    ("Llama 3.1", "meta-llama/Llama-3.1-8B-Instruct"),
+    ("Gemma 4", "google/gemma-4-E4B-it"),
+    ("Qwen 3-NT 8B", "Qwen/Qwen3-8B"),
+)
+
 PASSAGE_RETRIEVAL_EN_PREREGISTERED_CELLS = (
     PassageRetrievalCell(
         family="Mistral",
@@ -111,6 +118,22 @@ PASSAGE_RETRIEVAL_EN_PREREGISTERED_CELLS = (
         method_label="sentence attention",
         retention_policy="sentence_tova",
     ),
+)
+
+PASSAGE_RETRIEVAL_EN_EXPANDED_COMPARISON_CELLS = tuple(
+    PassageRetrievalCell(
+        family=family,
+        model_id=model_id,
+        method_label=method_label,
+        retention_policy=retention_policy,
+    )
+    for family, model_id in PASSAGE_RETRIEVAL_EN_FAMILY_CELLS
+    for method_label, retention_policy in (
+        ("sentence SnapKV", "sentence_snapkv"),
+        ("sentence L2 norm", "sentence_l2_norm"),
+        ("sentence StreamingLLM", "sentence_streaming_llm"),
+        ("vanilla", "vanilla"),
+    )
 )
 
 
@@ -169,6 +192,68 @@ def build_passage_retrieval_en_cell_specs(
                 "force_eviction_overflow_ratio": 1.2,
                 "model_id": cell.model_id,
                 "gpu": gpu,
+            }
+        )
+    return tuple(specs)
+
+
+def build_passage_retrieval_en_expanded_comparison_specs(
+    *,
+    results_root: str,
+    case_limit: int = 50,
+    case_offset_start: int = 0,
+    dataset_revision: str = LONGBENCH_REVISION,
+    attempt_label: str = "config321",
+    gpu: str = "H200",
+    modal_profile: str = "layne1penney",
+) -> tuple[dict[str, object], ...]:
+    """Return the 16 new Modal request specs locked by config#321.
+
+    The config#316 vorn/TOVA cells remain reference cells and are not rebuilt by
+    this helper. This function emits only the newly authorized expanded-comparison
+    cells: sentence SnapKV, sentence L2 norm, sentence StreamingLLM, and vanilla.
+    """
+
+    if case_limit != 50:
+        raise ValueError("config#321 locks case_limit=50")
+    if case_offset_start != 0:
+        raise ValueError("config#321 locks case_offset_start=0")
+    if gpu != "H200":
+        raise ValueError("config#321 locks gpu=H200")
+    if not attempt_label:
+        raise ValueError("attempt_label must be non-empty")
+    if not modal_profile:
+        raise ValueError("modal_profile must be non-empty")
+
+    specs: list[dict[str, object]] = []
+    for cell in PASSAGE_RETRIEVAL_EN_EXPANDED_COMPARISON_CELLS:
+        family_slug = _slug(cell.family)
+        model_slug = _slug(cell.model_id)
+        specs.append(
+            {
+                "dataset_revision": dataset_revision,
+                "case_limit": case_limit,
+                "case_offset_start": case_offset_start,
+                "output_path": (
+                    f"{results_root}/longbench-expanded-eviction-comparison/"
+                    f"{attempt_label}-{family_slug}-{model_slug}-"
+                    f"{cell.retention_policy}-b1024-n50.jsonl"
+                ),
+                "max_new_tokens": PASSAGE_RETRIEVAL_EN_MAX_NEW_TOKENS,
+                "cache_budget_tokens": 1024,
+                "retention_policy": cell.retention_policy,
+                "random_seed": 17,
+                "always_keep_prefix_tokens": 1,
+                "preserve_recent_window": True,
+                "sentence_pooling": "max",
+                "sentence_top_k": 3,
+                "eviction_trigger": "budget_threshold",
+                "sentence_boundary_lookahead_tokens": 25,
+                "force_eviction_overflow_ratio": 1.2,
+                "model_id": cell.model_id,
+                "gpu": gpu,
+                "modal_profile": modal_profile,
+                "preregistration": "config#321",
             }
         )
     return tuple(specs)

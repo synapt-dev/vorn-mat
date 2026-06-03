@@ -3,6 +3,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from vorn_mat import (
@@ -196,6 +198,48 @@ def test_select_live_eviction_plan_supports_sentence_level_h2o_control():
     assert plan.run.sentence_pooling == "max"
     assert plan.run.sentence_top_k == 3
     assert plan.baseline.name == "sentence_h2o_live"
+
+
+@pytest.mark.parametrize(
+    ("retention_policy", "baseline_name", "run_id"),
+    [
+        (
+            "sentence_snapkv",
+            "sentence_snapkv_live",
+            "step2-niah-sentence-snapkv-live-b1024",
+        ),
+        (
+            "sentence_l2_norm",
+            "sentence_l2_norm_live",
+            "step2-niah-sentence-l2-norm-live-b1024",
+        ),
+        (
+            "sentence_streaming_llm",
+            "sentence_streaming_llm_live",
+            "step2-niah-sentence-streaming-llm-live-b1024",
+        ),
+    ],
+)
+def test_select_live_eviction_plan_supports_expanded_sentence_controls(
+    retention_policy: str,
+    baseline_name: str,
+    run_id: str,
+):
+    plan = select_live_eviction_plan(
+        cache_budget_tokens=1024,
+        retention_policy=retention_policy,
+        random_seed=17,
+        sentence_pooling="max",
+        sentence_top_k=3,
+    )
+
+    assert plan.run.run_id == run_id
+    assert plan.run.cache_budget_tokens == 1024
+    assert plan.run.retention_policy == retention_policy
+    assert plan.run.eviction_unit == "sentence"
+    assert plan.run.sentence_pooling == "max"
+    assert plan.run.sentence_top_k == 3
+    assert plan.baseline.name == baseline_name
 
 
 def test_select_live_eviction_plan_supports_no_guardrails_vorn():

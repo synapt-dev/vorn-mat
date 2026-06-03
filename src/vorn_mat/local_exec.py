@@ -17,10 +17,13 @@ from .baselines.vanilla import PredictionTrace, TextGenerator, run_vanilla
 from .baselines.live_eviction import (
     ADAPTIVE_SELECTOR_CONTRACT,
     H2O_ATTENTION_CONTRACT,
+    KEY_L2_NORM_CONTRACT,
     LiveEvictionConfig,
     LiveEvictionStats,
     LiveEvictionTextGenerator,
     SEMANTIC_SUMMARY_CONTRACT,
+    SNAPKV_ATTENTION_CONTRACT,
+    STREAMING_LLM_CONTRACT,
     SUMMARIZE_COMPACT_CONTRACT,
     TOVA_ATTENTION_CONTRACT,
     accumulate_attention_scores,
@@ -39,6 +42,7 @@ from .baselines.live_eviction import (
     select_random_retained_positions,
     select_sentence_retained_positions,
     select_sliding_window_retained_positions,
+    select_streaming_sentence_retained_positions,
     should_trigger_sentence_boundary_eviction,
     summary_fingerprint,
 )
@@ -579,6 +583,7 @@ class _TransformersGeneratorBase:
         attention_mask: Any,
         position_ids: Any,
         output_attentions: bool = False,
+        use_cache: bool = False,
     ) -> Any:
         self._ensure_model()
 
@@ -606,7 +611,7 @@ class _TransformersGeneratorBase:
                     output_hidden_states=True,
                     output_attentions=output_attentions,
                     logits_to_keep=1,
-                    use_cache=False,
+                    use_cache=use_cache,
                     return_dict=True,
                 )
                 return self._model(**prepared)
@@ -616,7 +621,7 @@ class _TransformersGeneratorBase:
                 position_ids=position_ids,
                 output_hidden_states=True,
                 output_attentions=output_attentions,
-                use_cache=False,
+                use_cache=use_cache,
                 return_dict=True,
             )
 
@@ -646,6 +651,173 @@ class _TransformersGeneratorBase:
             "could not locate decoder layers on model; tried "
             + ", ".join(".".join(path) for path in layer_paths)
         )
+
+    @staticmethod
+    def _key_tensor_from_cache_layer(cache_layer: Any) -> Any:
+        if isinstance(cache_layer, tuple | list) and cache_layer:
+            return cache_layer[0]
+        for attr in ("keys", "key_cache", "key_states"):
+            value = getattr(cache_layer, attr, None)
+            if value is not None:
+                return value
+        raise ValueError(
+            "past_key_values layer does not expose a key tensor; add typed cache dispatch"
+        )
+
+    @classmethod
+    def _key_l2_norm_scores(
+        cls,
+        past_key_values: Any,
+        *,
+        canonical_layer: int,
+        token_count: int,
+    ) -> np.ndarray:
+        if past_key_values is None:
+            raise ValueError("sentence_l2_norm requires past_key_values")
+
+        key_cache = getattr(past_key_values, "key_cache", None)
+        if key_cache is not None:
+            cache_layer = key_cache[canonical_layer]
+        elif hasattr(past_key_values, "layers"):
+            cache_layer = past_key_values.layers[canonical_layer]
+        else:
+            cache_layer = past_key_values[canonical_layer]
+
+        key_tensor = cls._key_tensor_from_cache_layer(cache_layer)
+        if getattr(key_tensor, "ndim", None) != 4:
+            raise ValueError("key cache tensor must be rank-4")
+        key_tensor = key_tensor.detach().float()
+        # Common decoder cache shape: [batch, kv_heads, seq, head_dim]. Some
+        # backends return [batch, seq, kv_heads, head_dim]; use token_count to
+        # identify the sequence axis rather than relying on one model family.
+        if int(key_tensor.shape[2]) == token_count:
+            per_token = key_tensor[0].norm(dim=-1).mean(dim=0)
+        elif int(key_tensor.shape[1]) == token_count:
+            per_token = key_tensor[0].norm(dim=-1).mean(dim=1)
+        else:
+            raise ValueError(
+                "key cache tensor does not expose a sequence axis matching active tokens"
+            )
+        return per_token.cpu().numpy().astype(np.float32, copy=False)
+
+    def _snapkv_observation_window_attention_scores(
+        self,
+        *,
+        input_ids: Any,
+        attention_mask: Any,
+        position_ids: Any,
+        observation_window_tokens: int = 32,
+    ) -> np.ndarray:
+        self._ensure_model()
+
+        import torch
+
+        assert self._model is not None
+
+        token_count = int(input_ids.shape[-1])
+        if token_count <= 0:
+            raise ValueError("sentence_snapkv requires at least one active token")
+        query_window = min(observation_window_tokens, token_count)
+
+        with torch.no_grad():
+            if token_count <= query_window:
+                outputs = self._forward_with_hidden_states(
+                    input_ids=input_ids,
+                    attention_mask=attention_mask,
+                    position_ids=position_ids,
+                    output_attentions=True,
+                    use_cache=False,
+                )
+            else:
+                prefix_ids = input_ids[:, :-query_window]
+                query_ids = input_ids[:, -query_window:]
+                prefix_mask = attention_mask[:, :-query_window]
+                full_mask = attention_mask
+                prefix_positions = position_ids[:, :-query_window]
+                query_positions = position_ids[:, -query_window:]
+                model_type = getattr(
+                    getattr(self._model, "config", None),
+                    "model_type",
+                    "",
+                )
+                if model_type == "gemma3":
+                    prefix_cache_position = torch.arange(
+                        prefix_ids.shape[-1],
+                        device=prefix_ids.device,
+                        dtype=torch.long,
+                    )
+                    prefix_prepared = self._model.prepare_inputs_for_generation(
+                        input_ids=prefix_ids,
+                        attention_mask=prefix_mask,
+                        position_ids=prefix_positions,
+                        cache_position=prefix_cache_position,
+                        use_cache=True,
+                        is_first_iteration=True,
+                    )
+                    prefix_prepared.update(
+                        output_hidden_states=False,
+                        output_attentions=False,
+                        logits_to_keep=1,
+                        use_cache=True,
+                        return_dict=True,
+                    )
+                    prefix_outputs = self._model(**prefix_prepared)
+                    query_cache_position = torch.arange(
+                        prefix_ids.shape[-1],
+                        token_count,
+                        device=query_ids.device,
+                        dtype=torch.long,
+                    )
+                    query_prepared = self._model.prepare_inputs_for_generation(
+                        input_ids=query_ids,
+                        attention_mask=full_mask,
+                        position_ids=query_positions,
+                        cache_position=query_cache_position,
+                        past_key_values=prefix_outputs.past_key_values,
+                        use_cache=False,
+                        is_first_iteration=False,
+                    )
+                    query_prepared.update(
+                        output_hidden_states=False,
+                        output_attentions=True,
+                        logits_to_keep=1,
+                        use_cache=False,
+                        return_dict=True,
+                    )
+                    outputs = self._model(**query_prepared)
+                else:
+                    prefix_outputs = self._model(
+                        input_ids=prefix_ids,
+                        attention_mask=prefix_mask,
+                        position_ids=prefix_positions,
+                        output_hidden_states=False,
+                        output_attentions=False,
+                        use_cache=True,
+                        return_dict=True,
+                    )
+                    outputs = self._model(
+                        input_ids=query_ids,
+                        attention_mask=full_mask,
+                        position_ids=query_positions,
+                        past_key_values=prefix_outputs.past_key_values,
+                        output_hidden_states=False,
+                        output_attentions=True,
+                        use_cache=False,
+                        return_dict=True,
+                    )
+
+        if not outputs.attentions:
+            raise ValueError("sentence_snapkv attention output is unavailable")
+        final_layer = outputs.attentions[-1]
+        if getattr(final_layer, "ndim", None) != 4:
+            raise ValueError("sentence_snapkv attention tensor must be rank-4")
+        attention = final_layer[0, :, -query_window:, :]
+        if int(attention.shape[-1]) < token_count:
+            raise ValueError(
+                "sentence_snapkv attention tensor does not cover active tokens"
+            )
+        scores = attention[:, :, :token_count].mean(dim=(0, 1))
+        return scores.detach().float().cpu().numpy().astype(np.float32, copy=False)
 
     def _canonical_token_summaries(
         self,
@@ -1464,6 +1636,9 @@ class TransformersLiveEvictionGenerator(
             "sentence_vorn",
             "sentence_tova",
             "sentence_h2o",
+            "sentence_snapkv",
+            "sentence_l2_norm",
+            "sentence_streaming_llm",
             "adaptive_vorn",
         }
         if config.retention_policy in sentence_level_policies | {"word_vorn"}:
@@ -1525,6 +1700,7 @@ class TransformersLiveEvictionGenerator(
                 attention_mask=active_attention_mask,
                 position_ids=active_position_ids,
                 output_attentions=needs_attention_scores,
+                use_cache=config.retention_policy == "sentence_l2_norm",
             )
             step_forward_elapsed = time.perf_counter() - forward_start
             forward_elapsed_seconds += step_forward_elapsed
@@ -1608,6 +1784,9 @@ class TransformersLiveEvictionGenerator(
                     "word_vorn",
                     "sentence_tova",
                     "sentence_h2o",
+                    "sentence_snapkv",
+                    "sentence_l2_norm",
+                    "sentence_streaming_llm",
                 }:
                     if config.retention_policy in {"sentence_tova", "sentence_h2o"}:
                         if config.retention_policy == "sentence_tova":
@@ -1616,6 +1795,39 @@ class TransformersLiveEvictionGenerator(
                         else:
                             assert accumulated_attention_scores is not None
                             unit_scores = accumulated_attention_scores
+                    elif config.retention_policy == "sentence_snapkv":
+                        score_start = time.perf_counter()
+                        unit_scores = self._snapkv_observation_window_attention_scores(
+                            input_ids=active_input_ids,
+                            attention_mask=active_attention_mask,
+                            position_ids=active_position_ids,
+                        )
+                        eviction_score_elapsed_seconds += (
+                            time.perf_counter() - score_start
+                        )
+                        if first_policy_fingerprint is None:
+                            first_policy_fingerprint = summary_fingerprint(
+                                unit_scores.reshape(-1, 1)
+                            )
+                    elif config.retention_policy == "sentence_l2_norm":
+                        score_start = time.perf_counter()
+                        unit_scores = self._key_l2_norm_scores(
+                            outputs.past_key_values,
+                            canonical_layer=config.canonical_layer,
+                            token_count=int(active_input_ids.shape[-1]),
+                        )
+                        eviction_score_elapsed_seconds += (
+                            time.perf_counter() - score_start
+                        )
+                        if first_policy_fingerprint is None:
+                            first_policy_fingerprint = summary_fingerprint(
+                                unit_scores.reshape(-1, 1)
+                            )
+                    elif config.retention_policy == "sentence_streaming_llm":
+                        unit_scores = np.zeros(
+                            int(active_input_ids.shape[-1]),
+                            dtype=np.float32,
+                        )
                     else:
                         score_start = time.perf_counter()
                         vorn_direction = compute_vorn_direction(
@@ -1643,15 +1855,21 @@ class TransformersLiveEvictionGenerator(
                         ),
                     )
                     selection_start = time.perf_counter()
-                    keep_positions = select_sentence_retained_positions(
-                        unit_scores,
-                        unit_ids=unit_ids,
-                        cache_budget_tokens=config.cache_budget_tokens,
-                        always_keep_prefix_tokens=config.always_keep_prefix_tokens,
-                        preserve_recent_window=preserve_recent_window,
-                        pooling=config.sentence_pooling,
-                        top_k=config.sentence_top_k,
-                    )
+                    if config.retention_policy == "sentence_streaming_llm":
+                        keep_positions = select_streaming_sentence_retained_positions(
+                            unit_ids=unit_ids,
+                            cache_budget_tokens=config.cache_budget_tokens,
+                        )
+                    else:
+                        keep_positions = select_sentence_retained_positions(
+                            unit_scores,
+                            unit_ids=unit_ids,
+                            cache_budget_tokens=config.cache_budget_tokens,
+                            always_keep_prefix_tokens=config.always_keep_prefix_tokens,
+                            preserve_recent_window=preserve_recent_window,
+                            pooling=config.sentence_pooling,
+                            top_k=config.sentence_top_k,
+                        )
                     eviction_selection_elapsed_seconds += (
                         time.perf_counter() - selection_start
                     )
@@ -1919,6 +2137,15 @@ class TransformersLiveEvictionGenerator(
         elif config.retention_policy in {"h2o", "sentence_h2o"}:
             policy_contract = H2O_ATTENTION_CONTRACT
             policy_fingerprint = first_policy_fingerprint or ""
+        elif config.retention_policy == "sentence_snapkv":
+            policy_contract = SNAPKV_ATTENTION_CONTRACT
+            policy_fingerprint = first_policy_fingerprint or ""
+        elif config.retention_policy == "sentence_l2_norm":
+            policy_contract = KEY_L2_NORM_CONTRACT
+            policy_fingerprint = first_policy_fingerprint or ""
+        elif config.retention_policy == "sentence_streaming_llm":
+            policy_contract = STREAMING_LLM_CONTRACT
+            policy_fingerprint = first_summary_fingerprint or ""
         elif config.retention_policy == "adaptive_vorn":
             policy_contract = SEMANTIC_SUMMARY_CONTRACT
             policy_fingerprint = first_summary_fingerprint or ""
@@ -2009,6 +2236,9 @@ def select_live_eviction_plan(
         "h2o": "h2o_live",
         "sentence_tova": "sentence_tova_live",
         "sentence_h2o": "sentence_h2o_live",
+        "sentence_snapkv": "sentence_snapkv_live",
+        "sentence_l2_norm": "sentence_l2_norm_live",
+        "sentence_streaming_llm": "sentence_streaming_llm_live",
         "random": "random_live",
         "sliding_window": "sliding_window_live",
         "prefix_suffix": "prefix_suffix_live",
@@ -2052,6 +2282,15 @@ def select_live_eviction_plan(
             compression_mode = (
                 f"live_eviction_sentence_{method_name}_{sentence_pooling}"
             )
+        elif retention_policy in {
+            "sentence_snapkv",
+            "sentence_l2_norm",
+            "sentence_streaming_llm",
+        }:
+            method_name = retention_policy.removeprefix("sentence_")
+            compression_mode = (
+                f"live_eviction_sentence_{method_name}_{sentence_pooling}"
+            )
         elif retention_policy == "adaptive_vorn":
             compression_mode = (
                 f"live_eviction_adaptive_vorn_{sentence_pooling}"
@@ -2080,6 +2319,9 @@ def select_live_eviction_plan(
                         "sentence_vorn",
                         "sentence_tova",
                         "sentence_h2o",
+                        "sentence_snapkv",
+                        "sentence_l2_norm",
+                        "sentence_streaming_llm",
                     }
                     else "word"
                     if retention_policy == "word_vorn"
@@ -2091,6 +2333,9 @@ def select_live_eviction_plan(
                         "sentence_vorn",
                         "sentence_tova",
                         "sentence_h2o",
+                        "sentence_snapkv",
+                        "sentence_l2_norm",
+                        "sentence_streaming_llm",
                         "word_vorn",
                         "adaptive_vorn",
                     }
@@ -2102,6 +2347,9 @@ def select_live_eviction_plan(
                         "sentence_vorn",
                         "sentence_tova",
                         "sentence_h2o",
+                        "sentence_snapkv",
+                        "sentence_l2_norm",
+                        "sentence_streaming_llm",
                         "word_vorn",
                         "adaptive_vorn",
                     }

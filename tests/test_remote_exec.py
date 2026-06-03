@@ -582,6 +582,194 @@ def test_run_modal_live_eviction_longbench_uses_preregistered_contract(monkeypat
     assert report.elapsed_seconds == 30.0
 
 
+@pytest.mark.parametrize(
+    ("retention_policy", "expected_baseline"),
+    [
+        ("sentence_snapkv", "sentence_snapkv_live"),
+        ("sentence_l2_norm", "sentence_l2_norm_live"),
+        ("sentence_streaming_llm", "sentence_streaming_llm_live"),
+    ],
+)
+def test_run_modal_longbench_accepts_config321_compressed_policies(
+    monkeypatch,
+    retention_policy,
+    expected_baseline,
+):
+    calls = {}
+
+    monkeypatch.setattr(
+        remote_exec,
+        "load_longbench_passage_retrieval_en_slice",
+        lambda **kwargs: (
+            BenchmarkCase(
+                "case-1",
+                "prompt",
+                "Paragraph 7",
+                {"scoring_contract": "longbench_retrieval_score_v1"},
+            ),
+        ),
+    )
+
+    class FakeGenerator:
+        def __init__(self, config):
+            self.config = config
+
+        def ensure_model_loaded(self):
+            return 1.0
+
+        def unload_model(self):
+            return 0.5
+
+    monkeypatch.setattr(remote_exec, "TransformersLiveEvictionGenerator", FakeGenerator)
+
+    def fake_build_execution_plans(runs):
+        run = runs[0]
+        calls["run"] = run
+        assert run.retention_policy == retention_policy
+        assert run.baseline == expected_baseline
+        assert run.compression_mode == f"longbench_{retention_policy}_b1024"
+        return ("longbench-plan",)
+
+    monkeypatch.setattr(remote_exec, "build_execution_plans", fake_build_execution_plans)
+
+    def fake_run_live_eviction(plan, cases, generator, **kwargs):
+        assert plan == "longbench-plan"
+        return (
+            RunResult(
+                run_id=f"step2-longbench-passage-{retention_policy}-live-b1024",
+                benchmark="longbench_passage_retrieval_en",
+                baseline=expected_baseline,
+                metrics={
+                    "mean_official_score": 1.0,
+                    "longbench_percent": 100.0,
+                    "binary_paragraph_hit_rate": 1.0,
+                },
+                metadata={},
+                observations=(
+                    CaseObservation(
+                        fixture_id="case-1",
+                        correct=True,
+                        prediction="Paragraph 7",
+                        official_score=1.0,
+                        binary_paragraph_hit=True,
+                        numbers_extracted=("7",),
+                    ),
+                ),
+            ),
+            (),
+        )
+
+    monkeypatch.setattr(remote_exec, "run_live_eviction", fake_run_live_eviction)
+    monkeypatch.setattr(remote_exec.time, "perf_counter", lambda: next(counter))
+
+    counter = iter([1.0, 3.0])
+    report = remote_exec.run_modal_live_eviction_longbench_passage_retrieval(
+        remote_exec.ModalLongBenchLiveEvictionRunRequest(
+            case_limit=1,
+            retention_policy=retention_policy,
+            gpu="H200",
+            modal_profile="layne1penney",
+            preregistration="config#321",
+        )
+    )
+
+    assert report.retention_policy == retention_policy
+    assert report.result.metadata["modal_profile"] == "layne1penney"
+    assert report.result.metadata["preregistration"] == "config#321"
+    assert report.result.metadata["comparison_budget_tokens"] == "1024"
+
+
+def test_run_modal_longbench_vanilla_uses_no_eviction_runner(monkeypatch):
+    calls = {}
+
+    monkeypatch.setattr(
+        remote_exec,
+        "load_longbench_passage_retrieval_en_slice",
+        lambda **kwargs: (
+            BenchmarkCase(
+                "case-1",
+                "prompt",
+                "Paragraph 3",
+                {"scoring_contract": "longbench_retrieval_score_v1"},
+            ),
+        ),
+    )
+
+    class FakeGenerator:
+        def __init__(self, config):
+            self.config = config
+
+        def ensure_model_loaded(self):
+            return 2.0
+
+        def unload_model(self):
+            return 0.25
+
+    monkeypatch.setattr(remote_exec, "TransformersTextGenerator", FakeGenerator)
+
+    def fake_build_execution_plans(runs):
+        run = runs[0]
+        calls["run"] = run
+        assert run.baseline == "vanilla"
+        assert run.compression_mode == "none"
+        assert run.eviction_unit == "none"
+        return ("vanilla-longbench-plan",)
+
+    monkeypatch.setattr(remote_exec, "build_execution_plans", fake_build_execution_plans)
+
+    def fail_live_eviction(*args, **kwargs):
+        raise AssertionError("vanilla LongBench must not use live eviction")
+
+    monkeypatch.setattr(remote_exec, "run_live_eviction", fail_live_eviction)
+
+    def fake_run_vanilla(plan, cases, generator, **kwargs):
+        assert plan == "vanilla-longbench-plan"
+        return (
+            RunResult(
+                run_id="longbench-passage-retrieval-en-vanilla",
+                benchmark="longbench_passage_retrieval_en",
+                baseline="vanilla",
+                metrics={
+                    "mean_official_score": 1.0,
+                    "longbench_percent": 100.0,
+                    "binary_paragraph_hit_rate": 1.0,
+                },
+                metadata={},
+                observations=(
+                    CaseObservation(
+                        fixture_id="case-1",
+                        correct=True,
+                        prediction="Paragraph 3",
+                        official_score=1.0,
+                        binary_paragraph_hit=True,
+                        numbers_extracted=("3",),
+                    ),
+                ),
+            ),
+            (),
+        )
+
+    monkeypatch.setattr(remote_exec, "run_vanilla", fake_run_vanilla)
+    monkeypatch.setattr(remote_exec.time, "perf_counter", lambda: next(counter))
+
+    counter = iter([4.0, 9.0])
+    report = remote_exec.run_modal_live_eviction_longbench_passage_retrieval(
+        remote_exec.ModalLongBenchLiveEvictionRunRequest(
+            case_limit=1,
+            retention_policy="vanilla",
+            gpu="H200",
+            modal_profile="layne1penney",
+            preregistration="config#321",
+        )
+    )
+
+    assert report.retention_policy == "vanilla"
+    assert report.result.metadata["cache_budget_tokens"] == "unbounded"
+    assert report.result.metadata["comparison_budget_tokens"] == "1024"
+    assert report.result.metadata["vanilla_delta_available"] == "self"
+    assert report.result.metadata["preregistration"] == "config#321"
+
+
 def test_run_modal_live_eviction_longbench_rejects_out_of_spec_policy():
     with pytest.raises(ValueError, match="sentence_vorn"):
         remote_exec.run_modal_live_eviction_longbench_passage_retrieval(

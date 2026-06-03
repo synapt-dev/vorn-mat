@@ -32,6 +32,11 @@ SUMMARIZE_COMPACT_CONTRACT = (
 ADAPTIVE_SELECTOR_CONTRACT = (
     "choose_token_or_sentence_by_peak_zscore_over_current_alignment_scores"
 )
+SNAPKV_ATTENTION_CONTRACT = (
+    "bounded_observation_window_attention_final32_prompt_tokens_final_layer"
+)
+KEY_L2_NORM_CONTRACT = "canonical_layer_key_vector_l2_norm_mean_over_kv_heads"
+STREAMING_LLM_CONTRACT = "attention_sink_first4_plus_recent_sentence_units"
 
 
 @dataclass(frozen=True)
@@ -308,6 +313,61 @@ def select_prefix_suffix_retained_positions(
     if suffix_count > 0:
         keep.update(range(token_count - suffix_count, token_count))
     return tuple(sorted(keep))
+
+
+def select_streaming_sentence_retained_positions(
+    *,
+    unit_ids: Sequence[int],
+    cache_budget_tokens: int,
+    sink_prefix_tokens: int = 4,
+) -> tuple[int, ...]:
+    """Keep attention-sink prefix units plus newest complete units that fit."""
+    token_count = len(unit_ids)
+    if token_count == 0:
+        raise ValueError("unit_ids must be non-empty")
+    if cache_budget_tokens <= 0:
+        raise ValueError("cache_budget_tokens must be positive")
+    if sink_prefix_tokens <= 0:
+        raise ValueError("sink_prefix_tokens must be positive")
+    if cache_budget_tokens >= token_count:
+        return tuple(range(token_count))
+
+    units: list[tuple[int, tuple[int, ...]]] = []
+    for local_position, unit_id in enumerate(unit_ids):
+        if units and units[-1][0] == unit_id:
+            units[-1] = (unit_id, units[-1][1] + (local_position,))
+        else:
+            units.append((unit_id, (local_position,)))
+
+    sink_positions = set(range(min(sink_prefix_tokens, token_count)))
+    sink_units = {
+        unit_id
+        for unit_id, positions in units
+        if sink_positions.intersection(positions)
+    }
+    keep_units = set(sink_units)
+    kept_token_count = sum(
+        len(positions) for unit_id, positions in units if unit_id in keep_units
+    )
+    if kept_token_count > cache_budget_tokens:
+        raise ValueError("cache_budget_tokens must fit required sink prefix units")
+
+    for unit_id, positions in reversed(units):
+        if unit_id in keep_units:
+            continue
+        if kept_token_count + len(positions) > cache_budget_tokens:
+            continue
+        keep_units.add(unit_id)
+        kept_token_count += len(positions)
+        if kept_token_count >= cache_budget_tokens:
+            break
+
+    return tuple(
+        position
+        for unit_id, positions in units
+        if unit_id in keep_units
+        for position in positions
+    )
 
 
 def text_ends_at_sentence_boundary(text: str) -> bool:
