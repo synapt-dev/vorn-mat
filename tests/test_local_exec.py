@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from vorn_mat import (
     LocalModelConfig,
+    TransformersLiveEvictionGenerator,
     build_summary_answer_prompt,
     build_summary_prompt,
     load_results,
@@ -240,6 +241,26 @@ def test_select_live_eviction_plan_supports_expanded_sentence_controls(
     assert plan.run.sentence_pooling == "max"
     assert plan.run.sentence_top_k == 3
     assert plan.baseline.name == baseline_name
+
+
+def test_key_l2_norm_scores_supports_cache_sequence_axis_last():
+    torch = pytest.importorskip("torch")
+    key_tensor = torch.zeros((1, 2, 3, 4), dtype=torch.float32)
+    key_tensor[0, :, :, 0] = 1.0
+    key_tensor[0, :, :, 1] = 2.0
+    key_tensor[0, :, :, 2] = 3.0
+    key_tensor[0, :, :, 3] = 4.0
+
+    scores = TransformersLiveEvictionGenerator._key_l2_norm_scores(
+        ((key_tensor, None),),
+        canonical_layer=0,
+        token_count=4,
+    )
+
+    assert scores.shape == (4,)
+    assert scores.tolist() == pytest.approx(
+        [3**0.5, (12) ** 0.5, (27) ** 0.5, (48) ** 0.5]
+    )
 
 
 def test_select_live_eviction_plan_supports_no_guardrails_vorn():

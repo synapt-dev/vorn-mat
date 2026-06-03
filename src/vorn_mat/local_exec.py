@@ -694,6 +694,8 @@ class _TransformersGeneratorBase:
             per_token = key_tensor[0].norm(dim=-1).mean(dim=0)
         elif int(key_tensor.shape[1]) == token_count:
             per_token = key_tensor[0].norm(dim=-1).mean(dim=1)
+        elif int(key_tensor.shape[3]) == token_count:
+            per_token = key_tensor[0].norm(dim=1).mean(dim=0)
         else:
             raise ValueError(
                 "key cache tensor does not expose a sequence axis matching active tokens"
