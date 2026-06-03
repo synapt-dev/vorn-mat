@@ -313,9 +313,15 @@ def _artifact_role(path: Path) -> str:
     return "other_json_artifact"
 
 
-def _iter_json_artifacts(root: Path) -> Iterable[Path]:
+def _iter_json_artifacts(
+    root: Path,
+    *,
+    include_transient_benchmarks: bool = False,
+) -> Iterable[Path]:
     for path in sorted(root.rglob("*")):
         if path.is_dir() or ".git" in path.parts:
+            continue
+        if ".benchmarks" in path.parts and not include_transient_benchmarks:
             continue
         if not _is_json_path(path):
             continue
@@ -805,7 +811,7 @@ def _build_markdown(artifact: dict[str, object]) -> str:
         f"({len(neighborhood['probe_names']) if neighborhood else 0} probe families) — answer-neighborhood proxy aggregates.",
         f"- Score-distribution probe: `{score_distribution['source_path'] if score_distribution else 'missing'}` "
         f"({len(score_distribution['budget_runs']) if score_distribution else 0} budget runs) — token/word/sentence distribution summaries.",
-        f"- Method-level semantic-granularity inventory: {len(method_inventory)} JSON/JSON.GZ artifacts with sentence/word method rows, including `.benchmarks` cell specs/reports/failures.",
+        f"- Method-level semantic-granularity inventory: {len(method_inventory)} repository-stable JSON/JSON.GZ artifacts with sentence/word method rows. Transient `.benchmarks` files are excluded by default because their counts drift with local run state and require an exact manifest/checksum opt-in.",
         "",
         "Interpretation: these sources are useful for stratification and substrate "
         "inventory, but only the positional-score observation report supports "

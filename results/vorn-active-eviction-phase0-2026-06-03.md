@@ -32,7 +32,7 @@ This artifact now indexes the SEMU-bearing substrate available without fresh com
 - Positional-score sources: 10 JSON/JSON.GZ artifacts with `alignment_scores` arrays, currently the vanilla observation shards.
 - Neighborhood probe: `results/vanilla-observation-neighborhood-2026-05-13.json` (6 probe families) — answer-neighborhood proxy aggregates.
 - Score-distribution probe: `results/score-distribution-observation-8k-2026-05-14.json` (4 budget runs) — token/word/sentence distribution summaries.
-- Method-level semantic-granularity inventory: 137 JSON/JSON.GZ artifacts with sentence/word method rows, including `.benchmarks` cell specs/reports/failures.
+- Method-level semantic-granularity inventory: 52 repository-stable JSON/JSON.GZ artifacts with sentence/word method rows. Transient `.benchmarks` files are excluded by default because their counts drift with local run state and require an exact manifest/checksum opt-in.
 
 Interpretation: these sources are useful for stratification and substrate inventory, but only the positional-score observation report supports sentence-SEMU ranking trajectories.
 
@@ -41,7 +41,7 @@ Interpretation: these sources are useful for stratification and substrate invent
 The SEMU-bearing substrate also differs by telemetry shape:
 
 - Positional-score sources: 10 artifacts with per-step positional score arrays, answer spans, top-alignment positions, and ranking-stability fields.
-- Method-level semantic inventory: 137 artifacts; memory telemetry in 9, cost telemetry in 85, runtime telemetry in 85, retention telemetry in 77, outcome metrics in 47.
+- Method-level semantic inventory: 52 artifacts; memory telemetry in 9, cost telemetry in 49, runtime telemetry in 49, retention telemetry in 41, outcome metrics in 47.
 - Counterfactual SEMU quality labels in method-level rows: 0.
 - Positional score arrays in method-level rows: 0.
 
