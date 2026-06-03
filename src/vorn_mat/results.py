@@ -14,6 +14,11 @@ class CaseObservation:
     correct: bool
     prediction: str
     scored_prediction: str | None = None
+    expected_answer: str | None = None
+    official_score: float | None = None
+    binary_paragraph_hit: bool | None = None
+    numbers_extracted: tuple[str, ...] | None = None
+    case_metadata: dict[str, str] | None = None
     peak_memory_allocated_mb: float | None = None
     peak_memory_reserved_mb: float | None = None
 

@@ -3,6 +3,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 import vorn_mat.remote_exec as remote_exec
@@ -470,6 +472,120 @@ def test_run_modal_live_eviction_niah_supports_sentence_level_tova_variant(monke
     assert report.sentence_pooling == "max"
     assert report.sentence_top_k == 3
     assert report.result.run_id == "step2-niah-sentence-tova-live-b1024"
+
+
+def test_run_modal_live_eviction_longbench_uses_preregistered_contract(monkeypatch):
+    calls = {}
+
+    def fake_load_longbench(**kwargs):
+        calls["load_longbench"] = kwargs
+        return (
+            BenchmarkCase(
+                "case-1",
+                "prompt",
+                "Paragraph 15",
+                {"scoring_contract": "longbench_retrieval_score_v1"},
+            ),
+        )
+
+    monkeypatch.setattr(
+        remote_exec,
+        "load_longbench_passage_retrieval_en_slice",
+        fake_load_longbench,
+    )
+
+    class FakeGenerator:
+        def __init__(self, config):
+            self.config = config
+            assert config.model_id == "meta-llama/Llama-3.1-8B-Instruct"
+            assert config.max_new_tokens == 32
+
+    monkeypatch.setattr(remote_exec, "TransformersLiveEvictionGenerator", FakeGenerator)
+
+    def fake_build_execution_plans(runs):
+        run = runs[0]
+        calls["run"] = run
+        assert run.benchmark == "longbench_passage_retrieval_en"
+        assert run.retention_policy == "sentence_vorn"
+        assert run.cache_budget_tokens == 1024
+        assert run.sentence_pooling == "max"
+        assert run.sentence_top_k == 3
+        return ("longbench-plan",)
+
+    monkeypatch.setattr(remote_exec, "build_execution_plans", fake_build_execution_plans)
+
+    def fake_run_live_eviction(plan, cases, generator, **kwargs):
+        assert plan == "longbench-plan"
+        assert len(cases) == 1
+        return (
+            RunResult(
+                run_id="step2-longbench-passage-sentence-vorn-live-b1024",
+                benchmark="longbench_passage_retrieval_en",
+                baseline="sentence_vorn_live",
+                metrics={
+                    "mean_official_score": 1.0,
+                    "longbench_percent": 100.0,
+                    "binary_paragraph_hit_rate": 1.0,
+                },
+                metadata={"gpu": "A100-80GB"},
+                observations=(
+                    CaseObservation(
+                        fixture_id="case-1",
+                        correct=True,
+                        prediction="Paragraph 15",
+                        official_score=1.0,
+                        binary_paragraph_hit=True,
+                        numbers_extracted=("15",),
+                    ),
+                ),
+            ),
+            (),
+        )
+
+    monkeypatch.setattr(remote_exec, "run_live_eviction", fake_run_live_eviction)
+    monkeypatch.setattr(remote_exec.time, "perf_counter", lambda: next(counter))
+
+    counter = iter([20.0, 50.0])
+    report = remote_exec.run_modal_live_eviction_longbench_passage_retrieval(
+        remote_exec.ModalLongBenchLiveEvictionRunRequest(
+            case_limit=1,
+            model_id="meta-llama/Llama-3.1-8B-Instruct",
+            retention_policy="sentence_vorn",
+        )
+    )
+
+    assert calls["load_longbench"]["case_limit"] == 1
+    assert calls["load_longbench"]["case_offset_start"] == 0
+    assert report.dataset_config == "passage_retrieval_en"
+    assert report.split == "test[:1]"
+    assert report.cache_budget_tokens == 1024
+    assert report.retention_policy == "sentence_vorn"
+    assert report.result.metadata["dataset_id"] == "THUDM/LongBench"
+    assert report.result.metadata["prompt_template_id"] == (
+        "longbench_passage_retrieval_en_v1"
+    )
+    assert report.result.metadata["primary_metric"] == "mean_official_score"
+    assert report.result.metadata["secondary_metric"] == "binary_paragraph_hit_rate"
+    assert report.result.metadata["preregistration"] == "config#316"
+    assert report.elapsed_seconds == 30.0
+
+
+def test_run_modal_live_eviction_longbench_rejects_out_of_spec_policy():
+    with pytest.raises(ValueError, match="sentence_vorn"):
+        remote_exec.run_modal_live_eviction_longbench_passage_retrieval(
+            remote_exec.ModalLongBenchLiveEvictionRunRequest(
+                retention_policy="h2o",
+            )
+        )
+
+
+def test_run_modal_live_eviction_longbench_rejects_changed_max_new_tokens():
+    with pytest.raises(ValueError, match="max_new_tokens"):
+        remote_exec.run_modal_live_eviction_longbench_passage_retrieval(
+            remote_exec.ModalLongBenchLiveEvictionRunRequest(
+                max_new_tokens=64,
+            )
+        )
 
 
 def test_run_modal_live_eviction_niah_supports_sentence_level_h2o_variant(monkeypatch):

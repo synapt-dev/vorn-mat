@@ -81,13 +81,22 @@ def build_case_observation(
     peak_memory_reserved_mb: float | None = None,
 ) -> CaseObservation:
     scored_prediction = score_prediction_text(prediction)
+    extra_fields: dict[str, object] = {}
+    if case.metadata.get("scoring_contract") == "longbench_retrieval_score_v1":
+        from .longbench import build_passage_retrieval_observation_fields
+
+        extra_fields = build_passage_retrieval_observation_fields(case, prediction)
+        correct = bool(extra_fields.pop("correct"))
+    else:
+        correct = is_prediction_correct(case, prediction)
     return CaseObservation(
         fixture_id=case.case_id,
-        correct=is_prediction_correct(case, prediction),
+        correct=correct,
         prediction=prediction,
         scored_prediction=scored_prediction if scored_prediction != prediction else None,
         peak_memory_allocated_mb=peak_memory_allocated_mb,
         peak_memory_reserved_mb=peak_memory_reserved_mb,
+        **extra_fields,
     )
 
 

@@ -104,7 +104,14 @@ def test_build_modal_artifacts_applies_env_vars_to_image():
 
 
 def test_benchmark_registry_contains_week1_targets():
-    assert set(BENCHMARKS) == {"ruler", "niah"}
+    assert set(BENCHMARKS) == {
+        "longbench_passage_retrieval_en",
+        "niah",
+        "ruler",
+    }
+    assert BENCHMARKS["longbench_passage_retrieval_en"].metric_name == (
+        "mean_official_score"
+    )
     assert BENCHMARKS["ruler"].metric_name == "task_accuracy"
     assert BENCHMARKS["niah"].metric_name == "needle_hit_rate"
 
