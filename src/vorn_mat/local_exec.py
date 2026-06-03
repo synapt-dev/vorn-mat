@@ -702,6 +702,71 @@ class _TransformersGeneratorBase:
             )
         return per_token.cpu().numpy().astype(np.float32, copy=False)
 
+    def _key_l2_norm_scores_from_hidden_states(
+        self,
+        hidden_states: tuple[Any, ...] | list[Any],
+        *,
+        canonical_layer: int,
+        token_count: int,
+    ) -> np.ndarray:
+        self._ensure_model()
+
+        import torch
+
+        assert self._model is not None
+
+        layers = getattr(getattr(self._model, "model", None), "layers", None)
+        if layers is None:
+            language_model = getattr(self._model, "language_model", None)
+            layers = getattr(getattr(language_model, "model", None), "layers", None)
+        if layers is None or canonical_layer >= len(layers):
+            raise ValueError("model does not expose decoder layers for key L2 scoring")
+        if canonical_layer >= len(hidden_states):
+            raise ValueError("hidden_states do not include canonical layer input")
+
+        layer = layers[canonical_layer]
+        attention = getattr(layer, "self_attn", None) or getattr(layer, "attention", None)
+        if attention is None:
+            raise ValueError("decoder layer does not expose an attention module")
+        k_proj = getattr(attention, "k_proj", None) or getattr(attention, "key_proj", None)
+        if k_proj is None:
+            raise ValueError("attention module does not expose a key projection")
+
+        layer_input = hidden_states[canonical_layer]
+        if getattr(layer_input, "ndim", None) != 3:
+            raise ValueError("canonical layer hidden state must be rank-3")
+        if int(layer_input.shape[1]) != token_count:
+            raise ValueError("canonical layer hidden state length does not match tokens")
+
+        layer_norm = getattr(layer, "input_layernorm", None)
+        with torch.no_grad():
+            projected_input = (
+                layer_norm(layer_input) if layer_norm is not None else layer_input
+            )
+            key_states = k_proj(projected_input)
+        if getattr(key_states, "ndim", None) != 3:
+            raise ValueError("key projection output must be rank-3")
+
+        config = getattr(self._model, "config", None)
+        num_kv_heads = int(
+            getattr(attention, "num_key_value_heads", 0)
+            or getattr(config, "num_key_value_heads", 0)
+            or 0
+        )
+        if num_kv_heads > 0 and int(key_states.shape[-1]) % num_kv_heads == 0:
+            head_dim = int(key_states.shape[-1]) // num_kv_heads
+            scores = (
+                key_states[0]
+                .detach()
+                .float()
+                .reshape(token_count, num_kv_heads, head_dim)
+                .norm(dim=-1)
+                .mean(dim=-1)
+            )
+        else:
+            scores = key_states[0].detach().float().norm(dim=-1)
+        return scores.cpu().numpy().astype(np.float32, copy=False)
+
     def _snapkv_observation_window_attention_scores(
         self,
         *,
@@ -1813,11 +1878,19 @@ class TransformersLiveEvictionGenerator(
                             )
                     elif config.retention_policy == "sentence_l2_norm":
                         score_start = time.perf_counter()
-                        unit_scores = self._key_l2_norm_scores(
-                            outputs.past_key_values,
-                            canonical_layer=config.canonical_layer,
-                            token_count=int(active_input_ids.shape[-1]),
-                        )
+                        token_count = int(active_input_ids.shape[-1])
+                        try:
+                            unit_scores = self._key_l2_norm_scores(
+                                outputs.past_key_values,
+                                canonical_layer=config.canonical_layer,
+                                token_count=token_count,
+                            )
+                        except ValueError:
+                            unit_scores = self._key_l2_norm_scores_from_hidden_states(
+                                outputs.hidden_states,
+                                canonical_layer=config.canonical_layer,
+                                token_count=token_count,
+                            )
                         eviction_score_elapsed_seconds += (
                             time.perf_counter() - score_start
                         )
