@@ -8,6 +8,7 @@ fresh model generations and does not estimate counterfactual SEMU contribution.
 
 from __future__ import annotations
 
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 import argparse
@@ -173,6 +174,87 @@ def _is_semantic_method_value(value: object) -> bool:
     } or normalized.startswith("sentence_") or normalized.startswith("word_")
 
 
+TELEMETRY_FIELD_GROUPS: dict[str, tuple[str, ...]] = {
+    "memory_metrics": (
+        "gpu_memory_mb",
+        "max_memory_allocated_mb",
+        "max_memory_reserved_mb",
+        "memory_mb",
+        "peak_gpu_memory_mb",
+        "peak_memory_allocated_mb",
+        "peak_memory_reserved_mb",
+    ),
+    "cost_metrics": (
+        "cost_usd",
+        "elapsed_seconds",
+        "estimated_cost_usd",
+        "gpu_hours",
+        "modal_cost_usd",
+    ),
+    "runtime_metrics": (
+        "duration_seconds",
+        "elapsed_seconds",
+        "runtime_seconds",
+        "wall_time_seconds",
+    ),
+    "outcome_metrics": (
+        "accuracy",
+        "correct",
+        "hit",
+        "hit_rate",
+        "retrieval_score",
+        "score",
+        "success",
+    ),
+    "retention_metrics": (
+        "evicted_count",
+        "mean_evicted",
+        "mean_retention_ratio",
+        "retained_tokens",
+        "retention_ratio",
+        "tokens_retained",
+    ),
+    "per_case_ids": (
+        "case_id",
+        "fixture_id",
+        "item_id",
+        "sample_id",
+    ),
+    "generation_text": (
+        "answer",
+        "completion",
+        "generated_text",
+        "output",
+        "prediction",
+        "response",
+    ),
+    "positional_score_arrays": (
+        "alignment_scores",
+        "answer_token_spans",
+        "ranking_stability_with_prev",
+        "top_alignment_positions",
+        "vorn_vector",
+    ),
+    "counterfactual_quality_labels": (
+        "counterfactual_delta",
+        "counterfactual_quality_delta",
+        "drop_delta",
+        "semu_removed",
+    ),
+}
+
+
+def _has_any_key(rows: Sequence[dict[str, Any]], keys: Sequence[str]) -> bool:
+    return any(any(key in row for key in keys) for row in rows)
+
+
+def _artifact_telemetry_flags(rows: Sequence[dict[str, Any]]) -> dict[str, bool]:
+    return {
+        group_name: _has_any_key(rows, keys)
+        for group_name, keys in TELEMETRY_FIELD_GROUPS.items()
+    }
+
+
 def _walk_dicts(value: Any) -> Iterable[dict[str, Any]]:
     if isinstance(value, dict):
         yield value
@@ -302,6 +384,7 @@ def _collect_method_level_semu_inventory(root: Path) -> list[dict[str, object]]:
         semantic_method_values = [
             value for value in method_values if _is_semantic_method_value(value)
         ]
+        telemetry = _artifact_telemetry_flags(semantic_rows)
         inventory.append(
             {
                 "source_path": _display_path(path),
@@ -328,6 +411,14 @@ def _collect_method_level_semu_inventory(root: Path) -> list[dict[str, object]]:
                     "estimated_cost_usd" in row or "elapsed_seconds" in row
                     for row in semantic_rows
                 ),
+                "has_memory_metrics": telemetry["memory_metrics"],
+                "has_runtime_metrics": telemetry["runtime_metrics"],
+                "has_outcome_metrics": telemetry["outcome_metrics"],
+                "has_generation_text": telemetry["generation_text"],
+                "has_counterfactual_quality_labels": telemetry[
+                    "counterfactual_quality_labels"
+                ],
+                "telemetry": telemetry,
                 "capability": "method_level_semantic_granularity_outcomes",
                 "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
             }
@@ -386,6 +477,97 @@ def _collect_score_distribution(path: Path) -> dict[str, object] | None:
         "budget_runs": budget_runs,
         "initial_findings": payload.get("initial_findings", []),
         "limit": "Per-step token/word/sentence distribution summaries are available, but positional score arrays are not retained; SEMU ranking extraction is not possible from this artifact.",
+    }
+
+
+def _build_telemetry_crosswalk(
+    *,
+    positional_sources: Sequence[dict[str, object]],
+    neighborhood_probe: dict[str, object] | None,
+    score_distribution: dict[str, object] | None,
+    method_inventory: Sequence[dict[str, object]],
+) -> dict[str, object]:
+    role_counts = Counter(str(item["source_role"]) for item in method_inventory)
+    telemetry_counts = {
+        group_name: sum(
+            bool(item.get("telemetry", {}).get(group_name))
+            for item in method_inventory
+        )
+        for group_name in TELEMETRY_FIELD_GROUPS
+    }
+    method_inventory_count = len(method_inventory)
+
+    return {
+        "positional_score_sources": {
+            "artifact_count": len(positional_sources),
+            "supports": [
+                "per-step positional vorn/alignment score arrays",
+                "per-case answer token spans",
+                "top alignment positions",
+                "ranking stability between adjacent generation steps",
+                "sentence-SEMU trajectory extraction after prompt/token alignment",
+            ],
+            "does_not_support": [
+                "method cost telemetry",
+                "method memory telemetry",
+                "counterfactual deletion quality deltas",
+                "cross-family trajectory comparison",
+            ],
+        },
+        "neighborhood_probe": {
+            "artifact_count": 1 if neighborhood_probe else 0,
+            "probe_family_count": (
+                len(neighborhood_probe.get("probe_names", []))
+                if neighborhood_probe
+                else 0
+            ),
+            "supports": [
+                "answer-neighborhood ranking proxy aggregates",
+                "success/failure stratification for the targeted Mistral observation",
+            ],
+            "does_not_support": [
+                "per-SEMU score trajectories",
+                "counterfactual deletion quality deltas",
+            ],
+        },
+        "score_distribution": {
+            "artifact_count": 1 if score_distribution else 0,
+            "budget_run_count": (
+                len(score_distribution.get("budget_runs", []))
+                if score_distribution
+                else 0
+            ),
+            "supports": [
+                "per-step token/word/sentence distribution aggregates",
+                "budget-level hit-rate summaries",
+            ],
+            "does_not_support": [
+                "positional SEMU ranking extraction",
+                "individual SEMU score trajectories",
+                "counterfactual deletion quality deltas",
+            ],
+        },
+        "method_level_semantic_inventory": {
+            "artifact_count": method_inventory_count,
+            "source_role_counts": dict(sorted(role_counts.items())),
+            "telemetry_field_counts": telemetry_counts,
+            "supports": [
+                "semantic-granularity outcome and runner telemetry inventory",
+                "budget/family/task stratification for future probes",
+                "memory/cost/runtime coverage audit where those fields are present",
+            ],
+            "does_not_support": [
+                "per-SEMU positional ranking trajectories",
+                "safe-to-drop causal labels",
+                "tool-result-before/after-decision temporal decay",
+            ],
+        },
+        "fresh_instrumentation_required_for": [
+            "counterfactual SEMU deletion quality labels",
+            "cross-family per-SEMU trajectory comparison",
+            "agentic tool-result integration and decision-extraction event markers",
+            "consistent memory/cost/runtime telemetry across all active-eviction probe cells",
+        ],
     }
 
 
@@ -569,6 +751,10 @@ def _build_markdown(artifact: dict[str, object]) -> str:
     score_distribution = supporting["score_distribution"]
     positional_sources = supporting["positional_score_sources"]
     method_inventory = supporting["method_level_inventory"]
+    telemetry_crosswalk = supporting["telemetry_crosswalk"]
+    method_telemetry = telemetry_crosswalk["method_level_semantic_inventory"][
+        "telemetry_field_counts"
+    ]
 
     lines = [
         "# Vorn-Active Eviction Phase 0 SEMU Trajectory Findings",
@@ -624,6 +810,20 @@ def _build_markdown(artifact: dict[str, object]) -> str:
         "Interpretation: these sources are useful for stratification and substrate "
         "inventory, but only the positional-score observation report supports "
         "sentence-SEMU ranking trajectories.",
+        "",
+        "### F1c. Existing telemetry coverage is heterogeneous",
+        "",
+        "The SEMU-bearing substrate also differs by telemetry shape:",
+        "",
+        f"- Positional-score sources: {telemetry_crosswalk['positional_score_sources']['artifact_count']} artifacts with per-step positional score arrays, answer spans, top-alignment positions, and ranking-stability fields.",
+        f"- Method-level semantic inventory: {len(method_inventory)} artifacts; memory telemetry in {method_telemetry['memory_metrics']}, cost telemetry in {method_telemetry['cost_metrics']}, runtime telemetry in {method_telemetry['runtime_metrics']}, retention telemetry in {method_telemetry['retention_metrics']}, outcome metrics in {method_telemetry['outcome_metrics']}.",
+        f"- Counterfactual SEMU quality labels in method-level rows: {method_telemetry['counterfactual_quality_labels']}.",
+        f"- Positional score arrays in method-level rows: {method_telemetry['positional_score_arrays']}.",
+        "",
+        "Interpretation: existing artifacts are enough to audit SEMU-granularity "
+        "coverage and some runner telemetry, but a Phase 1+ probe must instrument "
+        "score trajectories, deletion labels, decision-event markers, and telemetry "
+        "consistently in the same records.",
         "",
         "### F2. Sentence-level vorn scores vary, but rankings are mostly stable",
         "",
@@ -720,6 +920,21 @@ def analyze_phase0(
             )
         case_matrices.append(_case_matrix(observation_case, rendered_prompt, offsets))
 
+    positional_sources = _collect_positional_score_sources(ROOT)
+    neighborhood_probe = _collect_neighborhood_probe(
+        ROOT / "results" / "vanilla-observation-neighborhood-2026-05-13.json"
+    )
+    score_distribution = _collect_score_distribution(
+        ROOT / "results" / "score-distribution-observation-8k-2026-05-14.json"
+    )
+    method_inventory = _collect_method_level_semu_inventory(ROOT)
+    telemetry_crosswalk = _build_telemetry_crosswalk(
+        positional_sources=positional_sources,
+        neighborhood_probe=neighborhood_probe,
+        score_distribution=score_distribution,
+        method_inventory=method_inventory,
+    )
+
     artifact = {
         "schema_version": "vorn-active-eviction-phase0/v1",
         "date": "2026-06-03",
@@ -730,16 +945,11 @@ def analyze_phase0(
         "semu_granularity": "sentence",
         "summary": _summarize_cases(case_matrices),
         "supporting_semu_sources": {
-            "positional_score_sources": _collect_positional_score_sources(ROOT),
-            "neighborhood_probe": _collect_neighborhood_probe(
-                ROOT / "results" / "vanilla-observation-neighborhood-2026-05-13.json"
-            ),
-            "score_distribution": _collect_score_distribution(
-                ROOT / "results" / "score-distribution-observation-8k-2026-05-14.json"
-            ),
-            "method_level_inventory": _collect_method_level_semu_inventory(
-                ROOT
-            ),
+            "positional_score_sources": positional_sources,
+            "neighborhood_probe": neighborhood_probe,
+            "score_distribution": score_distribution,
+            "method_level_inventory": method_inventory,
+            "telemetry_crosswalk": telemetry_crosswalk,
         },
         "outputs": {
             "json_path": _display_path(output_json),

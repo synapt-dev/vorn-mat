@@ -36,6 +36,17 @@ This artifact now indexes the SEMU-bearing substrate available without fresh com
 
 Interpretation: these sources are useful for stratification and substrate inventory, but only the positional-score observation report supports sentence-SEMU ranking trajectories.
 
+### F1c. Existing telemetry coverage is heterogeneous
+
+The SEMU-bearing substrate also differs by telemetry shape:
+
+- Positional-score sources: 10 artifacts with per-step positional score arrays, answer spans, top-alignment positions, and ranking-stability fields.
+- Method-level semantic inventory: 137 artifacts; memory telemetry in 9, cost telemetry in 85, runtime telemetry in 85, retention telemetry in 77, outcome metrics in 47.
+- Counterfactual SEMU quality labels in method-level rows: 0.
+- Positional score arrays in method-level rows: 0.
+
+Interpretation: existing artifacts are enough to audit SEMU-granularity coverage and some runner telemetry, but a Phase 1+ probe must instrument score trajectories, deletion labels, decision-event markers, and telemetry consistently in the same records.
+
 ### F2. Sentence-level vorn scores vary, but rankings are mostly stable
 
 - Mean per-case mean SEMU score range: 0.025574
