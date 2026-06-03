@@ -1,6 +1,6 @@
 # Vorn-Mat
 
-Reference implementation and result artifacts for the paper *Vorn-Mat: Family-Conditional KV-Cache Eviction and the Granularity Rescue Spectrum*.
+Reference implementation and result artifacts for the paper *Vorn: Residual Direction, Familial Eviction, and the Granularity Rescue Spectrum* (v1.1, June 2026).
 
 This repository contains the prototype source, all released result artifacts, supplementary analysis scripts, and a runbook for reproducing the headline cells. The companion HuggingFace dataset at [`synapt/vorn-mat-cross-family-results`](https://huggingface.co/datasets/synapt/vorn-mat-cross-family-results) mirrors the result artifacts for citeable, discoverable access independent of this code repository.
 
@@ -260,11 +260,11 @@ The paired McNemar p-values cited in the paper are recoverable from the per-fixt
 If you use this repository or the released artifacts in your work, please cite the paper:
 
 ```bibtex
-@article{penney2026vornmat,
-  title={Vorn-Mat: Family-Conditional KV-Cache Eviction and the Granularity Rescue Spectrum},
+@misc{penney2026vorn,
+  title={Vorn: Residual Direction, Familial Eviction, and the Granularity Rescue Spectrum},
   author={Penney, L.},
-  journal={arXiv preprint},
-  year={2026}
+  year={2026},
+  howpublished={\url{https://synapt.dev/vorn-mat/}},
 }
 ```
 
