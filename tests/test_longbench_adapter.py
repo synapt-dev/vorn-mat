@@ -13,7 +13,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 from vorn_mat import (
     PASSAGE_RETRIEVAL_EN_MAX_NEW_TOKENS,
     PASSAGE_RETRIEVAL_EN_PROMPT,
+    PASSAGE_RETRIEVAL_EN_PREREGISTERED_CELLS,
     BenchmarkCase,
+    build_passage_retrieval_en_cell_specs,
     get_benchmark,
     load_longbench_passage_retrieval_en_slice,
     official_retrieval_score,
@@ -199,3 +201,105 @@ def test_load_longbench_slice_rejects_out_of_range_request(
 
     with pytest.raises(ValueError, match="exceeds available rows"):
         load_longbench_passage_retrieval_en_slice(case_limit=2)
+
+
+def test_preregistered_cell_list_matches_config316_table() -> None:
+    assert [
+        (cell.family, cell.model_id, cell.method_label, cell.retention_policy)
+        for cell in PASSAGE_RETRIEVAL_EN_PREREGISTERED_CELLS
+    ] == [
+        (
+            "Mistral",
+            "mistralai/Mistral-7B-Instruct-v0.3",
+            "sentence vorn",
+            "sentence_vorn",
+        ),
+        (
+            "Mistral",
+            "mistralai/Mistral-7B-Instruct-v0.3",
+            "sentence attention",
+            "sentence_tova",
+        ),
+        (
+            "Llama 3.1",
+            "meta-llama/Llama-3.1-8B-Instruct",
+            "sentence vorn",
+            "sentence_vorn",
+        ),
+        (
+            "Llama 3.1",
+            "meta-llama/Llama-3.1-8B-Instruct",
+            "sentence attention",
+            "sentence_tova",
+        ),
+        (
+            "Gemma 4",
+            "google/gemma-4-E4B-it",
+            "sentence vorn",
+            "sentence_vorn",
+        ),
+        (
+            "Gemma 4",
+            "google/gemma-4-E4B-it",
+            "sentence attention",
+            "sentence_tova",
+        ),
+        ("Qwen 3-NT 8B", "Qwen/Qwen3-8B", "sentence vorn", "sentence_vorn"),
+        (
+            "Qwen 3-NT 8B",
+            "Qwen/Qwen3-8B",
+            "sentence attention",
+            "sentence_tova",
+        ),
+    ]
+
+
+def test_build_preregistered_cell_specs_are_run_ready_and_unique() -> None:
+    specs = build_passage_retrieval_en_cell_specs(results_root="/vol/results/vorn-mat")
+
+    assert len(specs) == 8
+    assert len({spec["output_path"] for spec in specs}) == 8
+    assert {spec["retention_policy"] for spec in specs} == {
+        "sentence_vorn",
+        "sentence_tova",
+    }
+    assert {spec["cache_budget_tokens"] for spec in specs} == {1024}
+    assert {spec["case_limit"] for spec in specs} == {50}
+    assert {spec["case_offset_start"] for spec in specs} == {0}
+    assert {spec["max_new_tokens"] for spec in specs} == {32}
+    assert {spec["sentence_pooling"] for spec in specs} == {"max"}
+    assert {spec["sentence_top_k"] for spec in specs} == {3}
+    assert {spec["always_keep_prefix_tokens"] for spec in specs} == {1}
+    assert {spec["preserve_recent_window"] for spec in specs} == {True}
+    assert {spec["random_seed"] for spec in specs} == {17}
+    assert {
+        (spec["model_id"], spec["retention_policy"])
+        for spec in specs
+    } == {
+        ("mistralai/Mistral-7B-Instruct-v0.3", "sentence_vorn"),
+        ("mistralai/Mistral-7B-Instruct-v0.3", "sentence_tova"),
+        ("meta-llama/Llama-3.1-8B-Instruct", "sentence_vorn"),
+        ("meta-llama/Llama-3.1-8B-Instruct", "sentence_tova"),
+        ("google/gemma-4-E4B-it", "sentence_vorn"),
+        ("google/gemma-4-E4B-it", "sentence_tova"),
+        ("Qwen/Qwen3-8B", "sentence_vorn"),
+        ("Qwen/Qwen3-8B", "sentence_tova"),
+    }
+
+
+@pytest.mark.parametrize(
+    ("kwargs", "match"),
+    [
+        ({"case_limit": 49}, "case_limit=50"),
+        ({"case_offset_start": 1}, "case_offset_start=0"),
+    ],
+)
+def test_build_preregistered_cell_specs_rejects_contract_drift(
+    kwargs: dict[str, int],
+    match: str,
+) -> None:
+    with pytest.raises(ValueError, match=match):
+        build_passage_retrieval_en_cell_specs(
+            results_root="/vol/results/vorn-mat",
+            **kwargs,
+        )

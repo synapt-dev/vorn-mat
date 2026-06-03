@@ -54,6 +54,121 @@ class PassageRetrievalScore:
     ground_truth_id: str
 
 
+@dataclass(frozen=True)
+class PassageRetrievalCell:
+    family: str
+    model_id: str
+    method_label: str
+    retention_policy: str
+
+
+PASSAGE_RETRIEVAL_EN_PREREGISTERED_CELLS = (
+    PassageRetrievalCell(
+        family="Mistral",
+        model_id="mistralai/Mistral-7B-Instruct-v0.3",
+        method_label="sentence vorn",
+        retention_policy="sentence_vorn",
+    ),
+    PassageRetrievalCell(
+        family="Mistral",
+        model_id="mistralai/Mistral-7B-Instruct-v0.3",
+        method_label="sentence attention",
+        retention_policy="sentence_tova",
+    ),
+    PassageRetrievalCell(
+        family="Llama 3.1",
+        model_id="meta-llama/Llama-3.1-8B-Instruct",
+        method_label="sentence vorn",
+        retention_policy="sentence_vorn",
+    ),
+    PassageRetrievalCell(
+        family="Llama 3.1",
+        model_id="meta-llama/Llama-3.1-8B-Instruct",
+        method_label="sentence attention",
+        retention_policy="sentence_tova",
+    ),
+    PassageRetrievalCell(
+        family="Gemma 4",
+        model_id="google/gemma-4-E4B-it",
+        method_label="sentence vorn",
+        retention_policy="sentence_vorn",
+    ),
+    PassageRetrievalCell(
+        family="Gemma 4",
+        model_id="google/gemma-4-E4B-it",
+        method_label="sentence attention",
+        retention_policy="sentence_tova",
+    ),
+    PassageRetrievalCell(
+        family="Qwen 3-NT 8B",
+        model_id="Qwen/Qwen3-8B",
+        method_label="sentence vorn",
+        retention_policy="sentence_vorn",
+    ),
+    PassageRetrievalCell(
+        family="Qwen 3-NT 8B",
+        model_id="Qwen/Qwen3-8B",
+        method_label="sentence attention",
+        retention_policy="sentence_tova",
+    ),
+)
+
+
+def _slug(value: str) -> str:
+    return (
+        value.lower()
+        .replace("/", "--")
+        .replace(" ", "-")
+        .replace(".", "")
+        .replace("_", "-")
+    )
+
+
+def build_passage_retrieval_en_cell_specs(
+    *,
+    results_root: str,
+    case_limit: int = 50,
+    case_offset_start: int = 0,
+    dataset_revision: str = LONGBENCH_REVISION,
+) -> tuple[dict[str, object], ...]:
+    """Return the exact 8 Modal request specs locked by config#316."""
+
+    if case_limit != 50:
+        raise ValueError("config#316 locks case_limit=50")
+    if case_offset_start != 0:
+        raise ValueError("config#316 locks case_offset_start=0")
+
+    specs: list[dict[str, object]] = []
+    for cell in PASSAGE_RETRIEVAL_EN_PREREGISTERED_CELLS:
+        family_slug = _slug(cell.family)
+        model_slug = _slug(cell.model_id)
+        specs.append(
+            {
+                "dataset_revision": dataset_revision,
+                "case_limit": case_limit,
+                "case_offset_start": case_offset_start,
+                "output_path": (
+                    f"{results_root}/longbench-passage-retrieval-en/"
+                    f"config316-{family_slug}-{model_slug}-"
+                    f"{cell.retention_policy}-b1024-n50.jsonl"
+                ),
+                "max_new_tokens": PASSAGE_RETRIEVAL_EN_MAX_NEW_TOKENS,
+                "cache_budget_tokens": 1024,
+                "retention_policy": cell.retention_policy,
+                "random_seed": 17,
+                "always_keep_prefix_tokens": 1,
+                "preserve_recent_window": True,
+                "sentence_pooling": "max",
+                "sentence_top_k": 3,
+                "eviction_trigger": "budget_threshold",
+                "sentence_boundary_lookahead_tokens": 25,
+                "force_eviction_overflow_ratio": 1.2,
+                "model_id": cell.model_id,
+            }
+        )
+    return tuple(specs)
+
+
 def render_passage_retrieval_en_prompt(*, context: str, input_text: str) -> str:
     return PASSAGE_RETRIEVAL_EN_PROMPT.format(context=context, input=input_text)
 
