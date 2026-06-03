@@ -1,0 +1,16 @@
+# LaTeX build artifacts
+*.pdf
+*.aux
+*.log
+*.blg
+*.bbl
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# Allow figure PDFs (these are source assets, not build output)
+!figures/*.pdf
