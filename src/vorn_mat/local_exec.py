@@ -702,6 +702,35 @@ class _TransformersGeneratorBase:
             )
         return per_token.cpu().numpy().astype(np.float32, copy=False)
 
+    def _decoder_layers_for_key_scoring(self) -> Any:
+        self._ensure_model()
+
+        assert self._model is not None
+
+        candidate_roots = [
+            self._model,
+            getattr(self._model, "model", None),
+            getattr(self._model, "language_model", None),
+            getattr(getattr(self._model, "model", None), "language_model", None),
+            getattr(
+                getattr(
+                    getattr(self._model, "model", None),
+                    "language_model",
+                    None,
+                ),
+                "model",
+                None,
+            ),
+            getattr(getattr(self._model, "language_model", None), "model", None),
+            getattr(self._model, "text_model", None),
+            getattr(getattr(self._model, "text_model", None), "model", None),
+        ]
+        for root in candidate_roots:
+            layers = getattr(root, "layers", None)
+            if layers is not None:
+                return layers
+        raise ValueError("model does not expose decoder layers for key L2 scoring")
+
     def _key_l2_norm_scores_from_hidden_states(
         self,
         hidden_states: tuple[Any, ...] | list[Any],
@@ -715,10 +744,7 @@ class _TransformersGeneratorBase:
 
         assert self._model is not None
 
-        layers = getattr(getattr(self._model, "model", None), "layers", None)
-        if layers is None:
-            language_model = getattr(self._model, "language_model", None)
-            layers = getattr(getattr(language_model, "model", None), "layers", None)
+        layers = self._decoder_layers_for_key_scoring()
         if layers is None or canonical_layer >= len(layers):
             raise ValueError("model does not expose decoder layers for key L2 scoring")
         if canonical_layer >= len(hidden_states):
@@ -748,9 +774,11 @@ class _TransformersGeneratorBase:
             raise ValueError("key projection output must be rank-3")
 
         config = getattr(self._model, "config", None)
+        text_config = getattr(config, "text_config", None)
         num_kv_heads = int(
             getattr(attention, "num_key_value_heads", 0)
             or getattr(config, "num_key_value_heads", 0)
+            or getattr(text_config, "num_key_value_heads", 0)
             or 0
         )
         if num_kv_heads > 0 and int(key_states.shape[-1]) % num_kv_heads == 0:

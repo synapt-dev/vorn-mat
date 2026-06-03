@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -260,6 +261,52 @@ def test_key_l2_norm_scores_supports_cache_sequence_axis_last():
     assert scores.shape == (4,)
     assert scores.tolist() == pytest.approx(
         [3**0.5, (12) ** 0.5, (27) ** 0.5, (48) ** 0.5]
+    )
+
+
+def test_key_l2_norm_hidden_state_fallback_supports_nested_language_model():
+    torch = pytest.importorskip("torch")
+
+    class FakeKeyProjection:
+        def __call__(self, hidden_states):
+            values = torch.arange(
+                1,
+                hidden_states.shape[1] + 1,
+                dtype=hidden_states.dtype,
+                device=hidden_states.device,
+            )
+            return values.reshape(1, -1, 1).repeat(1, 1, 4)
+
+    generator = TransformersLiveEvictionGenerator.__new__(
+        TransformersLiveEvictionGenerator
+    )
+    generator._tokenizer = object()
+    generator._device = "cpu"
+    layer = SimpleNamespace(
+        self_attn=SimpleNamespace(
+            k_proj=FakeKeyProjection(),
+            num_key_value_heads=0,
+        )
+    )
+    generator._model = SimpleNamespace(
+        model=SimpleNamespace(
+            language_model=SimpleNamespace(
+                model=SimpleNamespace(layers=[layer])
+            )
+        ),
+        config=SimpleNamespace(
+            text_config=SimpleNamespace(num_key_value_heads=2)
+        ),
+    )
+
+    scores = generator._key_l2_norm_scores_from_hidden_states(
+        [torch.zeros((1, 4, 3), dtype=torch.float32)],
+        canonical_layer=0,
+        token_count=4,
+    )
+
+    assert scores.tolist() == pytest.approx(
+        [(2 ** 0.5) * 1, (2 ** 0.5) * 2, (2 ** 0.5) * 3, (2 ** 0.5) * 4]
     )
 
 
