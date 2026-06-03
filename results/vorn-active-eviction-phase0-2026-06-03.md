@@ -23,7 +23,17 @@ Current trajectory-bearing coverage is narrower than the 21,600 method-level eva
 
 ### F1. Existing trajectory data is targeted, not corpus-wide
 
-The 21,600 public observations remain method-level fixture outcomes. They do not carry per-token or per-SEMU trajectory traces. The available SEMU trajectory mining path is through targeted observation artifacts such as the sharded vanilla observation report and the 8k score-distribution observation runs.
+The 21,600 public observations remain method-level fixture outcomes. They do not carry per-token or per-SEMU trajectory traces. The available SEMU trajectory mining path is through targeted observation artifacts with positional score arrays, currently the sharded vanilla observation report. The 8k score-distribution observation runs carry per-step distribution summaries but not the positional score arrays needed for SEMU ranking extraction.
+
+### F1b. Additional SEMU-bearing substrate is captured as bounded evidence
+
+This artifact now indexes the SEMU-bearing substrate available without fresh compute:
+
+- Neighborhood probe: `results/vanilla-observation-neighborhood-2026-05-13.json` (6 probe families) — answer-neighborhood proxy aggregates.
+- Score-distribution probe: `results/score-distribution-observation-8k-2026-05-14.json` (4 budget runs) — token/word/sentence distribution summaries.
+- Method-level semantic-granularity inventory: 51 JSON artifacts with sentence/word method rows.
+
+Interpretation: these sources are useful for stratification and substrate inventory, but only the positional-score observation report supports sentence-SEMU ranking trajectories.
 
 ### F2. Sentence-level vorn scores vary, but rankings are mostly stable
 
@@ -59,6 +69,7 @@ The current trajectory-bearing observation artifacts are not seven-family. Cross
 - Preserve sentence-level SEMU as the first intervention granularity.
 - Require fresh counterfactual runs for causal contribution labels.
 - Require fresh cross-family observation instrumentation before claiming family-conditional SEMU trajectories.
+- Treat method-level sentence/word rows as SEMU-granularity outcome evidence, not per-SEMU contribution labels.
 
 ## Honest negatives
 
@@ -66,4 +77,5 @@ The current trajectory-bearing observation artifacts are not seven-family. Cross
 - It does not include tool-result-before/after-decision workflows.
 - It does not establish that low-vorn SEMUs are safe to drop.
 - It does not compare seven families at trajectory level.
+- Distribution-only and method-level SEMU artifacts do not expose positional score arrays.
 - Sentence segmentation is a practical first granularity, not proven optimal.

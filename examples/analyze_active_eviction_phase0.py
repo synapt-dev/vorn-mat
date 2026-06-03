@@ -15,7 +15,7 @@ import hashlib
 import json
 import statistics
 import sys
-from typing import Iterable, Sequence
+from typing import Any, Iterable, Sequence
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -58,6 +58,10 @@ def _display_path(path: Path) -> str:
         return str(path.resolve().relative_to(ROOT.resolve()))
     except ValueError:
         return str(path)
+
+
+def _load_json(path: Path) -> Any:
+    return json.loads(path.read_text())
 
 
 def _mean(values: Iterable[float]) -> float | None:
@@ -142,6 +146,176 @@ def _rank_scores(scores: Sequence[float]) -> list[int]:
     for rank, (index, _score) in enumerate(ordered, start=1):
         ranks[index] = rank
     return ranks
+
+
+def _is_semantic_method_value(value: object) -> bool:
+    if not isinstance(value, str):
+        return False
+    normalized = value.lower().replace("-", "_")
+    return normalized in {
+        "sentence",
+        "word",
+        "sentence_vorn",
+        "word_vorn",
+        "sentence_tova",
+        "sentence_h2o",
+        "sentence_attention",
+        "sentence_attention_tova",
+        "sentence_attention_h2o",
+    } or normalized.startswith("sentence_") or normalized.startswith("word_")
+
+
+def _walk_dicts(value: Any) -> Iterable[dict[str, Any]]:
+    if isinstance(value, dict):
+        yield value
+        for nested in value.values():
+            yield from _walk_dicts(nested)
+    elif isinstance(value, list):
+        for nested in value:
+            yield from _walk_dicts(nested)
+
+
+def _collect_values(rows: Sequence[dict[str, Any]], keys: Sequence[str]) -> list[str]:
+    values: set[str] = set()
+    for row in rows:
+        for key in keys:
+            value = row.get(key)
+            if value is None:
+                continue
+            if isinstance(value, str):
+                values.add(value)
+            elif isinstance(value, (int, float, bool)):
+                values.add(str(value))
+    return sorted(values)
+
+
+def _extract_semantic_rows(payload: Any) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for item in _walk_dicts(payload):
+        string_values = [value for value in item.values() if isinstance(value, str)]
+        key_markers = set(item)
+        if any(_is_semantic_method_value(value) for value in string_values) or (
+            key_markers
+            & {
+                "sentence_rows",
+                "word_rows",
+                "sentence_vorn_rows",
+                "sentence_attention_rows",
+            }
+        ):
+            rows.append(item)
+    return rows
+
+
+def _collect_method_level_semu_inventory(results_dir: Path) -> list[dict[str, object]]:
+    inventory: list[dict[str, object]] = []
+    for path in sorted(results_dir.glob("*.json")):
+        if path.name.startswith("vorn-active-eviction-phase0"):
+            continue
+        try:
+            payload = _load_json(path)
+        except (json.JSONDecodeError, OSError):
+            continue
+        semantic_rows = _extract_semantic_rows(payload)
+        if not semantic_rows:
+            continue
+        method_values = _collect_values(
+            semantic_rows,
+            (
+                "method",
+                "baseline",
+                "retention_policy",
+                "oracle_granularity",
+                "granularity",
+            ),
+        )
+        semantic_method_values = [
+            value for value in method_values if _is_semantic_method_value(value)
+        ]
+        inventory.append(
+            {
+                "source_path": _display_path(path),
+                "semantic_row_count": len(semantic_rows),
+                "semantic_methods": semantic_method_values,
+                "budgets": _collect_values(
+                    semantic_rows,
+                    ("budget", "cache_budget_tokens", "budget_tokens"),
+                ),
+                "families_or_models": _collect_values(
+                    semantic_rows,
+                    ("family", "model", "model_id", "model_name"),
+                ),
+                "datasets_or_tasks": _collect_values(
+                    semantic_rows,
+                    ("dataset_config", "dataset", "task", "benchmark", "suite_id"),
+                ),
+                "has_retention_metrics": any(
+                    "mean_retention_ratio" in row or "mean_evicted" in row
+                    for row in semantic_rows
+                ),
+                "has_cost_metrics": any(
+                    "estimated_cost_usd" in row or "elapsed_seconds" in row
+                    for row in semantic_rows
+                ),
+                "capability": "method_level_semantic_granularity_outcomes",
+                "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+            }
+        )
+    return inventory
+
+
+def _collect_neighborhood_probe(path: Path) -> dict[str, object] | None:
+    if not path.exists():
+        return None
+    payload = _load_json(path)
+    probes = payload.get("probes", {})
+    return {
+        "source_path": _display_path(path),
+        "capability": "answer_neighborhood_semu_proxy",
+        "case_count": payload.get("case_count"),
+        "dataset_config": payload.get("dataset_config"),
+        "split": payload.get("split"),
+        "top_k": payload.get("top_k"),
+        "source_observation_manifest": payload.get("source_observation_manifest"),
+        "probe_names": sorted(probes),
+        "probes": probes,
+        "limit": "Probe aggregates rank answer-neighborhood units but do not preserve per-SEMU score trajectories.",
+    }
+
+
+def _collect_score_distribution(path: Path) -> dict[str, object] | None:
+    if not path.exists():
+        return None
+    payload = _load_json(path)
+    budget_runs: list[dict[str, object]] = []
+    for run in payload.get("budget_runs", []):
+        cases = run.get("cases", [])
+        step_counts = [
+            len(case.get("steps", []))
+            for case in cases
+            if isinstance(case, dict)
+        ]
+        budget_runs.append(
+            {
+                "budget": run.get("budget"),
+                "oracle_granularity": run.get("oracle_granularity"),
+                "retention_policy": run.get("retention_policy"),
+                "hit_rate": run.get("hit_rate"),
+                "case_count": len(cases),
+                "total_step_count": sum(step_counts),
+                "mean_steps_per_case": _round(_mean(float(value) for value in step_counts)),
+                "aggregates": run.get("aggregates", {}),
+                "source_report": run.get("source_report"),
+            }
+        )
+    return {
+        "source_path": _display_path(path),
+        "capability": "per_step_distribution_by_granularity",
+        "run_conditions": payload.get("run_conditions", {}),
+        "budget_runs": budget_runs,
+        "initial_findings": payload.get("initial_findings", []),
+        "limit": "Per-step token/word/sentence distribution summaries are available, but positional score arrays are not retained; SEMU ranking extraction is not possible from this artifact.",
+    }
 
 
 def _jaccard(left: Iterable[int], right: Iterable[int]) -> float:
@@ -319,6 +493,10 @@ def _build_markdown(artifact: dict[str, object]) -> str:
     variation = summary["trajectory_variation"]
     answer = summary["answer_semu_ranks"]
     matrix_path = artifact["outputs"]["json_path"]
+    supporting = artifact["supporting_semu_sources"]
+    neighborhood = supporting["neighborhood_probe"]
+    score_distribution = supporting["score_distribution"]
+    method_inventory = supporting["method_level_inventory"]
 
     lines = [
         "# Vorn-Active Eviction Phase 0 SEMU Trajectory Findings",
@@ -353,8 +531,25 @@ def _build_markdown(artifact: dict[str, object]) -> str:
         "",
         "The 21,600 public observations remain method-level fixture outcomes. They do not "
         "carry per-token or per-SEMU trajectory traces. The available SEMU trajectory "
-        "mining path is through targeted observation artifacts such as the sharded "
-        "vanilla observation report and the 8k score-distribution observation runs.",
+        "mining path is through targeted observation artifacts with positional score "
+        "arrays, currently the sharded vanilla observation report. The 8k "
+        "score-distribution observation runs carry per-step distribution summaries "
+        "but not the positional score arrays needed for SEMU ranking extraction.",
+        "",
+        "### F1b. Additional SEMU-bearing substrate is captured as bounded evidence",
+        "",
+        "This artifact now indexes the SEMU-bearing substrate available without fresh "
+        "compute:",
+        "",
+        f"- Neighborhood probe: `{neighborhood['source_path'] if neighborhood else 'missing'}` "
+        f"({len(neighborhood['probe_names']) if neighborhood else 0} probe families) — answer-neighborhood proxy aggregates.",
+        f"- Score-distribution probe: `{score_distribution['source_path'] if score_distribution else 'missing'}` "
+        f"({len(score_distribution['budget_runs']) if score_distribution else 0} budget runs) — token/word/sentence distribution summaries.",
+        f"- Method-level semantic-granularity inventory: {len(method_inventory)} JSON artifacts with sentence/word method rows.",
+        "",
+        "Interpretation: these sources are useful for stratification and substrate "
+        "inventory, but only the positional-score observation report supports "
+        "sentence-SEMU ranking trajectories.",
         "",
         "### F2. Sentence-level vorn scores vary, but rankings are mostly stable",
         "",
@@ -400,6 +595,7 @@ def _build_markdown(artifact: dict[str, object]) -> str:
         "- Preserve sentence-level SEMU as the first intervention granularity.",
         "- Require fresh counterfactual runs for causal contribution labels.",
         "- Require fresh cross-family observation instrumentation before claiming family-conditional SEMU trajectories.",
+        "- Treat method-level sentence/word rows as SEMU-granularity outcome evidence, not per-SEMU contribution labels.",
         "",
         "## Honest negatives",
         "",
@@ -407,6 +603,7 @@ def _build_markdown(artifact: dict[str, object]) -> str:
         "- It does not include tool-result-before/after-decision workflows.",
         "- It does not establish that low-vorn SEMUs are safe to drop.",
         "- It does not compare seven families at trajectory level.",
+        "- Distribution-only and method-level SEMU artifacts do not expose positional score arrays.",
         "- Sentence segmentation is a practical first granularity, not proven optimal.",
         "",
     ]
@@ -458,6 +655,17 @@ def analyze_phase0(
         "model_id": model_id,
         "semu_granularity": "sentence",
         "summary": _summarize_cases(case_matrices),
+        "supporting_semu_sources": {
+            "neighborhood_probe": _collect_neighborhood_probe(
+                ROOT / "results" / "vanilla-observation-neighborhood-2026-05-13.json"
+            ),
+            "score_distribution": _collect_score_distribution(
+                ROOT / "results" / "score-distribution-observation-8k-2026-05-14.json"
+            ),
+            "method_level_inventory": _collect_method_level_semu_inventory(
+                ROOT / "results"
+            ),
+        },
         "outputs": {
             "json_path": _display_path(output_json),
             "markdown_path": _display_path(output_md),
@@ -465,6 +673,7 @@ def analyze_phase0(
         "limits": [
             "method-level vorn-mat artifacts do not carry per-SEMU trajectories",
             "current committed trajectory extraction is targeted Mistral-only",
+            "8k score-distribution observations carry per-step distribution summaries but not positional SEMU score arrays",
             "counterfactual quality deltas require fresh runs",
             "agentic tool-result integration requires new workflow fixtures",
         ],
