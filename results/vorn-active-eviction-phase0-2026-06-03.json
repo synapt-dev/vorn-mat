@@ -456283,6 +456283,2017 @@
     "method_level_inventory": [
       {
         "budgets": [
+          "1536"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 2,
+        "source_path": ".benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/mistral-b1536-microrecovery/failures.json",
+        "source_role": "benchmark_failure_report"
+      },
+      {
+        "budgets": [
+          "1536"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live"
+        ],
+        "semantic_row_count": 42,
+        "source_path": ".benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/mistral-b1536-microrecovery/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1536"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 16,
+        "source_path": ".benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/mistral-b1536-microrecovery-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1536"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live"
+        ],
+        "semantic_row_count": 12,
+        "source_path": ".benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/mistral-b1536-singlecase-recovery/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1536"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 4,
+        "source_path": ".benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/mistral-b1536-singlecase-recovery-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1536",
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [],
+        "families_or_models": [
+          "Llama 3.1 8B",
+          "Mistral 7B v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 4,
+        "source_path": ".benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/planned-cells.json",
+        "source_role": "benchmark_auxiliary"
+      },
+      {
+        "budgets": [
+          "1536"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/single-shot/failures.json",
+        "source_role": "benchmark_failure_report"
+      },
+      {
+        "budgets": [
+          "1536",
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "meta-llama/Llama-3.1-8B-Instruct",
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live"
+        ],
+        "semantic_row_count": 9,
+        "source_path": ".benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/single-shot/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1536",
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "meta-llama/Llama-3.1-8B-Instruct",
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 4,
+        "source_path": ".benchmarks/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26/single-shot-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "256"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "meta-llama/Llama-3.1-8B-Instruct",
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 2,
+        "source_path": ".benchmarks/b256-vorn-verification-2026-05-25/cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "256"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "meta-llama/Llama-3.1-8B-Instruct",
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 6,
+        "source_path": ".benchmarks/b256-vorn-verification-2026-05-25/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "256",
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-2-9b-it",
+          "mistralai/Ministral-8B-Instruct-2410"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 4,
+        "source_path": ".benchmarks/column-fill-2026-05-25/gamma-missing-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "256",
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-2-9b-it",
+          "mistralai/Ministral-8B-Instruct-2410"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 12,
+        "source_path": ".benchmarks/column-fill-2026-05-25/gamma-missing-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/lane-a-gemma3-answer-retention-diagnostic-2026-05-24/sentence-h2o-b2048-n1-max32-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-answer-retention-diagnostic-2026-05-24/sentence-h2o-b2048-n1-max32-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_tova"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/lane-a-gemma3-answer-retention-diagnostic-2026-05-24/sentence-tova-b2048-n1-max32-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_tova",
+          "sentence_tova_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-answer-retention-diagnostic-2026-05-24/sentence-tova-b2048-n1-max32-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/lane-a-gemma3-answer-retention-diagnostic-2026-05-24/sentence-vorn-b1024-n1-max1-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-answer-retention-diagnostic-2026-05-24/sentence-vorn-b1024-n1-max1-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/lane-a-gemma3-answer-retention-diagnostic-2026-05-24/sentence-vorn-b2048-n1-max32-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-answer-retention-diagnostic-2026-05-24/sentence-vorn-b2048-n1-max32-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "3072"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/lane-a-gemma3-answer-retention-diagnostic-2026-05-24/sentence-vorn-b3072-n1-max1-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "3072"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-answer-retention-diagnostic-2026-05-24/sentence-vorn-b3072-n1-max1-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "3072"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/lane-a-gemma3-answer-retention-diagnostic-2026-05-24/sentence-vorn-b3072-n1-max32-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "3072"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-answer-retention-diagnostic-2026-05-24/sentence-vorn-b3072-n1-max32-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/lane-a-gemma3-cachepos-diagnostic-2026-05-24/sentence-vorn-b1024-n1-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-cachepos-diagnostic-2026-05-24/sentence-vorn-b1024-n1-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/lane-a-gemma3-diagnostic-2026-05-24/sentence-vorn-b1024-n1-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/lane-a-gemma3-diagnostic-2026-05-24/sentence-vorn-b1024-n1-max128-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-diagnostic-2026-05-24/sentence-vorn-b1024-n1-max128-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-diagnostic-2026-05-24/sentence-vorn-b1024-n1-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/lane-a-gemma3-diagnostic-2026-05-24/sentence-vorn-b2048-n1-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-diagnostic-2026-05-24/sentence-vorn-b2048-n1-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "2056"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/lane-a-gemma3-diagnostic-2026-05-24/sentence-vorn-b2056-n1-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "2056"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-diagnostic-2026-05-24/sentence-vorn-b2056-n1-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_tova",
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-refire-2026-05-24/sentence-profile-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live",
+          "sentence_tova",
+          "sentence_tova_live",
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 9,
+        "source_path": ".benchmarks/lane-a-gemma3-refire-2026-05-24/sentence-profile-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "3072"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/lane-a-gemma3-threshold-2026-05-25/sentence-vorn-b3072-n50-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "3072"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-3-12b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/lane-a-gemma3-threshold-2026-05-25/sentence-vorn-b3072-n50-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen2.5-7B-Instruct",
+          "google/gemma-2-9b-it",
+          "mistralai/Ministral-8B-Instruct-2410"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/low-budget-backfill-2026-05-25/b1024-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Ministral-8B-Instruct-2410"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/low-budget-backfill-2026-05-25/b1024-output/failures.json",
+        "source_role": "benchmark_failure_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen2.5-7B-Instruct",
+          "google/gemma-2-9b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live"
+        ],
+        "semantic_row_count": 6,
+        "source_path": ".benchmarks/low-budget-backfill-2026-05-25/b1024-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "256"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen2.5-7B-Instruct",
+          "google/gemma-2-9b-it",
+          "mistralai/Ministral-8B-Instruct-2410"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/low-budget-backfill-2026-05-25/b256-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "256"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Ministral-8B-Instruct-2410"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/low-budget-backfill-2026-05-25/b256-output/failures.json",
+        "source_role": "benchmark_failure_report"
+      },
+      {
+        "budgets": [
+          "256"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen2.5-7B-Instruct",
+          "google/gemma-2-9b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live"
+        ],
+        "semantic_row_count": 6,
+        "source_path": ".benchmarks/low-budget-backfill-2026-05-25/b256-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen2.5-7B-Instruct",
+          "google/gemma-2-9b-it",
+          "mistralai/Ministral-8B-Instruct-2410"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/low-budget-backfill-2026-05-25/b512-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Ministral-8B-Instruct-2410"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/low-budget-backfill-2026-05-25/b512-output/failures.json",
+        "source_role": "benchmark_failure_report"
+      },
+      {
+        "budgets": [
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen2.5-7B-Instruct",
+          "google/gemma-2-9b-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live"
+        ],
+        "semantic_row_count": 6,
+        "source_path": ".benchmarks/low-budget-backfill-2026-05-25/b512-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1536",
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_tova",
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/mistral-memory-rerun-2026-05-25/remaining-five-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1536",
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_tova"
+        ],
+        "semantic_row_count": 2,
+        "source_path": ".benchmarks/mistral-memory-rerun-2026-05-25/remaining-five-output/failures.json",
+        "source_role": "benchmark_failure_report"
+      },
+      {
+        "budgets": [
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/mistral-memory-rerun-2026-05-25/remaining-five-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1536"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/mistral-memory-rerun-2026-05-25/sentence-vorn-b1536-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1536"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/mistral-memory-rerun-2026-05-25/sentence-vorn-b1536-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1536",
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_tova"
+        ],
+        "semantic_row_count": 6,
+        "source_path": ".benchmarks/mistral-tova-late-budget-recovery-2026-05-26/microrecovery/failures.json",
+        "source_role": "benchmark_failure_report"
+      },
+      {
+        "budgets": [
+          "1536",
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_tova",
+          "sentence_tova_live"
+        ],
+        "semantic_row_count": 78,
+        "source_path": ".benchmarks/mistral-tova-late-budget-recovery-2026-05-26/microrecovery/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1536",
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_tova"
+        ],
+        "semantic_row_count": 32,
+        "source_path": ".benchmarks/mistral-tova-late-budget-recovery-2026-05-26/microrecovery-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1536",
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_tova",
+          "sentence_tova_live"
+        ],
+        "semantic_row_count": 30,
+        "source_path": ".benchmarks/mistral-tova-late-budget-recovery-2026-05-26/singlecase/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1536",
+          "2048"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_tova"
+        ],
+        "semantic_row_count": 10,
+        "source_path": ".benchmarks/mistral-tova-late-budget-recovery-2026-05-26/singlecase-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/qwen-no-thinking-smoke-2026-05-25/cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/qwen-no-thinking-smoke-2026-05-25/output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/qwen-think-strip-smoke-2026-05-25/cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/qwen-think-strip-smoke-2026-05-25/output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen2.5-7B-Instruct"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live",
+          "sentence_tova",
+          "sentence_tova_live",
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 9,
+        "source_path": ".benchmarks/qwen25-b1024-bf16-verification-2026-05-26/live-eviction/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen2.5-7B-Instruct"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_tova",
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/qwen25-b1024-bf16-verification-2026-05-26/live-eviction-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-b1024-back16-2026-05-25/output/remaining/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_tova",
+          "sentence_tova_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-b1024-back16-2026-05-25/output/sentinel/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-b1024-back16-2026-05-25/remaining-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_tova"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-b1024-back16-2026-05-25/sentinel-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_tova",
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-b1024-memory-rerun-2026-05-25/cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_tova"
+        ],
+        "semantic_row_count": 2,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-b1024-memory-rerun-2026-05-25/output/failures.json",
+        "source_role": "benchmark_failure_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-b1024-memory-rerun-2026-05-25/output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_tova",
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-b1024-six-cell-2026-05-25/cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_tova"
+        ],
+        "semantic_row_count": 2,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-b1024-six-cell-2026-05-25/output/failures.json",
+        "source_role": "benchmark_failure_report"
+      },
+      {
+        "budgets": [
+          "1024"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-b1024-six-cell-2026-05-25/output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "256",
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_tova",
+          "sentence_vorn"
+        ],
+        "semantic_row_count": 6,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-budget-ladder-2026-05-25/b256-b512-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "256",
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_tova"
+        ],
+        "semantic_row_count": 4,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-budget-ladder-2026-05-25/b256-b512-output/failures.json",
+        "source_role": "benchmark_failure_report"
+      },
+      {
+        "budgets": [
+          "256",
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_vorn",
+          "sentence_vorn_live"
+        ],
+        "semantic_row_count": 6,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-budget-ladder-2026-05-25/b256-b512-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "256",
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_tova"
+        ],
+        "semantic_row_count": 5,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-budget-ladder-2026-05-25/recovery-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-budget-ladder-2026-05-25/recovery-output/failures.json",
+        "source_role": "benchmark_failure_report"
+      },
+      {
+        "budgets": [
+          "256",
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live",
+          "sentence_tova",
+          "sentence_tova_live"
+        ],
+        "semantic_row_count": 12,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-budget-ladder-2026-05-25/recovery-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 10,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-budget-ladder-2026-05-25/sentence-h2o-b512-microrecovery-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [
+          "512"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "Qwen/Qwen3-8B"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live"
+        ],
+        "semantic_row_count": 30,
+        "source_path": ".benchmarks/qwen3-no-thinking-4k-budget-ladder-2026-05-25/sentence-h2o-b512-microrecovery-output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "256"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 1,
+        "source_path": ".benchmarks/tail-gap-fill-2026-05-25/output/failures.json",
+        "source_role": "benchmark_failure_report"
+      },
+      {
+        "budgets": [
+          "256"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "",
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-4-E4B-it"
+        ],
+        "has_cost_metrics": true,
+        "has_retention_metrics": true,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o",
+          "sentence_h2o_live"
+        ],
+        "semantic_row_count": 3,
+        "source_path": ".benchmarks/tail-gap-fill-2026-05-25/output/reports.json",
+        "source_role": "benchmark_report"
+      },
+      {
+        "budgets": [
+          "256"
+        ],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [
+          "niah",
+          "niah_multikey_1_4k"
+        ],
+        "families_or_models": [
+          "google/gemma-4-E4B-it",
+          "mistralai/Mistral-7B-Instruct-v0.3"
+        ],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [
+          "sentence_h2o"
+        ],
+        "semantic_row_count": 2,
+        "source_path": ".benchmarks/tail-gap-fill-2026-05-25/tail-gap-fill-cell-specs.json",
+        "source_role": "benchmark_cell_spec"
+      },
+      {
+        "budgets": [],
+        "capability": "method_level_semantic_granularity_outcomes",
+        "datasets_or_tasks": [],
+        "families_or_models": [],
+        "has_cost_metrics": false,
+        "has_retention_metrics": false,
+        "limit": "Rows identify sentence/word semantic-granularity outcomes, but do not expose per-SEMU positional score trajectories.",
+        "semantic_methods": [],
+        "semantic_row_count": 52,
+        "source_path": "data/vorn-mat-cross-family-stats-2026-05-15.json",
+        "source_role": "other_json_artifact"
+      },
+      {
+        "budgets": [
           "1024",
           "1536",
           "2048",
@@ -456303,7 +458314,8 @@
           "word_vorn"
         ],
         "semantic_row_count": 43,
-        "source_path": "results/adaptive-granularity-posthoc-2026-05-14.json"
+        "source_path": "results/adaptive-granularity-posthoc-2026-05-14.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456322,7 +458334,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 8,
-        "source_path": "results/adaptive-vorn-online-8k-2026-05-14.json"
+        "source_path": "results/adaptive-vorn-online-8k-2026-05-14.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456344,7 +458357,8 @@
           "sentence_h2o"
         ],
         "semantic_row_count": 7,
-        "source_path": "results/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26.json"
+        "source_path": "results/b1536-b2048-mistral-llama-gemma4-fill-2026-05-26.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456365,7 +458379,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 2,
-        "source_path": "results/b256-vorn-verification-2026-05-25.json"
+        "source_path": "results/b256-vorn-verification-2026-05-25.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456387,7 +458402,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 4,
-        "source_path": "results/column-fill-ministral-gemma2-2026-05-25.json"
+        "source_path": "results/column-fill-ministral-gemma2-2026-05-25.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456409,7 +458425,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 10,
-        "source_path": "results/cross-family-extension-wave-2026-05-20.json"
+        "source_path": "results/cross-family-extension-wave-2026-05-20.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456430,7 +458447,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 4,
-        "source_path": "results/cross-family-no-guards-mirror-2026-05-15.json"
+        "source_path": "results/cross-family-no-guards-mirror-2026-05-15.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456458,7 +458476,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 19,
-        "source_path": "results/cross-family-sentence-vorn-noguards-wave-2026-05-20.json"
+        "source_path": "results/cross-family-sentence-vorn-noguards-wave-2026-05-20.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456475,7 +458494,8 @@
           "sentence_vorn_eviction"
         ],
         "semantic_row_count": 6,
-        "source_path": "results/cross-task-qa_2-sentence-2026-05-13.json"
+        "source_path": "results/cross-task-qa_2-sentence-2026-05-13.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456493,7 +458513,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 4,
-        "source_path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json"
+        "source_path": "results/gemma-4-4k-cross-baseline-extension-2026-05-15.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456516,7 +458537,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 13,
-        "source_path": "results/gemma-4-4k-degradation-curve-2026-05-15.json"
+        "source_path": "results/gemma-4-4k-degradation-curve-2026-05-15.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456534,7 +458556,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 5,
-        "source_path": "results/gemma-4-4k-gate-2026-05-15.json"
+        "source_path": "results/gemma-4-4k-gate-2026-05-15.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456552,7 +458575,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 3,
-        "source_path": "results/gemma2-9b-4k-fast-read-2026-05-16.json"
+        "source_path": "results/gemma2-9b-4k-fast-read-2026-05-16.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456575,7 +458599,8 @@
           "sentence_vorn_live"
         ],
         "semantic_row_count": 3,
-        "source_path": "results/gemma3-12b-it-eviction-comparison-2026-05-27.json"
+        "source_path": "results/gemma3-12b-it-eviction-comparison-2026-05-27.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456598,7 +458623,8 @@
           "sentence_vorn_live"
         ],
         "semantic_row_count": 3,
-        "source_path": "results/gemma3-qwen3-30b-eviction-gate-2026-05-26.json"
+        "source_path": "results/gemma3-qwen3-30b-eviction-gate-2026-05-26.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456622,7 +458648,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 8,
-        "source_path": "results/gemma3-qwen3-30b-eviction-gate-failures-2026-05-26.json"
+        "source_path": "results/gemma3-qwen3-30b-eviction-gate-failures-2026-05-26.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456654,7 +458681,8 @@
           "sentence_vorn_live"
         ],
         "semantic_row_count": 26,
-        "source_path": "results/gemma3-qwen3-30b-eviction-phase1-phase3-2026-05-26.json"
+        "source_path": "results/gemma3-qwen3-30b-eviction-phase1-phase3-2026-05-26.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456672,7 +458700,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 4,
-        "source_path": "results/llama31-4k-cross-baseline-extension-2026-05-15.json"
+        "source_path": "results/llama31-4k-cross-baseline-extension-2026-05-15.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456690,7 +458719,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 5,
-        "source_path": "results/llama31-4k-gate-2026-05-15.json"
+        "source_path": "results/llama31-4k-gate-2026-05-15.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456710,7 +458740,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 6,
-        "source_path": "results/llama31-4k-threshold-curve-2026-05-16.json"
+        "source_path": "results/llama31-4k-threshold-curve-2026-05-16.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456730,7 +458761,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 2,
-        "source_path": "results/llama31-4k-threshold-cut-2026-05-15.json"
+        "source_path": "results/llama31-4k-threshold-cut-2026-05-15.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456753,7 +458785,8 @@
           "sentence_h2o"
         ],
         "semantic_row_count": 3,
-        "source_path": "results/low-budget-backfill-1024-2026-05-25.json"
+        "source_path": "results/low-budget-backfill-1024-2026-05-25.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456777,7 +458810,8 @@
           "sentence_h2o"
         ],
         "semantic_row_count": 12,
-        "source_path": "results/low-budget-backfill-512-256-2026-05-25.json"
+        "source_path": "results/low-budget-backfill-512-256-2026-05-25.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456795,7 +458829,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 3,
-        "source_path": "results/ministral-8b-4k-fast-read-2026-05-15.json"
+        "source_path": "results/ministral-8b-4k-fast-read-2026-05-15.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456813,7 +458848,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 4,
-        "source_path": "results/mistral-memory-rerun-2026-05-25.json"
+        "source_path": "results/mistral-memory-rerun-2026-05-25.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456835,7 +458871,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 36,
-        "source_path": "results/multistep-fillout-2026-05-27.json"
+        "source_path": "results/multistep-fillout-2026-05-27.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456858,7 +458895,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 3,
-        "source_path": "results/qa2-cross-task-multifamily-2026-05-16.json"
+        "source_path": "results/qa2-cross-task-multifamily-2026-05-16.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456880,7 +458918,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 21,
-        "source_path": "results/qwen-4k-budget-sweep-2026-05-14.json"
+        "source_path": "results/qwen-4k-budget-sweep-2026-05-14.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456903,7 +458942,8 @@
           "word_vorn"
         ],
         "semantic_row_count": 41,
-        "source_path": "results/qwen-4k-word-budget-sweep-2026-05-14.json"
+        "source_path": "results/qwen-4k-word-budget-sweep-2026-05-14.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456922,7 +458962,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 7,
-        "source_path": "results/qwen25-multibudget-refresh-2026-05-26.json"
+        "source_path": "results/qwen25-multibudget-refresh-2026-05-26.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456940,7 +458981,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 4,
-        "source_path": "results/qwen3-4k-gate-2026-05-15.json"
+        "source_path": "results/qwen3-4k-gate-2026-05-15.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456962,7 +459004,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 17,
-        "source_path": "results/qwen3-no-thinking-budget-ladder-256-512-2026-05-25.json"
+        "source_path": "results/qwen3-no-thinking-budget-ladder-256-512-2026-05-25.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -456982,7 +459025,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 2,
-        "source_path": "results/score-distribution-observation-8k-2026-05-14.json"
+        "source_path": "results/score-distribution-observation-8k-2026-05-14.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457004,7 +459048,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 8,
-        "source_path": "results/sentence-attention-2x2-gemma2-9b-2026-05-20.json"
+        "source_path": "results/sentence-attention-2x2-gemma2-9b-2026-05-20.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457029,7 +459074,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 21,
-        "source_path": "results/sentence-attention-2x2-gemma4-2026-05-19.json"
+        "source_path": "results/sentence-attention-2x2-gemma4-2026-05-19.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457046,7 +459092,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 6,
-        "source_path": "results/sentence-attention-2x2-gemma4-budget-fill-256-2026-05-20.json"
+        "source_path": "results/sentence-attention-2x2-gemma4-budget-fill-256-2026-05-20.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457071,7 +459118,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 18,
-        "source_path": "results/sentence-attention-2x2-gemma4-budget-fill-and-no-guards-2026-05-20.json"
+        "source_path": "results/sentence-attention-2x2-gemma4-budget-fill-and-no-guards-2026-05-20.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457095,7 +459143,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 34,
-        "source_path": "results/sentence-attention-2x2-llama31-2026-05-20.json"
+        "source_path": "results/sentence-attention-2x2-llama31-2026-05-20.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457113,7 +459162,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 10,
-        "source_path": "results/sentence-attention-2x2-llama31-budget-fill-1536-2048-2026-05-20.json"
+        "source_path": "results/sentence-attention-2x2-llama31-budget-fill-1536-2048-2026-05-20.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457135,7 +459185,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 8,
-        "source_path": "results/sentence-attention-2x2-ministral8b-2026-05-20.json"
+        "source_path": "results/sentence-attention-2x2-ministral8b-2026-05-20.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457156,7 +459207,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 15,
-        "source_path": "results/sentence-attention-2x2-mistral-2026-05-19.json"
+        "source_path": "results/sentence-attention-2x2-mistral-2026-05-19.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457178,7 +459230,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 13,
-        "source_path": "results/sentence-attention-2x2-mistral-budget-fill-256-1536-2048-2026-05-20.json"
+        "source_path": "results/sentence-attention-2x2-mistral-budget-fill-256-1536-2048-2026-05-20.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457203,7 +459256,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 9,
-        "source_path": "results/sentence-attention-qa2-cross-task-multifam-2026-05-20.json"
+        "source_path": "results/sentence-attention-qa2-cross-task-multifam-2026-05-20.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457220,7 +459274,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 6,
-        "source_path": "results/sentence-level-eviction-2026-05-13.json"
+        "source_path": "results/sentence-level-eviction-2026-05-13.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457239,7 +459294,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 17,
-        "source_path": "results/sentence-level-eviction-4k-budget-sweep-2026-05-13.json"
+        "source_path": "results/sentence-level-eviction-4k-budget-sweep-2026-05-13.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457256,7 +459312,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 10,
-        "source_path": "results/sentence-level-eviction-8k-2026-05-13.json"
+        "source_path": "results/sentence-level-eviction-8k-2026-05-13.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457275,7 +459332,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 17,
-        "source_path": "results/sentence-level-eviction-8k-budget-sweep-2026-05-13.json"
+        "source_path": "results/sentence-level-eviction-8k-budget-sweep-2026-05-13.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457295,7 +459353,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 7,
-        "source_path": "results/sentence-pooling-comparison-2026-05-13.json"
+        "source_path": "results/sentence-pooling-comparison-2026-05-13.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457313,7 +459372,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 4,
-        "source_path": "results/sentence-trigger-ablation-2026-05-14.json"
+        "source_path": "results/sentence-trigger-ablation-2026-05-14.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457334,7 +459394,8 @@
           "sentence_h2o"
         ],
         "semantic_row_count": 2,
-        "source_path": "results/tail-gap-fill-2026-05-25.json"
+        "source_path": "results/tail-gap-fill-2026-05-25.json",
+        "source_role": "published_result_artifact"
       },
       {
         "budgets": [
@@ -457355,7 +459416,8 @@
           "sentence_vorn"
         ],
         "semantic_row_count": 2,
-        "source_path": "results/token-vorn-qa2-cross-task-2026-05-20.json"
+        "source_path": "results/token-vorn-qa2-cross-task-2026-05-20.json",
+        "source_role": "published_result_artifact"
       }
     ],
     "neighborhood_probe": {
@@ -457504,6 +459566,128 @@
       "split": "validation[:50]",
       "top_k": 10
     },
+    "positional_score_sources": [
+      {
+        "capability": "positional_score_trajectory_source",
+        "case_record_count": 5,
+        "has_answer_token_spans": true,
+        "has_ranking_stability_with_prev": true,
+        "has_top_alignment_positions": true,
+        "limit": "Contains positional alignment_scores and can support per-SEMU trajectory extraction if tokenization/prompt alignment is reconstructible.",
+        "mean_steps_per_case": 14.2,
+        "source_path": "results/vanilla-observation-2026-05-13-shards/part-000.json.gz",
+        "source_role": "positional_score_shard",
+        "total_step_count": 71
+      },
+      {
+        "capability": "positional_score_trajectory_source",
+        "case_record_count": 5,
+        "has_answer_token_spans": true,
+        "has_ranking_stability_with_prev": true,
+        "has_top_alignment_positions": true,
+        "limit": "Contains positional alignment_scores and can support per-SEMU trajectory extraction if tokenization/prompt alignment is reconstructible.",
+        "mean_steps_per_case": 9.8,
+        "source_path": "results/vanilla-observation-2026-05-13-shards/part-001.json.gz",
+        "source_role": "positional_score_shard",
+        "total_step_count": 49
+      },
+      {
+        "capability": "positional_score_trajectory_source",
+        "case_record_count": 5,
+        "has_answer_token_spans": true,
+        "has_ranking_stability_with_prev": true,
+        "has_top_alignment_positions": true,
+        "limit": "Contains positional alignment_scores and can support per-SEMU trajectory extraction if tokenization/prompt alignment is reconstructible.",
+        "mean_steps_per_case": 9.8,
+        "source_path": "results/vanilla-observation-2026-05-13-shards/part-002.json.gz",
+        "source_role": "positional_score_shard",
+        "total_step_count": 49
+      },
+      {
+        "capability": "positional_score_trajectory_source",
+        "case_record_count": 5,
+        "has_answer_token_spans": true,
+        "has_ranking_stability_with_prev": true,
+        "has_top_alignment_positions": true,
+        "limit": "Contains positional alignment_scores and can support per-SEMU trajectory extraction if tokenization/prompt alignment is reconstructible.",
+        "mean_steps_per_case": 10.0,
+        "source_path": "results/vanilla-observation-2026-05-13-shards/part-003.json.gz",
+        "source_role": "positional_score_shard",
+        "total_step_count": 50
+      },
+      {
+        "capability": "positional_score_trajectory_source",
+        "case_record_count": 5,
+        "has_answer_token_spans": true,
+        "has_ranking_stability_with_prev": true,
+        "has_top_alignment_positions": true,
+        "limit": "Contains positional alignment_scores and can support per-SEMU trajectory extraction if tokenization/prompt alignment is reconstructible.",
+        "mean_steps_per_case": 9.2,
+        "source_path": "results/vanilla-observation-2026-05-13-shards/part-004.json.gz",
+        "source_role": "positional_score_shard",
+        "total_step_count": 46
+      },
+      {
+        "capability": "positional_score_trajectory_source",
+        "case_record_count": 5,
+        "has_answer_token_spans": true,
+        "has_ranking_stability_with_prev": true,
+        "has_top_alignment_positions": true,
+        "limit": "Contains positional alignment_scores and can support per-SEMU trajectory extraction if tokenization/prompt alignment is reconstructible.",
+        "mean_steps_per_case": 9.8,
+        "source_path": "results/vanilla-observation-2026-05-13-shards/part-005.json.gz",
+        "source_role": "positional_score_shard",
+        "total_step_count": 49
+      },
+      {
+        "capability": "positional_score_trajectory_source",
+        "case_record_count": 5,
+        "has_answer_token_spans": true,
+        "has_ranking_stability_with_prev": true,
+        "has_top_alignment_positions": true,
+        "limit": "Contains positional alignment_scores and can support per-SEMU trajectory extraction if tokenization/prompt alignment is reconstructible.",
+        "mean_steps_per_case": 18.4,
+        "source_path": "results/vanilla-observation-2026-05-13-shards/part-006.json.gz",
+        "source_role": "positional_score_shard",
+        "total_step_count": 92
+      },
+      {
+        "capability": "positional_score_trajectory_source",
+        "case_record_count": 5,
+        "has_answer_token_spans": true,
+        "has_ranking_stability_with_prev": true,
+        "has_top_alignment_positions": true,
+        "limit": "Contains positional alignment_scores and can support per-SEMU trajectory extraction if tokenization/prompt alignment is reconstructible.",
+        "mean_steps_per_case": 9.6,
+        "source_path": "results/vanilla-observation-2026-05-13-shards/part-007.json.gz",
+        "source_role": "positional_score_shard",
+        "total_step_count": 48
+      },
+      {
+        "capability": "positional_score_trajectory_source",
+        "case_record_count": 5,
+        "has_answer_token_spans": true,
+        "has_ranking_stability_with_prev": true,
+        "has_top_alignment_positions": true,
+        "limit": "Contains positional alignment_scores and can support per-SEMU trajectory extraction if tokenization/prompt alignment is reconstructible.",
+        "mean_steps_per_case": 14.2,
+        "source_path": "results/vanilla-observation-2026-05-13-shards/part-008.json.gz",
+        "source_role": "positional_score_shard",
+        "total_step_count": 71
+      },
+      {
+        "capability": "positional_score_trajectory_source",
+        "case_record_count": 5,
+        "has_answer_token_spans": true,
+        "has_ranking_stability_with_prev": true,
+        "has_top_alignment_positions": true,
+        "limit": "Contains positional alignment_scores and can support per-SEMU trajectory extraction if tokenization/prompt alignment is reconstructible.",
+        "mean_steps_per_case": 9.8,
+        "source_path": "results/vanilla-observation-2026-05-13-shards/part-009.json.gz",
+        "source_role": "positional_score_shard",
+        "total_step_count": 49
+      }
+    ],
     "score_distribution": {
       "budget_runs": [
         {

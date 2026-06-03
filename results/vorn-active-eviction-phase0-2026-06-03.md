@@ -29,9 +29,10 @@ The 21,600 public observations remain method-level fixture outcomes. They do not
 
 This artifact now indexes the SEMU-bearing substrate available without fresh compute:
 
+- Positional-score sources: 10 JSON/JSON.GZ artifacts with `alignment_scores` arrays, currently the vanilla observation shards.
 - Neighborhood probe: `results/vanilla-observation-neighborhood-2026-05-13.json` (6 probe families) — answer-neighborhood proxy aggregates.
 - Score-distribution probe: `results/score-distribution-observation-8k-2026-05-14.json` (4 budget runs) — token/word/sentence distribution summaries.
-- Method-level semantic-granularity inventory: 51 JSON artifacts with sentence/word method rows.
+- Method-level semantic-granularity inventory: 137 JSON/JSON.GZ artifacts with sentence/word method rows, including `.benchmarks` cell specs/reports/failures.
 
 Interpretation: these sources are useful for stratification and substrate inventory, but only the positional-score observation report supports sentence-SEMU ranking trajectories.
 

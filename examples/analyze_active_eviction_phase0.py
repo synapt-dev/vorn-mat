@@ -11,6 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 import argparse
+import gzip
 import hashlib
 import json
 import statistics
@@ -60,7 +61,14 @@ def _display_path(path: Path) -> str:
         return str(path)
 
 
+def _is_json_path(path: Path) -> bool:
+    return path.suffix == ".json" or "".join(path.suffixes[-2:]) == ".json.gz"
+
+
 def _load_json(path: Path) -> Any:
+    if "".join(path.suffixes[-2:]) == ".json.gz":
+        with gzip.open(path, "rt") as handle:
+            return json.load(handle)
     return json.loads(path.read_text())
 
 
@@ -207,11 +215,73 @@ def _extract_semantic_rows(payload: Any) -> list[dict[str, Any]]:
     return rows
 
 
-def _collect_method_level_semu_inventory(results_dir: Path) -> list[dict[str, object]]:
-    inventory: list[dict[str, object]] = []
-    for path in sorted(results_dir.glob("*.json")):
+def _artifact_role(path: Path) -> str:
+    if "vanilla-observation-2026-05-13-shards" in path.parts:
+        return "positional_score_shard"
+    if ".benchmarks" in path.parts:
+        if path.name == "cell-specs.json" or path.name.endswith("-cell-specs.json"):
+            return "benchmark_cell_spec"
+        if path.name == "reports.json":
+            return "benchmark_report"
+        if path.name == "failures.json":
+            return "benchmark_failure_report"
+        return "benchmark_auxiliary"
+    if path.parent.name == "results":
+        return "published_result_artifact"
+    return "other_json_artifact"
+
+
+def _iter_json_artifacts(root: Path) -> Iterable[Path]:
+    for path in sorted(root.rglob("*")):
+        if path.is_dir() or ".git" in path.parts:
+            continue
+        if not _is_json_path(path):
+            continue
         if path.name.startswith("vorn-active-eviction-phase0"):
             continue
+        yield path
+
+
+def _collect_positional_score_sources(root: Path) -> list[dict[str, object]]:
+    sources: list[dict[str, object]] = []
+    for path in _iter_json_artifacts(root):
+        try:
+            payload = _load_json(path)
+        except (json.JSONDecodeError, OSError):
+            continue
+        dicts = list(_walk_dicts(payload))
+        has_alignment_scores = any("alignment_scores" in item for item in dicts)
+        if not has_alignment_scores:
+            continue
+        has_answer_spans = any("answer_token_spans" in item for item in dicts)
+        has_top_alignment = any("top_alignment_positions" in item for item in dicts)
+        has_ranking_stability = any("ranking_stability_with_prev" in item for item in dicts)
+        case_records = [item for item in dicts if "case_id" in item and "steps" in item]
+        step_counts = [
+            len(item.get("steps", []))
+            for item in case_records
+            if isinstance(item.get("steps"), list)
+        ]
+        sources.append(
+            {
+                "source_path": _display_path(path),
+                "source_role": _artifact_role(path),
+                "case_record_count": len(case_records),
+                "total_step_count": sum(step_counts),
+                "mean_steps_per_case": _round(_mean(float(value) for value in step_counts)),
+                "has_answer_token_spans": has_answer_spans,
+                "has_top_alignment_positions": has_top_alignment,
+                "has_ranking_stability_with_prev": has_ranking_stability,
+                "capability": "positional_score_trajectory_source",
+                "limit": "Contains positional alignment_scores and can support per-SEMU trajectory extraction if tokenization/prompt alignment is reconstructible.",
+            }
+        )
+    return sources
+
+
+def _collect_method_level_semu_inventory(root: Path) -> list[dict[str, object]]:
+    inventory: list[dict[str, object]] = []
+    for path in _iter_json_artifacts(root):
         try:
             payload = _load_json(path)
         except (json.JSONDecodeError, OSError):
@@ -235,6 +305,7 @@ def _collect_method_level_semu_inventory(results_dir: Path) -> list[dict[str, ob
         inventory.append(
             {
                 "source_path": _display_path(path),
+                "source_role": _artifact_role(path),
                 "semantic_row_count": len(semantic_rows),
                 "semantic_methods": semantic_method_values,
                 "budgets": _collect_values(
@@ -496,6 +567,7 @@ def _build_markdown(artifact: dict[str, object]) -> str:
     supporting = artifact["supporting_semu_sources"]
     neighborhood = supporting["neighborhood_probe"]
     score_distribution = supporting["score_distribution"]
+    positional_sources = supporting["positional_score_sources"]
     method_inventory = supporting["method_level_inventory"]
 
     lines = [
@@ -541,11 +613,13 @@ def _build_markdown(artifact: dict[str, object]) -> str:
         "This artifact now indexes the SEMU-bearing substrate available without fresh "
         "compute:",
         "",
+        f"- Positional-score sources: {len(positional_sources)} JSON/JSON.GZ artifacts "
+        "with `alignment_scores` arrays, currently the vanilla observation shards.",
         f"- Neighborhood probe: `{neighborhood['source_path'] if neighborhood else 'missing'}` "
         f"({len(neighborhood['probe_names']) if neighborhood else 0} probe families) — answer-neighborhood proxy aggregates.",
         f"- Score-distribution probe: `{score_distribution['source_path'] if score_distribution else 'missing'}` "
         f"({len(score_distribution['budget_runs']) if score_distribution else 0} budget runs) — token/word/sentence distribution summaries.",
-        f"- Method-level semantic-granularity inventory: {len(method_inventory)} JSON artifacts with sentence/word method rows.",
+        f"- Method-level semantic-granularity inventory: {len(method_inventory)} JSON/JSON.GZ artifacts with sentence/word method rows, including `.benchmarks` cell specs/reports/failures.",
         "",
         "Interpretation: these sources are useful for stratification and substrate "
         "inventory, but only the positional-score observation report supports "
@@ -656,6 +730,7 @@ def analyze_phase0(
         "semu_granularity": "sentence",
         "summary": _summarize_cases(case_matrices),
         "supporting_semu_sources": {
+            "positional_score_sources": _collect_positional_score_sources(ROOT),
             "neighborhood_probe": _collect_neighborhood_probe(
                 ROOT / "results" / "vanilla-observation-neighborhood-2026-05-13.json"
             ),
@@ -663,7 +738,7 @@ def analyze_phase0(
                 ROOT / "results" / "score-distribution-observation-8k-2026-05-14.json"
             ),
             "method_level_inventory": _collect_method_level_semu_inventory(
-                ROOT / "results"
+                ROOT
             ),
         },
         "outputs": {
