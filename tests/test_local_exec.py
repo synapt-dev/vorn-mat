@@ -720,6 +720,151 @@ def test_forward_with_hidden_states_uses_compact_cache_position_for_gemma3():
     assert fake_model.calls[0]["output_attentions"] is False
 
 
+def test_decoder_layers_support_nested_language_model_layout():
+    from types import SimpleNamespace
+
+    from vorn_mat.local_exec import _TransformersGeneratorBase
+
+    layers = (object(), object(), object())
+    fake_model = SimpleNamespace(
+        model=SimpleNamespace(language_model=SimpleNamespace(layers=layers))
+    )
+    generator = _TransformersGeneratorBase()
+    object.__setattr__(generator, "_tokenizer", object())
+    object.__setattr__(generator, "_model", fake_model)
+    object.__setattr__(generator, "_device", "cpu")
+
+    assert generator._decoder_layers() == layers
+
+
+def test_selected_attention_path_hooks_gemma4_without_full_attention_outputs():
+    import torch
+    from types import SimpleNamespace
+
+    from vorn_mat.local_exec import TransformersObservationGenerator
+
+    class FakeAttention:
+        head_dim = 1
+        num_key_value_groups = 1
+        scaling = 1.0
+        is_kv_shared_layer = False
+
+        def q_proj(self, hidden_states):
+            return hidden_states
+
+        def k_proj(self, hidden_states):
+            return hidden_states
+
+        def q_norm(self, hidden_states):
+            return hidden_states
+
+        def k_norm(self, hidden_states):
+            return hidden_states
+
+        def forward(
+            self,
+            *,
+            hidden_states,
+            position_embeddings,
+            attention_mask,
+            shared_kv_states,
+            past_key_values=None,
+            **kwargs,
+        ):
+            return hidden_states, None
+
+    class FakeLayer:
+        def __init__(self):
+            self.self_attn = FakeAttention()
+
+    class FakeModel:
+        config = SimpleNamespace(model_type="gemma4")
+
+        def __init__(self):
+            self.calls = []
+            self.layers = tuple(FakeLayer() for _ in range(4))
+            self.model = SimpleNamespace(
+                language_model=SimpleNamespace(layers=self.layers)
+            )
+
+        def __call__(self, **kwargs):
+            self.calls.append(kwargs)
+            hidden_states = torch.tensor([[[1.0], [2.0], [3.0]]])
+            position_embeddings = (
+                torch.ones((1, 3, 1)),
+                torch.zeros((1, 3, 1)),
+            )
+            attention_mask = torch.zeros((1, 1, 3, 3))
+            shared_kv_states = {}
+            for layer in self.layers:
+                hidden_states, _ = layer.self_attn.forward(
+                    hidden_states=hidden_states,
+                    position_embeddings=position_embeddings,
+                    attention_mask=attention_mask,
+                    shared_kv_states=shared_kv_states,
+                )
+            return SimpleNamespace(hidden_states=(hidden_states,), attentions=None)
+
+    generator = TransformersObservationGenerator()
+    fake_model = FakeModel()
+    object.__setattr__(generator, "_tokenizer", object())
+    object.__setattr__(generator, "_model", fake_model)
+    object.__setattr__(generator, "_device", "cpu")
+
+    outputs, attention_by_layer = generator._forward_with_hidden_states_and_selected_attentions(
+        input_ids=torch.tensor([[1, 2, 3]]),
+        attention_mask=torch.tensor([[1, 1, 1]]),
+        position_ids=torch.tensor([[0, 1, 2]]),
+        capture_attention_layers=(2, 3),
+    )
+
+    assert outputs is not None
+    assert fake_model.calls[0]["output_attentions"] is False
+    assert set(attention_by_layer) == {"2", "3"}
+    assert len(attention_by_layer["2"]) == 3
+    assert len(attention_by_layer["3"]) == 3
+    assert attention_by_layer["2"][0] < attention_by_layer["2"][-1]
+    assert attention_by_layer["3"][0] < attention_by_layer["3"][-1]
+
+
+def test_gemma4_selected_attention_hook_uses_shared_kv_states():
+    import torch
+    from types import SimpleNamespace
+
+    from vorn_mat.local_exec import TransformersObservationGenerator
+
+    generator = TransformersObservationGenerator()
+    module = SimpleNamespace(
+        head_dim=1,
+        num_key_value_groups=1,
+        scaling=1.0,
+        is_kv_shared_layer=True,
+        layer_type="full_attention",
+        q_proj=lambda hidden_states: hidden_states,
+        q_norm=lambda hidden_states: hidden_states,
+    )
+    hidden_states = torch.tensor([[[1.0], [2.0], [3.0]]])
+    shared_key_states = torch.tensor([[[[4.0], [5.0], [6.0]]]])
+
+    query_states, key_states = generator._attention_query_key_states(
+        module_self=module,
+        hidden_states=hidden_states,
+        position_embeddings=(
+            torch.ones((1, 3, 1)),
+            torch.zeros((1, 3, 1)),
+        ),
+        shared_kv_states={
+            "full_attention": (
+                shared_key_states,
+                torch.zeros_like(shared_key_states),
+            )
+        },
+    )
+
+    assert query_states.shape == (1, 1, 3, 1)
+    assert torch.equal(key_states, shared_key_states)
+
+
 def test_answer_retention_payload_reports_retained_and_dropped_answer_tokens():
     from vorn_mat.local_exec import _answer_retention_payload
 
