@@ -957,6 +957,13 @@ def test_run_modal_consumer_validation_niah_writes_artifacts(monkeypatch, tmp_pa
     )
 
 
+def test_modal_consumer_validation_request_defaults_to_phase3_a100():
+    request = remote_exec.ModalConsumerValidationRunRequest()
+
+    assert request.gpu == "A100-80GB"
+    assert request.cost_per_second == remote_exec.A100_80GB_PER_SECOND
+
+
 def _consumer_phase0_case() -> dict[str, object]:
     return {
         "case_id": "case-1",

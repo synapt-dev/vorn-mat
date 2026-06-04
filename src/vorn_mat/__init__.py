@@ -117,6 +117,7 @@ from .local_exec import (
     select_week1_plan,
 )
 from .modal_app import (
+    DEFAULT_MODAL_GPU,
     ModalAppSpec,
     ModalArtifacts,
     ModalBinding,
@@ -250,6 +251,7 @@ __all__ = [
     "DEFAULT_CANONICAL_LAYER",
     "DEFAULT_LIVE_EVICTION_CACHE_BUDGET",
     "DEFAULT_LIVE_EVICTION_CASE_LIMIT",
+    "DEFAULT_MODAL_GPU",
     "DEFAULT_MODEL",
     "DEFAULT_RANDOM_LIVE_EVICTION_SEED",
     "DEFAULT_RECENT_WINDOW",

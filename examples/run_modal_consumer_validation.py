@@ -26,7 +26,7 @@ from vorn_mat import (
 binding = build_consumer_validation_entrypoint(
     run_modal_consumer_validation_niah,
     modal_module=modal,
-    app_spec=default_modal_app_spec(gpu="H200"),
+    app_spec=default_modal_app_spec(),
 )
 app = binding.app
 
