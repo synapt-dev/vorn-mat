@@ -964,6 +964,98 @@ def test_modal_consumer_validation_request_defaults_to_phase3_a100():
     assert request.cost_per_second == remote_exec.A100_80GB_PER_SECOND
 
 
+def test_run_modal_pressure_sweep_niah_writes_artifacts(monkeypatch, tmp_path):
+    monkeypatch.setattr(
+        remote_exec,
+        "load_ruler_hf_niah_slice",
+        lambda dataset_config, split, case_limit, **kwargs: (
+            BenchmarkCase("case-1", "raw prompt", "blue", {}),
+        ),
+    )
+
+    class FakePressureGenerator:
+        def __init__(self, config):
+            self.config = config
+
+        def generate(self, prompt):
+            return "blue"
+
+        def generate_rendered_prompt(self, rendered_prompt):
+            if "High magic clue." in rendered_prompt:
+                return "blue"
+            return "wrong"
+
+        def render_prompt_text_with_offsets(self, prompt):
+            return _CONSUMER_RENDERED_PROMPT, ()
+
+        def count_rendered_prompt_tokens(self, rendered_prompt):
+            return len(rendered_prompt.split())
+
+    monkeypatch.setattr(
+        remote_exec,
+        "TransformersTextGenerator",
+        FakePressureGenerator,
+    )
+    reset_calls = []
+    monkeypatch.setattr(
+        remote_exec,
+        "reset_runtime_telemetry",
+        lambda: reset_calls.append("reset"),
+    )
+    monkeypatch.setattr(
+        remote_exec,
+        "capture_runtime_telemetry",
+        lambda: {
+            "peak_memory_allocated_gb": 0.25,
+            "peak_memory_reserved_gb": 0.5,
+        },
+    )
+    monkeypatch.setattr(remote_exec.time, "perf_counter", lambda: next(counter))
+    counter = iter(
+        [
+            100.0,
+            101.0,
+            102.0,
+            103.0,
+            104.0,
+            105.0,
+            106.0,
+            107.0,
+            108.0,
+            109.0,
+            110.0,
+            111.0,
+        ]
+    )
+    jsonl_path = tmp_path / "pressure-sweep.jsonl"
+    summary_path = tmp_path / "pressure-sweep.md"
+
+    report = remote_exec.run_modal_pressure_sweep_niah(
+        remote_exec.ModalPressureSweepRunRequest(
+            output_jsonl_path=str(jsonl_path),
+            output_summary_path=str(summary_path),
+            phase0_case=_consumer_phase0_case(),
+            protected_semu_ids=(0,),
+            selector_arms=("vorn_high", "vorn_low"),
+            pressure_ns=(1, 2),
+            model_id="mistralai/Mistral-7B-Instruct-v0.3",
+            cost_per_second=0.01,
+        )
+    )
+
+    assert report.case_id == "case-1"
+    assert report.case_count == 1
+    assert report.elapsed_seconds == 11.0
+    assert report.estimated_cost_usd == 0.11
+    assert report.output_jsonl_path == str(jsonl_path)
+    assert jsonl_path.exists()
+    assert summary_path.exists()
+    assert len(reset_calls) == 5
+    assert len(report.report.records) == 4
+    assert report.report.records[0].intervention.pressure_n == 1
+    assert report.report.records[0].intervention.selected_semu_ids == (1,)
+
+
 def _consumer_phase0_case() -> dict[str, object]:
     return {
         "case_id": "case-1",

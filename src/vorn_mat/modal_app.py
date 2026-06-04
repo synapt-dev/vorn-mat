@@ -160,6 +160,20 @@ def build_consumer_validation_entrypoint(
     )
 
 
+def build_pressure_sweep_entrypoint(
+    run_callable: Callable[..., object],
+    modal_module: object | None = None,
+    app_spec: ModalAppSpec | None = None,
+) -> ModalBinding:
+    """Bind the active-eviction pressure-sweep runner to Modal."""
+    return _build_entrypoint_binding(
+        entrypoint_name="run_pressure_sweep_entrypoint",
+        run_callable=run_callable,
+        modal_module=modal_module,
+        app_spec=app_spec,
+    )
+
+
 def _build_entrypoint_binding(
     *,
     entrypoint_name: str,
