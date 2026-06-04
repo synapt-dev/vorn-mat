@@ -14,6 +14,11 @@ from .active_eviction_consumer_validation import (
     run_consumer_validation,
     write_consumer_validation_artifacts,
 )
+from .active_eviction_pressure_sweep import (
+    PressureSweepReport,
+    run_pressure_sweep,
+    write_pressure_sweep_artifacts,
+)
 from .benchmarks import load_ruler_hf_niah_slice
 from .local_exec import (
     LocalModelConfig,
@@ -175,6 +180,52 @@ class ModalConsumerValidationRunRequest:
 @dataclass(frozen=True)
 class ModalConsumerValidationRunReport:
     report: ConsumerValidationReport
+    dataset_config: str
+    split: str
+    case_count: int
+    case_offset_start: int
+    case_id: str
+    elapsed_seconds: float
+    estimated_cost_usd: float
+    output_jsonl_path: str | None
+    output_summary_path: str | None
+
+
+@dataclass(frozen=True)
+class ModalPressureSweepRunRequest:
+    dataset_config: str = "niah_multikey_1_4k"
+    split: str = "validation"
+    case_limit: int = 1
+    case_offset_start: int = 1
+    output_jsonl_path: str | None = None
+    output_summary_path: str | None = None
+    phase0_case: dict[str, object] | None = None
+    phase0_artifact_path: str | None = None
+    run_id: str = "vorn-active-eviction-pilot-b-pressure-sweep-2026-06-04"
+    family: str = "Mistral"
+    model_id: str = DEFAULT_MODEL
+    model_revision: str = "main"
+    tokenizer_revision: str = "main"
+    max_new_tokens: int = 32
+    protected_semu_ids: tuple[int, ...] = (0, 1, 2, 29, 209, 210)
+    selector_arms: tuple[str, ...] = (
+        "vorn_high",
+        "vorn_low",
+        "length_high",
+        "random_length_matched",
+    )
+    pressure_ns: tuple[int, ...] = (1, 3, 5, 10, 20, 50)
+    base_seed: int = 534588164691762844
+    expected_selected_semu_ids: tuple[tuple[str, int, tuple[int, ...]], ...] = ()
+    deletion_mode: str = "delete"
+    gpu: str = DEFAULT_MODAL_GPU
+    modal_profile: str = "layne1penney"
+    cost_per_second: float = A100_80GB_PER_SECOND
+
+
+@dataclass(frozen=True)
+class ModalPressureSweepRunReport:
+    report: PressureSweepReport
     dataset_config: str
     split: str
     case_count: int
@@ -438,6 +489,86 @@ def run_modal_consumer_validation_niah(
         )
 
     return ModalConsumerValidationRunReport(
+        report=report,
+        dataset_config=request.dataset_config,
+        split=request.split,
+        case_count=len(cases),
+        case_offset_start=request.case_offset_start,
+        case_id=case.case_id,
+        elapsed_seconds=elapsed_seconds,
+        estimated_cost_usd=elapsed_seconds * request.cost_per_second,
+        output_jsonl_path=request.output_jsonl_path,
+        output_summary_path=request.output_summary_path,
+    )
+
+
+def run_modal_pressure_sweep_niah(
+    request: ModalPressureSweepRunRequest,
+) -> ModalPressureSweepRunReport:
+    """Run the locked active-eviction pressure-scaling smoke on Modal."""
+    if request.case_limit != 1:
+        raise ValueError("pressure sweep requires exactly one fixture")
+
+    start = time.perf_counter()
+    cases = load_ruler_hf_niah_slice(
+        request.dataset_config,
+        split=request.split,
+        case_limit=request.case_limit,
+        case_offset_start=request.case_offset_start,
+    )
+    if len(cases) != 1:
+        raise ValueError(f"expected one pressure-sweep case, got {len(cases)}")
+    case = cases[0]
+    if request.phase0_case is not None:
+        phase0_case = dict(request.phase0_case)
+    elif request.phase0_artifact_path is not None:
+        phase0_case = load_phase0_case(
+            Path(request.phase0_artifact_path),
+            case.case_id,
+        )
+    else:
+        raise ValueError("pressure sweep requires phase0_case or phase0_artifact_path")
+
+    generator = TransformersTextGenerator(
+        LocalModelConfig(
+            model_id=request.model_id,
+            max_new_tokens=request.max_new_tokens,
+        )
+    )
+    expected_selected = {
+        (arm, pressure_n): ids
+        for arm, pressure_n, ids in request.expected_selected_semu_ids
+    }
+    report = run_pressure_sweep(
+        run_id=request.run_id,
+        family=request.family,
+        model_id=request.model_id,
+        model_revision=request.model_revision,
+        tokenizer_revision=request.tokenizer_revision,
+        case=case,
+        phase0_case=phase0_case,
+        generator=generator,
+        protected_semu_ids=request.protected_semu_ids,
+        selector_arms=request.selector_arms,
+        pressure_ns=request.pressure_ns,
+        base_seed=request.base_seed,
+        expected_selected_semu_ids=expected_selected or None,
+        deletion_mode=request.deletion_mode,
+        hardware=request.gpu,
+        modal_profile=request.modal_profile,
+        cost_per_second=request.cost_per_second,
+        reset_telemetry=reset_runtime_telemetry,
+        telemetry_snapshot=capture_runtime_telemetry,
+    )
+    elapsed_seconds = time.perf_counter() - start
+    if request.output_jsonl_path and request.output_summary_path:
+        write_pressure_sweep_artifacts(
+            report,
+            jsonl_path=Path(request.output_jsonl_path),
+            md_path=Path(request.output_summary_path),
+        )
+
+    return ModalPressureSweepRunReport(
         report=report,
         dataset_config=request.dataset_config,
         split=request.split,
