@@ -27,6 +27,7 @@ SelectorArm = Literal[
     "vorn_high",
     "vorn_low",
     "attention_high",
+    "snapkv_high",
     "recency_high",
     "length_high",
     "random_length_matched",
@@ -69,6 +70,8 @@ class SEMUScore:
     vorn_score: float
     vorn_rank: int
     attention_score: float | None = None
+    snapkv_score: float | None = None
+    snapkv_rank: int | None = None
 
 
 @dataclass(frozen=True)
@@ -285,6 +288,23 @@ def select_semu_for_arm(
                 -semu.semu_id,
             ),
         )
+    if selector_arm == "snapkv_high":
+        snapkv_eligible = [
+            semu
+            for semu in eligible
+            if score_by_semu[semu.semu_id].snapkv_score is not None
+            and score_by_semu[semu.semu_id].snapkv_rank is not None
+        ]
+        if not snapkv_eligible:
+            raise CounterfactualContractError("SnapKV scores are capacity-missing")
+        return max(
+            snapkv_eligible,
+            key=lambda semu: (
+                score_by_semu[semu.semu_id].snapkv_score,
+                -(score_by_semu[semu.semu_id].snapkv_rank or 0),
+                -semu.semu_id,
+            ),
+        )
     if selector_arm == "recency_high":
         return max(eligible, key=lambda semu: (semu.char_start, -semu.semu_id))
     if selector_arm == "length_high":
@@ -325,6 +345,7 @@ def build_intervention(
         raise CounterfactualContractError(
             f"protected SEMU selected: {semu.semu_id} {semu.protected_classes}"
         )
+    original_score, original_rank = selector_score_and_rank(selector_arm, score)
     return CounterfactualSEMUIntervention(
         family=family,
         model_id=model_id,
@@ -337,8 +358,8 @@ def build_intervention(
         protected_class="none",
         original_char_span=(semu.char_start, semu.char_end),
         original_token_span=(semu.token_start, semu.token_end),
-        original_score=score.vorn_score,
-        original_rank=score.vorn_rank,
+        original_score=original_score,
+        original_rank=original_rank,
         deletion_mode=deletion_mode,
         random_seed=deterministic_seed(
             run_id=run_id,
@@ -347,6 +368,17 @@ def build_intervention(
             model_id=model_id,
         ),
     )
+
+
+def selector_score_and_rank(
+    selector_arm: SelectorArm,
+    score: SEMUScore,
+) -> tuple[float, int]:
+    if selector_arm == "snapkv_high":
+        if score.snapkv_score is None or score.snapkv_rank is None:
+            raise CounterfactualContractError("SnapKV scores are capacity-missing")
+        return float(score.snapkv_score), int(score.snapkv_rank)
+    return float(score.vorn_score), int(score.vorn_rank)
 
 
 def render_counterfactual_prompt(

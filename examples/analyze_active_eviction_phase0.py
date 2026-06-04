@@ -28,6 +28,8 @@ from vorn_mat import DEFAULT_MODEL
 from vorn_mat import load_observation_report, load_ruler_hf_niah_slice
 from vorn_mat.text_spans import sentence_char_spans, token_span_from_offsets
 
+SNAPKV_OBSERVATION_WINDOW_STEPS = 8
+
 
 @dataclass(frozen=True)
 class SemuSpan:
@@ -155,6 +157,65 @@ def _rank_scores(scores: Sequence[float]) -> list[int]:
     for rank, (index, _score) in enumerate(ordered, start=1):
         ranks[index] = rank
     return ranks
+
+
+def _snapkv_token_scores(observation_case) -> tuple[list[float] | None, dict[str, object]]:
+    """Approximate SnapKV token importance from recorded attention observations.
+
+    SnapKV is token-native. For Phase 3 pressure sweeps we need a replayable
+    SEMU-level selector, so Phase 0 derives token scores from the final
+    observation window and the caller max-pools those scores into SEMUs.
+    """
+
+    steps = list(observation_case.steps)
+    if not steps:
+        return None, {
+            "supports_snapkv_high": False,
+            "reason": "no observation steps",
+            "window_step_count": 0,
+            "layer_count": 0,
+        }
+
+    window = steps[-min(SNAPKV_OBSERVATION_WINDOW_STEPS, len(steps)) :]
+    prompt_token_count = int(observation_case.prompt_token_count)
+    totals = [0.0] * prompt_token_count
+    counts = [0] * prompt_token_count
+    layer_names: set[str] = set()
+    contributing_steps = 0
+
+    for step in window:
+        step_contributed = False
+        for layer_name, values in step.attention_by_layer.items():
+            layer_names.add(str(layer_name))
+            width = min(prompt_token_count, len(values))
+            for token_index in range(width):
+                totals[token_index] += float(values[token_index])
+                counts[token_index] += 1
+            step_contributed = step_contributed or width > 0
+        if step_contributed:
+            contributing_steps += 1
+
+    if not any(counts):
+        return None, {
+            "supports_snapkv_high": False,
+            "reason": "no attention_by_layer values in observation window",
+            "window_step_count": len(window),
+            "contributing_step_count": contributing_steps,
+            "layer_count": len(layer_names),
+        }
+
+    scores = [
+        totals[index] / counts[index] if counts[index] else 0.0
+        for index in range(prompt_token_count)
+    ]
+    return scores, {
+        "supports_snapkv_high": True,
+        "method": "last_min_8_observation_steps_mean_layer_attention_then_semu_max_pool",
+        "window_step_count": len(window),
+        "contributing_step_count": contributing_steps,
+        "layer_count": len(layer_names),
+        "tokens_with_attention": sum(count > 0 for count in counts),
+    }
 
 
 def _is_semantic_method_value(value: object) -> bool:
@@ -598,6 +659,18 @@ def _case_matrix(observation_case, rendered_prompt: str, offsets) -> dict[str, o
     step_scores: list[list[float]] = []
     step_ranks: list[list[int]] = []
     step_top5: list[list[int]] = []
+    snapkv_tokens, snapkv_metadata = _snapkv_token_scores(observation_case)
+    snapkv_scores: list[float] | None = None
+    snapkv_ranks: list[int] | None = None
+    if snapkv_tokens is not None:
+        snapkv_scores = [
+            max(
+                float(score)
+                for score in snapkv_tokens[semu.token_start : semu.token_end]
+            )
+            for semu in semus
+        ]
+        snapkv_ranks = _rank_scores(snapkv_scores)
 
     for step in observation_case.steps:
         semu_scores: list[float] = []
@@ -655,6 +728,16 @@ def _case_matrix(observation_case, rendered_prompt: str, offsets) -> dict[str, o
                 "delta_final_minus_first": _round(scores[-1] - scores[0]),
                 "best_rank": min(ranks),
                 "final_rank": ranks[-1],
+                "snapkv_score": (
+                    _round(snapkv_scores[semu.semu_id])
+                    if snapkv_scores is not None
+                    else None
+                ),
+                "snapkv_rank": (
+                    snapkv_ranks[semu.semu_id]
+                    if snapkv_ranks is not None
+                    else None
+                ),
             }
         )
 
@@ -690,6 +773,20 @@ def _case_matrix(observation_case, rendered_prompt: str, offsets) -> dict[str, o
             if any(rank is not None for rank in answer_rank_by_step)
             else None
         ),
+        "snapkv": {
+            **snapkv_metadata,
+            "top5_semu_ids": (
+                sorted(
+                    range(len(snapkv_scores)),
+                    key=lambda idx: (
+                        snapkv_ranks[idx],
+                        idx,
+                    ),
+                )[:5]
+                if snapkv_scores is not None and snapkv_ranks is not None
+                else []
+            ),
+        },
         "semu_matrix": semu_records,
     }
 

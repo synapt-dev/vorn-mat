@@ -19,11 +19,11 @@ from .counterfactual_intervention_runner import (
     CounterfactualPromptRecord,
     CounterfactualQualityRecord,
     RecordStatus,
-    SCHEMA_VERSION,
     SEMUScore,
     SemanticUnit,
     SelectorArm,
     TargetedDropFailure,
+    selector_score_and_rank,
     sha256_text,
 )
 
@@ -161,6 +161,29 @@ def select_semus_for_arm(
             key=lambda semu: (
                 score_by_semu[semu.semu_id].vorn_score,
                 score_by_semu[semu.semu_id].vorn_rank,
+                semu.semu_id,
+            ),
+        )
+        return tuple(ordered[:pressure_n])
+
+    if selector_arm == "snapkv_high":
+        snapkv_eligible = [
+            semu
+            for semu in eligible
+            if score_by_semu[semu.semu_id].snapkv_score is not None
+            and score_by_semu[semu.semu_id].snapkv_rank is not None
+        ]
+        if len(snapkv_eligible) < pressure_n:
+            raise CounterfactualContractError(
+                "snapkv_high requires SnapKV scores for at least pressure_n "
+                f"eligible SEMUs: pressure_n={pressure_n}, "
+                f"available={len(snapkv_eligible)}"
+            )
+        ordered = sorted(
+            snapkv_eligible,
+            key=lambda semu: (
+                -float(score_by_semu[semu.semu_id].snapkv_score or 0.0),
+                int(score_by_semu[semu.semu_id].snapkv_rank or 0),
                 semu.semu_id,
             ),
         )
@@ -620,6 +643,8 @@ def _build_pressure_intervention(
     base_seed: int,
 ) -> PressureSweepIntervention:
     scores = [score_by_semu[semu.semu_id] for semu in selected_semus]
+    selected_scores = _selected_scores_for_arm(selector_arm, scores)
+    selected_ranks = _selected_ranks_for_arm(selector_arm, scores)
     return PressureSweepIntervention(
         family=family,
         model_id=model_id,
@@ -636,8 +661,8 @@ def _build_pressure_intervention(
         selected_token_spans=tuple(
             (semu.token_start, semu.token_end) for semu in selected_semus
         ),
-        selected_semu_scores=tuple(score.vorn_score for score in scores),
-        selected_semu_ranks=tuple(score.vorn_rank for score in scores),
+        selected_semu_scores=selected_scores,
+        selected_semu_ranks=selected_ranks,
         deletion_mode=deletion_mode,
         random_seed=_pressure_seed(
             run_id=run_id,
@@ -649,6 +674,20 @@ def _build_pressure_intervention(
             index=0,
         ),
     )
+
+
+def _selected_scores_for_arm(
+    selector_arm: SelectorArm,
+    scores: Sequence[SEMUScore],
+) -> tuple[float, ...]:
+    return tuple(selector_score_and_rank(selector_arm, score)[0] for score in scores)
+
+
+def _selected_ranks_for_arm(
+    selector_arm: SelectorArm,
+    scores: Sequence[SEMUScore],
+) -> tuple[int, ...]:
+    return tuple(selector_score_and_rank(selector_arm, score)[1] for score in scores)
 
 
 def _failure_record(
