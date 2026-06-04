@@ -586,6 +586,33 @@ class _TransformersGeneratorBase:
                 return_dict=True,
             )
 
+    def _decoder_layers(self) -> Sequence[Any]:
+        self._ensure_model()
+
+        assert self._model is not None
+
+        layer_paths = (
+            ("model", "layers"),
+            ("model", "language_model", "layers"),
+            ("language_model", "layers"),
+            ("model", "text_model", "layers"),
+            ("text_model", "layers"),
+            ("model", "decoder", "layers"),
+            ("decoder", "layers"),
+        )
+        for path in layer_paths:
+            current = self._model
+            for attr in path:
+                current = getattr(current, attr, None)
+                if current is None:
+                    break
+            if current is not None:
+                return current
+        raise AttributeError(
+            "could not locate decoder layers on model; tried "
+            + ", ".join(".".join(path) for path in layer_paths)
+        )
+
     def _canonical_token_summaries(
         self,
         *,
@@ -715,11 +742,11 @@ class TransformersObservationGenerator(_TransformersGeneratorBase):
         generated_token_ids: list[int] = []
         steps: list[ObservationStep] = []
         previous_top_positions: tuple[int, ...] | None = None
-        assert self._model is not None
+        decoder_layers = self._decoder_layers()
         selected_attention_layers = tuple(
             range(
-                max(0, len(self._model.model.layers) - attention_last_n_layers),
-                len(self._model.model.layers),
+                max(0, len(decoder_layers) - attention_last_n_layers),
+                len(decoder_layers),
             )
         )
 
@@ -840,15 +867,27 @@ class TransformersObservationGenerator(_TransformersGeneratorBase):
         self._ensure_model()
 
         import torch
-        from transformers.models.mistral import modeling_mistral
 
         assert self._model is not None
 
         captured_attentions: dict[str, list[float]] = {}
         original_forwards: dict[int, Any] = {}
+        decoder_layers = self._decoder_layers()
+
+        if not self._supports_selected_attention_hook(decoder_layers):
+            outputs = self._forward_with_hidden_states(
+                input_ids=input_ids,
+                attention_mask=attention_mask,
+                position_ids=position_ids,
+                output_attentions=True,
+            )
+            return outputs, self._selected_layer_attentions(
+                outputs.attentions,
+                layer_indices=capture_attention_layers,
+            )
 
         for layer_index in capture_attention_layers:
-            attention_module = self._model.model.layers[layer_index].self_attn
+            attention_module = decoder_layers[layer_index].self_attn
             original_forward = attention_module.forward
             original_forwards[layer_index] = original_forward
 
@@ -875,21 +914,11 @@ class TransformersObservationGenerator(_TransformersGeneratorBase):
                         **kwargs,
                     )
 
-                    input_shape = hidden_states.shape[:-1]
-                    hidden_shape = (*input_shape, -1, module_self.head_dim)
-                    query_states = module_self.q_proj(hidden_states).view(hidden_shape).transpose(1, 2)
-                    key_states = module_self.k_proj(hidden_states).view(hidden_shape).transpose(1, 2)
-
-                    cos, sin = position_embeddings
-                    query_states, key_states = modeling_mistral.apply_rotary_pos_emb(
-                        query_states,
-                        key_states,
-                        cos,
-                        sin,
-                    )
-                    key_states = modeling_mistral.repeat_kv(
-                        key_states,
-                        module_self.num_key_value_groups,
+                    query_states, key_states = self._attention_query_key_states(
+                        module_self=module_self,
+                        hidden_states=hidden_states,
+                        position_embeddings=position_embeddings,
+                        shared_kv_states=kwargs.get("shared_kv_states"),
                     )
 
                     last_query = query_states[:, :, -1:, :]
@@ -934,9 +963,140 @@ class TransformersObservationGenerator(_TransformersGeneratorBase):
                 )
         finally:
             for layer_index, original_forward in original_forwards.items():
-                self._model.model.layers[layer_index].self_attn.forward = original_forward
+                decoder_layers[layer_index].self_attn.forward = original_forward
 
         return outputs, captured_attentions
+
+    def _supports_selected_attention_hook(
+        self,
+        decoder_layers: Sequence[Any],
+    ) -> bool:
+        if not decoder_layers:
+            return False
+        attention_module = getattr(decoder_layers[0], "self_attn", None)
+        if attention_module is None:
+            return False
+        required_attrs = (
+            "forward",
+            "q_proj",
+            "head_dim",
+            "num_key_value_groups",
+            "scaling",
+        )
+        if not all(hasattr(attention_module, attr) for attr in required_attrs):
+            return False
+        return hasattr(attention_module, "k_proj") or bool(
+            getattr(attention_module, "is_kv_shared_layer", False)
+        )
+
+    def _attention_query_key_states(
+        self,
+        *,
+        module_self: Any,
+        hidden_states: Any,
+        position_embeddings: tuple[Any, Any],
+        shared_kv_states: dict[str, tuple[Any, Any]] | None,
+    ) -> tuple[Any, Any]:
+        input_shape = hidden_states.shape[:-1]
+        hidden_shape = (*input_shape, -1, module_self.head_dim)
+        cos, sin = position_embeddings
+
+        query_states = module_self.q_proj(hidden_states).view(hidden_shape)
+
+        if hasattr(module_self, "q_norm"):
+            query_states = module_self.q_norm(query_states)
+            query_states = self._apply_rotary_pos_emb(
+                query_states,
+                cos,
+                sin,
+                unsqueeze_dim=2,
+            ).transpose(1, 2)
+
+            if getattr(module_self, "is_kv_shared_layer", False):
+                if shared_kv_states is None:
+                    raise ValueError("Gemma4 shared-kv attention requires shared_kv_states")
+                key_states, _ = shared_kv_states[module_self.layer_type]
+                key_states = key_states.to(query_states.device)
+            else:
+                key_states = module_self.k_proj(hidden_states).view(hidden_shape)
+                if hasattr(module_self, "k_norm"):
+                    key_states = module_self.k_norm(key_states)
+                key_states = self._apply_rotary_pos_emb(
+                    key_states,
+                    cos,
+                    sin,
+                    unsqueeze_dim=2,
+                ).transpose(1, 2)
+        else:
+            key_states = module_self.k_proj(hidden_states).view(hidden_shape)
+            query_states = query_states.transpose(1, 2)
+            key_states = key_states.transpose(1, 2)
+            query_states = self._apply_rotary_pos_emb(
+                query_states,
+                cos,
+                sin,
+                unsqueeze_dim=1,
+            )
+            key_states = self._apply_rotary_pos_emb(
+                key_states,
+                cos,
+                sin,
+                unsqueeze_dim=1,
+            )
+
+        key_states = self._repeat_kv(key_states, module_self.num_key_value_groups)
+        return query_states, key_states
+
+    @staticmethod
+    def _apply_rotary_pos_emb(
+        x: Any,
+        cos: Any,
+        sin: Any,
+        *,
+        unsqueeze_dim: int,
+    ) -> Any:
+        cos = cos.unsqueeze(unsqueeze_dim)
+        sin = sin.unsqueeze(unsqueeze_dim)
+        return (x * cos) + (TransformersObservationGenerator._rotate_half(x) * sin)
+
+    @staticmethod
+    def _rotate_half(x: Any) -> Any:
+        import torch
+
+        x1 = x[..., : x.shape[-1] // 2]
+        x2 = x[..., x.shape[-1] // 2 :]
+        return torch.cat((-x2, x1), dim=-1)
+
+    @staticmethod
+    def _repeat_kv(hidden_states: Any, n_rep: int) -> Any:
+        if n_rep == 1:
+            return hidden_states
+        batch, num_key_value_heads, slen, head_dim = hidden_states.shape
+        hidden_states = hidden_states[:, :, None, :, :].expand(
+            batch,
+            num_key_value_heads,
+            n_rep,
+            slen,
+            head_dim,
+        )
+        return hidden_states.reshape(batch, num_key_value_heads * n_rep, slen, head_dim)
+
+    def _selected_layer_attentions(
+        self,
+        attentions: Any,
+        *,
+        layer_indices: Sequence[int],
+    ) -> dict[str, list[float]]:
+        if not attentions:
+            raise ValueError("attentions must be non-empty")
+        result: dict[str, list[float]] = {}
+        for layer_index in layer_indices:
+            layer = attentions[layer_index]
+            scores = layer[0, :, -1, :].mean(dim=0)
+            result[str(layer_index)] = round_float_list(
+                scores.detach().float().cpu().numpy().astype(np.float32, copy=False)
+            )
+        return result
 
     def _last_n_layer_attentions(
         self,
