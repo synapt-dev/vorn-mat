@@ -190,6 +190,54 @@ def test_attention_selector_fails_closed_when_attention_scores_are_missing():
         )
 
 
+def test_snapkv_selector_uses_snapkv_scores_and_records_snapkv_metadata():
+    semus = _manual_semus()
+    scores = (
+        SEMUScore(semu_id=0, vorn_score=0.99, vorn_rank=1, snapkv_score=0.99, snapkv_rank=1),
+        SEMUScore(semu_id=1, vorn_score=0.10, vorn_rank=4, snapkv_score=0.95, snapkv_rank=1),
+        SEMUScore(semu_id=2, vorn_score=0.80, vorn_rank=2, snapkv_score=0.40, snapkv_rank=3),
+        SEMUScore(semu_id=3, vorn_score=0.30, vorn_rank=3, snapkv_score=0.70, snapkv_rank=2),
+    )
+
+    selected = select_semu_for_arm(
+        selector_arm="snapkv_high",
+        semus=semus,
+        scores=scores,
+        run_id="run-a",
+        case_id="case-1",
+        model_id="mistral",
+    )
+    intervention = build_intervention(
+        family="Mistral",
+        model_id="mistralai/Mistral-7B-Instruct-v0.3",
+        model_revision="main",
+        tokenizer_revision="main",
+        case_id="case-1",
+        checkpoint="T0_PRE_GENERATION",
+        selector_arm="snapkv_high",
+        semu=selected,
+        score=scores[selected.semu_id],
+        deletion_mode="delete",
+        run_id="pilot-a",
+    )
+
+    assert selected.semu_id == 1
+    assert intervention.original_score == 0.95
+    assert intervention.original_rank == 1
+
+
+def test_snapkv_selector_fails_closed_when_snapkv_scores_are_missing():
+    with pytest.raises(CounterfactualContractError, match="SnapKV scores"):
+        select_semu_for_arm(
+            selector_arm="snapkv_high",
+            semus=_manual_semus(),
+            scores=_manual_scores(),
+            run_id="run-a",
+            case_id="case-1",
+            model_id="mistral",
+        )
+
+
 def test_random_length_matched_is_deterministic_and_excludes_reference_semu():
     semus = _manual_semus()
     scores = _manual_scores()

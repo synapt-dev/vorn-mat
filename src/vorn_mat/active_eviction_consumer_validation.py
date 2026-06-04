@@ -112,6 +112,16 @@ def build_semus_and_scores_from_phase0(
                 semu_id=semu_id,
                 vorn_score=float(semu_payload["final_score"]),
                 vorn_rank=int(semu_payload["final_rank"]),
+                snapkv_score=(
+                    float(semu_payload["snapkv_score"])
+                    if semu_payload.get("snapkv_score") is not None
+                    else None
+                ),
+                snapkv_rank=(
+                    int(semu_payload["snapkv_rank"])
+                    if semu_payload.get("snapkv_rank") is not None
+                    else None
+                ),
             )
         )
     return tuple(semus), tuple(scores)
