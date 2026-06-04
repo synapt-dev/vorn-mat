@@ -27,6 +27,7 @@ from .local_exec import (
     select_live_eviction_plan,
     select_week1_plan,
 )
+from .modal_app import DEFAULT_MODAL_GPU
 from .observation import ObservationReport
 from .plan import (
     A100_80GB_PER_SECOND,
@@ -166,9 +167,9 @@ class ModalConsumerValidationRunRequest:
     )
     deletion_mode: str = "delete"
     mask_dry_run_arms: tuple[str, ...] = ("vorn_high", "vorn_low")
-    gpu: str = "H200"
+    gpu: str = DEFAULT_MODAL_GPU
     modal_profile: str = "layne1penney"
-    cost_per_second: float = 0.0
+    cost_per_second: float = A100_80GB_PER_SECOND
 
 
 @dataclass(frozen=True)

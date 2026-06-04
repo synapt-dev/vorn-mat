@@ -7,6 +7,9 @@ from pathlib import Path
 from typing import Callable
 
 
+DEFAULT_MODAL_GPU = "A100-80GB"
+
+
 @dataclass(frozen=True)
 class ModalAppSpec:
     app_name: str
@@ -41,7 +44,7 @@ class ModalBinding:
     volume: object = None
 
 
-def default_modal_app_spec(gpu: str = "A100-80GB") -> ModalAppSpec:
+def default_modal_app_spec(gpu: str = DEFAULT_MODAL_GPU) -> ModalAppSpec:
     """Canonical Modal app spec.
 
     The pip_dependencies tuple is the canonical pin set (Atlas archaeology
