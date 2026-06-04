@@ -11,6 +11,7 @@ from vorn_mat import (
     ExperimentDefaults,
     RunResult,
     append_result,
+    build_consumer_validation_entrypoint,
     build_execution_plans,
     build_vanilla_entrypoint,
     build_vorn_entrypoint,
@@ -279,6 +280,29 @@ def test_build_vorn_entrypoint_binds_modal_function_contract():
     binding = build_vorn_entrypoint(run_callable, modal_module=_FakeModal)
 
     assert binding.entrypoint_name == "run_vorn_entrypoint"
+    assert binding.spec.app_name == "vorn-mat-week1-baselines"
+    assert binding.app.name == "vorn-mat-week1-baselines"
+    assert binding.remote_fn is run_callable
+    assert run_callable._modal_kwargs["gpu"] == "A100-80GB"
+    assert run_callable._modal_kwargs["timeout"] == 3600
+    assert run_callable._modal_kwargs["volumes"] == {
+        "/vol": {"name": "synapt-vorn-mat-vol", "create_if_missing": True}
+    }
+    assert run_callable._modal_kwargs["secrets"] == [
+        {"secret_name": "huggingface-secret"}
+    ]
+
+
+def test_build_consumer_validation_entrypoint_binds_modal_function_contract():
+    def run_callable(run_id: str) -> str:
+        return run_id
+
+    binding = build_consumer_validation_entrypoint(
+        run_callable,
+        modal_module=_FakeModal,
+    )
+
+    assert binding.entrypoint_name == "run_consumer_validation_entrypoint"
     assert binding.spec.app_name == "vorn-mat-week1-baselines"
     assert binding.app.name == "vorn-mat-week1-baselines"
     assert binding.remote_fn is run_callable

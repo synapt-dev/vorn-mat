@@ -7,6 +7,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 import vorn_mat.remote_exec as remote_exec
 from vorn_mat.benchmarks.common import BenchmarkCase
+from vorn_mat.counterfactual_intervention_runner import sha256_text
 from vorn_mat.observation import ObservationCase
 from vorn_mat.results import CaseObservation, RunResult
 from vorn_mat.score_distribution_observation import (
@@ -14,6 +15,16 @@ from vorn_mat.score_distribution_observation import (
     ScoreDistributionObservationReport,
     ScoreDistributionObservationStep,
     ScoreDistributionStats,
+)
+
+
+_CONSUMER_RENDERED_PROMPT = (
+    "[INST] Setup. "
+    "High magic clue. "
+    "Long neutral sentence with many extra words. "
+    "Length match. "
+    "Low filler. "
+    "Question? [/INST]"
 )
 
 
@@ -862,3 +873,129 @@ def test_run_modal_score_distribution_observation_niah_returns_structured_report
     assert report.elapsed_seconds == 12.0
     assert report.estimated_cost_usd == 12.0 * remote_exec.A100_80GB_PER_SECOND
     assert report.cases[0].observations[0].fixture_id == "c1"
+
+
+def test_run_modal_consumer_validation_niah_writes_artifacts(monkeypatch, tmp_path):
+    monkeypatch.setattr(
+        remote_exec,
+        "load_ruler_hf_niah_slice",
+        lambda dataset_config, split, case_limit, **kwargs: (
+            BenchmarkCase("case-1", "raw prompt", "blue", {}),
+        ),
+    )
+
+    class FakeConsumerGenerator:
+        def __init__(self, config):
+            self.config = config
+
+        def generate(self, prompt):
+            return "blue"
+
+        def generate_rendered_prompt(self, rendered_prompt):
+            if "High magic clue." in rendered_prompt:
+                return "blue"
+            return "wrong"
+
+        def render_prompt_text_with_offsets(self, prompt):
+            return _CONSUMER_RENDERED_PROMPT, ()
+
+        def count_rendered_prompt_tokens(self, rendered_prompt):
+            return len(rendered_prompt.split())
+
+    monkeypatch.setattr(
+        remote_exec,
+        "TransformersTextGenerator",
+        FakeConsumerGenerator,
+    )
+    reset_calls = []
+    monkeypatch.setattr(
+        remote_exec,
+        "reset_runtime_telemetry",
+        lambda: reset_calls.append("reset"),
+    )
+    monkeypatch.setattr(
+        remote_exec,
+        "capture_runtime_telemetry",
+        lambda: {
+            "peak_memory_allocated_gb": 0.25,
+            "peak_memory_reserved_gb": 0.5,
+        },
+    )
+    monkeypatch.setattr(remote_exec.time, "perf_counter", lambda: next(counter))
+    counter = iter([100.0, 101.0, 102.0, 103.0, 104.0, 105.0, 106.0, 107.0])
+    jsonl_path = tmp_path / "consumer-validation.jsonl"
+    summary_path = tmp_path / "consumer-validation.md"
+
+    report = remote_exec.run_modal_consumer_validation_niah(
+        remote_exec.ModalConsumerValidationRunRequest(
+            output_jsonl_path=str(jsonl_path),
+            output_summary_path=str(summary_path),
+            phase0_case=_consumer_phase0_case(),
+            protected_semu_ids=(0,),
+            selector_arms=("vorn_high", "vorn_low"),
+            expected_selected_semu_ids=(
+                ("vorn_high", 1),
+                ("vorn_low", 4),
+            ),
+            model_id="mistralai/Mistral-7B-Instruct-v0.3",
+            cost_per_second=0.01,
+        )
+    )
+
+    assert report.case_id == "case-1"
+    assert report.case_count == 1
+    assert report.elapsed_seconds == 7.0
+    assert report.estimated_cost_usd == 0.07
+    assert report.output_jsonl_path == str(jsonl_path)
+    assert jsonl_path.exists()
+    assert summary_path.exists()
+    assert len(reset_calls) == 3
+    assert report.report.records[0].record_status == "PROMPT_QUALITY_SUCCESS"
+    assert (
+        report.report.records[0].quality_record.peak_memory_allocated_mb
+        == 256.0
+    )
+
+
+def _consumer_phase0_case() -> dict[str, object]:
+    return {
+        "case_id": "case-1",
+        "prompt_hash": sha256_text(_CONSUMER_RENDERED_PROMPT),
+        "prompt_token_count": len(_CONSUMER_RENDERED_PROMPT.split()),
+        "semu_matrix": (
+            _consumer_semu_payload(0, "[INST] Setup.", 0.99, 0, 0, 2),
+            _consumer_semu_payload(1, "High magic clue.", 0.90, 1, 2, 6),
+            _consumer_semu_payload(
+                2,
+                "Long neutral sentence with many extra words.",
+                0.50,
+                2,
+                6,
+                14,
+            ),
+            _consumer_semu_payload(3, "Length match.", 0.40, 3, 14, 18),
+            _consumer_semu_payload(4, "Low filler.", 0.10, 4, 18, 20),
+        ),
+    }
+
+
+def _consumer_semu_payload(
+    semu_id: int,
+    text: str,
+    final_score: float,
+    final_rank: int,
+    token_start: int,
+    token_end: int,
+) -> dict[str, object]:
+    char_start = _CONSUMER_RENDERED_PROMPT.index(text)
+    return {
+        "semu_id": semu_id,
+        "char_start": char_start,
+        "char_end": char_start + len(text),
+        "token_start": token_start,
+        "token_end": token_end,
+        "text_preview": text,
+        "final_score": final_score,
+        "final_rank": final_rank,
+        "answer_overlap": False,
+    }

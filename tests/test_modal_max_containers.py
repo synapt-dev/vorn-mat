@@ -13,7 +13,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from vorn_mat import build_vanilla_entrypoint, build_vorn_entrypoint
+from vorn_mat import (
+    build_consumer_validation_entrypoint,
+    build_vanilla_entrypoint,
+    build_vorn_entrypoint,
+)
 
 
 class _FakeApp:
@@ -90,6 +94,16 @@ def test_vanilla_entrypoint_function_declares_max_containers_10():
 
 def test_vorn_entrypoint_function_declares_max_containers_10():
     binding = build_vorn_entrypoint(lambda r: r, modal_module=_FakeModal)
+
+    assert binding.app.last_kwargs is not None
+    assert binding.app.last_kwargs["max_containers"] == 10
+
+
+def test_consumer_validation_entrypoint_function_declares_max_containers_10():
+    binding = build_consumer_validation_entrypoint(
+        lambda r: r,
+        modal_module=_FakeModal,
+    )
 
     assert binding.app.last_kwargs is not None
     assert binding.app.last_kwargs["max_containers"] == 10

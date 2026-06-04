@@ -630,6 +630,44 @@ class TransformersTextGenerator(_TransformersGeneratorBase, TextGenerator):
         input_ids, attention_mask = self._render_prompt(prompt)
         return self._generate_from_tensors(input_ids, attention_mask)
 
+    def render_prompt_text_with_offsets(
+        self,
+        prompt: str,
+    ) -> tuple[str, tuple[tuple[int, int], ...]]:
+        return self._render_prompt_text_with_offsets(prompt)
+
+    def count_rendered_prompt_tokens(self, rendered_prompt: str) -> int:
+        self._ensure_model()
+
+        assert self._tokenizer is not None
+
+        encoded = self._tokenizer(
+            rendered_prompt,
+            add_special_tokens=False,
+            return_tensors="pt",
+        )
+        return int(encoded["input_ids"].shape[-1])
+
+    def generate_rendered_prompt(self, rendered_prompt: str) -> str:
+        self._ensure_model()
+
+        import torch
+
+        assert self._tokenizer is not None
+        assert self._device is not None
+
+        encoded = self._tokenizer(
+            rendered_prompt,
+            add_special_tokens=False,
+            return_tensors="pt",
+        )
+        input_ids = encoded["input_ids"].to(self._device)
+        attention_mask = encoded.get("attention_mask")
+        if attention_mask is None:
+            attention_mask = torch.ones_like(input_ids)
+        attention_mask = attention_mask.to(self._device)
+        return self._generate_from_tensors(input_ids, attention_mask)
+
 
 class TransformersObservationGenerator(_TransformersGeneratorBase):
     """Vanilla observer: no eviction, only per-step measurements."""
