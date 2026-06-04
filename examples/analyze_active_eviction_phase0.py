@@ -183,6 +183,8 @@ def _snapkv_token_scores(observation_case) -> tuple[list[float] | None, dict[str
             "layer_count": 0,
         }
 
+    # SnapKV's observation window is the most-recent few tokens before the
+    # generation decision, so Phase 0 uses the last available observation steps.
     window = steps[-min(SNAPKV_OBSERVATION_WINDOW_STEPS, len(steps)) :]
     prompt_token_count = int(observation_case.prompt_token_count)
     totals = [0.0] * prompt_token_count

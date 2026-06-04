@@ -237,6 +237,54 @@ def test_select_semus_for_arm_fails_closed_when_snapkv_scores_missing():
         )
 
 
+def test_select_semus_for_arm_fails_closed_when_snapkv_scores_are_partial():
+    phase0_case = _phase0_case_with_snapkv()
+    semu_matrix = [dict(row) for row in phase0_case["semu_matrix"]]
+    semu_matrix[3].pop("snapkv_score")
+    phase0_case["semu_matrix"] = tuple(semu_matrix)
+    semus, scores = build_semus_and_scores_from_phase0(
+        phase0_case,
+        protected_semu_ids=(0, 1),
+    )
+
+    with pytest.raises(sweep.CounterfactualContractError, match="complete SnapKV"):
+        sweep.select_semus_for_arm(
+            selector_arm="snapkv_high",
+            pressure_n=1,
+            semus=semus,
+            scores=scores,
+            run_id="pilot-snapkv",
+            case_id="case-1",
+            model_id="mistral",
+            base_seed=534588164691762844,
+        )
+
+
+def test_run_pressure_sweep_rejects_cross_arm_overlap_before_generation():
+    generator = FakeGenerator()
+
+    with pytest.raises(
+        sweep.CounterfactualContractError,
+        match="selector arm overlap before model execution",
+    ):
+        sweep.run_pressure_sweep(
+            run_id="pilot-snapkv",
+            family="Mistral",
+            model_id="mistralai/Mistral-7B-Instruct-v0.3",
+            model_revision="main",
+            tokenizer_revision="main",
+            case=_case(),
+            phase0_case=_phase0_case_with_snapkv_overlap(),
+            generator=generator,
+            protected_semu_ids=(0, 1),
+            selector_arms=("vorn_high", "snapkv_high"),
+            pressure_ns=(3,),
+            base_seed=534588164691762844,
+        )
+
+    assert generator.generated_prompts == []
+
+
 def test_render_pressure_prompt_deletes_multiple_spans_and_rejects_overlap():
     semus, _scores = build_semus_and_scores_from_phase0(
         _phase0_case(),
@@ -448,6 +496,28 @@ def _phase0_case_with_snapkv() -> dict[str, object]:
             _semu_payload(7, "Short low.", 0.01, 7, 25, 27, snapkv_score=0.10, snapkv_rank=7),
         ),
     }
+
+
+def _phase0_case_with_snapkv_overlap() -> dict[str, object]:
+    phase0_case = _phase0_case_with_snapkv()
+    semu_matrix: list[dict[str, object]] = []
+    snapkv_by_semu = {
+        2: (0.99, 1),
+        3: (0.90, 2),
+        4: (0.80, 3),
+        5: (0.20, 4),
+        6: (0.10, 5),
+        7: (0.01, 6),
+    }
+    for raw in phase0_case["semu_matrix"]:
+        row = dict(raw)
+        if int(row["semu_id"]) in snapkv_by_semu:
+            row["snapkv_score"], row["snapkv_rank"] = snapkv_by_semu[
+                int(row["semu_id"])
+            ]
+        semu_matrix.append(row)
+    phase0_case["semu_matrix"] = tuple(semu_matrix)
+    return phase0_case
 
 
 def _semu_payload(

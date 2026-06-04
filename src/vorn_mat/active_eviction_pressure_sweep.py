@@ -167,11 +167,20 @@ def select_semus_for_arm(
         return tuple(ordered[:pressure_n])
 
     if selector_arm == "snapkv_high":
+        missing_snapkv = [
+            semu.semu_id
+            for semu in eligible
+            if score_by_semu[semu.semu_id].snapkv_score is None
+            or score_by_semu[semu.semu_id].snapkv_rank is None
+        ]
+        if missing_snapkv:
+            raise CounterfactualContractError(
+                "snapkv_high requires complete SnapKV scores for all eligible "
+                f"SEMUs: missing={missing_snapkv}"
+            )
         snapkv_eligible = [
             semu
             for semu in eligible
-            if score_by_semu[semu.semu_id].snapkv_score is not None
-            and score_by_semu[semu.semu_id].snapkv_rank is not None
         ]
         if len(snapkv_eligible) < pressure_n:
             raise CounterfactualContractError(
@@ -326,6 +335,12 @@ def run_pressure_sweep(
                 reference_semus=reference_semus,
             )
             key = (arm, pressure_n)
+            _reject_cross_arm_selection_overlap(
+                selected=selected,
+                selector_arm=arm,
+                pressure_n=pressure_n,
+                selected_semus=selected_semus,
+            )
             selected[key] = selected_semus
             if expected_selected_semu_ids is not None:
                 expected_ids = expected_selected_semu_ids.get(key)
@@ -725,6 +740,27 @@ def _reject_overlapping_spans(ordered_semus: Sequence[SemanticUnit]) -> None:
                 "overlapping SEMU spans: "
                 f"{left.semu_id}=({left.char_start},{left.char_end}) "
                 f"{right.semu_id}=({right.char_start},{right.char_end})"
+            )
+
+
+def _reject_cross_arm_selection_overlap(
+    *,
+    selected: Mapping[tuple[str, int], Sequence[SemanticUnit]],
+    selector_arm: str,
+    pressure_n: int,
+    selected_semus: Sequence[SemanticUnit],
+) -> None:
+    selected_ids = {semu.semu_id for semu in selected_semus}
+    for (other_arm, other_pressure_n), other_semus in selected.items():
+        if other_pressure_n != pressure_n or other_arm == selector_arm:
+            continue
+        other_ids = {semu.semu_id for semu in other_semus}
+        overlap = sorted(selected_ids & other_ids)
+        if overlap:
+            raise CounterfactualContractError(
+                "selector arm overlap before model execution: "
+                f"pressure_n={pressure_n}, left={other_arm}, "
+                f"right={selector_arm}, overlap={overlap}"
             )
 
 

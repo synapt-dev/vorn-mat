@@ -289,14 +289,21 @@ def select_semu_for_arm(
             ),
         )
     if selector_arm == "snapkv_high":
+        missing_snapkv = [
+            semu.semu_id
+            for semu in eligible
+            if score_by_semu[semu.semu_id].snapkv_score is None
+            or score_by_semu[semu.semu_id].snapkv_rank is None
+        ]
+        if missing_snapkv:
+            raise CounterfactualContractError(
+                "SnapKV scores are incomplete for eligible SEMUs: "
+                f"{missing_snapkv}"
+            )
         snapkv_eligible = [
             semu
             for semu in eligible
-            if score_by_semu[semu.semu_id].snapkv_score is not None
-            and score_by_semu[semu.semu_id].snapkv_rank is not None
         ]
-        if not snapkv_eligible:
-            raise CounterfactualContractError("SnapKV scores are capacity-missing")
         return max(
             snapkv_eligible,
             key=lambda semu: (
