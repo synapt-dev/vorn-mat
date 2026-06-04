@@ -42,13 +42,20 @@ class SemuSpan:
     answer_overlap: bool
 
 
-def _render_chat_prompt(tokenizer, prompt: str) -> str:
+def _chat_template_kwargs(model_id: str) -> dict[str, object]:
+    if "qwen3" in model_id.lower():
+        return {"enable_thinking": False}
+    return {}
+
+
+def _render_chat_prompt(tokenizer, prompt: str, *, model_id: str) -> str:
     messages = [{"role": "user", "content": prompt}]
     if getattr(tokenizer, "chat_template", None):
         return tokenizer.apply_chat_template(
             messages,
             tokenize=False,
             add_generation_prompt=True,
+            **_chat_template_kwargs(model_id),
         )
     return prompt
 
@@ -1008,7 +1015,11 @@ def analyze_phase0(
     case_matrices: list[dict[str, object]] = []
     for observation_case in report.cases:
         benchmark_case = benchmark_cases[observation_case.case_id]
-        rendered_prompt = _render_chat_prompt(tokenizer, benchmark_case.prompt)
+        rendered_prompt = _render_chat_prompt(
+            tokenizer,
+            benchmark_case.prompt,
+            model_id=model_id,
+        )
         encoding = tokenizer(
             rendered_prompt,
             add_special_tokens=False,
