@@ -10,6 +10,7 @@ from typing import Callable, Mapping, Protocol, Sequence
 
 from .benchmarks.common import BenchmarkCase, is_prediction_correct
 from .counterfactual_intervention_runner import (
+    MASK_TOKEN,
     SCHEMA_VERSION,
     CounterfactualPromptRecord,
     CounterfactualQualityRecord,
@@ -173,6 +174,15 @@ def run_consumer_validation(
                     f"{arm} expected {expected_semu_id}, observed {semu.semu_id}"
                 )
 
+    original_token_count = int(phase0_case["prompt_token_count"])
+    mask_prompt_records = _build_mask_dry_run_records(
+        generator=generator,
+        rendered_prompt=rendered_prompt,
+        selected=selected,
+        mask_dry_run_arms=mask_dry_run_arms,
+        original_token_count=original_token_count,
+    )
+
     if reset_telemetry is not None:
         reset_telemetry()
     full_start = time.perf_counter()
@@ -199,7 +209,6 @@ def run_consumer_validation(
     )
 
     records: list[CounterfactualRunRecord] = []
-    original_token_count = int(phase0_case["prompt_token_count"])
 
     for arm in selector_arms:
         semu = selected[arm]
@@ -267,17 +276,6 @@ def run_consumer_validation(
             )
         )
 
-    mask_prompt_records = tuple(
-        _render_prompt_with_count(
-            generator=generator,
-            rendered_prompt=rendered_prompt,
-            semu=selected[arm],
-            deletion_mode="mask",
-            original_token_count=original_token_count,
-        )[1]
-        for arm in mask_dry_run_arms
-        if arm in selected
-    )
     return ConsumerValidationReport(
         run_id=run_id,
         case_id=case.case_id,
@@ -411,6 +409,74 @@ def render_consumer_validation_summary(report: ConsumerValidationReport) -> str:
     lines.extend(successful_rows or ["| n/a | n/a | n/a | n/a | n/a | n/a |"])
     lines.append("")
     return "\n".join(lines)
+
+
+def _build_mask_dry_run_records(
+    *,
+    generator: ConsumerValidationGenerator,
+    rendered_prompt: str,
+    selected: Mapping[str, SemanticUnit],
+    mask_dry_run_arms: Sequence[str],
+    original_token_count: int,
+) -> tuple[CounterfactualPromptRecord, ...]:
+    records: list[CounterfactualPromptRecord] = []
+    for arm in mask_dry_run_arms:
+        if arm not in selected:
+            continue
+        semu = selected[arm]
+        mask_prompt, prompt_record = _render_prompt_with_count(
+            generator=generator,
+            rendered_prompt=rendered_prompt,
+            semu=semu,
+            deletion_mode="mask",
+            original_token_count=original_token_count,
+        )
+        _validate_mask_dry_run(
+            mask_prompt=mask_prompt,
+            prompt_record=prompt_record,
+            semu=semu,
+        )
+        records.append(prompt_record)
+    return tuple(records)
+
+
+def _validate_mask_dry_run(
+    *,
+    mask_prompt: str,
+    prompt_record: CounterfactualPromptRecord,
+    semu: SemanticUnit,
+) -> None:
+    if prompt_record.original_prompt_hash == prompt_record.counterfactual_prompt_hash:
+        raise ValueError("mask dry-run did not change prompt hash")
+    if prompt_record.mask_text_policy != (
+        "repeat_MASKED_SEMU_token_to_original_semu_token_length"
+    ):
+        raise ValueError(
+            "mask dry-run used unexpected mask_text_policy: "
+            f"{prompt_record.mask_text_policy}"
+        )
+
+    audit = prompt_record.sentence_id_alignment_audit
+    expected_char_span = [semu.char_start, semu.char_end]
+    expected_token_span = [semu.token_start, semu.token_end]
+    if (
+        audit.get("semu_id") != semu.semu_id
+        or audit.get("original_char_span") != expected_char_span
+        or audit.get("original_token_span") != expected_token_span
+        or audit.get("deletion_mode") != "mask"
+        or audit.get("granularity") != semu.granularity
+    ):
+        raise ValueError(
+            "mask dry-run corrupted sentence-id alignment audit for "
+            f"SEMU {semu.semu_id}"
+        )
+
+    mask_count = mask_prompt.count(MASK_TOKEN)
+    if mask_count != semu.token_length:
+        raise ValueError(
+            "mask dry-run token-count mismatch: "
+            f"expected {semu.token_length} {MASK_TOKEN} tokens, observed {mask_count}"
+        )
 
 
 def _render_prompt_with_count(

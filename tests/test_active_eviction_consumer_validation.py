@@ -8,6 +8,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
+import vorn_mat.active_eviction_consumer_validation as acv
 from vorn_mat.active_eviction_consumer_validation import (
     build_semus_and_scores_from_phase0,
     load_consumer_validation_delta_table,
@@ -157,6 +158,38 @@ def test_run_consumer_validation_rejects_locked_semu_drift_before_generation():
             protected_semu_ids=(0, 1),
             selector_arms=("vorn_high",),
             expected_selected_semu_ids={"vorn_high": 5},
+        )
+
+    assert generator.generated_prompts == []
+
+
+def test_run_consumer_validation_rejects_mask_corruption_before_generation(
+    monkeypatch,
+):
+    generator = FakeGenerator()
+    monkeypatch.setitem(
+        acv.render_counterfactual_prompt.__globals__,
+        "MASK_TOKEN",
+        "[BROKEN_MASK]",
+    )
+
+    with pytest.raises(ValueError, match="mask dry-run token-count mismatch"):
+        run_consumer_validation(
+            run_id="consumer-validation-test",
+            family="Mistral",
+            model_id="mistralai/Mistral-7B-Instruct-v0.3",
+            model_revision="main",
+            tokenizer_revision="main",
+            case=_case(),
+            phase0_case=_phase0_case(),
+            generator=generator,
+            protected_semu_ids=(0, 1),
+            selector_arms=("vorn_high", "vorn_low"),
+            expected_selected_semu_ids={
+                "vorn_high": 2,
+                "vorn_low": 5,
+            },
+            mask_dry_run_arms=("vorn_high",),
         )
 
     assert generator.generated_prompts == []
