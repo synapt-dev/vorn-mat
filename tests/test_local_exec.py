@@ -2,11 +2,15 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from vorn_mat import (
     LocalModelConfig,
+    TransformersLiveEvictionGenerator,
     build_summary_answer_prompt,
     build_summary_prompt,
     load_results,
@@ -196,6 +200,114 @@ def test_select_live_eviction_plan_supports_sentence_level_h2o_control():
     assert plan.run.sentence_pooling == "max"
     assert plan.run.sentence_top_k == 3
     assert plan.baseline.name == "sentence_h2o_live"
+
+
+@pytest.mark.parametrize(
+    ("retention_policy", "baseline_name", "run_id"),
+    [
+        (
+            "sentence_snapkv",
+            "sentence_snapkv_live",
+            "step2-niah-sentence-snapkv-live-b1024",
+        ),
+        (
+            "sentence_l2_norm",
+            "sentence_l2_norm_live",
+            "step2-niah-sentence-l2-norm-live-b1024",
+        ),
+        (
+            "sentence_streaming_llm",
+            "sentence_streaming_llm_live",
+            "step2-niah-sentence-streaming-llm-live-b1024",
+        ),
+    ],
+)
+def test_select_live_eviction_plan_supports_expanded_sentence_controls(
+    retention_policy: str,
+    baseline_name: str,
+    run_id: str,
+):
+    plan = select_live_eviction_plan(
+        cache_budget_tokens=1024,
+        retention_policy=retention_policy,
+        random_seed=17,
+        sentence_pooling="max",
+        sentence_top_k=3,
+    )
+
+    assert plan.run.run_id == run_id
+    assert plan.run.cache_budget_tokens == 1024
+    assert plan.run.retention_policy == retention_policy
+    assert plan.run.eviction_unit == "sentence"
+    assert plan.run.sentence_pooling == "max"
+    assert plan.run.sentence_top_k == 3
+    assert plan.baseline.name == baseline_name
+
+
+def test_key_l2_norm_scores_supports_cache_sequence_axis_last():
+    torch = pytest.importorskip("torch")
+    key_tensor = torch.zeros((1, 2, 3, 4), dtype=torch.float32)
+    key_tensor[0, :, :, 0] = 1.0
+    key_tensor[0, :, :, 1] = 2.0
+    key_tensor[0, :, :, 2] = 3.0
+    key_tensor[0, :, :, 3] = 4.0
+
+    scores = TransformersLiveEvictionGenerator._key_l2_norm_scores(
+        ((key_tensor, None),),
+        canonical_layer=0,
+        token_count=4,
+    )
+
+    assert scores.shape == (4,)
+    assert scores.tolist() == pytest.approx(
+        [3**0.5, (12) ** 0.5, (27) ** 0.5, (48) ** 0.5]
+    )
+
+
+def test_key_l2_norm_hidden_state_fallback_supports_nested_language_model():
+    torch = pytest.importorskip("torch")
+
+    class FakeKeyProjection:
+        def __call__(self, hidden_states):
+            values = torch.arange(
+                1,
+                hidden_states.shape[1] + 1,
+                dtype=hidden_states.dtype,
+                device=hidden_states.device,
+            )
+            return values.reshape(1, -1, 1).repeat(1, 1, 4)
+
+    generator = TransformersLiveEvictionGenerator.__new__(
+        TransformersLiveEvictionGenerator
+    )
+    generator._tokenizer = object()
+    generator._device = "cpu"
+    layer = SimpleNamespace(
+        self_attn=SimpleNamespace(
+            k_proj=FakeKeyProjection(),
+            num_key_value_heads=0,
+        )
+    )
+    generator._model = SimpleNamespace(
+        model=SimpleNamespace(
+            language_model=SimpleNamespace(
+                model=SimpleNamespace(layers=[layer])
+            )
+        ),
+        config=SimpleNamespace(
+            text_config=SimpleNamespace(num_key_value_heads=2)
+        ),
+    )
+
+    scores = generator._key_l2_norm_scores_from_hidden_states(
+        [torch.zeros((1, 4, 3), dtype=torch.float32)],
+        canonical_layer=0,
+        token_count=4,
+    )
+
+    assert scores.tolist() == pytest.approx(
+        [(2 ** 0.5) * 1, (2 ** 0.5) * 2, (2 ** 0.5) * 3, (2 ** 0.5) * 4]
+    )
 
 
 def test_select_live_eviction_plan_supports_no_guardrails_vorn():

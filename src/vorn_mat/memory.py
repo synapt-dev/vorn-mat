@@ -7,6 +7,8 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class CaseMemoryStats:
+    active_memory_allocated_mb: float | None = None
+    active_memory_reserved_mb: float | None = None
     peak_memory_allocated_mb: float | None = None
     peak_memory_reserved_mb: float | None = None
 
@@ -39,6 +41,8 @@ def capture_case_memory_stats() -> CaseMemoryStats:
         pass
 
     return CaseMemoryStats(
+        active_memory_allocated_mb=_bytes_to_mb(torch.cuda.memory_allocated()),
+        active_memory_reserved_mb=_bytes_to_mb(torch.cuda.memory_reserved()),
         peak_memory_allocated_mb=_bytes_to_mb(torch.cuda.max_memory_allocated()),
         peak_memory_reserved_mb=_bytes_to_mb(torch.cuda.max_memory_reserved()),
     )

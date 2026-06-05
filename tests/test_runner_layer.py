@@ -104,7 +104,14 @@ def test_build_modal_artifacts_applies_env_vars_to_image():
 
 
 def test_benchmark_registry_contains_week1_targets():
-    assert set(BENCHMARKS) == {"ruler", "niah"}
+    assert set(BENCHMARKS) == {
+        "longbench_passage_retrieval_en",
+        "niah",
+        "ruler",
+    }
+    assert BENCHMARKS["longbench_passage_retrieval_en"].metric_name == (
+        "mean_official_score"
+    )
     assert BENCHMARKS["ruler"].metric_name == "task_accuracy"
     assert BENCHMARKS["niah"].metric_name == "needle_hit_rate"
 
@@ -121,6 +128,9 @@ def test_baseline_registry_contains_week1_baselines():
         "sentence_tova_live",
         "h2o_live",
         "sentence_h2o_live",
+        "sentence_snapkv_live",
+        "sentence_l2_norm_live",
+        "sentence_streaming_llm_live",
         "random_live",
         "sliding_window_live",
         "prefix_suffix_live",
@@ -140,6 +150,15 @@ def test_baseline_registry_contains_week1_baselines():
     )
     assert BASELINES["h2o_live"].cache_strategy == (
         "accumulated_attention_weight_eviction"
+    )
+    assert BASELINES["sentence_snapkv_live"].cache_strategy == (
+        "bounded_observation_window_attention_sentence_eviction"
+    )
+    assert BASELINES["sentence_l2_norm_live"].cache_strategy == (
+        "key_vector_l2_norm_sentence_eviction"
+    )
+    assert BASELINES["sentence_streaming_llm_live"].cache_strategy == (
+        "attention_sink_plus_recent_sentence_eviction"
     )
     assert BASELINES["random_live"].cache_strategy == (
         "uniform_random_token_position_eviction"

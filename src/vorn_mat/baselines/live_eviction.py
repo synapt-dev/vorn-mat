@@ -32,6 +32,11 @@ SUMMARIZE_COMPACT_CONTRACT = (
 ADAPTIVE_SELECTOR_CONTRACT = (
     "choose_token_or_sentence_by_peak_zscore_over_current_alignment_scores"
 )
+SNAPKV_ATTENTION_CONTRACT = (
+    "bounded_observation_window_attention_final32_prompt_tokens_final_layer"
+)
+KEY_L2_NORM_CONTRACT = "canonical_layer_key_vector_l2_norm_mean_over_kv_heads"
+STREAMING_LLM_CONTRACT = "attention_sink_first4_plus_recent_sentence_units"
 
 
 @dataclass(frozen=True)
@@ -67,6 +72,14 @@ class LiveEvictionStats:
     adaptive_token_steps: int = 0
     adaptive_sentence_steps: int = 0
     adaptive_selector_contract: str = ""
+    elapsed_seconds: float = 0.0
+    time_to_first_token_seconds: float = 0.0
+    prefill_elapsed_seconds: float = 0.0
+    decode_elapsed_seconds: float = 0.0
+    forward_elapsed_seconds: float = 0.0
+    eviction_score_elapsed_seconds: float = 0.0
+    eviction_selection_elapsed_seconds: float = 0.0
+    eviction_apply_elapsed_seconds: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -300,6 +313,61 @@ def select_prefix_suffix_retained_positions(
     if suffix_count > 0:
         keep.update(range(token_count - suffix_count, token_count))
     return tuple(sorted(keep))
+
+
+def select_streaming_sentence_retained_positions(
+    *,
+    unit_ids: Sequence[int],
+    cache_budget_tokens: int,
+    sink_prefix_tokens: int = 4,
+) -> tuple[int, ...]:
+    """Keep attention-sink prefix units plus newest complete units that fit."""
+    token_count = len(unit_ids)
+    if token_count == 0:
+        raise ValueError("unit_ids must be non-empty")
+    if cache_budget_tokens <= 0:
+        raise ValueError("cache_budget_tokens must be positive")
+    if sink_prefix_tokens <= 0:
+        raise ValueError("sink_prefix_tokens must be positive")
+    if cache_budget_tokens >= token_count:
+        return tuple(range(token_count))
+
+    units: list[tuple[int, tuple[int, ...]]] = []
+    for local_position, unit_id in enumerate(unit_ids):
+        if units and units[-1][0] == unit_id:
+            units[-1] = (unit_id, units[-1][1] + (local_position,))
+        else:
+            units.append((unit_id, (local_position,)))
+
+    sink_positions = set(range(min(sink_prefix_tokens, token_count)))
+    sink_units = {
+        unit_id
+        for unit_id, positions in units
+        if sink_positions.intersection(positions)
+    }
+    keep_units = set(sink_units)
+    kept_token_count = sum(
+        len(positions) for unit_id, positions in units if unit_id in keep_units
+    )
+    if kept_token_count > cache_budget_tokens:
+        raise ValueError("cache_budget_tokens must fit required sink prefix units")
+
+    for unit_id, positions in reversed(units):
+        if unit_id in keep_units:
+            continue
+        if kept_token_count + len(positions) > cache_budget_tokens:
+            continue
+        keep_units.add(unit_id)
+        kept_token_count += len(positions)
+        if kept_token_count >= cache_budget_tokens:
+            break
+
+    return tuple(
+        position
+        for unit_id, positions in units
+        if unit_id in keep_units
+        for position in positions
+    )
 
 
 def text_ends_at_sentence_boundary(text: str) -> bool:
@@ -655,6 +723,16 @@ def run_live_eviction(
     total_adaptive_token_steps = 0
     total_adaptive_sentence_steps = 0
     adaptive_selector_contract = ""
+    total_case_elapsed_seconds = 0.0
+    total_prompt_token_count = 0
+    total_generated_token_count = 0
+    total_time_to_first_token_seconds = 0.0
+    total_prefill_elapsed_seconds = 0.0
+    total_decode_elapsed_seconds = 0.0
+    total_forward_elapsed_seconds = 0.0
+    total_eviction_score_elapsed_seconds = 0.0
+    total_eviction_selection_elapsed_seconds = 0.0
+    total_eviction_apply_elapsed_seconds = 0.0
     edge_kinds: set[str] = set()
     suite_ids: set[str] = set()
     observations: list[CaseObservation] = []
@@ -688,6 +766,39 @@ def run_live_eviction(
         observation = build_case_observation(
             case,
             prediction,
+            elapsed_seconds=round(stats.elapsed_seconds, 6),
+            prompt_token_count=stats.prompt_token_count,
+            generated_token_count=stats.generated_token_count,
+            time_to_first_token_seconds=round(
+                stats.time_to_first_token_seconds,
+                6,
+            ),
+            prefill_elapsed_seconds=round(stats.prefill_elapsed_seconds, 6),
+            decode_elapsed_seconds=round(stats.decode_elapsed_seconds, 6),
+            forward_elapsed_seconds=round(stats.forward_elapsed_seconds, 6),
+            eviction_score_elapsed_seconds=round(
+                stats.eviction_score_elapsed_seconds,
+                6,
+            ),
+            eviction_selection_elapsed_seconds=round(
+                stats.eviction_selection_elapsed_seconds,
+                6,
+            ),
+            eviction_apply_elapsed_seconds=round(
+                stats.eviction_apply_elapsed_seconds,
+                6,
+            ),
+            tokens_per_second=(
+                round(
+                    (stats.prompt_token_count + stats.generated_token_count)
+                    / stats.elapsed_seconds,
+                    6,
+                )
+                if stats.elapsed_seconds > 0
+                else None
+            ),
+            active_memory_allocated_mb=memory_stats.active_memory_allocated_mb,
+            active_memory_reserved_mb=memory_stats.active_memory_reserved_mb,
             peak_memory_allocated_mb=memory_stats.peak_memory_allocated_mb,
             peak_memory_reserved_mb=memory_stats.peak_memory_reserved_mb,
         )
@@ -713,6 +824,18 @@ def run_live_eviction(
             summary_fingerprint = stats.summary_fingerprint
         total_adaptive_token_steps += stats.adaptive_token_steps
         total_adaptive_sentence_steps += stats.adaptive_sentence_steps
+        total_case_elapsed_seconds += stats.elapsed_seconds
+        total_prompt_token_count += stats.prompt_token_count
+        total_generated_token_count += stats.generated_token_count
+        total_time_to_first_token_seconds += stats.time_to_first_token_seconds
+        total_prefill_elapsed_seconds += stats.prefill_elapsed_seconds
+        total_decode_elapsed_seconds += stats.decode_elapsed_seconds
+        total_forward_elapsed_seconds += stats.forward_elapsed_seconds
+        total_eviction_score_elapsed_seconds += stats.eviction_score_elapsed_seconds
+        total_eviction_selection_elapsed_seconds += (
+            stats.eviction_selection_elapsed_seconds
+        )
+        total_eviction_apply_elapsed_seconds += stats.eviction_apply_elapsed_seconds
         if not adaptive_selector_contract:
             adaptive_selector_contract = stats.adaptive_selector_contract
         if edge_kind:
@@ -733,6 +856,36 @@ def run_live_eviction(
         )
     mean_retention_ratio = (
         mean_retention_total / len(cases) if cases else 0.0
+    )
+    cases_per_second = (
+        len(cases) / total_case_elapsed_seconds
+        if total_case_elapsed_seconds > 0
+        else 0.0
+    )
+    generated_tokens_per_second = (
+        total_generated_token_count / total_decode_elapsed_seconds
+        if total_decode_elapsed_seconds > 0
+        else 0.0
+    )
+    prompt_tokens_per_second = (
+        total_prompt_token_count / total_prefill_elapsed_seconds
+        if total_prefill_elapsed_seconds > 0
+        else 0.0
+    )
+    mean_eviction_score_elapsed_seconds = (
+        total_eviction_score_elapsed_seconds / total_eviction_steps
+        if total_eviction_steps > 0
+        else 0.0
+    )
+    mean_eviction_selection_elapsed_seconds = (
+        total_eviction_selection_elapsed_seconds / total_eviction_steps
+        if total_eviction_steps > 0
+        else 0.0
+    )
+    mean_eviction_apply_elapsed_seconds = (
+        total_eviction_apply_elapsed_seconds / total_eviction_steps
+        if total_eviction_steps > 0
+        else 0.0
     )
     result = RunResult(
         run_id=plan.run.run_id,
@@ -764,6 +917,45 @@ def run_live_eviction(
             "summary_fingerprint": summary_fingerprint,
             "mean_retention_ratio": f"{mean_retention_ratio:.4f}",
             "total_eviction_steps": str(total_eviction_steps),
+            "total_case_elapsed_seconds": f"{total_case_elapsed_seconds:.6f}",
+            "mean_case_elapsed_seconds": (
+                f"{(total_case_elapsed_seconds / len(cases)):.6f}"
+                if cases
+                else "0.000000"
+            ),
+            "total_prompt_token_count": str(total_prompt_token_count),
+            "total_generated_token_count": str(total_generated_token_count),
+            "mean_time_to_first_token_seconds": (
+                f"{(total_time_to_first_token_seconds / len(cases)):.6f}"
+                if cases
+                else "0.000000"
+            ),
+            "total_prefill_elapsed_seconds": (
+                f"{total_prefill_elapsed_seconds:.6f}"
+            ),
+            "total_decode_elapsed_seconds": f"{total_decode_elapsed_seconds:.6f}",
+            "total_forward_elapsed_seconds": f"{total_forward_elapsed_seconds:.6f}",
+            "total_eviction_score_elapsed_seconds": (
+                f"{total_eviction_score_elapsed_seconds:.6f}"
+            ),
+            "total_eviction_selection_elapsed_seconds": (
+                f"{total_eviction_selection_elapsed_seconds:.6f}"
+            ),
+            "total_eviction_apply_elapsed_seconds": (
+                f"{total_eviction_apply_elapsed_seconds:.6f}"
+            ),
+            "mean_eviction_score_elapsed_seconds": (
+                f"{mean_eviction_score_elapsed_seconds:.6f}"
+            ),
+            "mean_eviction_selection_elapsed_seconds": (
+                f"{mean_eviction_selection_elapsed_seconds:.6f}"
+            ),
+            "mean_eviction_apply_elapsed_seconds": (
+                f"{mean_eviction_apply_elapsed_seconds:.6f}"
+            ),
+            "cases_per_second": f"{cases_per_second:.6f}",
+            "generated_tokens_per_second": f"{generated_tokens_per_second:.6f}",
+            "prompt_tokens_per_second": f"{prompt_tokens_per_second:.6f}",
             "adaptive_token_steps": str(total_adaptive_token_steps),
             "adaptive_sentence_steps": str(total_adaptive_sentence_steps),
             "adaptive_selector_contract": adaptive_selector_contract,

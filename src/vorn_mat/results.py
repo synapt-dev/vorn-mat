@@ -14,6 +14,24 @@ class CaseObservation:
     correct: bool
     prediction: str
     scored_prediction: str | None = None
+    expected_answer: str | None = None
+    official_score: float | None = None
+    binary_paragraph_hit: bool | None = None
+    numbers_extracted: tuple[str, ...] | None = None
+    case_metadata: dict[str, str] | None = None
+    elapsed_seconds: float | None = None
+    prompt_token_count: int | None = None
+    generated_token_count: int | None = None
+    time_to_first_token_seconds: float | None = None
+    prefill_elapsed_seconds: float | None = None
+    decode_elapsed_seconds: float | None = None
+    forward_elapsed_seconds: float | None = None
+    eviction_score_elapsed_seconds: float | None = None
+    eviction_selection_elapsed_seconds: float | None = None
+    eviction_apply_elapsed_seconds: float | None = None
+    tokens_per_second: float | None = None
+    active_memory_allocated_mb: float | None = None
+    active_memory_reserved_mb: float | None = None
     peak_memory_allocated_mb: float | None = None
     peak_memory_reserved_mb: float | None = None
 
@@ -31,8 +49,11 @@ class RunResult:
     # Reproducibility-substrate telemetry (added 2026-05-23). Optional fields
     # so existing serialized envelopes load unchanged; cells run on the pinned
     # substrate populate them from local_exec.capture_runtime_telemetry().
+    active_memory_allocated_gb: float | None = None
+    active_memory_reserved_gb: float | None = None
     peak_memory_allocated_gb: float | None = None
     peak_memory_reserved_gb: float | None = None
+    gpu_total_memory_gb: float | None = None
     oom_near_miss: bool = False
     env_versions: dict[str, str] = field(default_factory=dict)
 

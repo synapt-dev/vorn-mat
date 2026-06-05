@@ -110,6 +110,36 @@ BASELINES: dict[str, BaselineSpec] = {
             "sentences under the same fixed budget."
         ),
     ),
+    "sentence_snapkv_live": BaselineSpec(
+        name="sentence_snapkv_live",
+        implementation_slug="sentence_snapkv_live",
+        cache_strategy="bounded_observation_window_attention_sentence_eviction",
+        notes=(
+            "Sentence-level SnapKV-style control arm: estimate token importance "
+            "from a bounded final-query observation window, aggregate into sentence "
+            "units, and evict whole sentences under the same fixed budget."
+        ),
+    ),
+    "sentence_l2_norm_live": BaselineSpec(
+        name="sentence_l2_norm_live",
+        implementation_slug="sentence_l2_norm_live",
+        cache_strategy="key_vector_l2_norm_sentence_eviction",
+        notes=(
+            "Sentence-level vector-magnitude control arm: score token positions by "
+            "canonical-layer key-vector L2 norm, aggregate into sentence units, and "
+            "evict whole sentences under the same fixed budget."
+        ),
+    ),
+    "sentence_streaming_llm_live": BaselineSpec(
+        name="sentence_streaming_llm_live",
+        implementation_slug="sentence_streaming_llm_live",
+        cache_strategy="attention_sink_plus_recent_sentence_eviction",
+        notes=(
+            "Sentence-level StreamingLLM control arm: preserve an attention-sink "
+            "prefix plus the most recent complete sentence units under the same "
+            "fixed budget."
+        ),
+    ),
     "random_live": BaselineSpec(
         name="random_live",
         implementation_slug="random_live",

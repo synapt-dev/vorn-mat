@@ -77,17 +77,52 @@ def build_case_observation(
     case: BenchmarkCase,
     prediction: str,
     *,
+    elapsed_seconds: float | None = None,
+    prompt_token_count: int | None = None,
+    generated_token_count: int | None = None,
+    time_to_first_token_seconds: float | None = None,
+    prefill_elapsed_seconds: float | None = None,
+    decode_elapsed_seconds: float | None = None,
+    forward_elapsed_seconds: float | None = None,
+    eviction_score_elapsed_seconds: float | None = None,
+    eviction_selection_elapsed_seconds: float | None = None,
+    eviction_apply_elapsed_seconds: float | None = None,
+    tokens_per_second: float | None = None,
+    active_memory_allocated_mb: float | None = None,
+    active_memory_reserved_mb: float | None = None,
     peak_memory_allocated_mb: float | None = None,
     peak_memory_reserved_mb: float | None = None,
 ) -> CaseObservation:
     scored_prediction = score_prediction_text(prediction)
+    extra_fields: dict[str, object] = {}
+    if case.metadata.get("scoring_contract") == "longbench_retrieval_score_v1":
+        from .longbench import build_passage_retrieval_observation_fields
+
+        extra_fields = build_passage_retrieval_observation_fields(case, prediction)
+        correct = bool(extra_fields.pop("correct"))
+    else:
+        correct = is_prediction_correct(case, prediction)
     return CaseObservation(
         fixture_id=case.case_id,
-        correct=is_prediction_correct(case, prediction),
+        correct=correct,
         prediction=prediction,
         scored_prediction=scored_prediction if scored_prediction != prediction else None,
+        elapsed_seconds=elapsed_seconds,
+        prompt_token_count=prompt_token_count,
+        generated_token_count=generated_token_count,
+        time_to_first_token_seconds=time_to_first_token_seconds,
+        prefill_elapsed_seconds=prefill_elapsed_seconds,
+        decode_elapsed_seconds=decode_elapsed_seconds,
+        forward_elapsed_seconds=forward_elapsed_seconds,
+        eviction_score_elapsed_seconds=eviction_score_elapsed_seconds,
+        eviction_selection_elapsed_seconds=eviction_selection_elapsed_seconds,
+        eviction_apply_elapsed_seconds=eviction_apply_elapsed_seconds,
+        tokens_per_second=tokens_per_second,
+        active_memory_allocated_mb=active_memory_allocated_mb,
+        active_memory_reserved_mb=active_memory_reserved_mb,
         peak_memory_allocated_mb=peak_memory_allocated_mb,
         peak_memory_reserved_mb=peak_memory_reserved_mb,
+        **extra_fields,
     )
 
 

@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
+import json
 from pathlib import Path
 import time
 
@@ -19,7 +20,16 @@ from .active_eviction_pressure_sweep import (
     run_pressure_sweep,
     write_pressure_sweep_artifacts,
 )
-from .benchmarks import load_ruler_hf_niah_slice
+from .benchmarks import (
+    LONGBENCH_DATASET_ID,
+    LONGBENCH_REVISION,
+    PASSAGE_RETRIEVAL_EN_CONFIG,
+    PASSAGE_RETRIEVAL_EN_LICENSE_NOTE,
+    PASSAGE_RETRIEVAL_EN_MAX_NEW_TOKENS,
+    PASSAGE_RETRIEVAL_EN_PROMPT_TEMPLATE_ID,
+    load_longbench_passage_retrieval_en_slice,
+    load_ruler_hf_niah_slice,
+)
 from .local_exec import (
     LocalModelConfig,
     TransformersObservationGenerator,
@@ -38,11 +48,68 @@ from .plan import (
     A100_80GB_PER_SECOND,
     DEFAULT_LIVE_EVICTION_CACHE_BUDGET,
     DEFAULT_MODEL,
+    LiveEvictionDefaults,
+    Week1Run,
+    build_live_eviction_run,
     per_second_rate_for_gpu,
 )
 from .progress import default_progress_logger
 from .results import RunResult, append_observation, append_result, observations_path
+from .runner import build_execution_plans
 from .score_distribution_observation import ScoreDistributionObservationReport
+
+
+LONGBENCH_ALLOWED_RETENTION_POLICIES_BY_PREREGISTRATION = {
+    "config#316": {
+        "sentence_vorn",
+        "sentence_tova",
+    },
+    "config#321": {
+        "sentence_snapkv",
+        "sentence_l2_norm",
+        "sentence_streaming_llm",
+        "vanilla",
+    },
+}
+
+
+def _runtime_failure_diagnostics(exc: Exception) -> dict[str, object]:
+    diagnostics: dict[str, object] = {
+        "exception_type": type(exc).__name__,
+        "error_text": str(exc)[:4000],
+    }
+    try:
+        import torch
+    except ImportError:
+        return diagnostics
+
+    if not torch.cuda.is_available():
+        return diagnostics
+
+    diagnostics.update(
+        {
+            "active_memory_allocated_gb": torch.cuda.memory_allocated()
+            / (1024 ** 3),
+            "active_memory_reserved_gb": torch.cuda.memory_reserved() / (1024 ** 3),
+            "peak_memory_allocated_gb": torch.cuda.max_memory_allocated()
+            / (1024 ** 3),
+            "peak_memory_reserved_gb": torch.cuda.max_memory_reserved()
+            / (1024 ** 3),
+        }
+    )
+    try:
+        diagnostics["gpu_total_memory_gb"] = (
+            torch.cuda.get_device_properties(0).total_memory / (1024 ** 3)
+        )
+    except (RuntimeError, AssertionError):
+        pass
+    try:
+        diagnostics["cuda_memory_summary"] = torch.cuda.memory_summary(
+            abbreviated=True,
+        )[:4000]
+    except RuntimeError:
+        pass
+    return diagnostics
 
 
 @dataclass(frozen=True)
@@ -93,6 +160,56 @@ class ModalLiveEvictionRunRequest:
 @dataclass(frozen=True)
 class ModalLiveEvictionRunReport:
     result: RunResult
+    dataset_config: str
+    split: str
+    case_count: int
+    case_offset_start: int
+    elapsed_seconds: float
+    estimated_cost_usd: float
+    cache_budget_tokens: int
+    retention_policy: str
+    always_keep_prefix_tokens: int
+    preserve_recent_window: bool
+    sentence_pooling: str
+    sentence_top_k: int
+    eviction_trigger: str
+    sentence_boundary_lookahead_tokens: int
+    force_eviction_overflow_ratio: float
+    model_id: str
+
+
+@dataclass(frozen=True)
+class ModalLongBenchLiveEvictionRunRequest:
+    dataset_id: str = LONGBENCH_DATASET_ID
+    dataset_revision: str = LONGBENCH_REVISION
+    dataset_config: str = PASSAGE_RETRIEVAL_EN_CONFIG
+    split: str = "test[:50]"
+    case_limit: int = 50
+    case_offset_start: int = 0
+    benchmark: str = "longbench_passage_retrieval_en"
+    output_path: str | None = None
+    max_new_tokens: int = PASSAGE_RETRIEVAL_EN_MAX_NEW_TOKENS
+    cache_budget_tokens: int = 1024
+    retention_policy: str = "sentence_vorn"
+    random_seed: int = 17
+    always_keep_prefix_tokens: int = 1
+    preserve_recent_window: bool = True
+    sentence_pooling: str = "max"
+    sentence_top_k: int = 3
+    eviction_trigger: str = "budget_threshold"
+    sentence_boundary_lookahead_tokens: int = 25
+    force_eviction_overflow_ratio: float = 1.2
+    model_id: str = DEFAULT_MODEL
+    gpu: str = "A100-80GB"
+    modal_profile: str = "layne1penney"
+    preregistration: str = "config#316"
+
+
+@dataclass(frozen=True)
+class ModalLongBenchLiveEvictionRunReport:
+    result: RunResult
+    dataset_id: str
+    dataset_revision: str
     dataset_config: str
     split: str
     case_count: int
@@ -280,6 +397,7 @@ def run_modal_vanilla_niah(request: ModalVanillaRunRequest) -> ModalVanillaRunRe
             "case_count": str(len(cases)),
             "model": request.model_id,
             "model_id": request.model_id,
+            "gpu": request.gpu,
             "elapsed_seconds": f"{elapsed_seconds:.3f}",
             "estimated_cost_usd": f"{estimated_cost_usd:.4f}",
         }
@@ -369,6 +487,7 @@ def run_modal_live_eviction_niah(
             "case_offset_start": str(request.case_offset_start),
             "model": request.model_id,
             "model_id": request.model_id,
+            "gpu": request.gpu,
             "elapsed_seconds": f"{elapsed_seconds:.3f}",
             "estimated_cost_usd": f"{estimated_cost_usd:.4f}",
             "cache_budget_tokens": str(request.cache_budget_tokens),
@@ -408,6 +527,245 @@ def run_modal_live_eviction_niah(
         result=enriched_result,
         dataset_config=request.dataset_config,
         split=request.split,
+        case_count=len(cases),
+        case_offset_start=request.case_offset_start,
+        elapsed_seconds=elapsed_seconds,
+        estimated_cost_usd=estimated_cost_usd,
+        cache_budget_tokens=request.cache_budget_tokens,
+        retention_policy=request.retention_policy,
+        always_keep_prefix_tokens=request.always_keep_prefix_tokens,
+        preserve_recent_window=request.preserve_recent_window,
+        sentence_pooling=request.sentence_pooling,
+        sentence_top_k=request.sentence_top_k,
+        eviction_trigger=request.eviction_trigger,
+        sentence_boundary_lookahead_tokens=request.sentence_boundary_lookahead_tokens,
+        force_eviction_overflow_ratio=request.force_eviction_overflow_ratio,
+        model_id=request.model_id,
+    )
+
+
+def run_modal_live_eviction_longbench_passage_retrieval(
+    request: ModalLongBenchLiveEvictionRunRequest,
+) -> ModalLongBenchLiveEvictionRunReport:
+    """Run a preregistered LongBench PassageRetrieval-en compressed cell.
+
+    This function is scaffolding-safe before ratification: it performs no Modal
+    call unless used as the remote function by an entrypoint. The cell contract
+    is locked by config#316.
+    """
+    if request.dataset_config != PASSAGE_RETRIEVAL_EN_CONFIG:
+        raise ValueError(
+            "LongBench preregistration only permits dataset_config="
+            f"{PASSAGE_RETRIEVAL_EN_CONFIG!r}"
+        )
+    if request.max_new_tokens != PASSAGE_RETRIEVAL_EN_MAX_NEW_TOKENS:
+        raise ValueError(
+            "LongBench preregistration requires max_new_tokens="
+            f"{PASSAGE_RETRIEVAL_EN_MAX_NEW_TOKENS}"
+        )
+    try:
+        allowed_retention_policies = (
+            LONGBENCH_ALLOWED_RETENTION_POLICIES_BY_PREREGISTRATION[
+                request.preregistration
+            ]
+        )
+    except KeyError as exc:
+        raise ValueError(
+            "LongBench run request uses unknown preregistration "
+            f"{request.preregistration!r}"
+        ) from exc
+    if request.retention_policy not in allowed_retention_policies:
+        raise ValueError(
+            f"LongBench {request.preregistration} only permits retention_policy "
+            f"{sorted(allowed_retention_policies)!r}"
+        )
+    per_second_rate = per_second_rate_for_gpu(request.gpu)
+    start = time.perf_counter()
+    reset_runtime_telemetry()
+    cases = load_longbench_passage_retrieval_en_slice(
+        case_limit=request.case_limit,
+        case_offset_start=request.case_offset_start,
+        dataset_id=request.dataset_id,
+        revision=request.dataset_revision,
+    )
+    if request.retention_policy == "vanilla":
+        run = Week1Run(
+            run_id="longbench-passage-retrieval-en-vanilla",
+            model=request.model_id,
+            benchmark=request.benchmark,
+            baseline="vanilla",
+            gpu=request.gpu,
+            canonical_layer=0,
+            recent_token_window=0,
+            eviction_unit="none",
+            case_limit=request.case_limit,
+            experiment_stage="longbench_expanded_config321",
+            compression_mode="none",
+        )
+    else:
+        baseline = (
+            "sentence_vorn_live"
+            if request.retention_policy == "sentence_vorn"
+            else "sentence_tova_live"
+            if request.retention_policy == "sentence_tova"
+            else "sentence_snapkv_live"
+            if request.retention_policy == "sentence_snapkv"
+            else "sentence_l2_norm_live"
+            if request.retention_policy == "sentence_l2_norm"
+            else "sentence_streaming_llm_live"
+            if request.retention_policy == "sentence_streaming_llm"
+            else f"{request.retention_policy}_live"
+        )
+        run = build_live_eviction_run(
+            live=LiveEvictionDefaults(
+                benchmark=request.benchmark,
+                case_limit=request.case_limit,
+                cache_budget_tokens=request.cache_budget_tokens,
+                baseline=baseline,
+                retention_policy=request.retention_policy,
+                random_seed=request.random_seed,
+                always_keep_prefix_tokens=request.always_keep_prefix_tokens,
+                preserve_recent_window=request.preserve_recent_window,
+                eviction_unit="sentence",
+                sentence_pooling=request.sentence_pooling,
+                sentence_top_k=request.sentence_top_k,
+                eviction_trigger=request.eviction_trigger,
+                sentence_boundary_lookahead_tokens=request.sentence_boundary_lookahead_tokens,
+                force_eviction_overflow_ratio=request.force_eviction_overflow_ratio,
+                compression_mode=f"longbench_{request.retention_policy}_b{request.cache_budget_tokens}",
+            )
+        )
+    plan = build_execution_plans((run,))[0]
+    generator_config = LocalModelConfig(
+        model_id=request.model_id,
+        max_new_tokens=request.max_new_tokens,
+    )
+    generator = (
+        TransformersTextGenerator(generator_config)
+        if request.retention_policy == "vanilla"
+        else TransformersLiveEvictionGenerator(generator_config)
+    )
+    model_load_elapsed_seconds = generator.ensure_model_loaded()
+    ledger = (
+        observations_path(Path(request.output_path)) if request.output_path else None
+    )
+    try:
+        on_case = (
+            (lambda observation: append_observation(ledger, observation))
+            if ledger is not None
+            else None
+        )
+        if request.retention_policy == "vanilla":
+            result, _traces = run_vanilla(
+                plan,
+                cases,
+                generator,
+                on_case=on_case,
+                progress_logger=default_progress_logger,
+            )
+        else:
+            result, _traces = run_live_eviction(
+                plan,
+                cases,
+                generator,
+                on_case=on_case,
+                progress_logger=default_progress_logger,
+            )
+    except Exception as exc:
+        diagnostics = _runtime_failure_diagnostics(exc)
+        raise RuntimeError(json.dumps(diagnostics, sort_keys=True)) from exc
+    elapsed_seconds = time.perf_counter() - start
+    estimated_cost_usd = elapsed_seconds * per_second_rate
+
+    split = (
+        f"test[:{request.case_limit}]"
+        if request.case_offset_start == 0
+        else f"test[{request.case_offset_start}:{request.case_offset_start + request.case_limit}]"
+    )
+    metadata = dict(result.metadata)
+    metadata.update(
+        {
+            "dataset_id": request.dataset_id,
+            "dataset_revision": request.dataset_revision,
+            "dataset_config": request.dataset_config,
+            "split": split,
+            "case_count": str(len(cases)),
+            "case_offset_start": str(request.case_offset_start),
+            "model": request.model_id,
+            "model_id": request.model_id,
+            "gpu": request.gpu,
+            "modal_profile": request.modal_profile,
+            "elapsed_seconds": f"{elapsed_seconds:.3f}",
+            "estimated_cost_usd": f"{estimated_cost_usd:.4f}",
+            "cache_budget_tokens": (
+                "unbounded"
+                if request.retention_policy == "vanilla"
+                else str(request.cache_budget_tokens)
+            ),
+            "comparison_budget_tokens": str(request.cache_budget_tokens),
+            "retention_policy": request.retention_policy,
+            "random_seed": str(request.random_seed),
+            "always_keep_prefix_tokens": str(request.always_keep_prefix_tokens),
+            "preserve_recent_window": str(request.preserve_recent_window).lower(),
+            "sentence_pooling": request.sentence_pooling,
+            "sentence_top_k": str(request.sentence_top_k),
+            "eviction_trigger": request.eviction_trigger,
+            "sentence_boundary_lookahead_tokens": str(
+                request.sentence_boundary_lookahead_tokens
+            ),
+            "force_eviction_overflow_ratio": (
+                f"{request.force_eviction_overflow_ratio:.2f}"
+            ),
+            "prompt_template_id": PASSAGE_RETRIEVAL_EN_PROMPT_TEMPLATE_ID,
+            "max_new_tokens": str(request.max_new_tokens),
+            "primary_metric": "mean_official_score",
+            "secondary_metric": "binary_paragraph_hit_rate",
+            "license_note": PASSAGE_RETRIEVAL_EN_LICENSE_NOTE,
+            "preregistration": request.preregistration,
+            "gpu_hours": f"{(elapsed_seconds / 3600):.6f}",
+            "model_load_elapsed_seconds": (
+                f"{model_load_elapsed_seconds:.6f}"
+            ),
+            "cache_stats_available": "false",
+            "vanilla_delta_available": (
+                "self" if request.retention_policy == "vanilla" else "false"
+            ),
+            "vanilla_delta_reason": (
+                "self_baseline"
+                if request.retention_policy == "vanilla"
+                else "computed_downstream_from_config321_vanilla_cells"
+            ),
+        }
+    )
+    enriched_result = RunResult(
+        run_id=result.run_id,
+        benchmark=result.benchmark,
+        baseline=result.baseline,
+        metrics=result.metrics,
+        metadata=metadata,
+        preprocessing_elapsed_seconds=result.preprocessing_elapsed_seconds,
+        preprocessing_cost_usd=(
+            result.preprocessing_elapsed_seconds * per_second_rate
+        ),
+        observations=result.observations,
+    )
+    enriched_result = attach_runtime_telemetry(enriched_result)
+    model_unload_elapsed_seconds = generator.unload_model()
+    enriched_metadata = dict(enriched_result.metadata)
+    enriched_metadata["model_unload_elapsed_seconds"] = (
+        f"{model_unload_elapsed_seconds:.6f}"
+    )
+    enriched_result = replace(enriched_result, metadata=enriched_metadata)
+
+    if request.output_path:
+        append_result(Path(request.output_path), enriched_result)
+
+    return ModalLongBenchLiveEvictionRunReport(
+        result=enriched_result,
+        dataset_id=request.dataset_id,
+        dataset_revision=request.dataset_revision,
+        dataset_config=request.dataset_config,
+        split=split,
         case_count=len(cases),
         case_offset_start=request.case_offset_start,
         elapsed_seconds=elapsed_seconds,
