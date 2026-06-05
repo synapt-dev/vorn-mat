@@ -34,6 +34,15 @@ binding = build_vorn_entrypoint(
 app = binding.app
 
 
+def _modal_profile_from_specs(cell_specs: list[dict]) -> str:
+    profiles = {str(spec.get("modal_profile", "")) for spec in cell_specs}
+    if len(profiles) != 1 or "" in profiles:
+        raise ValueError(
+            "LongBench cell specs must carry exactly one non-empty modal_profile"
+        )
+    return next(iter(profiles))
+
+
 @app.function(
     image=binding.image,
     timeout=86400,
@@ -67,6 +76,7 @@ def main(
                 dataset_revision=dataset_revision,
             )
         )
+    modal_profile = _modal_profile_from_specs(cell_specs)
 
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
@@ -76,6 +86,7 @@ def main(
 
     if dry_run:
         print("dry_run=true")
+        print(f"profile={modal_profile}")
         print(f"cells_prepared={len(cell_specs)}")
         print(f"output_dir={output_path}")
         return
@@ -90,7 +101,7 @@ def main(
             json.dumps(wave_report["failures"], indent=2, sort_keys=True)
         )
 
-    print("profile=laynepenney")
+    print(f"profile={modal_profile}")
     print(f"cells_fired={len(cell_specs)}")
     print(f"cells_succeeded={len(wave_report['reports'])}")
     print(f"cells_failed={len(wave_report['failures'])}")

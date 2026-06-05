@@ -52,6 +52,7 @@ def main(
     force_eviction_overflow_ratio: float = 1.2,
     model_id: str = DEFAULT_MODEL,
     dataset_revision: str = LONGBENCH_REVISION,
+    modal_profile: str = "layne1penney",
     output: str = str(ROOT / ".benchmarks" / "modal-longbench-passage-report.json"),
 ) -> None:
     model_slug = model_id.replace("/", "--")
@@ -76,6 +77,8 @@ def main(
         sentence_boundary_lookahead_tokens=sentence_boundary_lookahead_tokens,
         force_eviction_overflow_ratio=force_eviction_overflow_ratio,
         model_id=model_id,
+        modal_profile=modal_profile,
+        preregistration="config#316",
     )
     report = binding.remote_fn.remote(request)
 
@@ -83,7 +86,7 @@ def main(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(asdict(report), indent=2, sort_keys=True))
 
-    print("profile=laynepenney")
+    print(f"profile={request.modal_profile}")
     print(f"dataset_id={report.dataset_id}")
     print(f"dataset_revision={report.dataset_revision}")
     print(f"dataset_config={report.dataset_config}")

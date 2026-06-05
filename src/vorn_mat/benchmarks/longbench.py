@@ -155,6 +155,7 @@ def build_passage_retrieval_en_cell_specs(
     dataset_revision: str = LONGBENCH_REVISION,
     attempt_label: str = "config316",
     gpu: str = "A100-80GB",
+    modal_profile: str = "layne1penney",
 ) -> tuple[dict[str, object], ...]:
     """Return the exact 8 Modal request specs locked by config#316."""
 
@@ -164,6 +165,8 @@ def build_passage_retrieval_en_cell_specs(
         raise ValueError("config#316 locks case_offset_start=0")
     if not attempt_label:
         raise ValueError("attempt_label must be non-empty")
+    if not modal_profile:
+        raise ValueError("modal_profile must be non-empty")
 
     specs: list[dict[str, object]] = []
     for cell in PASSAGE_RETRIEVAL_EN_PREREGISTERED_CELLS:
@@ -192,6 +195,8 @@ def build_passage_retrieval_en_cell_specs(
                 "force_eviction_overflow_ratio": 1.2,
                 "model_id": cell.model_id,
                 "gpu": gpu,
+                "modal_profile": modal_profile,
+                "preregistration": "config#316",
             }
         )
     return tuple(specs)

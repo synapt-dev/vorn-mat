@@ -59,13 +59,17 @@ from .runner import build_execution_plans
 from .score_distribution_observation import ScoreDistributionObservationReport
 
 
-LONGBENCH_ALLOWED_RETENTION_POLICIES = {
-    "sentence_vorn",
-    "sentence_tova",
-    "sentence_snapkv",
-    "sentence_l2_norm",
-    "sentence_streaming_llm",
-    "vanilla",
+LONGBENCH_ALLOWED_RETENTION_POLICIES_BY_PREREGISTRATION = {
+    "config#316": {
+        "sentence_vorn",
+        "sentence_tova",
+    },
+    "config#321": {
+        "sentence_snapkv",
+        "sentence_l2_norm",
+        "sentence_streaming_llm",
+        "vanilla",
+    },
 }
 
 
@@ -197,7 +201,7 @@ class ModalLongBenchLiveEvictionRunRequest:
     force_eviction_overflow_ratio: float = 1.2
     model_id: str = DEFAULT_MODEL
     gpu: str = "A100-80GB"
-    modal_profile: str = ""
+    modal_profile: str = "layne1penney"
     preregistration: str = "config#316"
 
 
@@ -559,10 +563,21 @@ def run_modal_live_eviction_longbench_passage_retrieval(
             "LongBench preregistration requires max_new_tokens="
             f"{PASSAGE_RETRIEVAL_EN_MAX_NEW_TOKENS}"
         )
-    if request.retention_policy not in LONGBENCH_ALLOWED_RETENTION_POLICIES:
+    try:
+        allowed_retention_policies = (
+            LONGBENCH_ALLOWED_RETENTION_POLICIES_BY_PREREGISTRATION[
+                request.preregistration
+            ]
+        )
+    except KeyError as exc:
         raise ValueError(
-            "LongBench preregistration only permits retention_policy "
-            f"{sorted(LONGBENCH_ALLOWED_RETENTION_POLICIES)!r}"
+            "LongBench run request uses unknown preregistration "
+            f"{request.preregistration!r}"
+        ) from exc
+    if request.retention_policy not in allowed_retention_policies:
+        raise ValueError(
+            f"LongBench {request.preregistration} only permits retention_policy "
+            f"{sorted(allowed_retention_policies)!r}"
         )
     per_second_rate = per_second_rate_for_gpu(request.gpu)
     start = time.perf_counter()

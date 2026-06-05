@@ -574,12 +574,33 @@ def test_run_modal_live_eviction_longbench_uses_preregistered_contract(monkeypat
     assert report.result.metadata["primary_metric"] == "mean_official_score"
     assert report.result.metadata["secondary_metric"] == "binary_paragraph_hit_rate"
     assert report.result.metadata["preregistration"] == "config#316"
+    assert report.result.metadata["modal_profile"] == "layne1penney"
     assert report.result.metadata["gpu_hours"] == "0.008333"
     assert report.result.metadata["model_load_elapsed_seconds"] == "4.250000"
     assert report.result.metadata["model_unload_elapsed_seconds"] == "0.750000"
     assert report.result.metadata["vanilla_delta_available"] == "false"
     assert report.estimated_cost_usd == 30.0 * remote_exec.per_second_rate_for_gpu("H200")
     assert report.elapsed_seconds == 30.0
+
+
+@pytest.mark.parametrize(
+    "retention_policy",
+    [
+        "sentence_snapkv",
+        "sentence_l2_norm",
+        "sentence_streaming_llm",
+        "vanilla",
+    ],
+)
+def test_run_modal_longbench_rejects_config321_methods_under_config316_default(
+    retention_policy,
+):
+    with pytest.raises(ValueError, match="config#316"):
+        remote_exec.run_modal_live_eviction_longbench_passage_retrieval(
+            remote_exec.ModalLongBenchLiveEvictionRunRequest(
+                retention_policy=retention_policy,
+            )
+        )
 
 
 @pytest.mark.parametrize(

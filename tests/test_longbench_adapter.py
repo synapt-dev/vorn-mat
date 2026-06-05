@@ -270,6 +270,8 @@ def test_build_preregistered_cell_specs_are_run_ready_and_unique() -> None:
     assert {spec["case_offset_start"] for spec in specs} == {0}
     assert {spec["max_new_tokens"] for spec in specs} == {32}
     assert {spec["gpu"] for spec in specs} == {"A100-80GB"}
+    assert {spec["modal_profile"] for spec in specs} == {"layne1penney"}
+    assert {spec["preregistration"] for spec in specs} == {"config#316"}
     assert {spec["sentence_pooling"] for spec in specs} == {"max"}
     assert {spec["sentence_top_k"] for spec in specs} == {3}
     assert {spec["always_keep_prefix_tokens"] for spec in specs} == {1}
@@ -317,6 +319,7 @@ def test_build_preregistered_cell_specs_supports_h200_substrate_metadata() -> No
     [
         ({"case_limit": 49}, "case_limit=50"),
         ({"case_offset_start": 1}, "case_offset_start=0"),
+        ({"modal_profile": ""}, "modal_profile"),
         ({"attempt_label": ""}, "attempt_label"),
     ],
 )
