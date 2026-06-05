@@ -14,11 +14,23 @@
 
 ## First Overlap
 
+- Runner-gate meaning: actual arm-major gate event recorded as `first_overlap`.
+- Pressure N: `10`
+- Arms: `vorn_high` vs `snapkv_high`
+- SEMU ids: `[422]`
+
+### Overlap SEMUs
+
+- 422: What is the special magic number for faint-smolt mentioned in the provided text?
+
+## Earliest Pressure Overlap
+
+- Interpretation meaning: lower-pressure structural inversion preserved separately as `earliest_pressure_overlap`.
 - Pressure N: `3`
 - Arms: `snapkv_high` vs `vorn_low`
 - SEMU ids: `[0]`
 
-### Overlap SEMUs
+### Earliest-Pressure Overlap SEMUs
 
 - 0: <|im_start|>user
 
@@ -65,3 +77,5 @@
 ## Interpretation
 
 Overlap is the substrate finding for this Option A cell. The pre-execution source-check invariant rejected the cell before any Modal or model call, so no measured quality comparison should be inferred.
+
+The Qwen3-NT cell has two distinct overlap findings. The runner-gate event is the first arm-major overlap the executor would raise: `vorn_high` vs `snapkv_high` at N=10 on SEMU 422. The earliest-pressure inversion is `snapkv_high` vs `vorn_low` at N=3 on SEMU 0. Both are retained because they carry different substrate meanings.

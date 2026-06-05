@@ -522,7 +522,7 @@
     }
   },
   "family": "Qwen 3-NT 8B",
-  "first_overlap": {
+  "earliest_pressure_overlap": {
     "left_arm": "snapkv_high",
     "overlap_semu_ids": [
       0
@@ -537,6 +537,22 @@
     ],
     "pressure_n": 3,
     "right_arm": "vorn_low"
+  },
+  "first_overlap": {
+    "left_arm": "vorn_high",
+    "overlap_semu_ids": [
+      422
+    ],
+    "overlap_semus": [
+      {
+        "answer_overlap": false,
+        "label": "422: What is the special magic number for faint-smolt mentioned in the provided text?",
+        "semu_id": 422,
+        "text_preview": "What is the special magic number for faint-smolt mentioned in the provided text?"
+      }
+    ],
+    "pressure_n": 10,
+    "right_arm": "snapkv_high"
   },
   "gate_result": "FAIL_CLOSED_BEFORE_MODAL_OR_MODEL_CALL",
   "gpu": "A100-80GB",
