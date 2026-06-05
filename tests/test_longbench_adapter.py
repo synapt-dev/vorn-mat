@@ -15,7 +15,6 @@ from vorn_mat import (
     PASSAGE_RETRIEVAL_EN_PROMPT,
     PASSAGE_RETRIEVAL_EN_EXPANDED_COMPARISON_CELLS,
     PASSAGE_RETRIEVAL_EN_PREREGISTERED_CELLS,
-    BenchmarkCase,
     build_passage_retrieval_en_cell_specs,
     build_passage_retrieval_en_expanded_comparison_specs,
     get_benchmark,
