@@ -1,0 +1,1455 @@
+{
+  "base_seed": 534588164691762844,
+  "case_id": "niah_multikey_1_8k-2",
+  "case_offset_start": 2,
+  "dataset_config": "niah_multikey_1_8k",
+  "date": "2026-06-04",
+  "expected_selected_semu_ids": {
+    "length_high": {
+      "1": [
+        342
+      ],
+      "10": [
+        342,
+        357,
+        125,
+        222,
+        227,
+        48,
+        399,
+        180,
+        24,
+        52
+      ],
+      "20": [
+        342,
+        357,
+        125,
+        222,
+        227,
+        48,
+        399,
+        180,
+        24,
+        52,
+        204,
+        354,
+        392,
+        51,
+        179,
+        229,
+        90,
+        359,
+        3,
+        19
+      ],
+      "3": [
+        342,
+        357,
+        125
+      ],
+      "5": [
+        342,
+        357,
+        125,
+        222,
+        227
+      ],
+      "50": [
+        342,
+        357,
+        125,
+        222,
+        227,
+        48,
+        399,
+        180,
+        24,
+        52,
+        204,
+        354,
+        392,
+        51,
+        179,
+        229,
+        90,
+        359,
+        3,
+        19,
+        67,
+        209,
+        279,
+        410,
+        174,
+        326,
+        258,
+        272,
+        350,
+        351,
+        366,
+        72,
+        88,
+        91,
+        223,
+        276,
+        320,
+        321,
+        420,
+        81,
+        103,
+        298,
+        130,
+        353,
+        60,
+        86,
+        108,
+        112,
+        121,
+        181
+      ]
+    },
+    "random_length_matched": {
+      "1": [
+        393
+      ],
+      "10": [
+        393,
+        101,
+        148,
+        237,
+        35,
+        142,
+        28,
+        19,
+        361,
+        359
+      ],
+      "20": [
+        393,
+        411,
+        291,
+        215,
+        27,
+        208,
+        296,
+        67,
+        380,
+        359,
+        253,
+        177,
+        91,
+        277,
+        354,
+        367,
+        63,
+        186,
+        117,
+        240
+      ],
+      "3": [
+        393,
+        132,
+        66
+      ],
+      "5": [
+        393,
+        149,
+        274,
+        27,
+        148
+      ],
+      "50": [
+        268,
+        254,
+        41,
+        111,
+        274,
+        364,
+        214,
+        19,
+        297,
+        359,
+        396,
+        177,
+        91,
+        277,
+        204,
+        68,
+        129,
+        207,
+        213,
+        175,
+        115,
+        181,
+        314,
+        300,
+        114,
+        100,
+        222,
+        350,
+        32,
+        293,
+        161,
+        159,
+        260,
+        271,
+        217,
+        355,
+        48,
+        52,
+        227,
+        352,
+        333,
+        322,
+        187,
+        180,
+        324,
+        209,
+        51,
+        164,
+        57,
+        86
+      ]
+    },
+    "snapkv_high": {
+      "1": [
+        0
+      ],
+      "10": [
+        0,
+        422,
+        21,
+        421,
+        3,
+        2,
+        1,
+        7,
+        6,
+        13
+      ],
+      "20": [
+        0,
+        422,
+        21,
+        421,
+        3,
+        2,
+        1,
+        7,
+        6,
+        13,
+        36,
+        10,
+        154,
+        26,
+        185,
+        12,
+        49,
+        90,
+        174,
+        14
+      ],
+      "3": [
+        0,
+        422,
+        21
+      ],
+      "5": [
+        0,
+        422,
+        21,
+        421,
+        3
+      ],
+      "50": [
+        0,
+        422,
+        21,
+        421,
+        3,
+        2,
+        1,
+        7,
+        6,
+        13,
+        36,
+        10,
+        154,
+        26,
+        185,
+        12,
+        49,
+        90,
+        174,
+        14,
+        89,
+        125,
+        4,
+        85,
+        45,
+        54,
+        22,
+        11,
+        203,
+        72,
+        8,
+        64,
+        69,
+        15,
+        23,
+        19,
+        18,
+        57,
+        38,
+        86,
+        5,
+        16,
+        27,
+        370,
+        359,
+        61,
+        20,
+        62,
+        345,
+        9
+      ]
+    },
+    "vorn_high": {
+      "1": [
+        422
+      ],
+      "10": [
+        422,
+        421,
+        21,
+        36,
+        154,
+        45,
+        26,
+        3,
+        2,
+        90
+      ],
+      "20": [
+        422,
+        421,
+        21,
+        36,
+        154,
+        45,
+        26,
+        3,
+        2,
+        90,
+        0,
+        1,
+        72,
+        13,
+        24,
+        25,
+        38,
+        14,
+        185,
+        49
+      ],
+      "3": [
+        422,
+        421,
+        21
+      ],
+      "5": [
+        422,
+        421,
+        21,
+        36,
+        154
+      ],
+      "50": [
+        422,
+        421,
+        21,
+        36,
+        154,
+        45,
+        26,
+        3,
+        2,
+        90,
+        0,
+        1,
+        72,
+        13,
+        24,
+        25,
+        38,
+        14,
+        185,
+        49,
+        23,
+        60,
+        7,
+        6,
+        12,
+        345,
+        125,
+        351,
+        69,
+        334,
+        346,
+        54,
+        344,
+        11,
+        407,
+        203,
+        399,
+        354,
+        342,
+        162,
+        112,
+        22,
+        173,
+        357,
+        419,
+        67,
+        392,
+        373,
+        365,
+        108
+      ]
+    },
+    "vorn_low": {
+      "1": [
+        151
+      ],
+      "10": [
+        151,
+        256,
+        233,
+        266,
+        257,
+        135,
+        144,
+        136,
+        260,
+        145
+      ],
+      "20": [
+        151,
+        256,
+        233,
+        266,
+        257,
+        135,
+        144,
+        136,
+        260,
+        145,
+        267,
+        43,
+        80,
+        414,
+        415,
+        150,
+        201,
+        42,
+        270,
+        265
+      ],
+      "3": [
+        151,
+        256,
+        233
+      ],
+      "5": [
+        151,
+        256,
+        233,
+        266,
+        257
+      ],
+      "50": [
+        151,
+        256,
+        233,
+        266,
+        257,
+        135,
+        144,
+        136,
+        260,
+        145,
+        267,
+        43,
+        80,
+        414,
+        415,
+        150,
+        201,
+        42,
+        270,
+        265,
+        285,
+        46,
+        284,
+        254,
+        147,
+        388,
+        283,
+        137,
+        235,
+        261,
+        28,
+        263,
+        141,
+        217,
+        259,
+        142,
+        253,
+        243,
+        139,
+        245,
+        120,
+        292,
+        202,
+        114,
+        206,
+        262,
+        232,
+        214,
+        275,
+        244
+      ]
+    }
+  },
+  "family": "Mistral 7B",
+  "first_overlap": {
+    "left_arm": "vorn_high",
+    "overlap_semu_ids": [
+      21,
+      422
+    ],
+    "overlap_semus": [
+      {
+        "answer_overlap": true,
+        "label": "21 answer_overlap: One of the special magic numbers for spectacular-hail is: 4694634.",
+        "semu_id": 21,
+        "text_preview": "One of the special magic numbers for spectacular-hail is: 4694634."
+      },
+      {
+        "answer_overlap": false,
+        "label": "422: The special magic number for spectacular-hail mentioned in the provided text is[/INST]",
+        "semu_id": 422,
+        "text_preview": "The special magic number for spectacular-hail mentioned in the provided text is[/INST]"
+      }
+    ],
+    "pressure_n": 3,
+    "right_arm": "snapkv_high"
+  },
+  "gate_result": "FAIL_CLOSED_BEFORE_MODAL_OR_MODEL_CALL",
+  "gpu": "A100-80GB",
+  "lane": "snapkv-lateral-case2",
+  "limits": [
+    "No Modal cell was launched because the pre-execution source-check invariant determined overlap from the locked Phase 0 source artifact.",
+    "This is an honest-negative substrate finding: SnapKV and another arm selected overlapping SEMUs at the same pressure.",
+    "No measured quality comparison exists for this cell."
+  ],
+  "local_spec_path": ".benchmarks/pressure-snapkv-lateral-niah8k-case2-2026-06-04.json",
+  "modal_invoked": false,
+  "modal_profile": "layne1penney",
+  "model_generation_invoked": false,
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "overlap_count": 13,
+  "overlaps": [
+    {
+      "left_arm": "vorn_high",
+      "overlap_semu_ids": [
+        21,
+        422
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": true,
+          "label": "21 answer_overlap: One of the special magic numbers for spectacular-hail is: 4694634.",
+          "semu_id": 21,
+          "text_preview": "One of the special magic numbers for spectacular-hail is: 4694634."
+        },
+        {
+          "answer_overlap": false,
+          "label": "422: The special magic number for spectacular-hail mentioned in the provided text is[/INST]",
+          "semu_id": 422,
+          "text_preview": "The special magic number for spectacular-hail mentioned in the provided text is[/INST]"
+        }
+      ],
+      "pressure_n": 3,
+      "right_arm": "snapkv_high"
+    },
+    {
+      "left_arm": "vorn_high",
+      "overlap_semu_ids": [
+        21,
+        421,
+        422
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": true,
+          "label": "21 answer_overlap: One of the special magic numbers for spectacular-hail is: 4694634.",
+          "semu_id": 21,
+          "text_preview": "One of the special magic numbers for spectacular-hail is: 4694634."
+        },
+        {
+          "answer_overlap": false,
+          "label": "421: What is the special magic number for spectacular-hail mentioned in the provided text?",
+          "semu_id": 421,
+          "text_preview": "What is the special magic number for spectacular-hail mentioned in the provided text?"
+        },
+        {
+          "answer_overlap": false,
+          "label": "422: The special magic number for spectacular-hail mentioned in the provided text is[/INST]",
+          "semu_id": 422,
+          "text_preview": "The special magic number for spectacular-hail mentioned in the provided text is[/INST]"
+        }
+      ],
+      "pressure_n": 5,
+      "right_arm": "snapkv_high"
+    },
+    {
+      "left_arm": "vorn_high",
+      "overlap_semu_ids": [
+        2,
+        3,
+        21,
+        421,
+        422
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": false,
+          "label": "2: I will quiz you about the number afterwards.",
+          "semu_id": 2,
+          "text_preview": "I will quiz you about the number afterwards."
+        },
+        {
+          "answer_overlap": false,
+          "label": "3: July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l",
+          "semu_id": 3,
+          "text_preview": "July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l"
+        },
+        {
+          "answer_overlap": true,
+          "label": "21 answer_overlap: One of the special magic numbers for spectacular-hail is: 4694634.",
+          "semu_id": 21,
+          "text_preview": "One of the special magic numbers for spectacular-hail is: 4694634."
+        },
+        {
+          "answer_overlap": false,
+          "label": "421: What is the special magic number for spectacular-hail mentioned in the provided text?",
+          "semu_id": 421,
+          "text_preview": "What is the special magic number for spectacular-hail mentioned in the provided text?"
+        },
+        {
+          "answer_overlap": false,
+          "label": "422: The special magic number for spectacular-hail mentioned in the provided text is[/INST]",
+          "semu_id": 422,
+          "text_preview": "The special magic number for spectacular-hail mentioned in the provided text is[/INST]"
+        }
+      ],
+      "pressure_n": 10,
+      "right_arm": "snapkv_high"
+    },
+    {
+      "left_arm": "vorn_high",
+      "overlap_semu_ids": [
+        0,
+        1,
+        2,
+        3,
+        13,
+        14,
+        21,
+        26,
+        36,
+        49,
+        90,
+        154,
+        185,
+        421,
+        422
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": false,
+          "label": "0: <s>[INST] A special magic number is hidden within the following text.",
+          "semu_id": 0,
+          "text_preview": "<s>[INST] A special magic number is hidden within the following text."
+        },
+        {
+          "answer_overlap": false,
+          "label": "1: Make sure to memorize it.",
+          "semu_id": 1,
+          "text_preview": "Make sure to memorize it."
+        },
+        {
+          "answer_overlap": false,
+          "label": "2: I will quiz you about the number afterwards.",
+          "semu_id": 2,
+          "text_preview": "I will quiz you about the number afterwards."
+        },
+        {
+          "answer_overlap": false,
+          "label": "3: July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l",
+          "semu_id": 3,
+          "text_preview": "July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l"
+        },
+        {
+          "answer_overlap": false,
+          "label": "13: [1]No one doubts this process is accelerating, which means increasing numbers of things we like will be transformed into",
+          "semu_id": 13,
+          "text_preview": "[1]No one doubts this process is accelerating, which means increasing numbers of things we like will be transformed into"
+        },
+        {
+          "answer_overlap": false,
+          "label": "14: [2]As far as I know there's no word for something we like too much.",
+          "semu_id": 14,
+          "text_preview": "[2]As far as I know there's no word for something we like too much."
+        },
+        {
+          "answer_overlap": true,
+          "label": "21 answer_overlap: One of the special magic numbers for spectacular-hail is: 4694634.",
+          "semu_id": 21,
+          "text_preview": "One of the special magic numbers for spectacular-hail is: 4694634."
+        },
+        {
+          "answer_overlap": false,
+          "label": "26: I don't mean to imply they're all to be avoided.",
+          "semu_id": 26,
+          "text_preview": "I don't mean to imply they're all to be avoided."
+        },
+        {
+          "answer_overlap": false,
+          "label": "36: One of the special magic numbers for spectacular-deer is: 4860684.",
+          "semu_id": 36,
+          "text_preview": "One of the special magic numbers for spectacular-deer is: 4860684."
+        },
+        {
+          "answer_overlap": false,
+          "label": "49: A lot of the change was due to legislation, of course, but the legislation couldn't have happened if customs hadn't alre",
+          "semu_id": 49,
+          "text_preview": "A lot of the change was due to legislation, of course, but the legislation couldn't have happened if customs hadn't alre"
+        },
+        {
+          "answer_overlap": false,
+          "label": "90: October 2015When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know i",
+          "semu_id": 90,
+          "text_preview": "October 2015When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know i"
+        },
+        {
+          "answer_overlap": false,
+          "label": "154: One of the special magic numbers for internal-trip is: 1352896.",
+          "semu_id": 154,
+          "text_preview": "One of the special magic numbers for internal-trip is: 1352896."
+        },
+        {
+          "answer_overlap": false,
+          "label": "185: November 2009I don't think Apple realizes how badly the App Store approval process is broken.",
+          "semu_id": 185,
+          "text_preview": "November 2009I don't think Apple realizes how badly the App Store approval process is broken."
+        },
+        {
+          "answer_overlap": false,
+          "label": "421: What is the special magic number for spectacular-hail mentioned in the provided text?",
+          "semu_id": 421,
+          "text_preview": "What is the special magic number for spectacular-hail mentioned in the provided text?"
+        },
+        {
+          "answer_overlap": false,
+          "label": "422: The special magic number for spectacular-hail mentioned in the provided text is[/INST]",
+          "semu_id": 422,
+          "text_preview": "The special magic number for spectacular-hail mentioned in the provided text is[/INST]"
+        }
+      ],
+      "pressure_n": 20,
+      "right_arm": "snapkv_high"
+    },
+    {
+      "left_arm": "vorn_high",
+      "overlap_semu_ids": [
+        3,
+        24,
+        90
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": false,
+          "label": "3: July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l",
+          "semu_id": 3,
+          "text_preview": "July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l"
+        },
+        {
+          "answer_overlap": false,
+          "label": "24: And unless the forms of technological progress that produced these things are subject to different laws than technologic",
+          "semu_id": 24,
+          "text_preview": "And unless the forms of technological progress that produced these things are subject to different laws than technologic"
+        },
+        {
+          "answer_overlap": false,
+          "label": "90: October 2015When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know i",
+          "semu_id": 90,
+          "text_preview": "October 2015When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know i"
+        }
+      ],
+      "pressure_n": 20,
+      "right_arm": "length_high"
+    },
+    {
+      "left_arm": "snapkv_high",
+      "overlap_semu_ids": [
+        3,
+        90
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": false,
+          "label": "3: July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l",
+          "semu_id": 3,
+          "text_preview": "July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l"
+        },
+        {
+          "answer_overlap": false,
+          "label": "90: October 2015When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know i",
+          "semu_id": 90,
+          "text_preview": "October 2015When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know i"
+        }
+      ],
+      "pressure_n": 20,
+      "right_arm": "length_high"
+    },
+    {
+      "left_arm": "length_high",
+      "overlap_semu_ids": [
+        354,
+        359
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": false,
+          "label": "354: [1]The Secret WeaponEric Raymond has written an essay called \"How to Become a Hacker,\" and in it, among other things, he",
+          "semu_id": 354,
+          "text_preview": "[1]The Secret WeaponEric Raymond has written an essay called \"How to Become a Hacker,\" and in it, among other things, he"
+        },
+        {
+          "answer_overlap": false,
+          "label": "359: It won't get you a job, except perhaps as a classics professor, but it will improve your mind, and make you a better wri",
+          "semu_id": 359,
+          "text_preview": "It won't get you a job, except perhaps as a classics professor, but it will improve your mind, and make you a better wri"
+        }
+      ],
+      "pressure_n": 20,
+      "right_arm": "random_length_matched"
+    },
+    {
+      "left_arm": "vorn_high",
+      "overlap_semu_ids": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        7,
+        11,
+        12,
+        13,
+        14,
+        21,
+        22,
+        23,
+        26,
+        36,
+        38,
+        45,
+        49,
+        54,
+        69,
+        72,
+        90,
+        125,
+        154,
+        185,
+        203,
+        345,
+        421,
+        422
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": false,
+          "label": "0: <s>[INST] A special magic number is hidden within the following text.",
+          "semu_id": 0,
+          "text_preview": "<s>[INST] A special magic number is hidden within the following text."
+        },
+        {
+          "answer_overlap": false,
+          "label": "1: Make sure to memorize it.",
+          "semu_id": 1,
+          "text_preview": "Make sure to memorize it."
+        },
+        {
+          "answer_overlap": false,
+          "label": "2: I will quiz you about the number afterwards.",
+          "semu_id": 2,
+          "text_preview": "I will quiz you about the number afterwards."
+        },
+        {
+          "answer_overlap": false,
+          "label": "3: July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l",
+          "semu_id": 3,
+          "text_preview": "July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l"
+        },
+        {
+          "answer_overlap": false,
+          "label": "6: We wouldn't want to stop it.",
+          "semu_id": 6,
+          "text_preview": "We wouldn't want to stop it."
+        },
+        {
+          "answer_overlap": false,
+          "label": "7: It's the same process that cures diseases: technological progress.",
+          "semu_id": 7,
+          "text_preview": "It's the same process that cures diseases: technological progress."
+        },
+        {
+          "answer_overlap": false,
+          "label": "11: When progress concentrates something we don't want to want\u2014when it transforms opium into heroin\u2014it seems bad.",
+          "semu_id": 11,
+          "text_preview": "When progress concentrates something we don't want to want\u2014when it transforms opium into heroin\u2014it seems bad."
+        },
+        {
+          "answer_overlap": false,
+          "label": "12: But it's the same process at work.",
+          "semu_id": 12,
+          "text_preview": "But it's the same process at work."
+        },
+        {
+          "answer_overlap": false,
+          "label": "13: [1]No one doubts this process is accelerating, which means increasing numbers of things we like will be transformed into",
+          "semu_id": 13,
+          "text_preview": "[1]No one doubts this process is accelerating, which means increasing numbers of things we like will be transformed into"
+        },
+        {
+          "answer_overlap": false,
+          "label": "14: [2]As far as I know there's no word for something we like too much.",
+          "semu_id": 14,
+          "text_preview": "[2]As far as I know there's no word for something we like too much."
+        },
+        {
+          "answer_overlap": true,
+          "label": "21 answer_overlap: One of the special magic numbers for spectacular-hail is: 4694634.",
+          "semu_id": 21,
+          "text_preview": "One of the special magic numbers for spectacular-hail is: 4694634."
+        },
+        {
+          "answer_overlap": false,
+          "label": "22: TV has become much more engaging, and even so it can't compete with Facebook.",
+          "semu_id": 22,
+          "text_preview": "TV has become much more engaging, and even so it can't compete with Facebook."
+        },
+        {
+          "answer_overlap": false,
+          "label": "23: The world is more addictive than it was 40 years ago.",
+          "semu_id": 23,
+          "text_preview": "The world is more addictive than it was 40 years ago."
+        },
+        {
+          "answer_overlap": false,
+          "label": "26: I don't mean to imply they're all to be avoided.",
+          "semu_id": 26,
+          "text_preview": "I don't mean to imply they're all to be avoided."
+        },
+        {
+          "answer_overlap": false,
+          "label": "36: One of the special magic numbers for spectacular-deer is: 4860684.",
+          "semu_id": 36,
+          "text_preview": "One of the special magic numbers for spectacular-deer is: 4860684."
+        },
+        {
+          "answer_overlap": false,
+          "label": "38: You can probably take it as a rule of thumb from now on that if people don't think you're weird, you're living badly.",
+          "semu_id": 38,
+          "text_preview": "You can probably take it as a rule of thumb from now on that if people don't think you're weird, you're living badly."
+        },
+        {
+          "answer_overlap": false,
+          "label": "45: One of the special magic numbers for abject-tavern is: 2191066.",
+          "semu_id": 45,
+          "text_preview": "One of the special magic numbers for abject-tavern is: 2191066."
+        },
+        {
+          "answer_overlap": false,
+          "label": "49: A lot of the change was due to legislation, of course, but the legislation couldn't have happened if customs hadn't alre",
+          "semu_id": 49,
+          "text_preview": "A lot of the change was due to legislation, of course, but the legislation couldn't have happened if customs hadn't alre"
+        },
+        {
+          "answer_overlap": false,
+          "label": "54: In fact, even that won't be enough.",
+          "semu_id": 54,
+          "text_preview": "In fact, even that won't be enough."
+        },
+        {
+          "answer_overlap": false,
+          "label": "69: Notes[1] Could you restrict technological progress to areas where you wanted it?",
+          "semu_id": 69,
+          "text_preview": "Notes[1] Could you restrict technological progress to areas where you wanted it?"
+        },
+        {
+          "answer_overlap": false,
+          "label": "72: \"Good\" and \"bad\" technological progress aren't sharply differentiated, so you'd find you couldn't slow the latter withou",
+          "semu_id": 72,
+          "text_preview": "\"Good\" and \"bad\" technological progress aren't sharply differentiated, so you'd find you couldn't slow the latter withou"
+        },
+        {
+          "answer_overlap": false,
+          "label": "90: October 2015When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know i",
+          "semu_id": 90,
+          "text_preview": "October 2015When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know i"
+        },
+        {
+          "answer_overlap": false,
+          "label": "125: You should always have a plan B as well: you should know (as in write down) precisely what you'll need to do to survive",
+          "semu_id": 125,
+          "text_preview": "You should always have a plan B as well: you should know (as in write down) precisely what you'll need to do to survive"
+        },
+        {
+          "answer_overlap": false,
+          "label": "154: One of the special magic numbers for internal-trip is: 1352896.",
+          "semu_id": 154,
+          "text_preview": "One of the special magic numbers for internal-trip is: 1352896."
+        },
+        {
+          "answer_overlap": false,
+          "label": "185: November 2009I don't think Apple realizes how badly the App Store approval process is broken.",
+          "semu_id": 185,
+          "text_preview": "November 2009I don't think Apple realizes how badly the App Store approval process is broken."
+        },
+        {
+          "answer_overlap": false,
+          "label": "203: It doesn't work for an intermediary to own the user.",
+          "semu_id": 203,
+          "text_preview": "It doesn't work for an intermediary to own the user."
+        },
+        {
+          "answer_overlap": false,
+          "label": "345: April 2001, rev.",
+          "semu_id": 345,
+          "text_preview": "April 2001, rev."
+        },
+        {
+          "answer_overlap": false,
+          "label": "421: What is the special magic number for spectacular-hail mentioned in the provided text?",
+          "semu_id": 421,
+          "text_preview": "What is the special magic number for spectacular-hail mentioned in the provided text?"
+        },
+        {
+          "answer_overlap": false,
+          "label": "422: The special magic number for spectacular-hail mentioned in the provided text is[/INST]",
+          "semu_id": 422,
+          "text_preview": "The special magic number for spectacular-hail mentioned in the provided text is[/INST]"
+        }
+      ],
+      "pressure_n": 50,
+      "right_arm": "snapkv_high"
+    },
+    {
+      "left_arm": "vorn_high",
+      "overlap_semu_ids": [
+        3,
+        24,
+        60,
+        67,
+        72,
+        90,
+        108,
+        112,
+        125,
+        342,
+        351,
+        354,
+        357,
+        392,
+        399
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": false,
+          "label": "3: July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l",
+          "semu_id": 3,
+          "text_preview": "July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l"
+        },
+        {
+          "answer_overlap": false,
+          "label": "24: And unless the forms of technological progress that produced these things are subject to different laws than technologic",
+          "semu_id": 24,
+          "text_preview": "And unless the forms of technological progress that produced these things are subject to different laws than technologic"
+        },
+        {
+          "answer_overlap": false,
+          "label": "60: That's why I don't have an iPhone, for example; the last thing I want is for the Internet to follow me out into the worl",
+          "semu_id": 60,
+          "text_preview": "That's why I don't have an iPhone, for example; the last thing I want is for the Internet to follow me out into the worl"
+        },
+        {
+          "answer_overlap": false,
+          "label": "67: But if I'm right about the acceleration of addictiveness, then this kind of lonely squirming to avoid it will increasing",
+          "semu_id": 67,
+          "text_preview": "But if I'm right about the acceleration of addictiveness, then this kind of lonely squirming to avoid it will increasing"
+        },
+        {
+          "answer_overlap": false,
+          "label": "72: \"Good\" and \"bad\" technological progress aren't sharply differentiated, so you'd find you couldn't slow the latter withou",
+          "semu_id": 72,
+          "text_preview": "\"Good\" and \"bad\" technological progress aren't sharply differentiated, so you'd find you couldn't slow the latter withou"
+        },
+        {
+          "answer_overlap": false,
+          "label": "90: October 2015When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know i",
+          "semu_id": 90,
+          "text_preview": "October 2015When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know i"
+        },
+        {
+          "answer_overlap": false,
+          "label": "108: But it's probably not that dangerous to start worrying too early that you're default dead, whereas it's very dangerous t",
+          "semu_id": 108,
+          "text_preview": "But it's probably not that dangerous to start worrying too early that you're default dead, whereas it's very dangerous t"
+        },
+        {
+          "answer_overlap": false,
+          "label": "112: There is another reason founders don't ask themselves whether they're default alive or default dead: they assume it will",
+          "semu_id": 112,
+          "text_preview": "There is another reason founders don't ask themselves whether they're default alive or default dead: they assume it will"
+        },
+        {
+          "answer_overlap": false,
+          "label": "125: You should always have a plan B as well: you should know (as in write down) precisely what you'll need to do to survive",
+          "semu_id": 125,
+          "text_preview": "You should always have a plan B as well: you should know (as in write down) precisely what you'll need to do to survive"
+        },
+        {
+          "answer_overlap": false,
+          "label": "342: Thanks to Sam Altman, Trevor Blackwell, Ross Boucher, James Bracy, Gabor Cselle, Patrick Collison, Jason Freedman, John",
+          "semu_id": 342,
+          "text_preview": "Thanks to Sam Altman, Trevor Blackwell, Ross Boucher, James Bracy, Gabor Cselle, Patrick Collison, Jason Freedman, John"
+        },
+        {
+          "answer_overlap": false,
+          "label": "351: It seemed such a novel idea to us that we named the company after it: Viaweb, because our software worked via the Web, i",
+          "semu_id": 351,
+          "text_preview": "It seemed such a novel idea to us that we named the company after it: Viaweb, because our software worked via the Web, i"
+        },
+        {
+          "answer_overlap": false,
+          "label": "354: [1]The Secret WeaponEric Raymond has written an essay called \"How to Become a Hacker,\" and in it, among other things, he",
+          "semu_id": 354,
+          "text_preview": "[1]The Secret WeaponEric Raymond has written an essay called \"How to Become a Hacker,\" and in it, among other things, he"
+        },
+        {
+          "answer_overlap": false,
+          "label": "357: Finally, the truly serious hacker should consider learning Lisp: Lisp is worth learning for the profound enlightenment e",
+          "semu_id": 357,
+          "text_preview": "Finally, the truly serious hacker should consider learning Lisp: Lisp is worth learning for the profound enlightenment e"
+        },
+        {
+          "answer_overlap": false,
+          "label": "392: So if you're running a big company and you do everything the way the average big company does it, you can expect to do a",
+          "semu_id": 392,
+          "text_preview": "So if you're running a big company and you do everything the way the average big company does it, you can expect to do a"
+        },
+        {
+          "answer_overlap": false,
+          "label": "399: Back in 1995, we knew something that I don't think our competitors understood, and few understand even now: when you're",
+          "semu_id": 399,
+          "text_preview": "Back in 1995, we knew something that I don't think our competitors understood, and few understand even now: when you're"
+        }
+      ],
+      "pressure_n": 50,
+      "right_arm": "length_high"
+    },
+    {
+      "left_arm": "snapkv_high",
+      "overlap_semu_ids": [
+        3,
+        19,
+        72,
+        86,
+        90,
+        125,
+        174,
+        359
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": false,
+          "label": "3: July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l",
+          "semu_id": 3,
+          "text_preview": "July 2010What hard liquor, cigarettes, heroin, and crack have in common is that they're all more concentrated forms of l"
+        },
+        {
+          "answer_overlap": false,
+          "label": "19: Food has been transformed by a combination of factory farming and innovations in food processing into something with way",
+          "semu_id": 19,
+          "text_preview": "Food has been transformed by a combination of factory farming and innovations in food processing into something with way"
+        },
+        {
+          "answer_overlap": false,
+          "label": "72: \"Good\" and \"bad\" technological progress aren't sharply differentiated, so you'd find you couldn't slow the latter withou",
+          "semu_id": 72,
+          "text_preview": "\"Good\" and \"bad\" technological progress aren't sharply differentiated, so you'd find you couldn't slow the latter withou"
+        },
+        {
+          "answer_overlap": false,
+          "label": "86: [5] Several people have told me they like the iPad because it lets them bring the Internet into situations where a lapto",
+          "semu_id": 86,
+          "text_preview": "[5] Several people have told me they like the iPad because it lets them bring the Internet into situations where a lapto"
+        },
+        {
+          "answer_overlap": false,
+          "label": "90: October 2015When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know i",
+          "semu_id": 90,
+          "text_preview": "October 2015When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know i"
+        },
+        {
+          "answer_overlap": false,
+          "label": "125: You should always have a plan B as well: you should know (as in write down) precisely what you'll need to do to survive",
+          "semu_id": 125,
+          "text_preview": "You should always have a plan B as well: you should know (as in write down) precisely what you'll need to do to survive"
+        },
+        {
+          "answer_overlap": false,
+          "label": "174: But that doesn't mean you should avoid raising money in order to avoid this problem, any more than that total abstinence",
+          "semu_id": 174,
+          "text_preview": "But that doesn't mean you should avoid raising money in order to avoid this problem, any more than that total abstinence"
+        },
+        {
+          "answer_overlap": false,
+          "label": "359: It won't get you a job, except perhaps as a classics professor, but it will improve your mind, and make you a better wri",
+          "semu_id": 359,
+          "text_preview": "It won't get you a job, except perhaps as a classics professor, but it will improve your mind, and make you a better wri"
+        }
+      ],
+      "pressure_n": 50,
+      "right_arm": "length_high"
+    },
+    {
+      "left_arm": "snapkv_high",
+      "overlap_semu_ids": [
+        19,
+        57,
+        86,
+        359
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": false,
+          "label": "19: Food has been transformed by a combination of factory farming and innovations in food processing into something with way",
+          "semu_id": 19,
+          "text_preview": "Food has been transformed by a combination of factory farming and innovations in food processing into something with way"
+        },
+        {
+          "answer_overlap": false,
+          "label": "57: I've avoided most addictions, but the Internet got me because it became addictive while I was using it.",
+          "semu_id": 57,
+          "text_preview": "I've avoided most addictions, but the Internet got me because it became addictive while I was using it."
+        },
+        {
+          "answer_overlap": false,
+          "label": "86: [5] Several people have told me they like the iPad because it lets them bring the Internet into situations where a lapto",
+          "semu_id": 86,
+          "text_preview": "[5] Several people have told me they like the iPad because it lets them bring the Internet into situations where a lapto"
+        },
+        {
+          "answer_overlap": false,
+          "label": "359: It won't get you a job, except perhaps as a classics professor, but it will improve your mind, and make you a better wri",
+          "semu_id": 359,
+          "text_preview": "It won't get you a job, except perhaps as a classics professor, but it will improve your mind, and make you a better wri"
+        }
+      ],
+      "pressure_n": 50,
+      "right_arm": "random_length_matched"
+    },
+    {
+      "left_arm": "vorn_low",
+      "overlap_semu_ids": [
+        114,
+        214,
+        217,
+        254,
+        260
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": false,
+          "label": "114: Maybe it will help to separate facts from hopes.",
+          "semu_id": 114,
+          "text_preview": "Maybe it will help to separate facts from hopes."
+        },
+        {
+          "answer_overlap": false,
+          "label": "214: The standard way to develop applications now is to launch fast and iterate.",
+          "semu_id": 214,
+          "text_preview": "The standard way to develop applications now is to launch fast and iterate."
+        },
+        {
+          "answer_overlap": false,
+          "label": "217: They would say that.",
+          "semu_id": 217,
+          "text_preview": "They would say that."
+        },
+        {
+          "answer_overlap": false,
+          "label": "254: If your company seems evil, the best programmers won't work for you.",
+          "semu_id": 254,
+          "text_preview": "If your company seems evil, the best programmers won't work for you."
+        },
+        {
+          "answer_overlap": false,
+          "label": "260: It was the people they never got.",
+          "semu_id": 260,
+          "text_preview": "It was the people they never got."
+        }
+      ],
+      "pressure_n": 50,
+      "right_arm": "random_length_matched"
+    },
+    {
+      "left_arm": "length_high",
+      "overlap_semu_ids": [
+        19,
+        48,
+        51,
+        52,
+        86,
+        91,
+        180,
+        181,
+        204,
+        209,
+        222,
+        227,
+        350,
+        359
+      ],
+      "overlap_semus": [
+        {
+          "answer_overlap": false,
+          "label": "19: Food has been transformed by a combination of factory farming and innovations in food processing into something with way",
+          "semu_id": 19,
+          "text_preview": "Food has been transformed by a combination of factory farming and innovations in food processing into something with way"
+        },
+        {
+          "answer_overlap": false,
+          "label": "48: In the last 20 years, smoking has been transformed from something that seemed totally normal into a rather seedy habit:",
+          "semu_id": 48,
+          "text_preview": "In the last 20 years, smoking has been transformed from something that seemed totally normal into a rather seedy habit:"
+        },
+        {
+          "answer_overlap": false,
+          "label": "51: And unless the rate at which social antibodies evolve can increase to match the accelerating rate at which technological",
+          "semu_id": 51,
+          "text_preview": "And unless the rate at which social antibodies evolve can increase to match the accelerating rate at which technological"
+        },
+        {
+          "answer_overlap": false,
+          "label": "52: [3] Unless we want to be canaries in the coal mine of each new addiction\u2014the people whose sad example becomes a lesson t",
+          "semu_id": 52,
+          "text_preview": "[3] Unless we want to be canaries in the coal mine of each new addiction\u2014the people whose sad example becomes a lesson t"
+        },
+        {
+          "answer_overlap": false,
+          "label": "86: [5] Several people have told me they like the iPad because it lets them bring the Internet into situations where a lapto",
+          "semu_id": 86,
+          "text_preview": "[5] Several people have told me they like the iPad because it lets them bring the Internet into situations where a lapto"
+        },
+        {
+          "answer_overlap": false,
+          "label": "91: Assuming their expenses remain constant and their revenue growth is what it has been over the last several months, do th",
+          "semu_id": 91,
+          "text_preview": "Assuming their expenses remain constant and their revenue growth is what it has been over the last several months, do th"
+        },
+        {
+          "answer_overlap": false,
+          "label": "180: \"Paul Buchheit adds:\"A related problem that I see a lot is premature scaling\u2014founders take a small business that isn't r",
+          "semu_id": 180,
+          "text_preview": "\"Paul Buchheit adds:\"A related problem that I see a lot is premature scaling\u2014founders take a small business that isn't r"
+        },
+        {
+          "answer_overlap": false,
+          "label": "181: This is similar to over-hiring in that it makes the business much harder to fix once it's big, plus they are bleeding ca",
+          "semu_id": 181,
+          "text_preview": "This is similar to over-hiring in that it makes the business much harder to fix once it's big, plus they are bleeding ca"
+        },
+        {
+          "answer_overlap": false,
+          "label": "204: The software business learned that in the early 1980s, when companies like VisiCorp showed that although the words \"soft",
+          "semu_id": 204,
+          "text_preview": "The software business learned that in the early 1980s, when companies like VisiCorp showed that although the words \"soft"
+        },
+        {
+          "answer_overlap": false,
+          "label": "209: If software publishing didn't work in 1980, it works even less now that software development has evolved from a small nu",
+          "semu_id": 209,
+          "text_preview": "If software publishing didn't work in 1980, it works even less now that software development has evolved from a small nu"
+        },
+        {
+          "answer_overlap": false,
+          "label": "222: How would Apple like it if when they discovered a serious bug in OS X, instead of releasing a software update immediatel",
+          "semu_id": 222,
+          "text_preview": "How would Apple like it if when they discovered a serious bug in OS X, instead of releasing a software update immediatel"
+        },
+        {
+          "answer_overlap": false,
+          "label": "227: I'm sure that a lot of developers feel this way: One emotion is \"I'm not really proud about what's in the App Store\", an",
+          "semu_id": 227,
+          "text_preview": "I'm sure that a lot of developers feel this way: One emotion is \"I'm not really proud about what's in the App Store\", an"
+        },
+        {
+          "answer_overlap": false,
+          "label": "350: A lot of people could have been having this idea at the same time, of course, but as far as I know, Viaweb was the first",
+          "semu_id": 350,
+          "text_preview": "A lot of people could have been having this idea at the same time, of course, but as far as I know, Viaweb was the first"
+        },
+        {
+          "answer_overlap": false,
+          "label": "359: It won't get you a job, except perhaps as a classics professor, but it will improve your mind, and make you a better wri",
+          "semu_id": 359,
+          "text_preview": "It won't get you a job, except perhaps as a classics professor, but it will improve your mind, and make you a better wri"
+        }
+      ],
+      "pressure_n": 50,
+      "right_arm": "random_length_matched"
+    }
+  ],
+  "per_row_generation_cost_usd": 0.0,
+  "phase0_source_artifact": "results/phase0-source-snapkv-lateral-niah8k-case2-2026-06-04.json",
+  "phase0_source_sha256": "566cc644803bfe03ff06107fcc65229bda06e8fe69e4bf81134599d5dcf1c231",
+  "pressure_ns": [
+    1,
+    3,
+    5,
+    10,
+    20,
+    50
+  ],
+  "protected_semu_ids": [],
+  "reason": "selector arm overlap before model execution",
+  "record_status": "PRE_EXECUTION_OVERLAP_GATE",
+  "run_id": "vorn-active-eviction-snapkv-lateral-niah8k-case2-2026-06-04",
+  "schema_version": "vorn-active-eviction-snapkv-overlap-gate/v1",
+  "selector_arms": [
+    "vorn_high",
+    "snapkv_high",
+    "vorn_low",
+    "length_high",
+    "random_length_matched"
+  ],
+  "split": "validation",
+  "wall_clock_cost_usd": 0.0
+}
