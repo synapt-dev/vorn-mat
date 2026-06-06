@@ -1,0 +1,9 @@
+TMLR style files vendored for the submission build.
+
+Source: https://github.com/JmlrOrg/tmlr-style-file
+Commit: 7bf90efe3a0debbba703c05c43f3ff7e4d4a2992
+Commit date: 2023-06-30T20:21:15Z
+Retrieved: 2026-06-06
+Files: tmlr.sty, tmlr.bst
+
+The TMLR author guide links to this repository for the current LaTeX stylefile and template.
