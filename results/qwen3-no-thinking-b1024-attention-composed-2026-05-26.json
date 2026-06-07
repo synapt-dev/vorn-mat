@@ -1,0 +1,1472 @@
+{
+  "schema": "result-envelope/v0.2",
+  "artifact_id": "qwen3-no-thinking-b1024-attention-composed-2026-05-26",
+  "created_at": "2026-05-26T11:22:57-05:00",
+  "harness_commit": "a7911e78d45f0c77b401c76b432a12740f3a4977",
+  "modal_profile": "layne-79000",
+  "hf_dataset_repo": "synapt/vorn-mat-cross-family-results",
+  "hf_path": "eval-results/vorn-mat/qwen3-no-thinking-b1024-attention-composed-2026-05-26",
+  "contract": {
+    "model_id": "Qwen/Qwen3-8B",
+    "enable_thinking": false,
+    "dataset_id": "rbiswasfc/ruler",
+    "dataset_config": "niah_multikey_1_4k",
+    "split": "validation[:50]",
+    "budget": 1024,
+    "methods": [
+      "tova",
+      "h2o",
+      "sentence_tova",
+      "sentence_h2o"
+    ],
+    "max_new_tokens": 32,
+    "guardrails": "prefix_plus_recent",
+    "precision": "bf16",
+    "memory_telemetry": "partial: first34 yes, offset34 ledgers no memory fields",
+    "composition": "first 34 cases from original n=50 run before cumulative OOM + offset34 back-16 recovery cases 34-49"
+  },
+  "rows": [
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "tova",
+      "budget": 1024,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 5,
+      "hit_rate": 0.1,
+      "missing_fixture_indices": [],
+      "observations": [
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **fair-sprout** is **not explicitly mentioned** in the provided text.\n\nHowever, the text does mention several \"special magic"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **solid-few** mentioned in the provided text is **7888**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 53257.196,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **tan-page** mentioned in the provided text is:\n\n**364542** (Note: There appears to be a"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 53327.441,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **tested-familiar** mentioned in the provided text is: **666**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 53257.196,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for quick-mortality mentioned in the provided text is **278577**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **round-ruin** mentioned in the provided text is:\n\n**9558**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **troubled-midnight** mentioned in the provided text is:\n\n**873915**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 53374.965,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **faint-smolt** mentioned in the provided text is:\n\n**444**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 53310.242,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **spectacular-hail** mentioned in the provided text is:\n\n**4694634**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 53440.209,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **foregoing-counseling** mentioned in the provided text is:\n\n**533**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 53379.672,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **careful-nurse** mentioned in the provided text is **2222**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 53415.657,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **nappy-limestone** mentioned in the provided text is:\n\n**888**\n\nThis number appears in the line:  \n**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 53415.657,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **scattered-eaglet** mentioned in the provided text is **555**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 53274.685,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for good-speed mentioned in the provided text is **8633773**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 53379.672,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **fascinated-bull-fighter** mentioned in the provided text is:\n\n**111166**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 53397.178,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **efficient-pursuit** mentioned in the provided text is:\n\n**277**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 53449.978,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **hypnotic-biscuit** mentioned in the provided text is **988**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for orange-conversion mentioned in the provided text is **33**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 53374.965,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **handsome-dynamite** mentioned in the provided text is **322**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 53327.441,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **sticky-platter** mentioned in the provided text is:\n\n**999**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 53415.657,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **abashed-geometry** mentioned in the provided text is:\n\n**600005**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 53293.025,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **salty-hovel** mentioned in the provided text is:\n\n**16551**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 53327.441,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **hot-backdrop** mentioned in the provided text is:\n\n**71777**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 53440.209,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **inconclusive-participation** mentioned in the provided text is:\n\n**000**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **outrageous-admission** mentioned in the provided text is:\n\n**68662**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 53379.672,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **gullible-article** mentioned in the provided text is:\n\n**644**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 53415.657,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **jolly-experience** mentioned in the provided text is:\n\n**666632**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 53374.965,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **smelly-root** mentioned in the provided text is:\n\n**492**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 53397.178,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **womanly-regulator** mentioned in the provided text is **61111**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **ultra-vodka** mentioned in the provided text is:\n\n**761002**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 53397.178,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **sneaky-vice** mentioned in the provided text is:\n\n**640444**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **trite-icon** mentioned in the provided text is:\n\n**233**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 53415.657,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **onerous-warming** mentioned in the provided text is:\n\n**766**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 53374.965,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **towering-yeast** mentioned in the provided text is:\n\n**10006** (Note: The number appears"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "prediction": "The special magic number for **shaggy-transformation** mentioned in the provided text is:\n\n**666**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "prediction": "The special magic number for **functional-panic** mentioned in the provided text is:\n\n**565251**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "prediction": "The special magic number for **flowery-supplement** mentioned in the provided text is:\n\n**333**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "prediction": "The special magic number for **exotic-position** mentioned in the provided text is:\n\n**8048838**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "prediction": "The special magic number for **rough-extremist** mentioned in the provided text is **83001**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "prediction": "The special magic number for **adjoining-swivel** mentioned in the provided text is:\n\n**7523941**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "prediction": "The special magic number for **glamorous-nightmare** mentioned in the provided text is **777**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "prediction": "The special magic number for **guarded-wasp** mentioned in the provided text is **not explicitly stated**.\n\nHowever, the text does mention several \"magic numbers"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "prediction": "The special magic number for **foregoing-syndicate** mentioned in the provided text is **3**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "prediction": "The special magic number for **disgusted-hunchback** mentioned in the provided text is:\n\n**611667**\n\nThis number is explicitly"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "prediction": "The special magic number for **shy-mutt** mentioned in the provided text is **not explicitly stated**.\n\nHowever, based on the structure of the text"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "prediction": "The special magic number for noisy-thyme mentioned in the provided text is **7076506**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "prediction": "The special magic number for **illegal-hearth** mentioned in the provided text is **555**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "prediction": "The special magic number for **productive-artery** mentioned in the provided text is **64**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "prediction": "The special magic number for **bright-spat** mentioned in the provided text is **222**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "prediction": "The special magic number for **fearless-tritone** mentioned in the provided text is:\n\n**555**"
+        }
+      ],
+      "peak_memory_allocated_mb": 53449.978,
+      "peak_memory_reserved_mb": 74078.0,
+      "memory_telemetry_note": "first 34 cases include per-case memory telemetry; offset-34 recovery ledgers do not carry memory fields",
+      "chunks": [
+        {
+          "source": "modal_volume_first34",
+          "case_offset_start": 0,
+          "case_count": 34,
+          "hits": 2,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/qwen3-8b-no-thinking-4k-tova-b1024-n50-memory-2026-05-25.observations.jsonl",
+          "durability_status": "recovered_from_modal_volume_2026-05-26"
+        },
+        {
+          "source": "back16_offset34",
+          "case_offset_start": 34,
+          "case_count": 16,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/qwen3-8b-no-thinking-4k-tova-b1024-n16-offset34-2026-05-25.observations.jsonl",
+          "hf_report_path": "eval-results/vorn-mat/qwen3-no-thinking-4k-b1024-back16-2026-05-25",
+          "durability_status": "back16_report_on_hf; ledger_recovered_from_modal_volume_2026-05-26"
+        }
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "h2o",
+      "budget": 1024,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 5,
+      "hit_rate": 0.1,
+      "missing_fixture_indices": [],
+      "observations": [
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **fair-sprout** is **not explicitly mentioned** in the provided text.\n\nHowever, the text does mention several \"special magic"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **solid-few** mentioned in the provided text is **7888**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 53257.196,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **tan-page** mentioned in the provided text is:\n\n**364542** (Note: There appears to be a"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 53327.441,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **tested-familiar** mentioned in the provided text is:\n\n**666**\n\nThis number appears in the text as part of the"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 53257.196,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for quick-mortality mentioned in the provided text is **278577**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **round-ruin** mentioned in the provided text is:\n\n**9558**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **troubled-midnight** mentioned in the provided text is:\n\n**873915**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 53374.965,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **faint-smolt** mentioned in the provided text is:\n\n**444**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 53310.242,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **spectacular-hail** mentioned in the provided text is:\n\n**4694634**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 53440.209,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **foregoing-counseling** mentioned in the provided text is:\n\n**533**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 53379.672,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **careful-nurse** mentioned in the provided text is **2222**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 53415.657,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **nappy-limestone** mentioned in the provided text is:\n\n**888**\n\nThis number appears in the line:  \n**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 53415.657,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **scattered-eaglet** mentioned in the provided text is:\n\n**555**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 53274.685,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for good-speed mentioned in the provided text is **8633773**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 53379.672,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **fascinated-bull-fighter** mentioned in the provided text is:\n\n**111166**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 53397.178,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **efficient-pursuit** mentioned in the provided text is:\n\n**277**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 53449.978,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **hypnotic-biscuit** mentioned in the provided text is **988**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for orange-conversion mentioned in the provided text is **33**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 53374.965,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **handsome-dynamite** mentioned in the provided text is **322**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 53327.441,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **sticky-platter** mentioned in the provided text is:\n\n**999**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 53415.657,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **abashed-geometry** mentioned in the provided text is:\n\n**600005**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 53293.025,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **salty-hovel** mentioned in the provided text is:\n\n**16551**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 53327.441,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **hot-backdrop** mentioned in the provided text is:\n\n**71777**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 53440.209,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **inconclusive-participation** mentioned in the provided text is:\n\n**000**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **outrageous-admission** mentioned in the provided text is:\n\n**68662**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 53379.672,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **gullible-article** mentioned in the provided text is:\n\n**644**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 53415.657,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **jolly-experience** mentioned in the provided text is:\n\n**666632**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 53374.965,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **smelly-root** mentioned in the provided text is:\n\n**492**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 53397.178,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **womanly-regulator** mentioned in the provided text is **6111**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **ultra-vodka** mentioned in the provided text is:\n\n**761002**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 53397.178,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **sneaky-vice** mentioned in the provided text is:\n\n**640444**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **trite-icon** mentioned in the provided text is:\n\n**233**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 53415.657,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **onerous-warming** mentioned in the provided text is:\n\n**766**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 53374.965,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **towering-yeast** mentioned in the provided text is:\n\n**10006** (Note: The number appears"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "prediction": "The special magic number for **shaggy-transformation** mentioned in the provided text is:\n\n**666**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "prediction": "The special magic number for **functional-panic** mentioned in the provided text is **565251**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "prediction": "The special magic number for **flowery-supplement** mentioned in the provided text is:\n\n**333**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "prediction": "The special magic number for **exotic-position** mentioned in the provided text is:\n\n**8048838**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "prediction": "The special magic number for **rough-extremist** mentioned in the provided text is **83001**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "prediction": "The special magic number for **adjoining-swivel** mentioned in the provided text is:\n\n**7523941**"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "prediction": "The special magic number for **glamorous-nightmare** mentioned in the provided text is **777**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "prediction": "The special magic number for **guarded-wasp** mentioned in the provided text is **1325197**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "prediction": "The special magic number for **foregoing-syndicate** mentioned in the provided text is **3**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "prediction": "The special magic number for **disgusted-hunchback** mentioned in the provided text is:\n\n**611667**\n\nThis number appears in"
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "prediction": "The special magic number for **shy-mutt** mentioned in the provided text is **not explicitly stated**.\n\nHowever, based on the pattern of the text"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "prediction": "The special magic number for noisy-thyme mentioned in the provided text is **7076506**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "prediction": "The special magic number for **illegal-hearth** mentioned in the provided text is **555**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "prediction": "The special magic number for **productive-artery** mentioned in the provided text is **64**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "prediction": "The special magic number for **bright-spat** mentioned in the provided text is **222**."
+        },
+        {
+          "correct": false,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "prediction": "The special magic number for **fearless-tritone** mentioned in the provided text is:\n\n**555**"
+        }
+      ],
+      "peak_memory_allocated_mb": 53449.978,
+      "peak_memory_reserved_mb": 74078.0,
+      "memory_telemetry_note": "first 34 cases include per-case memory telemetry; offset-34 recovery ledgers do not carry memory fields",
+      "chunks": [
+        {
+          "source": "modal_volume_first34",
+          "case_offset_start": 0,
+          "case_count": 34,
+          "hits": 2,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/qwen3-8b-no-thinking-4k-h2o-b1024-n50-memory-2026-05-25.observations.jsonl",
+          "durability_status": "recovered_from_modal_volume_2026-05-26"
+        },
+        {
+          "source": "back16_offset34",
+          "case_offset_start": 34,
+          "case_count": 16,
+          "hits": 3,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/qwen3-8b-no-thinking-4k-h2o-b1024-n16-offset34-2026-05-25.observations.jsonl",
+          "hf_report_path": "eval-results/vorn-mat/qwen3-no-thinking-4k-b1024-back16-2026-05-25",
+          "durability_status": "back16_report_on_hf; ledger_recovered_from_modal_volume_2026-05-26"
+        }
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "sentence_tova",
+      "budget": 1024,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 50,
+      "hit_rate": 1.0,
+      "missing_fixture_indices": [],
+      "observations": [
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 53201.273,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **fair-sprout** mentioned in the provided text is:\n\n**9375710**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 53286.302,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **solid-few** mentioned in the provided text is:\n\n**7700828**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 53252.15,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **tan-page** mentioned in the provided text is:\n\n**3684052**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 53301.828,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **tested-familiar** mentioned in the provided text is:\n\n**6707197**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 53172.671,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for quick-mortality mentioned in the provided text is **2785277**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 53245.14,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **round-ruin** mentioned in the provided text is:\n\n**9897858**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 53235.223,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **troubled-midnight** mentioned in the provided text is:\n\n**8973915**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 53374.965,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **faint-smolt** mentioned in the provided text is:\n\n**4374754**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 53304.618,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **spectacular-hail** mentioned in the provided text is:\n\n**4694634**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 53394.58,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **foregoing-counseling** mentioned in the provided text is:\n\n**5672073**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 53354.348,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **careful-nurse** mentioned in the provided text is:\n\n**2626229**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 53299.481,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **nappy-limestone** mentioned in the provided text is:\n\n**4078418**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 53325.179,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **scattered-eaglet** mentioned in the provided text is:\n\n**2642635**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 53254.405,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for good-speed mentioned in the provided text is **8633773**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 53314.936,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **fascinated-bull-fighter** mentioned in the provided text is:\n\n**1981186**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 53387.521,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **efficient-pursuit** mentioned in the provided text is:\n\n**2149597**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 53221.948,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for hypnotic-biscuit mentioned in the provided text is **5374922**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 53255.904,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **orange-conversion** mentioned in the provided text is:\n\n**6304573**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 53294.266,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **handsome-dynamite** mentioned in the provided text is:\n\n**3646552**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 53306.872,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **sticky-platter** mentioned in the provided text is:\n\n**4533779**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 53364.742,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **abashed-geometry** mentioned in the provided text is:\n\n**6596150**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 53261.771,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **salty-hovel** mentioned in the provided text is:\n\n**1604451**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 53322.106,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **hot-backdrop** mentioned in the provided text is:\n\n**7117837**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 53429.584,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **inconclusive-participation** mentioned in the provided text is:\n\n**7907400**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 53310.554,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **outrageous-admission** mentioned in the provided text is:\n\n**6866294**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 53334.156,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **gullible-article** mentioned in the provided text is:\n\n**6891254**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 53309.398,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **jolly-experience** mentioned in the provided text is:\n\n**6262632**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 53324.405,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **smelly-root** mentioned in the provided text is:\n\n**4188992**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 53337.516,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **womanly-regulator** mentioned in the provided text is:\n\n**6038571**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 53310.554,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **ultra-vodka** mentioned in the provided text is:\n\n**7361002**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 53351.662,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **sneaky-vice** mentioned in the provided text is:\n\n**6406444**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **trite-icon** mentioned in the provided text is:\n\n**2422633**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 53389.379,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **onerous-warming** mentioned in the provided text is:\n\n**7953166**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 53359.811,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **towering-yeast** mentioned in the provided text is:\n\n**1093026**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "prediction": "The special magic number for **shaggy-transformation** mentioned in the provided text is:\n\n**6323376**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "prediction": "The special magic number for **functional-panic** mentioned in the provided text is:\n\n**5652512**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "prediction": "The special magic number for **flowery-supplement** mentioned in the provided text is:\n\n**5558623**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "prediction": "The special magic number for **exotic-position** mentioned in the provided text is:\n\n**8048838**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "prediction": "The special magic number for **rough-extremist** mentioned in the provided text is:\n\n**4700025**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "prediction": "The special magic number for **adjoining-swivel** mentioned in the provided text is:\n\n**7523941**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "prediction": "The special magic number for **glamorous-nightmare** mentioned in the provided text is:\n\n**7360307**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "prediction": "The special magic number for **guarded-wasp** mentioned in the provided text is:\n\n**8072684**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "prediction": "The special magic number for **foregoing-syndicate** mentioned in the provided text is:\n\n**3117636**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "prediction": "The special magic number for **disgusted-hunchback** mentioned in the provided text is:\n\n**6218367**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "prediction": "The special magic number for shy-mutt mentioned in the provided text is **1689025**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "prediction": "The special magic number for noisy-thyme mentioned in the provided text is **7076506**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "prediction": "The special magic number for **illegal-hearth** mentioned in the provided text is:\n\n**5118725**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "prediction": "The special magic number for productive-artery mentioned in the provided text is **6452832**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "prediction": "The special magic number for **bright-spat** mentioned in the provided text is:\n\n**5049282**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "prediction": "The special magic number for **fearless-tritone** mentioned in the provided text is:\n\n**7784725**"
+        }
+      ],
+      "peak_memory_allocated_mb": 53429.584,
+      "peak_memory_reserved_mb": 74078.0,
+      "memory_telemetry_note": "first 34 cases include per-case memory telemetry; offset-34 recovery ledgers do not carry memory fields",
+      "chunks": [
+        {
+          "source": "modal_volume_first34",
+          "case_offset_start": 0,
+          "case_count": 34,
+          "hits": 34,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/qwen3-8b-no-thinking-4k-sentence-tova-b1024-n50-memory-2026-05-25.observations.jsonl",
+          "durability_status": "recovered_from_modal_volume_2026-05-26"
+        },
+        {
+          "source": "back16_offset34",
+          "case_offset_start": 34,
+          "case_count": 16,
+          "hits": 16,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/qwen3-8b-no-thinking-4k-sentence-tova-b1024-n16-offset34-2026-05-25.observations.jsonl",
+          "hf_report_path": "eval-results/vorn-mat/qwen3-no-thinking-4k-b1024-back16-2026-05-25",
+          "durability_status": "back16_report_on_hf; ledger_recovered_from_modal_volume_2026-05-26"
+        }
+      ]
+    },
+    {
+      "family": "Qwen 3 8B no-thinking",
+      "model_id": "Qwen/Qwen3-8B",
+      "enable_thinking": false,
+      "method": "sentence_h2o",
+      "budget": 1024,
+      "status": "completed_recovered",
+      "n": 50,
+      "hits": 50,
+      "hit_rate": 1.0,
+      "missing_fixture_indices": [],
+      "observations": [
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-0",
+          "peak_memory_allocated_mb": 53201.273,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **fair-sprout** mentioned in the provided text is:\n\n**9375710**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-1",
+          "peak_memory_allocated_mb": 53286.302,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **solid-few** mentioned in the provided text is:\n\n**7700828**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-2",
+          "peak_memory_allocated_mb": 53252.15,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **tan-page** mentioned in the provided text is:\n\n**3684052**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-3",
+          "peak_memory_allocated_mb": 53301.828,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **tested-familiar** mentioned in the provided text is:\n\n**6707197**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-4",
+          "peak_memory_allocated_mb": 53172.671,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for quick-mortality mentioned in the provided text is **2785277**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-5",
+          "peak_memory_allocated_mb": 53245.14,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **round-ruin** mentioned in the provided text is:\n\n**9897858**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-6",
+          "peak_memory_allocated_mb": 53235.223,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **troubled-midnight** mentioned in the provided text is:\n\n**8973915**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-7",
+          "peak_memory_allocated_mb": 53374.965,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **faint-smolt** mentioned in the provided text is:\n\n**4374754**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-8",
+          "peak_memory_allocated_mb": 53304.618,
+          "peak_memory_reserved_mb": 55918.0,
+          "prediction": "The special magic number for **spectacular-hail** mentioned in the provided text is:\n\n**4694634**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-9",
+          "peak_memory_allocated_mb": 53394.58,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **foregoing-counseling** mentioned in the provided text is:\n\n**5672073**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-10",
+          "peak_memory_allocated_mb": 53354.348,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **careful-nurse** mentioned in the provided text is:\n\n**2626229**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-11",
+          "peak_memory_allocated_mb": 53299.481,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **nappy-limestone** mentioned in the provided text is:\n\n**4078418**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-12",
+          "peak_memory_allocated_mb": 53325.179,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **scattered-eaglet** mentioned in the provided text is:\n\n**2642635**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-13",
+          "peak_memory_allocated_mb": 53254.405,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **good-speed** mentioned in the provided text is:\n\n**8633773**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-14",
+          "peak_memory_allocated_mb": 53314.936,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **fascinated-bull-fighter** mentioned in the provided text is:\n\n**1981186**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-15",
+          "peak_memory_allocated_mb": 53387.521,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **efficient-pursuit** mentioned in the provided text is:\n\n**2149597**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-16",
+          "peak_memory_allocated_mb": 53221.948,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for hypnotic-biscuit mentioned in the provided text is **5374922**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-17",
+          "peak_memory_allocated_mb": 53255.904,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **orange-conversion** mentioned in the provided text is:\n\n**6304573**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-18",
+          "peak_memory_allocated_mb": 53294.266,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **handsome-dynamite** mentioned in the provided text is:\n\n**3646552**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-19",
+          "peak_memory_allocated_mb": 53306.872,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **sticky-platter** mentioned in the provided text is:\n\n**4533779**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-20",
+          "peak_memory_allocated_mb": 53364.742,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **abashed-geometry** mentioned in the provided text is:\n\n**6596150**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-21",
+          "peak_memory_allocated_mb": 53261.771,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **salty-hovel** mentioned in the provided text is:\n\n**1604451**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-22",
+          "peak_memory_allocated_mb": 53322.106,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **hot-backdrop** mentioned in the provided text is:\n\n**7117837**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-23",
+          "peak_memory_allocated_mb": 53429.584,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **inconclusive-participation** mentioned in the provided text is:\n\n**7907400**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-24",
+          "peak_memory_allocated_mb": 53310.554,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **outrageous-admission** mentioned in the provided text is:\n\n**6866294**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-25",
+          "peak_memory_allocated_mb": 53334.156,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **gullible-article** mentioned in the provided text is:\n\n**6891254**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-26",
+          "peak_memory_allocated_mb": 53309.398,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **jolly-experience** mentioned in the provided text is:\n\n**6262632**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-27",
+          "peak_memory_allocated_mb": 53324.405,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **smelly-root** mentioned in the provided text is:\n\n**4188992**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-28",
+          "peak_memory_allocated_mb": 53337.516,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **womanly-regulator** mentioned in the provided text is:\n\n**6038571**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-29",
+          "peak_memory_allocated_mb": 53310.554,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **ultra-vodka** mentioned in the provided text is:\n\n**7361002**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-30",
+          "peak_memory_allocated_mb": 53351.662,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **sneaky-vice** mentioned in the provided text is:\n\n**6406444**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-31",
+          "peak_memory_allocated_mb": 53345.495,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **trite-icon** mentioned in the provided text is:\n\n**2422633**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-32",
+          "peak_memory_allocated_mb": 53389.379,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **onerous-warming** mentioned in the provided text is:\n\n**7953166**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-33",
+          "peak_memory_allocated_mb": 53359.811,
+          "peak_memory_reserved_mb": 74078.0,
+          "prediction": "The special magic number for **towering-yeast** mentioned in the provided text is:\n\n**1093026**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-34",
+          "prediction": "The special magic number for **shaggy-transformation** mentioned in the provided text is:\n\n**6323376**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-35",
+          "prediction": "The special magic number for **functional-panic** mentioned in the provided text is:\n\n**5652512**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-36",
+          "prediction": "The special magic number for **flowery-supplement** mentioned in the provided text is:\n\n**5558623**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-37",
+          "prediction": "The special magic number for **exotic-position** mentioned in the provided text is:\n\n**8048838**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-38",
+          "prediction": "The special magic number for **rough-extremist** mentioned in the provided text is:\n\n**4700025**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-39",
+          "prediction": "The special magic number for **adjoining-swivel** mentioned in the provided text is:\n\n**7523941**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-40",
+          "prediction": "The special magic number for **glamorous-nightmare** mentioned in the provided text is:\n\n**7360307**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-41",
+          "prediction": "The special magic number for **guarded-wasp** mentioned in the provided text is:\n\n**8072684**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-42",
+          "prediction": "The special magic number for **foregoing-syndicate** mentioned in the provided text is:\n\n**3117636**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-43",
+          "prediction": "The special magic number for **disgusted-hunchback** mentioned in the provided text is:\n\n**6218367**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-44",
+          "prediction": "The special magic number for shy-mutt mentioned in the provided text is **1689025**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-45",
+          "prediction": "The special magic number for noisy-thyme mentioned in the provided text is **7076506**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-46",
+          "prediction": "The special magic number for **illegal-hearth** mentioned in the provided text is:\n\n**5118725**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-47",
+          "prediction": "The special magic number for productive-artery mentioned in the provided text is **6452832**."
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-48",
+          "prediction": "The special magic number for **bright-spat** mentioned in the provided text is:\n\n**5049282**"
+        },
+        {
+          "correct": true,
+          "fixture_id": "niah_multikey_1_4k-49",
+          "prediction": "The special magic number for **fearless-tritone** mentioned in the provided text is:\n\n**7784725**"
+        }
+      ],
+      "peak_memory_allocated_mb": 53429.584,
+      "peak_memory_reserved_mb": 74078.0,
+      "memory_telemetry_note": "first 34 cases include per-case memory telemetry; offset-34 recovery ledgers do not carry memory fields",
+      "chunks": [
+        {
+          "source": "modal_volume_first34",
+          "case_offset_start": 0,
+          "case_count": 34,
+          "hits": 34,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/qwen3-8b-no-thinking-4k-sentence-h2o-b1024-n50-memory-2026-05-25.observations.jsonl",
+          "durability_status": "recovered_from_modal_volume_2026-05-26"
+        },
+        {
+          "source": "back16_offset34",
+          "case_offset_start": 34,
+          "case_count": 16,
+          "hits": 16,
+          "observations_jsonl": "synapt-vorn-mat-vol:/results/vorn-mat/qwen3-8b-no-thinking-4k-sentence-h2o-b1024-n16-offset34-2026-05-25.observations.jsonl",
+          "hf_report_path": "eval-results/vorn-mat/qwen3-no-thinking-4k-b1024-back16-2026-05-25",
+          "durability_status": "back16_report_on_hf; ledger_recovered_from_modal_volume_2026-05-26"
+        }
+      ]
+    }
+  ],
+  "read": {
+    "summary": "Qwen 3 8B no-thinking b=1024 attention rows are completed_recovered from first-34 partial ledgers plus offset-34 back-16 ledgers. The composed values reproduce Table 1: token TOVA/H2O 5/50 each; sentence TOVA/H2O 50/50 each.",
+    "composition_status": "source ledgers were not present in the public repo or HF as a single aggregate; first-34 ledgers were recovered from Modal volume synapt-vorn-mat-vol on 2026-05-26 and embedded here for durability.",
+    "table1_values": {
+      "tova": {
+        "hits": 5,
+        "n": 50,
+        "hit_rate": 0.1
+      },
+      "h2o": {
+        "hits": 5,
+        "n": 50,
+        "hit_rate": 0.1
+      },
+      "sentence_tova": {
+        "hits": 50,
+        "n": 50,
+        "hit_rate": 1.0
+      },
+      "sentence_h2o": {
+        "hits": 50,
+        "n": 50,
+        "hit_rate": 1.0
+      }
+    }
+  }
+}
