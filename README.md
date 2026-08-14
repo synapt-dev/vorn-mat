@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20519215.svg)](https://doi.org/10.5281/zenodo.20519215)
 
-Reference implementation and result artifacts for the paper *Vorn: Residual Direction, Familial Eviction, and the Granularity Rescue Spectrum* (v1.1, June 2026).
+Reference implementation and result artifacts for the paper *Vorn: Residual Facing and Family-Conditional KV-Cache Eviction* (v1.2, August 2026).
 
 This repository contains the prototype source, all released result artifacts, supplementary analysis scripts, and a runbook for reproducing the headline cells. The companion HuggingFace dataset at [`synapt/vorn-mat-cross-family-results`](https://huggingface.co/datasets/synapt/vorn-mat-cross-family-results) mirrors the result artifacts for citeable, discoverable access independent of this code repository.
 
@@ -294,7 +294,7 @@ If you use this repository or the released artifacts in your work, please cite t
 
 ```bibtex
 @misc{penney2026vorn,
-  title={Vorn: Residual Direction, Familial Eviction, and the Granularity Rescue Spectrum},
+  title={Vorn: Residual Facing and Family-Conditional KV-Cache Eviction},
   author={Penney, L.},
   year={2026},
   doi={10.5281/zenodo.20519215},

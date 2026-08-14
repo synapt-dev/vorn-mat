@@ -108,15 +108,14 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
-  pdftitle={Vorn: Residual Direction, Familial Eviction, and the Granularity Rescue Spectrum},
+  pdftitle={Vorn: Residual Facing and Family-Conditional KV-Cache Eviction},
   pdfauthor={L. Penney},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
-\title{Vorn: Residual Direction, Familial Eviction, and the
-Granularity Rescue Spectrum}
+\title{Vorn: Residual Facing and Family-Conditional KV-Cache Eviction}
 \author{L. Penney}
-\date{June 2026 \textperiodcentered{} v1.1}
+\date{August 2026 \textperiodcentered{} v1.2}
 
 \usepackage[round]{natbib}
 \usepackage[margin=1in,top=1in,bottom=1in]{geometry}
@@ -126,32 +125,37 @@ Granularity Rescue Spectrum}
 
 \subsection{Abstract}\label{abstract}
 
-Key-value cache eviction is a major approach to long-context inference,
-and prior work typically selects a scoring criterion under the implicit
-assumption that its ranking generalizes across model families. Under a
-prefill-time cache selection contract with full-prompt visibility
-(eviction is decided once after reading the full prompt, before
-generation), we show this assumption fails: KV-cache eviction effectiveness is
-\textbf{family-conditional}. Across seven model families spanning four
-laboratories, five families attain or preserve long-context retrieval
-competence under residual-direction-based eviction, which we call
-\textbf{vorn}, while two families (Gemma 4 and Qwen 3-NT) are attention-favoring at
-the shared b=1024 gate, with attention reaching ceiling earlier and
-more reliably across measured budgets. Two targeted multi-budget falsification
-probes rule out attention-pattern and laboratory identity as sufficient
-explanations for the channel preference, pointing toward a
-model-specific architectural, training, or configuration variable that
-we do not uniquely isolate.
+KV-cache eviction is often evaluated as though one scoring rule should
+generalize across model families. We test that assumption under a
+prefill-time eviction contract in which the full prompt is available
+before selecting the retained cache positions. We introduce
+\textbf{vorn}, a residual-direction scoring signal that measures how
+strongly each position aligns with the direction toward which the
+model's residual computation is oriented --- its residual ``facing'' ---
+rather than relying directly on attention weights.
 
-A complementary \textbf{granularity rescue spectrum} reports a unit-of-
-retention effect: across family-anchored sentence-attention surfaces,
-retrieval competence under eviction ranges from rescue-resilient to
-rescue-resistant. The practical implication is that eviction-method
-selection should be family-conditional on the quality axis ---
-residual-direction scoring for residual-favoring families,
-attention-weight scoring for attention-favoring families --- while
-cost-per-correct is dominated by retention granularity rather than
-scoring channel.
+Across seven model families evaluated on long-context retrieval,
+eviction quality is \textbf{family-conditional} at a cache budget of
+1,024 tokens. Residual-direction scoring attains or preserves
+near-ceiling retrieval on five families, while attention-weight scoring
+is stronger on two: Gemma 4 and Qwen 3 in the no-thinking
+configuration. Targeted comparisons using Ministral and Gemma 2 rule
+out attention topology and laboratory identity as sufficient
+explanations, leaving model-specific architectural, training, or
+configuration differences unresolved.
+
+We further evaluate token-level and sentence-level retention across
+multiple budgets. Sentence-level retention is frequently the dominant
+mechanism variable: it rescues attention-weight scoring on some
+families, only partially rescues it on others, and fails to rescue the
+disfavored residual-direction signal on Gemma 4 at constrained budgets.
+Thus, the results form a family- and budget-dependent rescue spectrum
+rather than a universal ranking of eviction methods. Within the
+non-floor, non-anomalous cells measured, sentence-level retention also
+reduces cost per correct answer relative to token-level retention.
+These findings support a bounded practical rule: choose the scoring
+channel according to model family and quality target, and treat
+retention granularity as a first-class design variable.
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -182,8 +186,17 @@ method ranking does not generalize uniformly across model families.
 Scoring channel and retention granularity interact with family and
 budget. Sentence-level retention is often the cost-dominant
 operational choice, while the best scoring channel is
-family-conditional.} We introduce vorn as a measurement of the
-model's residual focus at a canonical mid-depth layer. Vorn-based eviction
+family-conditional.} We introduce vorn, a residual-direction scoring
+signal that measures how strongly each cached position aligns with the
+model's residual ``facing'' at a canonical mid-depth layer: the
+direction carried by the model's own hidden states, which may differ
+from where its attention weights point. Attention-based eviction asks
+which positions receive attention; vorn asks which positions align
+with the residual direction carried by the model's internal state.
+Throughout, ``facing'' is a metaphor for a geometric measurement --- a
+representation-space direction whose usefulness is tested empirically
+--- not a claim about the model's intention or viewpoint; §3.1 gives
+the formal computation. Residual-direction eviction
 attains or preserves long-context retrieval competence on five of seven
 families (Mistral, Llama, Ministral, Gemma 2, Qwen 2.5), while two
 families (Gemma 4 and Qwen 3-NT, the no-thinking configuration of
@@ -455,8 +468,10 @@ spectrum, and cost surface directly (see Appendix A).
 
 \subsubsection{3.1 Vorn computation}\label{31-vorn-computation}
 
-The vorn signal estimates residual focus from the model\textquotesingle s
-own hidden states at a canonical middle layer.
+The vorn signal estimates the model\textquotesingle s residual
+``facing'' --- the residual-stream direction against which cached
+positions are compared for eviction --- from its own hidden states at a
+canonical middle layer.
 For a model with \texttt{L} decoder layers, we fix the canonical layer
 \texttt{L*\ =\ L\ //\ 2} (layer 16 for the 32-layer models in this
 study). The current paper\textquotesingle s experimental contract is
@@ -752,33 +767,33 @@ is a separate engineering surface this paper does not address.
 \begin{verbatim}
 Experimental timeline (per fixture)
 
-t0  ──────────────  Full prompt observed (4096 or 8192 tokens)
-    │
-t1  ──────────────  Forward pass over complete prompt
-    │               output_hidden_states=True
-    │               (output_attentions=True for attention-weight methods)
-    │               Hidden states h_i^(L*) extracted for all positions
-    │
-t2  ──────────────  Scoring
-    │               vorn: cos(v_t, s_i) per position
-    │               TOVA: final-layer attention weights for last query token
-    │               H2O: accumulated prompt-query attention mass
-    │
-t3  ──────────────  Eviction decision
-    │               Select top-B positions by score (with guardrails)
-    │               For sentence-level: max-pool scores within sentence units,
-    │               drop lowest-scoring whole sentences
-    │               All other positions dropped across all KV layers
-    │
-t4  ──────────────  Reconstruct
-    │               Second forward pass over retained positions only
-    │               Clean KV cache at budget B, original absolute positions preserved
-    │
-t5  ──────────────  Generate (up to 32 tokens)
-    │               Standard autoregressive decoding from reconstructed cache
-    │               No further eviction (cache stays within hysteresis band)
-    │
-t6  ──────────────  Score prediction against ground truth
+t0  --------------  Full prompt observed (4096 or 8192 tokens)
+    |
+t1  --------------  Forward pass over complete prompt
+    |               output_hidden_states=True
+    |               (output_attentions=True for attention-weight methods)
+    |               Hidden states h_i^(L*) extracted for all positions
+    |
+t2  --------------  Scoring
+    |               vorn: cos(v_t, s_i) per position
+    |               TOVA: final-layer attention weights for last query token
+    |               H2O: accumulated prompt-query attention mass
+    |
+t3  --------------  Eviction decision
+    |               Select top-B positions by score (with guardrails)
+    |               For sentence-level: max-pool scores within sentence units,
+    |               drop lowest-scoring whole sentences
+    |               All other positions dropped across all KV layers
+    |
+t4  --------------  Reconstruct
+    |               Second forward pass over retained positions only
+    |               Clean KV cache at budget B, original absolute positions preserved
+    |
+t5  --------------  Generate (up to 32 tokens)
+    |               Standard autoregressive decoding from reconstructed cache
+    |               No further eviction (cache stays within hysteresis band)
+    |
+t6  --------------  Score prediction against ground truth
                     Exact substring match after whitespace normalization
 \end{verbatim}
 
@@ -1116,7 +1131,7 @@ Qwen 3-NT‖ & 1.00 & 0.00 & 0.40 & 0.10 & 0.10 & 1.00†† & 1.00†† \\
 \item
   \textbf{Mistral}: granularity-primary family with
   vorn-robustness-to-granularity. Publication-strong: token-vorn
-  dominates token-attention-weight at constrained budget (paired p ≤
+  dominates token-attention-weight at constrained budget (paired p $\le$
   4.66e-10 at b=512); at b=1024 vorn lead narrows to directional (p =
   0.0625 vs TOVA, p = 0.0313 vs H2O). At sentence
   granularity all three scoring channels cluster at ceiling (paired p =
@@ -1625,7 +1640,7 @@ spectrum (attention-weight 0.30→0.96 at b=512). The late-budget Mistral
 attention-weight cells at b=1536 and b=2048 are filled via 3-case
 micro-recovery composition (\texttt{completed\_recovered}; see
 Appendix C.3) and confirm rescue-resilient behavior holds across the
-full b ∈ \{256, 512, 1024, 1536, 2048\} range.
+full b $\in$ \{256, 512, 1024, 1536, 2048\} range.
 \textbf{Threshold-bounded recovery on Llama}: strong rescue at b=512
 with sentence-TOVA 0.94 vs token 0.56, partial rescue at b=256 where
 sentence-vorn 1.00 still decisively beats sentence-TOVA 0.74
@@ -1642,12 +1657,12 @@ budgets and dissolves at ceiling-regime budgets. This is a
 family-wide split, and the rescue-threshold position varies by family.
 
 The Ministral and Gemma 2 2×2 surfaces now carry anchor-grade
-multi-budget coverage (b ∈ \{256, 512, 1024, 1536, 2048\} across vorn
+multi-budget coverage (b $\in$ \{256, 512, 1024, 1536, 2048\} across vorn
 + attention-weight methods) following the 2026-05-27 multistep-fillout
 extension. They retain their falsification-probe identity from the
 original Phase 2B design (§5.6 hybrid framing). The three primary
 rescue-spectrum anchors (Mistral, Llama 3.1, Gemma 4) carry full
-multi-budget 2×2 coverage after the 2026-05-20 budget-fill spans b ∈
+multi-budget 2×2 coverage after the 2026-05-20 budget-fill spans b $\in$
 \{256, 512, 1024, 1536, 2048\} on all three families. The Mistral panel includes b=256 +
 512 + 1024 + 1536 + 2048 across all four methods; the attention-weight
 rows at b=1536 and b=2048 are filled via 3-case micro-recovery
@@ -1677,7 +1692,7 @@ parity). The data shows a granularity-rescue pattern: token-level
 methods floor or near-floor at b=256 (token-vorn 0.00, token-TOVA 0.14,
 token-H2O 0.12) while sentence-level methods rescue stably across
 budgets (sentence-vorn / sentence-TOVA / sentence-H2O cluster in
-0.66-0.76 across b=256/512/1024 with per-family spread ≤ 0.06). The
+0.66-0.76 across b=256/512/1024 with per-family spread $\le$ 0.06). The
 shape replicates the granularity-rescue mechanism on a fourth family at
 a lower no-eviction baseline (0.64), with the notable difference vs
 Mistral that the rescue extends to vorn-channel cells as well, not just
@@ -2134,7 +2149,7 @@ This paper makes two contributions. First, on the scientific surface,
 we report that KV-cache eviction effectiveness is family-conditional.
 Five of seven families (Mistral, Llama 3.1, Ministral, Gemma 2,
 Qwen 2.5) attain or preserve long-context retrieval competence under
-vorn-based eviction with small per-family spreads; two families
+residual-direction (vorn) eviction with small per-family spreads; two families
 (Gemma 4 and Qwen 3-NT) are attention-favoring at the shared b=1024
 gate, with attention reaching ceiling earlier and more reliably
 across measured budgets. The variable responsible is not explained
