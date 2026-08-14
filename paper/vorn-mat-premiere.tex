@@ -770,33 +770,33 @@ is a separate engineering surface this paper does not address.
 \begin{verbatim}
 Experimental timeline (per fixture)
 
-t0  ──────────────  Full prompt observed (4096 or 8192 tokens)
-    │
-t1  ──────────────  Forward pass over complete prompt
-    │               output_hidden_states=True
-    │               (output_attentions=True for attention-weight methods)
-    │               Hidden states h_i^(L*) extracted for all positions
-    │
-t2  ──────────────  Scoring
-    │               vorn: cos(v_t, s_i) per position
-    │               TOVA: final-layer attention weights for last query token
-    │               H2O: accumulated prompt-query attention mass
-    │
-t3  ──────────────  Eviction decision
-    │               Select top-B positions by score (with guardrails)
-    │               For sentence-level: max-pool scores within sentence units,
-    │               drop lowest-scoring whole sentences
-    │               All other positions dropped across all KV layers
-    │
-t4  ──────────────  Reconstruct
-    │               Second forward pass over retained positions only
-    │               Clean KV cache at budget B, original absolute positions preserved
-    │
-t5  ──────────────  Generate (up to 32 tokens)
-    │               Standard autoregressive decoding from reconstructed cache
-    │               No further eviction (cache stays within hysteresis band)
-    │
-t6  ──────────────  Score prediction against ground truth
+t0  --------------  Full prompt observed (4096 or 8192 tokens)
+    |
+t1  --------------  Forward pass over complete prompt
+    |               output_hidden_states=True
+    |               (output_attentions=True for attention-weight methods)
+    |               Hidden states h_i^(L*) extracted for all positions
+    |
+t2  --------------  Scoring
+    |               vorn: cos(v_t, s_i) per position
+    |               TOVA: final-layer attention weights for last query token
+    |               H2O: accumulated prompt-query attention mass
+    |
+t3  --------------  Eviction decision
+    |               Select top-B positions by score (with guardrails)
+    |               For sentence-level: max-pool scores within sentence units,
+    |               drop lowest-scoring whole sentences
+    |               All other positions dropped across all KV layers
+    |
+t4  --------------  Reconstruct
+    |               Second forward pass over retained positions only
+    |               Clean KV cache at budget B, original absolute positions preserved
+    |
+t5  --------------  Generate (up to 32 tokens)
+    |               Standard autoregressive decoding from reconstructed cache
+    |               No further eviction (cache stays within hysteresis band)
+    |
+t6  --------------  Score prediction against ground truth
                     Exact substring match after whitespace normalization
 \end{verbatim}
 
@@ -1134,7 +1134,7 @@ Qwen 3-NT‖ & 1.00 & 0.00 & 0.40 & 0.10 & 0.10 & 1.00†† & 1.00†† \\
 \item
   \textbf{Mistral}: granularity-primary family with
   vorn-robustness-to-granularity. Publication-strong: token-vorn
-  dominates token-attention-weight at constrained budget (paired p ≤
+  dominates token-attention-weight at constrained budget (paired p $\le$
   4.66e-10 at b=512); at b=1024 vorn lead narrows to directional (p =
   0.0625 vs TOVA, p = 0.0313 vs H2O). At sentence
   granularity all three scoring channels cluster at ceiling (paired p =
@@ -1643,7 +1643,7 @@ spectrum (attention-weight 0.30→0.96 at b=512). The late-budget Mistral
 attention-weight cells at b=1536 and b=2048 are filled via 3-case
 micro-recovery composition (\texttt{completed\_recovered}; see
 Appendix C.3) and confirm rescue-resilient behavior holds across the
-full b ∈ \{256, 512, 1024, 1536, 2048\} range.
+full b $\in$ \{256, 512, 1024, 1536, 2048\} range.
 \textbf{Threshold-bounded recovery on Llama}: strong rescue at b=512
 with sentence-TOVA 0.94 vs token 0.56, partial rescue at b=256 where
 sentence-vorn 1.00 still decisively beats sentence-TOVA 0.74
@@ -1660,12 +1660,12 @@ budgets and dissolves at ceiling-regime budgets. This is a
 family-wide split, and the rescue-threshold position varies by family.
 
 The Ministral and Gemma 2 2×2 surfaces now carry anchor-grade
-multi-budget coverage (b ∈ \{256, 512, 1024, 1536, 2048\} across vorn
+multi-budget coverage (b $\in$ \{256, 512, 1024, 1536, 2048\} across vorn
 + attention-weight methods) following the 2026-05-27 multistep-fillout
 extension. They retain their falsification-probe identity from the
 original Phase 2B design (§5.6 hybrid framing). The three primary
 rescue-spectrum anchors (Mistral, Llama 3.1, Gemma 4) carry full
-multi-budget 2×2 coverage after the 2026-05-20 budget-fill spans b ∈
+multi-budget 2×2 coverage after the 2026-05-20 budget-fill spans b $\in$
 \{256, 512, 1024, 1536, 2048\} on all three families. The Mistral panel includes b=256 +
 512 + 1024 + 1536 + 2048 across all four methods; the attention-weight
 rows at b=1536 and b=2048 are filled via 3-case micro-recovery
@@ -1695,7 +1695,7 @@ parity). The data shows a granularity-rescue pattern: token-level
 methods floor or near-floor at b=256 (token-vorn 0.00, token-TOVA 0.14,
 token-H2O 0.12) while sentence-level methods rescue stably across
 budgets (sentence-vorn / sentence-TOVA / sentence-H2O cluster in
-0.66-0.76 across b=256/512/1024 with per-family spread ≤ 0.06). The
+0.66-0.76 across b=256/512/1024 with per-family spread $\le$ 0.06). The
 shape replicates the granularity-rescue mechanism on a fourth family at
 a lower no-eviction baseline (0.64), with the notable difference vs
 Mistral that the rescue extends to vorn-channel cells as well, not just
