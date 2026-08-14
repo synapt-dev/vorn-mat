@@ -1,6 +1,6 @@
 # Paper Source
 
-LaTeX source for *Vorn: Residual Direction, Familial Eviction, and the Granularity Rescue Spectrum* (v1.1, June 2026).
+LaTeX source for *Vorn: Residual Facing and Family-Conditional KV-Cache Eviction* (v1.2, August 2026).
 
 This directory is the canonical source for the paper PDF that ships at [synapt.dev/vorn-mat/](https://synapt.dev/vorn-mat/) and the Zenodo deposit.
 
@@ -45,7 +45,7 @@ provenance is recorded in `TMLR_STYLE_UPSTREAM.txt`.
 
 ```bibtex
 @misc{penney2026vorn,
-  title={Vorn: Residual Direction, Familial Eviction, and the Granularity Rescue Spectrum},
+  title={Vorn: Residual Facing and Family-Conditional KV-Cache Eviction},
   author={Penney, L.},
   year={2026},
   howpublished={\url{https://synapt.dev/vorn-mat/}},
