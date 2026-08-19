@@ -1,6 +1,6 @@
 # Vorn-Mat
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20519215.svg)](https://doi.org/10.5281/zenodo.20519215)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20519214.svg)](https://doi.org/10.5281/zenodo.20519214)
 
 Reference implementation and result artifacts for the paper *Vorn: Residual Facing and Family-Conditional KV-Cache Eviction* (v1.2, August 2026).
 
@@ -297,7 +297,7 @@ If you use this repository or the released artifacts in your work, please cite t
   title={Vorn: Residual Facing and Family-Conditional KV-Cache Eviction},
   author={Penney, L.},
   year={2026},
-  doi={10.5281/zenodo.20519215},
+  doi={10.5281/zenodo.20519214},
   howpublished={\url{https://synapt.dev/vorn-mat/}},
 }
 ```
