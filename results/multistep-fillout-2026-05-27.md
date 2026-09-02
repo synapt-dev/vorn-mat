@@ -112,7 +112,7 @@ Pattern: **Form 2 (fragmentation) confirmed** — all 5 cells completed cleanly 
 
 Paper §6.8 "3-case agreement methodology" caveat can be removed for the b=1536 token-TOVA, b=1536 sentence-TOVA, and b=2048 sentence-TOVA cells (n=50 now available and matches prior reading). The b=256 cells reveal the partial-data over-estimate boundary — useful methodological note.
 
-## OOM events for OOM Registry (config#283)
+## OOM events for OOM Registry
 
 **Allocator-class fragmentation OOMs (Form 2)** — pre-PR-23 harness:
 - 8 cells Ministral 8B (token+sentence × TOVA+H2O at b=256/512/1024 subset) — all recovered post-PR-23
